@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Workspaces">
+    <option name="workspaces">
+      <list>
+        <Workspace>
+          <option name="name" value="Untitled" />
+          <option name="fileUrls">
+            <list>
+              <option value="file://$PROJECT_DIR$/eureka/src/main/java/com/pelegrino/eureka/EurekaApplication.java" />
+              <option value="file://$PROJECT_DIR$/eureka/src/main/resources/application.properties" />
+            </list>
+          </option>
+        </Workspace>
+      </list>
+    </option>
+  </component>
+</project>
