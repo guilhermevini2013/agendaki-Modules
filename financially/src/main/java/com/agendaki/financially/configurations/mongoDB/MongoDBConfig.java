@@ -1,4 +1,4 @@
-package com.agendaki.financially.configuration.mongoDB;
+package com.agendaki.financially.configurations.mongoDB;
 
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;

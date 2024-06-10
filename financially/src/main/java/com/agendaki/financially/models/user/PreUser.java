@@ -1,7 +1,9 @@
 package com.agendaki.financially.models.user;
 
+import com.agendaki.financially.dtos.user.PreUserSaveDTO;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Document(collection = "pre-user")
 public class PreUser {
@@ -13,6 +15,15 @@ public class PreUser {
     private String email;
     private TypeSignature typeSignature;
     private String tellPhone;
+
+    public PreUser(PreUserSaveDTO userDTO, PasswordEncoder passwordEncoder) {
+        this.email = userDTO.email();
+        this.tradeName = userDTO.tradeName();
+        this.password = passwordEncoder.encode(userDTO.password());
+        this.typeSignature = userDTO.typeSignature();
+        this.tellPhone = userDTO.tellPhone();
+        this.name = userDTO.name();
+    }
 
     public String getId() {
         return id;

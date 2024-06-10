@@ -27,4 +27,36 @@ public class Payment {
         this.dateOpen = dateOpen;
         this.dateTransaction = dateTransaction;
     }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getIdUser() {
+        return idUser;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public PaymentStatus getPaymentStatus() {
+        return paymentStatus;
+    }
+
+    public TypePayment getTypePayment() {
+        return typePayment;
+    }
+
+    public LocalDate getDateOpen() {
+        return dateOpen;
+    }
+
+    public LocalDate getDateTransaction() {
+        return dateTransaction;
+    }
 }
