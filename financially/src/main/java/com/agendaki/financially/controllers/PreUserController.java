@@ -18,7 +18,7 @@ public class PreUserController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> savePreUser(@RequestBody PreUserSaveDTO preUserDto) {
+    public ResponseEntity<Void> savePreUser(@RequestBody final PreUserSaveDTO preUserDto) {
         preUserService.save(preUserDto);
         return ResponseEntity.noContent().build();
     }
