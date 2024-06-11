@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PreUserRepository extends MongoRepository<PreUser, String> {
+    PreUser findByEmail(String email);
 }

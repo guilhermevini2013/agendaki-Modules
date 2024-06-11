@@ -3,10 +3,16 @@ package com.agendaki.financially.models.user;
 import com.agendaki.financially.dtos.user.PreUserSaveDTO;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.util.Collection;
+import java.util.List;
+
 @Document(collection = "pre-user")
-public class PreUser {
+public class PreUser implements UserDetails {
     @MongoId
     private String id;
     private String name;
@@ -33,11 +39,17 @@ public class PreUser {
         return name;
     }
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority("ROLE_PRE-USER"));
+    }
+
     public String getPassword() {
         return password;
     }
 
-    public String getEmail() {
+    @Override
+    public String getUsername() {
         return email;
     }
 
