@@ -1,5 +1,6 @@
 package com.agendaki.financially.controllers;
 
+import com.agendaki.financially.dtos.user.PreUserLoadDTO;
 import com.agendaki.financially.dtos.user.PreUserSaveDTO;
 import com.agendaki.financially.services.user.PreUserService;
 import org.springframework.http.ResponseEntity;
@@ -18,8 +19,14 @@ public class PreUserController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> savePreUser(@RequestBody final PreUserSaveDTO preUserDto) {
+    public ResponseEntity<Void> savePreUser(@RequestBody PreUserSaveDTO preUserDto) {
         preUserService.save(preUserDto);
         return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping(value = "/auth")
+    public ResponseEntity<String> loadPreUsers(@RequestBody PreUserLoadDTO preUserLoadDTO) {
+        String token = preUserService.load(preUserLoadDTO);
+        return ResponseEntity.ok(token);
     }
 }

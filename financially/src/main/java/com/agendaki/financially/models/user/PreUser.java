@@ -1,6 +1,7 @@
 package com.agendaki.financially.models.user;
 
 import com.agendaki.financially.dtos.user.PreUserSaveDTO;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 import org.springframework.security.core.GrantedAuthority;
@@ -18,6 +19,7 @@ public class PreUser implements UserDetails {
     private String name;
     private String tradeName;
     private String password;
+    @Indexed(unique = true)
     private String email;
     private TypeSignature typeSignature;
     private String tellPhone;
@@ -29,6 +31,19 @@ public class PreUser implements UserDetails {
         this.typeSignature = userDTO.typeSignature();
         this.tellPhone = userDTO.tellPhone();
         this.name = userDTO.name();
+    }
+
+    public PreUser() {
+    }
+
+    public PreUser(String id, String name, String tradeName, String password, String email, TypeSignature typeSignature, String tellPhone) {
+        this.id = id;
+        this.name = name;
+        this.tradeName = tradeName;
+        this.password = password;
+        this.email = email;
+        this.typeSignature = typeSignature;
+        this.tellPhone = tellPhone;
     }
 
     public String getId() {
@@ -50,8 +65,29 @@ public class PreUser implements UserDetails {
 
     @Override
     public String getUsername() {
-        return email;
+        return this.email;
     }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
 
     public TypeSignature getTypeSignature() {
         return typeSignature;
