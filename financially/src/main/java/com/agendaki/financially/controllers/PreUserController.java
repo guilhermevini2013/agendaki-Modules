@@ -3,14 +3,14 @@ package com.agendaki.financially.controllers;
 import com.agendaki.financially.dtos.user.PreUserLoadDTO;
 import com.agendaki.financially.dtos.user.PreUserSaveDTO;
 import com.agendaki.financially.services.user.PreUserService;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.*;
+
+import static org.springframework.http.HttpStatus.NO_CONTENT;
+import static org.springframework.http.HttpStatus.OK;
 
 @RestController
-@RequestMapping(value = "/api/pre-user/")
+@RequestMapping(value = "/api/pre-user")
 public class PreUserController {
     private final PreUserService preUserService;
 
@@ -18,15 +18,15 @@ public class PreUserController {
         this.preUserService = preUserService;
     }
 
+    @ResponseStatus(NO_CONTENT)
     @PostMapping
-    public ResponseEntity<Void> savePreUser(@RequestBody PreUserSaveDTO preUserDto) {
+    public void savePreUser(@RequestBody @Valid PreUserSaveDTO preUserDto) {
         preUserService.save(preUserDto);
-        return ResponseEntity.noContent().build();
     }
 
+    @ResponseStatus(OK)
     @PostMapping(value = "/auth")
-    public ResponseEntity<String> loadPreUsers(@RequestBody PreUserLoadDTO preUserLoadDTO) {
-        String token = preUserService.load(preUserLoadDTO);
-        return ResponseEntity.ok(token);
+    public String loadPreUsers(@RequestBody @Valid PreUserLoadDTO preUserLoadDTO) {
+        return preUserService.load(preUserLoadDTO);
     }
 }
