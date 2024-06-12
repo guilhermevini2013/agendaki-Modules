@@ -1,5 +1,6 @@
 package com.agendaki.financially.configurations.security;
 
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -18,14 +19,21 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        configurePublicRoutes(http);
         return http.cors(cors -> cors.disable())
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(request -> request
-                        .requestMatchers(HttpMethod.POST, "/api/pre-user").permitAll()
-                        .requestMatchers(HttpMethod.POST, "api/pre-user/auth").permitAll()
-                        .anyRequest().authenticated())
                 .build();
+    }
+
+    public void configurePublicRoutes(HttpSecurity http) throws Exception {
+        final String[] publicRoutes = {
+                "/api/pre-user",
+                "/api/pre-user/auth"
+        };
+        http.authorizeHttpRequests(request -> request
+                .requestMatchers(publicRoutes).permitAll()
+                .anyRequest().authenticated());
     }
 
     @Bean

@@ -2,9 +2,11 @@ package com.agendaki.financially.services.user;
 
 import com.agendaki.financially.dtos.user.PreUserLoadDTO;
 import com.agendaki.financially.dtos.user.PreUserSaveDTO;
+import com.agendaki.financially.exceptions.ExistingDataException;
 import com.agendaki.financially.models.user.PreUser;
 import com.agendaki.financially.repositories.PreUserRepository;
 import com.agendaki.financially.services.jwt.JWTService;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -30,7 +32,11 @@ public class PreUserServiceImpl implements PreUserService {
     @Transactional
     public void save(PreUserSaveDTO userDTO) {
         PreUser preUser = new PreUser(userDTO,passwordEncoder);
-        preUserRepository.save(preUser);
+        try {
+            preUserRepository.save(preUser);
+        } catch (DuplicateKeyException ex) {
+            throw new ExistingDataException("Existing data, check the fields");
+        }
     }
 
     @Override
