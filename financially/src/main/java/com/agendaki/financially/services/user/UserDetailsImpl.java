@@ -1,9 +1,9 @@
 package com.agendaki.financially.services.user;
 
+import com.agendaki.financially.models.user.PreUser;
 import com.agendaki.financially.repositories.PreUserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,7 +17,8 @@ public class UserDetailsImpl implements UserDetailsService {
 
     @Override
     @Transactional
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        return preUserRepository.findByEmail(email).get();
+    public UserDetails loadUserByUsername(String email){
+        PreUserRepository.UserAuth userAuth = preUserRepository.findByEmail(email).orElse(null);
+        return new PreUser(userAuth);
     }
 }

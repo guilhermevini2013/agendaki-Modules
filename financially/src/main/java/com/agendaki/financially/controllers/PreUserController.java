@@ -2,6 +2,7 @@ package com.agendaki.financially.controllers;
 
 import com.agendaki.financially.dtos.user.PreUserLoadDTO;
 import com.agendaki.financially.dtos.user.PreUserSaveDTO;
+import com.agendaki.financially.dtos.user.PreUserTokenDTO;
 import com.agendaki.financially.services.user.PreUserService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -25,7 +26,7 @@ public class PreUserController {
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping(value = "/auth")
-    public String loadPreUsers(@RequestBody @Valid PreUserLoadDTO preUserLoadDTO) {
+    public PreUserTokenDTO loadPreUsers(@RequestBody @Valid PreUserLoadDTO preUserLoadDTO) {
         return preUserService.load(preUserLoadDTO);
     }
 }
