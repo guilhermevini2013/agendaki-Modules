@@ -4,21 +4,21 @@ import com.agendaki.financially.models.user.TypeSignature;
 import jakarta.validation.constraints.*;
 
 public record PreUserSaveDTO(
-        @NotBlank
-        @Size(min = 3, max = 70)
+        @NotBlank(message = "Name is blank.")
+        @Size(min = 3, max = 70, message = "Name must contain 3 to 70 characters.")
         String name,
-        @NotBlank
-        @Size(min = 3, max = 50)
+        @NotBlank(message = "Trade name is blank.")
+        @Size(min = 3, max = 50, message = "Trade name must contain 3 to 50 characters.")
         String tradeName,
-        @NotBlank
-        @Size(min = 6, max = 20)
+        @NotBlank(message = "Password is blank.")
+        @Size(min = 6, max = 20, message = "Password must contain 6 to 20 characters.")
         String password,
-        @NotBlank
+        @NotBlank(message = "Email is blank.")
         @Email
         String email,
-        @NotNull
+        @NotNull(message = "Type signature is blank, use MONTHLY, QUARTERLY or ANNUAL.")
         TypeSignature typeSignature,
-        @NotBlank
-        @Pattern(regexp = "^\\(\\d{2}\\)\\s\\d{5}-\\d{4}$")
+        @NotBlank(message = "TellPhone is blank")
+        @Pattern(regexp = "^\\(\\d{2}\\)\\s\\d{5}-\\d{4}$", message = "Pattern incorrect, use (00) 00000-0000.")
         String tellPhone) {
 }
