@@ -1,5 +1,6 @@
 package com.agendaki.financially.models.payment;
 
+import com.agendaki.financially.models.user.TypeSignature;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 
@@ -7,25 +8,30 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Document(collection = "payment")
-public class Payment {
+public abstract class Payment {
     @MongoId
     private String id;
     private String idUser;
     private BigDecimal price;
     private String cpf;
     private PaymentStatus paymentStatus;
+    private TypeSignature typeSignature;
     private TypePayment typePayment;
     private LocalDate dateOpen;
     private LocalDate dateTransaction;
 
-    protected Payment(String idUser, BigDecimal price, String cpf, PaymentStatus paymentStatus, TypePayment typePayment, LocalDate dateOpen, LocalDate dateTransaction) {
+    protected Payment(String idUser, BigDecimal price, String cpf, PaymentStatus paymentStatus, TypeSignature typeSignature, TypePayment typePayment, LocalDate dateOpen, LocalDate dateTransaction) {
         this.idUser = idUser;
         this.price = price;
         this.cpf = cpf;
         this.paymentStatus = paymentStatus;
+        this.typeSignature = typeSignature;
         this.typePayment = typePayment;
         this.dateOpen = dateOpen;
         this.dateTransaction = dateTransaction;
+    }
+
+    public Payment() {
     }
 
     public String getId() {
@@ -50,6 +56,10 @@ public class Payment {
 
     public TypePayment getTypePayment() {
         return typePayment;
+    }
+
+    public TypeSignature getTypeSignature() {
+        return typeSignature;
     }
 
     public LocalDate getDateOpen() {

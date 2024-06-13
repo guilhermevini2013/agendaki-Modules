@@ -22,14 +22,12 @@ public class PreUser implements UserDetails {
     private String password;
     @Indexed(unique = true)
     private String email;
-    private TypeSignature typeSignature;
     private String tellPhone;
 
     public PreUser(PreUserSaveDTO userDTO, PasswordEncoder passwordEncoder) {
         this.email = userDTO.email();
         this.tradeName = userDTO.tradeName();
         this.password = passwordEncoder.encode(userDTO.password());
-        this.typeSignature = userDTO.typeSignature();
         this.tellPhone = userDTO.tellPhone();
         this.name = userDTO.name();
     }
@@ -43,7 +41,6 @@ public class PreUser implements UserDetails {
         this.tradeName = tradeName;
         this.password = password;
         this.email = email;
-        this.typeSignature = typeSignature;
         this.tellPhone = tellPhone;
     }
 
@@ -92,11 +89,6 @@ public class PreUser implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
-    }
-
-
-    public TypeSignature getTypeSignature() {
-        return typeSignature;
     }
 
     public String getTellPhone() {

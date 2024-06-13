@@ -1,5 +1,6 @@
 package com.agendaki.financially.models.payment;
 
+import com.agendaki.financially.models.user.TypeSignature;
 import org.springframework.beans.factory.annotation.Value;
 
 import java.math.BigDecimal;
@@ -9,7 +10,7 @@ public class Pix extends Payment {
     @Value("${keyPIX}")
     private static String PIX_KEY_RECEIVER;
 
-    protected Pix(String idUser, BigDecimal price, String cpf, PaymentStatus paymentStatus, LocalDate dateOpen, LocalDate dateTransaction) {
-        super(idUser, price, cpf, paymentStatus, TypePayment.PIX, dateOpen, dateTransaction);
+    public Pix(String idUser, BigDecimal price, String cpf, PaymentStatus paymentStatus, TypeSignature typeSignature, TypePayment typePayment, LocalDate dateOpen, LocalDate dateTransaction) {
+        super(idUser, price, cpf, paymentStatus, typeSignature, typePayment, dateOpen, dateTransaction);
     }
 }

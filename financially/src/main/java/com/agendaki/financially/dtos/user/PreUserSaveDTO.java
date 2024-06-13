@@ -1,6 +1,5 @@
 package com.agendaki.financially.dtos.user;
 
-import com.agendaki.financially.models.user.TypeSignature;
 import jakarta.validation.constraints.*;
 
 public record PreUserSaveDTO(
@@ -16,8 +15,6 @@ public record PreUserSaveDTO(
         @NotBlank(message = "Email is blank.")
         @Email
         String email,
-        @NotNull(message = "Type signature is blank, use MONTHLY, QUARTERLY or ANNUAL.")
-        TypeSignature typeSignature,
         @NotBlank(message = "TellPhone is blank")
         @Pattern(regexp = "^\\(\\d{2}\\)\\s\\d{5}-\\d{4}$", message = "Pattern incorrect, use (00) 00000-0000.")
         String tellPhone) {
