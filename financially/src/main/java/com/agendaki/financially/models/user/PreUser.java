@@ -45,6 +45,7 @@ public class PreUser implements UserDetails {
     }
 
     public PreUser(PreUserRepository.UserAuth userAuth) {
+        this.id = userAuth.getId();
         this.email = userAuth.getEmail();
         this.password = userAuth.getPassword();
     }
