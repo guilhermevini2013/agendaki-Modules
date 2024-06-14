@@ -1,5 +1,7 @@
 package com.agendaki.financially.models.payment;
 
+import com.agendaki.financially.dtos.payment.CardBankCreateDTO;
+import com.agendaki.financially.dtos.payment.PaymentCreateDTO;
 import com.agendaki.financially.models.user.TypeSignature;
 
 import java.math.BigDecimal;
@@ -17,5 +19,14 @@ public class CardBank extends Payment {
         this.dueDate = dueDate;
         this.cvv = cvv;
         this.titularName = titularName;
+    }
+
+    public CardBank(String idPreUser, PaymentCreateDTO paymentCreateDTO) {
+        super(idPreUser, paymentCreateDTO);
+        CardBankCreateDTO cardBankCreateDTO = paymentCreateDTO.payment().orElseThrow(() -> new IllegalArgumentException("Card bank does not exist"));
+        this.number = cardBankCreateDTO.number();
+        this.dueDate = cardBankCreateDTO.dueDate();
+        this.cvv = cardBankCreateDTO.cvv();
+        this.titularName = cardBankCreateDTO.titularName();
     }
 }

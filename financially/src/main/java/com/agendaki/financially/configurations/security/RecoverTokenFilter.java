@@ -32,7 +32,7 @@ public class RecoverTokenFilter extends OncePerRequestFilter {
             String subject = jwtService.verifyToken(token);
             PreUserRepository.UserAuth userAuth = preUserRepository.findByEmail(subject).orElseThrow(() -> new UsernameNotFoundException("User not found"));
             PreUser preUser = new PreUser(userAuth);
-            UsernamePasswordAuthenticationToken authenticated = UsernamePasswordAuthenticationToken.authenticated(preUser, null, preUser.getAuthorities());
+            UsernamePasswordAuthenticationToken authenticated = UsernamePasswordAuthenticationToken.authenticated(preUser, preUser.getId(), preUser.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authenticated);
         }
         filterChain.doFilter(request, response);

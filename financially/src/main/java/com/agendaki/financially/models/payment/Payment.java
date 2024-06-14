@@ -1,5 +1,6 @@
 package com.agendaki.financially.models.payment;
 
+import com.agendaki.financially.dtos.payment.PaymentCreateDTO;
 import com.agendaki.financially.models.user.TypeSignature;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
@@ -11,7 +12,7 @@ import java.time.LocalDate;
 public abstract class Payment {
     @MongoId
     private String id;
-    private String idUser;
+    private String idPreUser;
     private BigDecimal price;
     private String cpf;
     private PaymentStatus paymentStatus;
@@ -21,7 +22,7 @@ public abstract class Payment {
     private LocalDate dateTransaction;
 
     protected Payment(String idUser, BigDecimal price, String cpf, PaymentStatus paymentStatus, TypeSignature typeSignature, TypePayment typePayment, LocalDate dateOpen, LocalDate dateTransaction) {
-        this.idUser = idUser;
+        this.idPreUser = idUser;
         this.price = price;
         this.cpf = cpf;
         this.paymentStatus = paymentStatus;
@@ -31,6 +32,18 @@ public abstract class Payment {
         this.dateTransaction = dateTransaction;
     }
 
+    protected Payment(String idPreUser, PaymentCreateDTO paymentCreateDTO) {
+        this.idPreUser = idPreUser;
+        this.typePayment = paymentCreateDTO.typePayment();
+        this.price = paymentCreateDTO.typeSignature().getDateBySignature().price();
+        this.typeSignature = paymentCreateDTO.typeSignature();
+        this.dateOpen = LocalDate.now();
+        this.paymentStatus = PaymentStatus.PENDING;
+        this.dateTransaction = null;
+        this.cpf = paymentCreateDTO.cpf();
+
+    }
+
     public Payment() {
     }
 
@@ -38,8 +51,8 @@ public abstract class Payment {
         return id;
     }
 
-    public String getIdUser() {
-        return idUser;
+    public String getIdPreUser() {
+        return idPreUser;
     }
 
     public BigDecimal getPrice() {
