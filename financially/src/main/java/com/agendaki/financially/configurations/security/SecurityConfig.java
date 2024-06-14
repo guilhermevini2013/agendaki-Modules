@@ -27,7 +27,8 @@ public class SecurityConfig {
     public void configurePublicRoutes(HttpSecurity http) throws Exception {
         final String[] publicRoutes = {
                 "/api/pre-user",
-                "/api/pre-user/auth"
+                "/api/pre-user/auth",
+                "/api/payment",
         };
         http.authorizeHttpRequests(request -> request
                 .requestMatchers(publicRoutes).permitAll()

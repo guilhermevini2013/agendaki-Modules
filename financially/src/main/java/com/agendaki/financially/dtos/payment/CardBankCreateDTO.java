@@ -1,4 +1,4 @@
 package com.agendaki.financially.dtos.payment;
 
-public record CardBankCreateDTO(String number,String dueDate,Short cvv,String titularName) implements IPaymentDTO {
+public record CardBankCreateDTO(String number,String dueDate,Short cvv,String titularName) {
 }
