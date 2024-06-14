@@ -19,6 +19,8 @@ public class MongoDBConfig implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) {
         mongoTemplate.remove(new Query(), "pre-user");
+        mongoTemplate.remove(new Query(), "payment");
         mongoTemplate.indexOps("pre-user").ensureIndex(new Index("email", Sort.Direction.ASC).unique());
+        mongoTemplate.indexOps("payment").ensureIndex(new Index("idPreUser", Sort.Direction.ASC).unique());
     }
 }

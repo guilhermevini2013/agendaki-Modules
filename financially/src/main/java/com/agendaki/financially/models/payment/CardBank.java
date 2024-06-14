@@ -3,6 +3,7 @@ package com.agendaki.financially.models.payment;
 import com.agendaki.financially.dtos.payment.CardBankCreateDTO;
 import com.agendaki.financially.dtos.payment.PaymentCreateDTO;
 import com.agendaki.financially.models.user.TypeSignature;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -21,12 +22,15 @@ public class CardBank extends Payment {
         this.titularName = titularName;
     }
 
-    public CardBank(String idPreUser, PaymentCreateDTO paymentCreateDTO) {
+    public CardBank(String idPreUser, PaymentCreateDTO paymentCreateDTO, PasswordEncoder passwordEncoder) {
         super(idPreUser, paymentCreateDTO);
         CardBankCreateDTO cardBankCreateDTO = paymentCreateDTO.payment().orElseThrow(() -> new IllegalArgumentException("Card bank does not exist"));
-        this.number = cardBankCreateDTO.number();
+        this.number = passwordEncoder.encode(cardBankCreateDTO.number());
         this.dueDate = cardBankCreateDTO.dueDate();
         this.cvv = cardBankCreateDTO.cvv();
         this.titularName = cardBankCreateDTO.titularName();
+    }
+
+    public CardBank() {
     }
 }

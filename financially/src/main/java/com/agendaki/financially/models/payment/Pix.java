@@ -18,4 +18,7 @@ public class Pix extends Payment {
     public Pix(String idPreUser, PaymentCreateDTO paymentCreateDTO) {
         super(idPreUser, paymentCreateDTO);
     }
+
+    public Pix() {
+    }
 }

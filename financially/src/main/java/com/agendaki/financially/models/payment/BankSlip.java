@@ -21,4 +21,7 @@ public class BankSlip extends Payment {
         this.description = paymentCreateDTO.typeSignature().getDateBySignature().description();
         this.expiryDate = LocalDate.now().plusDays(3);
     }
+
+    public BankSlip() {
+    }
 }

@@ -1,7 +1,9 @@
 package com.agendaki.financially.controllers;
 
 import com.agendaki.financially.dtos.payment.PaymentCreateDTO;
+import com.agendaki.financially.dtos.payment.PaymentReadDTO;
 import com.agendaki.financially.services.payment.PaymentService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +18,13 @@ public class PaymentController {
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PostMapping
-    public void createPayment(@RequestBody final PaymentCreateDTO paymentDTO) {
+    public void createPayment(@RequestBody @Valid final PaymentCreateDTO paymentDTO) {
         paymentService.createPayment(paymentDTO);
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping
+    public PaymentReadDTO findPaymentByIdUser() {
+        return paymentService.findPaymentByPreUserId();
     }
 }
