@@ -3,6 +3,7 @@ package com.agendaki.financially.services.user;
 import com.agendaki.financially.dtos.user.PreUserLoadDTO;
 import com.agendaki.financially.dtos.user.PreUserSaveDTO;
 import com.agendaki.financially.dtos.user.PreUserTokenDTO;
+import com.agendaki.financially.dtos.user.PreUserUpdateDTO;
 import com.agendaki.financially.exceptions.ExistingDataException;
 import com.agendaki.financially.models.user.PreUser;
 import com.agendaki.financially.repositories.PreUserRepository;
@@ -12,6 +13,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -32,7 +34,7 @@ public class PreUserServiceImpl implements PreUserService {
 
     @Override
     public void save(PreUserSaveDTO userDTO) {
-        PreUser preUser = new PreUser(userDTO,passwordEncoder);
+        PreUser preUser = new PreUser(userDTO, passwordEncoder);
         try {
             preUserRepository.save(preUser);
         } catch (DuplicateKeyException ex) {
@@ -42,12 +44,19 @@ public class PreUserServiceImpl implements PreUserService {
 
     @Override
     public PreUserTokenDTO load(PreUserLoadDTO userLoadDTO) {
-        try{
+        try {
             UsernamePasswordAuthenticationToken usernamePasswordAuth = new UsernamePasswordAuthenticationToken(userLoadDTO.email(), userLoadDTO.password());
             Authentication authenticate = authenticationManager.authenticate(usernamePasswordAuth);
-            return new PreUserTokenDTO(jwtService.generateToken(((PreUser)authenticate.getPrincipal()).getUsername()));
-        }catch (AuthenticationException ex){
+            return new PreUserTokenDTO(jwtService.generateToken(((PreUser) authenticate.getPrincipal()).getUsername()));
+        } catch (AuthenticationException ex) {
             throw new UsernameNotFoundException("Credentials not found or incorrect");
         }
+    }
+
+    @Override
+    public void update(PreUserUpdateDTO userUpdateDTO) {
+        PreUser userAuthenticated = (PreUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        userAuthenticated.updateData(userUpdateDTO);
+        preUserRepository.save(userAuthenticated);
     }
 }

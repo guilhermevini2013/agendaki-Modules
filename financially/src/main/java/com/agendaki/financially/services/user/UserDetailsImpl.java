@@ -17,7 +17,7 @@ public class UserDetailsImpl implements UserDetailsService {
 
     @Override
     @Transactional
-    public UserDetails loadUserByUsername(String email){
+    public UserDetails loadUserByUsername(String email) {
         PreUserRepository.UserAuth userAuth = preUserRepository.findByEmail(email).orElse(null);
         return new PreUser(userAuth);
     }

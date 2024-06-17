@@ -1,6 +1,7 @@
 package com.agendaki.financially.models.user;
 
 import com.agendaki.financially.dtos.user.PreUserSaveDTO;
+import com.agendaki.financially.dtos.user.PreUserUpdateDTO;
 import com.agendaki.financially.repositories.PreUserRepository;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -52,6 +53,12 @@ public class PreUser implements UserDetails {
 
     public String getId() {
         return id;
+    }
+
+    public void updateData(PreUserUpdateDTO userUpdateDTO) {
+        this.name = userUpdateDTO.name();
+        this.tradeName = userUpdateDTO.tradeName();
+        this.tellPhone = userUpdateDTO.tellPhone();
     }
 
     public String getName() {

@@ -9,9 +9,9 @@ import java.util.List;
 public class ResponseErrorModel {
     private final Instant timestamp;
     private final Integer status;
+    private final String path;
     private List<String> errors;
     private String error;
-    private final String path;
 
     public ResponseErrorModel(Instant timestamp, Integer status, List<String> errors, String path) {
         this.timestamp = timestamp;

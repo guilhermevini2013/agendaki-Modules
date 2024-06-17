@@ -9,12 +9,14 @@ import java.util.Optional;
 
 public interface PreUserRepository extends MongoRepository<PreUser, String> {
 
-    interface UserAuth {
-        String getId();
-        String getEmail();
-        String getPassword();
-    }
-
     @Query(value = "{ 'email' : ?0 }", fields = "{ 'email' : 1, 'password' : 1, 'id' : 1 }")
     Optional<UserAuth> findByEmail(@Param("email") String email);
+
+    interface UserAuth {
+        String getId();
+
+        String getEmail();
+
+        String getPassword();
+    }
 }
