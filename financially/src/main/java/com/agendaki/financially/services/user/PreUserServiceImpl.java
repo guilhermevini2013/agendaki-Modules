@@ -15,7 +15,6 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class PreUserServiceImpl implements PreUserService {
@@ -32,7 +31,6 @@ public class PreUserServiceImpl implements PreUserService {
     }
 
     @Override
-    @Transactional
     public void save(PreUserSaveDTO userDTO) {
         PreUser preUser = new PreUser(userDTO,passwordEncoder);
         try {
@@ -43,7 +41,6 @@ public class PreUserServiceImpl implements PreUserService {
     }
 
     @Override
-    @Transactional
     public PreUserTokenDTO load(PreUserLoadDTO userLoadDTO) {
         try{
             UsernamePasswordAuthenticationToken usernamePasswordAuth = new UsernamePasswordAuthenticationToken(userLoadDTO.email(), userLoadDTO.password());

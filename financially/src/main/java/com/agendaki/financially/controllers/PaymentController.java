@@ -27,4 +27,10 @@ public class PaymentController {
     public PaymentReadDTO findPaymentByIdUser() {
         return paymentService.findPaymentByPreUserId();
     }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping
+    public void deletePayment() {
+        paymentService.deletePayment();
+    }
 }

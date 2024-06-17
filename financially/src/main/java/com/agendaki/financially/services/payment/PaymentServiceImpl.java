@@ -38,6 +38,15 @@ public class PaymentServiceImpl implements PaymentService {
         return new PaymentReadDTO(payment);
     }
 
+    @Override
+    public void deletePayment() {
+        String idAuthenticated = recoverIdOfAuthenticated();
+        if (!paymentRepository.existsByIdPreUser(idAuthenticated)) {
+            throw new ExistingDataException("Not a payment on your account");
+        }
+        paymentRepository.deleteByIdPreUser(idAuthenticated);
+    }
+
     private String recoverIdOfAuthenticated() {
         return (String) SecurityContextHolder.getContext().getAuthentication().getCredentials();
     }

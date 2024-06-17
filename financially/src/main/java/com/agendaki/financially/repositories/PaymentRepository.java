@@ -8,4 +8,8 @@ import java.util.Optional;
 public interface PaymentRepository extends MongoRepository<Payment, String> {
 
     Optional<Payment> findByIdPreUser(String id);
+
+    void deleteByIdPreUser(String id);
+
+    boolean existsByIdPreUser(String id);
 }
