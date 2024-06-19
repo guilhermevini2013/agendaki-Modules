@@ -1,8 +1,8 @@
 package com.agendaki.financially.controllers;
 
+import com.agendaki.financially.api.dtos.PaymentReadDTO;
+import com.agendaki.financially.api.dtos.pix.PixReadDTO;
 import com.agendaki.financially.dtos.payment.PaymentCreateDTO;
-import com.agendaki.financially.dtos.payment.pix.PaymentPixReadDTO;
-import com.agendaki.financially.dtos.payment.PaymentReadDTO;
 import com.agendaki.financially.services.payment.PaymentService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -17,10 +17,11 @@ public class PaymentController {
         this.paymentService = paymentService;
     }
 
-    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public void createPayment(@RequestBody @Valid final PaymentCreateDTO paymentDTO) {
-        paymentService.createPayment(paymentDTO);
+    public PaymentReadDTO createPayment(@RequestBody @Valid final PaymentCreateDTO paymentDTO) {
+        PaymentReadDTO payment = paymentService.createPayment(paymentDTO);
+        return payment;
     }
 
     @ResponseStatus(HttpStatus.OK)
@@ -37,7 +38,7 @@ public class PaymentController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = "/pix")
-    public PaymentPixReadDTO findPaymentByPreUserId() {
+    public PixReadDTO findPaymentByPreUserId() {
         return null;
     }
 }

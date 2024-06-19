@@ -43,7 +43,6 @@ public abstract class Payment {
         this.paymentStatus = PaymentStatus.PENDING;
         this.dateTransaction = null;
         this.cpf = paymentCreateDTO.cpf();
-
     }
 
     public Payment() {
