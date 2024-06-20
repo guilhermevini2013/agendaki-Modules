@@ -4,10 +4,11 @@ import com.agendaki.financially.models.payment.Payment;
 import com.agendaki.financially.models.payment.PaymentStatus;
 import com.agendaki.financially.models.payment.TypePayment;
 import com.agendaki.financially.models.user.TypeSignature;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class PaymentReadDTO {
     private BigDecimal price;
     private String cpf;

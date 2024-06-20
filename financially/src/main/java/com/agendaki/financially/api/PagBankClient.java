@@ -1,5 +1,6 @@
 package com.agendaki.financially.api;
 
+import com.agendaki.financially.api.dtos.bankSlip.PaymentBankSlipCreateDTO;
 import com.agendaki.financially.api.dtos.pix.PaymentPixCreateDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,4 +12,7 @@ public interface PagBankClient {
 
     @PostMapping
     String payPix(@RequestHeader("Authorization") String token, @RequestBody PaymentPixCreateDTO paymentPixCreateDTO);
+
+    @PostMapping
+    String payBankSlip(@RequestHeader("Authorization") String token, @RequestBody PaymentBankSlipCreateDTO paymentBankSlipCreateDTO);
 }

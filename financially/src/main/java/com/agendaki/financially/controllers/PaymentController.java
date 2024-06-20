@@ -6,6 +6,7 @@ import com.agendaki.financially.dtos.payment.PaymentCreateDTO;
 import com.agendaki.financially.services.payment.PaymentService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -24,10 +25,11 @@ public class PaymentController {
         return payment;
     }
 
-    @ResponseStatus(HttpStatus.OK)
     @GetMapping
-    public PaymentReadDTO findPaymentByIdUser() {
-        return paymentService.findPaymentByPreUserId();
+    public ResponseEntity<PaymentReadDTO> findPaymentByIdUser() {
+        PaymentReadDTO paymentRead = paymentService.findPaymentByPreUserId();
+        if (paymentRead == null) return ResponseEntity.noContent().build();
+        return ResponseEntity.ok(paymentRead);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)

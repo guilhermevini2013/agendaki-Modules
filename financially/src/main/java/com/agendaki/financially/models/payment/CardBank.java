@@ -24,7 +24,7 @@ public class CardBank extends Payment {
 
     public CardBank(String idPreUser, PaymentCreateDTO paymentCreateDTO, PasswordEncoder passwordEncoder) {
         super(idPreUser, paymentCreateDTO);
-        CardBankCreateDTO cardBankCreateDTO = paymentCreateDTO.payment().orElseThrow(() -> new IllegalArgumentException("Card bank does not exist"));
+        CardBankCreateDTO cardBankCreateDTO = paymentCreateDTO.paymentCardBank().orElseThrow(() -> new IllegalArgumentException("Card bank does not exist"));
         this.number = passwordEncoder.encode(cardBankCreateDTO.number());
         this.dueDate = cardBankCreateDTO.dueDate();
         this.cvv = cardBankCreateDTO.cvv();

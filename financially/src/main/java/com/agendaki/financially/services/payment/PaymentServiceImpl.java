@@ -1,8 +1,8 @@
 package com.agendaki.financially.services.payment;
 
-import com.agendaki.financially.api.dtos.BankSplitReadDTO;
 import com.agendaki.financially.api.dtos.CardBankReadDTO;
 import com.agendaki.financially.api.dtos.PaymentReadDTO;
+import com.agendaki.financially.api.dtos.bankSlip.BankSplitReadDTO;
 import com.agendaki.financially.api.dtos.pix.PixReadDTO;
 import com.agendaki.financially.dtos.payment.PaymentCreateDTO;
 import com.agendaki.financially.exceptions.ExistingDataException;

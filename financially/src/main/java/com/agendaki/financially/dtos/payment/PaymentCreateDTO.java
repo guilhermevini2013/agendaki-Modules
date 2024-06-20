@@ -1,5 +1,6 @@
 package com.agendaki.financially.dtos.payment;
 
+import com.agendaki.financially.api.dtos.AddressDTO;
 import com.agendaki.financially.models.payment.TypePayment;
 import com.agendaki.financially.models.user.TypeSignature;
 import jakarta.validation.constraints.NotBlank;
@@ -16,6 +17,7 @@ public record PaymentCreateDTO(
         TypePayment typePayment,
         @NotNull(message = "Type signature is blank.")
         TypeSignature typeSignature,
-        Optional<CardBankCreateDTO> payment) {
+        Optional<CardBankCreateDTO> paymentCardBank,
+        Optional<AddressDTO> address) {
 
 }
