@@ -9,8 +9,6 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class Pix extends Payment {
-    @Value("${keyPIX}")
-    private static String PIX_KEY_RECEIVER;
     private String idQrCode;
     private String urlPix;
     private String urlImagePix;

@@ -27,4 +27,9 @@ public class HandlerRequestException {
     public ResponseEntity<ResponseErrorModel> validation(MethodArgumentNotValidException e, HttpServletRequest request) {
         return ResponseEntity.badRequest().body(new ResponseErrorModel(Instant.now(), HttpStatus.BAD_REQUEST.value(), e.getFieldErrors().stream().map(fieldError -> fieldError.getDefaultMessage()).toList(), request.getRequestURI()));
     }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<ResponseErrorModel> handIllegalArgumentException(IllegalArgumentException e, HttpServletRequest request) {
+        return ResponseEntity.badRequest().body(new ResponseErrorModel(Instant.now(), HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage(), request.getRequestURI()));
+    }
 }

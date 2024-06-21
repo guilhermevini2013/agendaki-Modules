@@ -1,6 +1,5 @@
 package com.agendaki.financially.services.payment;
 
-import com.agendaki.financially.api.dtos.CardBankReadDTO;
 import com.agendaki.financially.api.dtos.PaymentReadDTO;
 import com.agendaki.financially.api.dtos.bankSlip.BankSplitReadDTO;
 import com.agendaki.financially.api.dtos.pix.PixReadDTO;
@@ -9,7 +8,6 @@ import com.agendaki.financially.exceptions.ExistingDataException;
 import com.agendaki.financially.models.payment.Payment;
 import com.agendaki.financially.repositories.PaymentRepository;
 import com.agendaki.financially.services.payment.strategy.BankSlipCreate;
-import com.agendaki.financially.services.payment.strategy.CardBankCreate;
 import com.agendaki.financially.services.payment.strategy.PaymentStrategy;
 import com.agendaki.financially.services.payment.strategy.PixCreate;
 import org.springframework.dao.DuplicateKeyException;
@@ -30,9 +28,6 @@ public class PaymentServiceImpl implements PaymentService {
     public PaymentReadDTO createPayment(PaymentCreateDTO paymentDTO) {
         try {
             switch (paymentDTO.typePayment()) {
-                case CARD -> {
-                    return new CardBankReadDTO(paymentStrategy.createPayment(paymentDTO, new CardBankCreate()));
-                }
                 case PIX -> {
                     return new PixReadDTO(paymentStrategy.createPayment(paymentDTO, new PixCreate()));
                 }
@@ -53,9 +48,6 @@ public class PaymentServiceImpl implements PaymentService {
             return null;
         }
         switch (payment.getTypePayment()) {
-            case CARD -> {
-                return new CardBankReadDTO(payment);
-            }
             case PIX -> {
                 return new PixReadDTO(payment);
             }

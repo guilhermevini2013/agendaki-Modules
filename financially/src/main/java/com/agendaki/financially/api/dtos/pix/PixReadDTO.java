@@ -17,12 +17,15 @@ public class PixReadDTO extends PaymentReadDTO {
 
     public PixReadDTO(Payment payment) {
         super(payment);
-        Pix pix = (Pix) payment;
-        System.out.println(pix.getUrlPix());
-        this.urlPix = pix.getUrlPix();
-        this.urlImagePix = pix.getUrlImagePix();
-        this.expireTime = pix.getExpireTime();
-        this.signatureSpecification = pix.getTypeSignature().getDateBySignature();
+        if (payment instanceof Pix) {
+            Pix pix = (Pix) payment;
+            this.urlPix = pix.getUrlPix();
+            this.urlImagePix = pix.getUrlImagePix();
+            this.expireTime = pix.getExpireTime();
+            this.signatureSpecification = pix.getTypeSignature().getDateBySignature();
+        } else {
+            throw new IllegalArgumentException("Payment is not Pix");
+        }
     }
 
     public String getUrlPix() {

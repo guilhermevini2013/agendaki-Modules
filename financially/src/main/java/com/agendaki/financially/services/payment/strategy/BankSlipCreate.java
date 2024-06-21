@@ -16,11 +16,16 @@ public class BankSlipCreate implements IPaymentCreate {
     public Payment createPayment(PreUser preUser, PaymentCreateDTO paymentDTO, PagBankClient pagBankClient, String apiKey) {
         String response = pagBankClient.payBankSlip(apiKey, new PaymentBankSlipCreateDTO(paymentDTO, preUser));
         JsonObject json = gson.fromJson(response, JsonObject.class);
-        String linkPDF = json.getAsJsonArray("charges")
-                .get(0).getAsJsonObject().getAsJsonArray("links").get(0).getAsJsonObject().get("href").getAsString();
+        return new BankSlip(preUser.getId(), paymentDTO, recoverLinkPDFByJson(json), recoverCodeBarByJson(json));
+    }
 
-        String codeBar = json.getAsJsonArray("charges")
+    private String recoverLinkPDFByJson(JsonObject json) {
+        return json.getAsJsonArray("charges")
+                .get(0).getAsJsonObject().getAsJsonArray("links").get(0).getAsJsonObject().get("href").getAsString();
+    }
+
+    private String recoverCodeBarByJson(JsonObject json) {
+        return json.getAsJsonArray("charges")
                 .get(0).getAsJsonObject().getAsJsonObject("payment_method").getAsJsonObject("boleto").get("formatted_barcode").getAsString();
-        return new BankSlip(preUser.getId(), paymentDTO, linkPDF, codeBar);
     }
 }

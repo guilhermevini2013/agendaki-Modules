@@ -1,7 +1,6 @@
 package com.agendaki.financially.controllers;
 
 import com.agendaki.financially.api.dtos.PaymentReadDTO;
-import com.agendaki.financially.api.dtos.pix.PixReadDTO;
 import com.agendaki.financially.dtos.payment.PaymentCreateDTO;
 import com.agendaki.financially.services.payment.PaymentService;
 import jakarta.validation.Valid;
@@ -36,11 +35,5 @@ public class PaymentController {
     @DeleteMapping
     public void deletePayment() {
         paymentService.deletePayment();
-    }
-
-    @ResponseStatus(HttpStatus.OK)
-    @GetMapping(value = "/pix")
-    public PixReadDTO findPaymentByPreUserId() {
-        return null;
     }
 }
