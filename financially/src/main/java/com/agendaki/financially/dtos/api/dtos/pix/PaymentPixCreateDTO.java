@@ -1,4 +1,4 @@
-package com.agendaki.financially.api.dtos.pix;
+package com.agendaki.financially.dtos.api.dtos.pix;
 
 import com.agendaki.financially.dtos.payment.PaymentCreateDTO;
 import com.agendaki.financially.models.user.PreUser;

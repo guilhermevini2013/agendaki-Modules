@@ -1,7 +1,7 @@
 package com.agendaki.financially.services.payment.strategy;
 
 import com.agendaki.financially.api.PagBankClient;
-import com.agendaki.financially.api.dtos.bankSlip.PaymentBankSlipCreateDTO;
+import com.agendaki.financially.dtos.api.dtos.bankSlip.PaymentBankSlipCreateDTO;
 import com.agendaki.financially.dtos.payment.PaymentCreateDTO;
 import com.agendaki.financially.models.payment.BankSlip;
 import com.agendaki.financially.models.payment.Payment;

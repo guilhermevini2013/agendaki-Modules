@@ -1,9 +1,9 @@
-package com.agendaki.financially.api.dtos.bankSlip;
+package com.agendaki.financially.dtos.api.dtos.bankSlip;
 
-import com.agendaki.financially.api.dtos.ChargesDTO;
-import com.agendaki.financially.api.dtos.ItemsDTO;
-import com.agendaki.financially.api.dtos.pix.AmountDTO;
-import com.agendaki.financially.api.dtos.pix.CustomerDTO;
+import com.agendaki.financially.dtos.api.dtos.ChargesDTO;
+import com.agendaki.financially.dtos.api.dtos.ItemsDTO;
+import com.agendaki.financially.dtos.api.dtos.pix.AmountDTO;
+import com.agendaki.financially.dtos.api.dtos.pix.CustomerDTO;
 import com.agendaki.financially.dtos.payment.PaymentCreateDTO;
 import com.agendaki.financially.models.user.PreUser;
 

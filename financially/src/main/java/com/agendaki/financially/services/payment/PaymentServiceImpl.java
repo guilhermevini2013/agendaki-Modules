@@ -1,8 +1,10 @@
 package com.agendaki.financially.services.payment;
 
-import com.agendaki.financially.api.dtos.PaymentReadDTO;
-import com.agendaki.financially.api.dtos.bankSlip.BankSplitReadDTO;
-import com.agendaki.financially.api.dtos.pix.PixReadDTO;
+import com.agendaki.financially.dtos.api.dtos.PaymentReadDTO;
+import com.agendaki.financially.dtos.api.dtos.bankSlip.BankSplitReadDTO;
+import com.agendaki.financially.dtos.api.dtos.pix.PixReadDTO;
+import com.agendaki.financially.dtos.api.dtos.webhook.ChargesNotificationDTO;
+import com.agendaki.financially.dtos.api.dtos.webhook.PaymentNotificationDTO;
 import com.agendaki.financially.dtos.payment.PaymentCreateDTO;
 import com.agendaki.financially.exceptions.ExistingDataException;
 import com.agendaki.financially.models.payment.Payment;
@@ -13,6 +15,9 @@ import com.agendaki.financially.services.payment.strategy.PixCreate;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+
+import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Service
 public class PaymentServiceImpl implements PaymentService {
@@ -65,6 +70,13 @@ public class PaymentServiceImpl implements PaymentService {
             throw new ExistingDataException("Not a payment on your account");
         }
         paymentRepository.deleteByIdPreUser(idAuthenticated);
+    }
+
+    @Override
+    public void pushNotification(PaymentNotificationDTO paymentNotificationDTO) {
+        ChargesNotificationDTO chargesNotificationDTO = paymentNotificationDTO.charges().get(0);
+        paymentRepository.updatePaymentStatusAndDateTransactionByIdPreUser(chargesNotificationDTO.reference_id(), chargesNotificationDTO.status(),
+                OffsetDateTime.parse(chargesNotificationDTO.paid_at(), DateTimeFormatter.ISO_OFFSET_DATE_TIME).toLocalDate());
     }
 
     private String recoverIdOfAuthenticated() {

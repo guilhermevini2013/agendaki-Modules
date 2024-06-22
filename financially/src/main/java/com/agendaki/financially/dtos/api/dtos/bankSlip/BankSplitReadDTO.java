@@ -1,6 +1,6 @@
-package com.agendaki.financially.api.dtos.bankSlip;
+package com.agendaki.financially.dtos.api.dtos.bankSlip;
 
-import com.agendaki.financially.api.dtos.PaymentReadDTO;
+import com.agendaki.financially.dtos.api.dtos.PaymentReadDTO;
 import com.agendaki.financially.models.payment.BankSlip;
 import com.agendaki.financially.models.payment.Payment;
 import com.fasterxml.jackson.annotation.JsonInclude;

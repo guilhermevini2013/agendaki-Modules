@@ -1,4 +1,4 @@
-package com.agendaki.financially.api.dtos.bankSlip;
+package com.agendaki.financially.dtos.api.dtos.bankSlip;
 
 import java.util.Map;
 

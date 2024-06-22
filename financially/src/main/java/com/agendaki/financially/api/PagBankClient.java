@@ -1,7 +1,7 @@
 package com.agendaki.financially.api;
 
-import com.agendaki.financially.api.dtos.bankSlip.PaymentBankSlipCreateDTO;
-import com.agendaki.financially.api.dtos.pix.PaymentPixCreateDTO;
+import com.agendaki.financially.dtos.api.dtos.bankSlip.PaymentBankSlipCreateDTO;
+import com.agendaki.financially.dtos.api.dtos.pix.PaymentPixCreateDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

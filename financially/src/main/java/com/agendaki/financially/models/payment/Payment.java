@@ -40,7 +40,7 @@ public abstract class Payment {
         this.price = paymentCreateDTO.typeSignature().getDateBySignature().price();
         this.typeSignature = paymentCreateDTO.typeSignature();
         this.dateOpen = LocalDate.now();
-        this.paymentStatus = PaymentStatus.PENDING;
+        this.paymentStatus = PaymentStatus.WAITING;
         this.dateTransaction = null;
         this.cpf = paymentCreateDTO.cpf();
     }

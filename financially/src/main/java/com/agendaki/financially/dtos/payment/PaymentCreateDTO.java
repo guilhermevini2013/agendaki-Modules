@@ -1,6 +1,6 @@
 package com.agendaki.financially.dtos.payment;
 
-import com.agendaki.financially.api.dtos.AddressDTO;
+import com.agendaki.financially.dtos.api.dtos.AddressDTO;
 import com.agendaki.financially.models.payment.TypePayment;
 import com.agendaki.financially.models.user.TypeSignature;
 import jakarta.validation.Valid;

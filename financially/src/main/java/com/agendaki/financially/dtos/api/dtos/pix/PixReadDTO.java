@@ -1,6 +1,6 @@
-package com.agendaki.financially.api.dtos.pix;
+package com.agendaki.financially.dtos.api.dtos.pix;
 
-import com.agendaki.financially.api.dtos.PaymentReadDTO;
+import com.agendaki.financially.dtos.api.dtos.PaymentReadDTO;
 import com.agendaki.financially.models.payment.Payment;
 import com.agendaki.financially.models.payment.Pix;
 import com.agendaki.financially.models.user.SignatureSpecification;

@@ -1,6 +1,7 @@
 package com.agendaki.financially.services.payment;
 
-import com.agendaki.financially.api.dtos.PaymentReadDTO;
+import com.agendaki.financially.dtos.api.dtos.PaymentReadDTO;
+import com.agendaki.financially.dtos.api.dtos.webhook.PaymentNotificationDTO;
 import com.agendaki.financially.dtos.payment.PaymentCreateDTO;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,4 +14,7 @@ public interface PaymentService {
 
     @Transactional
     void deletePayment();
+
+    @Transactional
+    void pushNotification(PaymentNotificationDTO paymentNotificationDTO);
 }

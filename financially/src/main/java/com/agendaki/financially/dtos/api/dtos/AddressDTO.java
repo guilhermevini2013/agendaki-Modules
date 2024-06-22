@@ -1,4 +1,4 @@
-package com.agendaki.financially.api.dtos;
+package com.agendaki.financially.dtos.api.dtos;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
