@@ -1,7 +1,7 @@
 package com.agendaki.financially.models.user;
 
-import com.agendaki.financially.dtos.user.PreUserSaveDTO;
-import com.agendaki.financially.dtos.user.PreUserUpdateDTO;
+import com.agendaki.financially.dtos.user.request.PreUserSaveDTO;
+import com.agendaki.financially.dtos.user.request.PreUserUpdateDTO;
 import com.agendaki.financially.repositories.PreUserRepository;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -45,7 +45,7 @@ public class PreUser implements UserDetails {
         this.tellPhone = tellPhone;
     }
 
-    public PreUser(PreUserRepository.UserAuth userAuth) {
+    public PreUser(PreUserRepository.PreUserAuth userAuth) {
         this.id = userAuth.getId();
         this.email = userAuth.getEmail();
         this.password = userAuth.getPassword();

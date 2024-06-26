@@ -10,9 +10,20 @@ import java.util.Optional;
 public interface PreUserRepository extends MongoRepository<PreUser, String> {
 
     @Query(value = "{ 'email' : ?0 }", fields = "{ 'email' : 1, 'password' : 1, 'id' : 1 }")
-    Optional<UserAuth> findByEmail(@Param("email") String email);
+    Optional<PreUserAuth> findByEmail(@Param("email") String email);
 
-    interface UserAuth {
+    @Query(value = "{ 'id' : ?0 }", fields = "{ 'name' : 1, 'tradeName' : 1, 'tellPhone' : 1 }")
+    Optional<PreUserRead> getPreUserById(@Param("id") String id);
+
+    interface PreUserRead {
+        String getName();
+
+        String getTradeName();
+
+        String getTellPhone();
+    }
+
+    interface PreUserAuth {
         String getId();
 
         String getEmail();
