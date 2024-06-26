@@ -13,6 +13,7 @@ import com.agendaki.financially.services.payment.strategy.BankSlipCreate;
 import com.agendaki.financially.services.payment.strategy.PaymentStrategy;
 import com.agendaki.financially.services.payment.strategy.PixCreate;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -30,14 +31,14 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
-    public PaymentReadDTO createPayment(PaymentCreateDTO paymentDTO) {
+    public EntityModel<PaymentReadDTO> createPayment(PaymentCreateDTO paymentDTO) {
         try {
             switch (paymentDTO.typePayment()) {
                 case PIX -> {
-                    return new PixReadDTO(paymentStrategy.createPayment(paymentDTO, new PixCreate()));
+                    return EntityModel.of(new PixReadDTO(paymentStrategy.createPayment(paymentDTO, new PixCreate())));
                 }
                 case BANK_SLIP -> {
-                    return new BankSplitReadDTO(paymentStrategy.createPayment(paymentDTO, new BankSlipCreate()));
+                    return EntityModel.of(new BankSplitReadDTO(paymentStrategy.createPayment(paymentDTO, new BankSlipCreate())));
                 }
                 default -> throw new IllegalArgumentException("Type payment not supported");
             }

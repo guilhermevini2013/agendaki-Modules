@@ -4,7 +4,9 @@ import com.agendaki.financially.dtos.api.dtos.PaymentReadDTO;
 import com.agendaki.financially.dtos.api.dtos.webhook.PaymentNotificationDTO;
 import com.agendaki.financially.dtos.payment.PaymentCreateDTO;
 import com.agendaki.financially.services.payment.PaymentService;
+import com.agendaki.financially.utils.HateoasUtil;
 import jakarta.validation.Valid;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,9 +22,10 @@ public class PaymentController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public PaymentReadDTO createPayment(@RequestBody @Valid final PaymentCreateDTO paymentDTO) {
-        PaymentReadDTO payment = paymentService.createPayment(paymentDTO);
-        return payment;
+    public EntityModel<PaymentReadDTO> createPayment(@RequestBody @Valid final PaymentCreateDTO paymentDTO) {
+        EntityModel<PaymentReadDTO> paymentReadDTO = paymentService.createPayment(paymentDTO);
+        HateoasUtil.insertHateoasIntoPayment(paymentReadDTO);
+        return paymentReadDTO;
     }
 
     @GetMapping
