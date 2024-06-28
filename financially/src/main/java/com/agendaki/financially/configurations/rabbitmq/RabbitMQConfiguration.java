@@ -20,12 +20,12 @@ public class RabbitMQConfiguration {
     }
 
     @Bean
-    public RabbitAdmin criaRabbitAdmin(ConnectionFactory conn) {
+    public RabbitAdmin createRabbitAdmin(ConnectionFactory conn) {
         return new RabbitAdmin(conn);
     }
 
     @Bean
-    public ApplicationListener<ApplicationReadyEvent> inicializaAdmin(RabbitAdmin rabbitAdmin) {
+    public ApplicationListener<ApplicationReadyEvent> initializeAdmin(RabbitAdmin rabbitAdmin) {
         return event -> rabbitAdmin.initialize();
     }
 

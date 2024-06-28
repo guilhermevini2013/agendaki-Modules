@@ -1,4 +1,6 @@
 package com.agendaki.financially.dtos.email;
 
-public record EmailGenerationDTO(String email, String typeReceiver) {
+import com.agendaki.financially.dtos.user.response.PreUserSaveResponseDTO;
+
+public record EmailGenerationDTO(PreUserSaveResponseDTO preUserSaveResponseDTO, String typeTemplate) {
 }

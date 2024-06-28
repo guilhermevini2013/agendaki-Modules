@@ -1,6 +1,6 @@
 package com.agendaki.notification.dtos;
 
-import com.agendaki.notification.models.TypeReceiver;
+import com.agendaki.notification.models.TypeTemplate;
 
-public record EmailGenerationDTO(String email, TypeReceiver typeReceiver) {
+public record EmailGenerationDTO(PreUserSaveResponseDTO preUserSaveResponseDTO, TypeTemplate typeTemplate) {
 }

@@ -44,11 +44,12 @@ public class PreUserServiceImpl implements PreUserService {
         PreUser preUserSaved = null;
         try {
             preUserSaved = preUserRepository.save(new PreUser(userDTO, passwordEncoder));
-            rabbitTemplate.convertAndSend("email.pending", new EmailGenerationDTO(preUserSaved.getUsername(), "WELCOME"));
+            PreUserSaveResponseDTO preUserSaveResponseDTO = new PreUserSaveResponseDTO(preUserSaved);
+            rabbitTemplate.convertAndSend("email.pending", new EmailGenerationDTO(preUserSaveResponseDTO, "WELCOME"));
+            return EntityModel.of(preUserSaveResponseDTO);
         } catch (DuplicateKeyException ex) {
             throw new ExistingDataException("Existing data, check the fields");
         }
-        return EntityModel.of(new PreUserSaveResponseDTO(preUserSaved));
     }
 
     @Override

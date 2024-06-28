@@ -1,4 +1,6 @@
 package com.agendaki.notification.models;
 
-public record EmailContent(String email, String subject, String urlResourceFile) {
+import org.thymeleaf.context.Context;
+
+public record EmailContent(String email, String subject, String nameResourceFile, Context context) {
 }

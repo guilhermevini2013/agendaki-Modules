@@ -15,6 +15,6 @@ public class EmailListener {
 
     @RabbitListener(queues = "email.pending")
     public void sendEmail(EmailGenerationDTO message) {
-        emailService.sendEmail(message.typeReceiver().getEmailContent(message.email()));
+        emailService.sendEmail(message.typeTemplate().getEmailContent(message.preUserSaveResponseDTO()));
     }
 }
