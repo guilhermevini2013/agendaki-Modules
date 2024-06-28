@@ -1,5 +1,6 @@
 package com.agendaki.financially.services.user;
 
+import com.agendaki.financially.dtos.email.EmailGenerationDTO;
 import com.agendaki.financially.dtos.user.request.PreUserLoadDTO;
 import com.agendaki.financially.dtos.user.request.PreUserSaveDTO;
 import com.agendaki.financially.dtos.user.request.PreUserUpdateDTO;
@@ -10,6 +11,7 @@ import com.agendaki.financially.exceptions.ExistingDataException;
 import com.agendaki.financially.models.user.PreUser;
 import com.agendaki.financially.repositories.PreUserRepository;
 import com.agendaki.financially.services.jwt.JWTService;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -27,12 +29,14 @@ public class PreUserServiceImpl implements PreUserService {
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
     private final JWTService jwtService;
+    private final RabbitTemplate rabbitTemplate;
 
-    public PreUserServiceImpl(PreUserRepository preUserRepository, PasswordEncoder passwordEncoder, AuthenticationManager authenticationManager, JWTService jwtService) {
+    public PreUserServiceImpl(PreUserRepository preUserRepository, PasswordEncoder passwordEncoder, AuthenticationManager authenticationManager, JWTService jwtService, RabbitTemplate rabbitTemplate) {
         this.preUserRepository = preUserRepository;
         this.passwordEncoder = passwordEncoder;
         this.authenticationManager = authenticationManager;
         this.jwtService = jwtService;
+        this.rabbitTemplate = rabbitTemplate;
     }
 
     @Override
@@ -40,6 +44,7 @@ public class PreUserServiceImpl implements PreUserService {
         PreUser preUserSaved = null;
         try {
             preUserSaved = preUserRepository.save(new PreUser(userDTO, passwordEncoder));
+            rabbitTemplate.convertAndSend("email.pending", new EmailGenerationDTO(preUserSaved.getUsername(), "WELCOME"));
         } catch (DuplicateKeyException ex) {
             throw new ExistingDataException("Existing data, check the fields");
         }
