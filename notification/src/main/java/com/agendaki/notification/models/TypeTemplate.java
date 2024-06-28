@@ -11,15 +11,15 @@ public enum TypeTemplate {
 
     public EmailContent getEmailContent(PreUserSaveResponseDTO preUserSaveDTO) {
         Context context = new Context();
+        Map<String, Object> variables = new HashMap<>();
         switch (this) {
             case WELCOME:
-                Map<String, Object> variables = new HashMap<>();
                 variables.put("username", preUserSaveDTO.name());
                 variables.put("tradeName", preUserSaveDTO.tradeName());
                 context.setVariables(variables);
                 return new EmailContent(preUserSaveDTO.email(), "Bem-vindo a plataforma AgendaKi", "welcomePreUser", context);
             default:
-                throw new IllegalArgumentException("Invalid Type receiver");
+                throw new IllegalArgumentException("Invalid Type template");
         }
     }
 }
