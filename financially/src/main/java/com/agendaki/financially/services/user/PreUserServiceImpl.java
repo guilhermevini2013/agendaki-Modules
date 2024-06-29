@@ -1,6 +1,6 @@
 package com.agendaki.financially.services.user;
 
-import com.agendaki.financially.dtos.email.EmailGenerationDTO;
+import com.agendaki.financially.dtos.email.EmailToPreUserDTO;
 import com.agendaki.financially.dtos.user.request.PreUserLoadDTO;
 import com.agendaki.financially.dtos.user.request.PreUserSaveDTO;
 import com.agendaki.financially.dtos.user.request.PreUserUpdateDTO;
@@ -45,7 +45,7 @@ public class PreUserServiceImpl implements PreUserService {
         try {
             preUserSaved = preUserRepository.save(new PreUser(userDTO, passwordEncoder));
             PreUserSaveResponseDTO preUserSaveResponseDTO = new PreUserSaveResponseDTO(preUserSaved);
-            rabbitTemplate.convertAndSend("email.pending", new EmailGenerationDTO(preUserSaveResponseDTO, "WELCOME"));
+            rabbitTemplate.convertAndSend("email.preuser.pending", new EmailToPreUserDTO(preUserSaveResponseDTO, "WELCOME"));
             return EntityModel.of(preUserSaveResponseDTO);
         } catch (DuplicateKeyException ex) {
             throw new ExistingDataException("Existing data, check the fields");

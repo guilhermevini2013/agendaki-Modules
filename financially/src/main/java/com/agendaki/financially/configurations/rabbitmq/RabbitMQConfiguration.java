@@ -15,8 +15,13 @@ import org.springframework.context.annotation.Configuration;
 public class RabbitMQConfiguration {
 
     @Bean
-    public Queue emailQueue() {
-        return QueueBuilder.nonDurable("email.pending").build();
+    public Queue emailUserQueue() {
+        return QueueBuilder.nonDurable("email.preuser.pending").build();
+    }
+
+    @Bean
+    public Queue emailPaymentQueue() {
+        return QueueBuilder.nonDurable("email.payment.pending").build();
     }
 
     @Bean

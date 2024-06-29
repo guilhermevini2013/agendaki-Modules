@@ -5,13 +5,16 @@ import com.agendaki.financially.dtos.api.dtos.bankSlip.BankSplitReadDTO;
 import com.agendaki.financially.dtos.api.dtos.pix.PixReadDTO;
 import com.agendaki.financially.dtos.api.dtos.webhook.ChargesNotificationDTO;
 import com.agendaki.financially.dtos.api.dtos.webhook.PaymentNotificationDTO;
+import com.agendaki.financially.dtos.email.EmailToPaymentDTO;
 import com.agendaki.financially.dtos.payment.PaymentCreateDTO;
 import com.agendaki.financially.exceptions.ExistingDataException;
 import com.agendaki.financially.models.payment.Payment;
+import com.agendaki.financially.models.user.PreUser;
 import com.agendaki.financially.repositories.PaymentRepository;
 import com.agendaki.financially.services.payment.strategy.BankSlipCreate;
 import com.agendaki.financially.services.payment.strategy.PaymentStrategy;
 import com.agendaki.financially.services.payment.strategy.PixCreate;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -24,24 +27,28 @@ import java.time.format.DateTimeFormatter;
 public class PaymentServiceImpl implements PaymentService {
     private final PaymentRepository paymentRepository;
     private final PaymentStrategy paymentStrategy;
+    private final RabbitTemplate rabbitTemplate;
 
-    public PaymentServiceImpl(PaymentRepository paymentRepository, PaymentStrategy paymentStrategy) {
+    public PaymentServiceImpl(PaymentRepository paymentRepository, PaymentStrategy paymentStrategy, RabbitTemplate rabbitTemplate) {
         this.paymentRepository = paymentRepository;
         this.paymentStrategy = paymentStrategy;
+        this.rabbitTemplate = rabbitTemplate;
     }
 
     @Override
     public EntityModel<PaymentReadDTO> createPayment(PaymentCreateDTO paymentDTO) {
         try {
+            EntityModel<PaymentReadDTO> entityModel = null;
             switch (paymentDTO.typePayment()) {
-                case PIX -> {
-                    return EntityModel.of(new PixReadDTO(paymentStrategy.createPayment(paymentDTO, new PixCreate())));
-                }
-                case BANK_SLIP -> {
-                    return EntityModel.of(new BankSplitReadDTO(paymentStrategy.createPayment(paymentDTO, new BankSlipCreate())));
-                }
+                case PIX ->
+                        entityModel = EntityModel.of(new PixReadDTO(paymentStrategy.createPayment(paymentDTO, new PixCreate())));
+                case BANK_SLIP ->
+                        entityModel = EntityModel.of(new BankSplitReadDTO(paymentStrategy.createPayment(paymentDTO, new BankSlipCreate())));
                 default -> throw new IllegalArgumentException("Type payment not supported");
             }
+            PreUser preUserAuth = recoverPreUserOfAuthenticated();
+            rabbitTemplate.convertAndSend("email.payment.pending", new EmailToPaymentDTO(entityModel.getContent(), preUserAuth.getUsername()));
+            return entityModel;
         } catch (DuplicateKeyException ex) {
             throw new ExistingDataException("Request already active on your account");
         }
@@ -82,5 +89,9 @@ public class PaymentServiceImpl implements PaymentService {
 
     private String recoverIdOfAuthenticated() {
         return (String) SecurityContextHolder.getContext().getAuthentication().getCredentials();
+    }
+
+    private PreUser recoverPreUserOfAuthenticated() {
+        return (PreUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
 }
