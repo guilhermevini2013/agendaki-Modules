@@ -87,6 +87,7 @@ public class PaymentServiceImpl implements PaymentService {
         ChargesNotificationDTO chargesNotificationDTO = paymentNotificationDTO.charges().get(0);
         paymentRepository.updatePaymentStatusAndDateTransactionByIdPreUser(chargesNotificationDTO.reference_id(), chargesNotificationDTO.status(),
                 OffsetDateTime.parse(chargesNotificationDTO.paid_at(), DateTimeFormatter.ISO_OFFSET_DATE_TIME).toLocalDate());
+//        rabbitTemplate.convertAndSend(RabbitMQConstants.EXCHANGE_EMAIL_FINANCIALLY,"",);
     }
 
     private String recoverIdOfAuthenticated() {

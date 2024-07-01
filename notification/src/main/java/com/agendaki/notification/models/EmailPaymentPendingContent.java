@@ -1,6 +1,6 @@
 package com.agendaki.notification.models;
 
-import com.agendaki.notification.dtos.EmailPaymentToSendDTO;
+import com.agendaki.notification.dtos.financially.EmailPaymentToSendDTO;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

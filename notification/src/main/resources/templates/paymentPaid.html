@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagamento Efetuado</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+            padding: 20px;
+        }
+
+        .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #4CAF50;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        table td {
+            padding: 8px;
+            border: 1px solid #ddd;
+        }
+
+        table td:first-child {
+            background-color: #f2f2f2;
+        }
+
+        p {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="email-container">
+    <h2>Pagamento Efetuado</h2>
+    <p>Olá,[[${username}]]!</p>
+    <p>Informamos que o pagamento referente ao seu pedido foi efetuado com sucesso.</p>
+
+    <table>
+        <tr>
+            <td>Status</td>
+            <td><b>[[${status}]]</b></td>
+        </tr>
+        <tr>
+            <td>Descrição</td>
+            <td><b>[[${signatureDescription}]]</b></td>
+        </tr>
+        <tr>
+            <td>Data do Pagamento:</td>
+            <td>[[${date}]]</td>
+        </tr>
+        <tr>
+            <td>Valor Pago:</td>
+            <td>[[${totalValue}]]</td>
+        </tr>
+    </table>
+
+    <p>Se precisar de mais informações, não hesite em entrar em contato conosco.</p>
+
+    <p>Atenciosamente,<br>AgendaKi</p>
+</div>
+</body>
+</html>

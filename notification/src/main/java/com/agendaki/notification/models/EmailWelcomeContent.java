@@ -1,7 +1,6 @@
 package com.agendaki.notification.models;
 
-import com.agendaki.notification.dtos.PreUserSaveResponseDTO;
-import org.thymeleaf.context.Context;
+import com.agendaki.notification.dtos.financially.PreUserSaveResponseDTO;
 
 public class EmailWelcomeContent extends EmailToSend {
     private final String username;

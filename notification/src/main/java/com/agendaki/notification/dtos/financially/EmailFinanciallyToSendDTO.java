@@ -1,4 +1,4 @@
-package com.agendaki.notification.dtos;
+package com.agendaki.notification.dtos.financially;
 
 import com.agendaki.notification.models.TypeTemplate;
 
