@@ -2,24 +2,16 @@ package com.agendaki.financially.configurations.rabbitmq;
 
 import org.springframework.amqp.core.ExchangeBuilder;
 import org.springframework.amqp.core.FanoutExchange;
-import org.springframework.amqp.core.Queue;
-import org.springframework.amqp.core.QueueBuilder;
+import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
-import org.springframework.amqp.rabbit.core.RabbitAdmin;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
-import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
+@EnableRabbit
 public class RabbitMQConfiguration {
-
-    @Bean
-    public Queue emailFinanciallyQueue() {
-        return QueueBuilder.nonDurable(RabbitMQConstants.QUEUE_EMAIL_FINANCIALLY.value()).build();
-    }
 
     @Bean
     public FanoutExchange emailFanoutExchange() {
@@ -27,16 +19,6 @@ public class RabbitMQConfiguration {
                 .fanoutExchange(RabbitMQConstants.EXCHANGE_EMAIL_FINANCIALLY.value())
                 .durable(false)
                 .build();
-    }
-
-    @Bean
-    public RabbitAdmin createRabbitAdmin(ConnectionFactory conn) {
-        return new RabbitAdmin(conn);
-    }
-
-    @Bean
-    public ApplicationListener<ApplicationReadyEvent> initializeAdmin(RabbitAdmin rabbitAdmin) {
-        return event -> rabbitAdmin.initialize();
     }
 
     @Bean
