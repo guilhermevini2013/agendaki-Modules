@@ -1,5 +1,7 @@
 package com.agendaki.financially.configurations.rabbitmq;
 
+import org.springframework.amqp.core.ExchangeBuilder;
+import org.springframework.amqp.core.FanoutExchange;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.core.QueueBuilder;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
@@ -15,13 +17,16 @@ import org.springframework.context.annotation.Configuration;
 public class RabbitMQConfiguration {
 
     @Bean
-    public Queue emailUserQueue() {
-        return QueueBuilder.nonDurable("email.preuser.pending").build();
+    public Queue emailFinanciallyQueue() {
+        return QueueBuilder.nonDurable(RabbitMQConstants.QUEUE_EMAIL_FINANCIALLY.value()).build();
     }
 
     @Bean
-    public Queue emailPaymentQueue() {
-        return QueueBuilder.nonDurable("email.payment.pending").build();
+    public FanoutExchange emailFanoutExchange() {
+        return ExchangeBuilder
+                .fanoutExchange(RabbitMQConstants.EXCHANGE_EMAIL_FINANCIALLY.value())
+                .durable(false)
+                .build();
     }
 
     @Bean

@@ -1,10 +1,12 @@
 package com.agendaki.financially.services.payment;
 
+import com.agendaki.financially.configurations.rabbitmq.RabbitMQConstants;
 import com.agendaki.financially.dtos.api.dtos.PaymentReadDTO;
 import com.agendaki.financially.dtos.api.dtos.bankSlip.BankSplitReadDTO;
 import com.agendaki.financially.dtos.api.dtos.pix.PixReadDTO;
 import com.agendaki.financially.dtos.api.dtos.webhook.ChargesNotificationDTO;
 import com.agendaki.financially.dtos.api.dtos.webhook.PaymentNotificationDTO;
+import com.agendaki.financially.dtos.email.EmailFinanciallyToSendDTO;
 import com.agendaki.financially.dtos.email.EmailToPaymentDTO;
 import com.agendaki.financially.dtos.payment.PaymentCreateDTO;
 import com.agendaki.financially.exceptions.ExistingDataException;
@@ -47,7 +49,7 @@ public class PaymentServiceImpl implements PaymentService {
                 default -> throw new IllegalArgumentException("Type payment not supported");
             }
             PreUser preUserAuth = recoverPreUserOfAuthenticated();
-            rabbitTemplate.convertAndSend("email.payment.pending", new EmailToPaymentDTO(entityModel.getContent(), preUserAuth.getUsername()));
+            rabbitTemplate.convertAndSend(RabbitMQConstants.QUEUE_EMAIL_FINANCIALLY.value(), new EmailFinanciallyToSendDTO(entityModel.getContent(), preUserAuth.getUsername()));
             return entityModel;
         } catch (DuplicateKeyException ex) {
             throw new ExistingDataException("Request already active on your account");
