@@ -16,9 +16,9 @@ public record PaymentBankSlipCreateDTO(String reference_id, CustomerDTO customer
 
     public PaymentBankSlipCreateDTO(PaymentCreateDTO paymentDTO, PreUser preUser) {
         this(preUser.getId(), new CustomerDTO(preUser.getName(), preUser.getUsername(), paymentDTO.cpf().replace(".", "").replace("-", "")),
-                List.of(new ItemsDTO(paymentDTO.typeSignature().getDateBySignature().description(), 1, paymentDTO.typeSignature().getDateBySignature().price().toBigInteger().intValue())),
-                List.of(new ChargesDTO(preUser.getId(), paymentDTO.typeSignature().getDateBySignature().description(),
-                        new AmountDTO(paymentDTO.typeSignature().getDateBySignature().price().toString(), "BRL"),
+                List.of(new ItemsDTO(paymentDTO.typeSignature().getInformation().description(), 1, paymentDTO.typeSignature().getInformation().price().toBigInteger().intValue())),
+                List.of(new ChargesDTO(preUser.getId(), paymentDTO.typeSignature().getInformation().description(),
+                        new AmountDTO(paymentDTO.typeSignature().getInformation().price().toString(), "BRL"),
                         new PaymentMethodDTO("BOLETO",
                                 new BankSlipDTO(LocalDate.now().plusDays(3).toString(), Map.of("line_1", "Pagamento processado para DESC Fatura", "line_2", "Via PagSeguro"),
                                         new HolderDTO(preUser.getName(), preUser.getUsername(), paymentDTO.cpf().replace(".", "").replace("-", ""),

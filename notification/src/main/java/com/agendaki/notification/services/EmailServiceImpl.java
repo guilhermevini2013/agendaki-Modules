@@ -1,8 +1,6 @@
 package com.agendaki.notification.services;
 
-import com.agendaki.notification.models.EmailContent;
 import com.agendaki.notification.models.EmailToSend;
-import com.agendaki.notification.services.strategy.IEmailContent;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -21,14 +19,13 @@ public class EmailServiceImpl implements EmailService {
     }
 
     @Override
-    public void sendEmail(IEmailContent iCreateEmailContent, EmailToSend emailToSend) {
-        EmailContent emailContent = iCreateEmailContent.createEmailContent(emailToSend);
+    public void sendEmail(EmailToSend emailToSend) {
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
         try {
-            helper.setTo(emailContent.email());
-            helper.setSubject(emailContent.subject());
-            String htmlContent = templateEngine.process(emailContent.nameResourceFile(), emailContent.context());
+            helper.setTo(emailToSend.getEmail());
+            helper.setSubject(emailToSend.getSubject());
+            String htmlContent = templateEngine.process(emailToSend.getNameResourceFile(), emailToSend.getContext());
             helper.setText(htmlContent, true);
             mailSender.send(message);
         } catch (MessagingException e) {

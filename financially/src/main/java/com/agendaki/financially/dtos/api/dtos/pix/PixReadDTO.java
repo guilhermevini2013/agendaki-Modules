@@ -22,7 +22,7 @@ public class PixReadDTO extends PaymentReadDTO {
             this.urlPix = pix.getUrlPix();
             this.urlImagePix = pix.getUrlImagePix();
             this.expireTime = pix.getExpireTime();
-            this.signatureSpecification = pix.getTypeSignature().getDateBySignature();
+            this.signatureSpecification = pix.getTypeSignature().getInformation();
         } else {
             throw new IllegalArgumentException("Payment is not Pix");
         }

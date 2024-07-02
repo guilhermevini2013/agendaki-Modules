@@ -2,7 +2,8 @@ package com.agendaki.notification.dtos.financially;
 
 import com.agendaki.notification.models.TypeTemplate;
 
-import java.util.Optional;
+import java.util.Map;
 
-public record EmailFinanciallyToSendDTO(Optional<PreUserSaveResponseDTO> preUserSaveResponseDTO,Optional<EmailPaymentToSendDTO> emailPaymentToSendDTO, TypeTemplate typeTemplate) {
+public record EmailFinanciallyToSendDTO(Map<String, Object> attributesEmail, String emailTo,
+                                        TypeTemplate typeTemplate) {
 }

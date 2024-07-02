@@ -7,7 +7,6 @@ import com.agendaki.financially.dtos.api.dtos.pix.PixReadDTO;
 import com.agendaki.financially.dtos.api.dtos.webhook.ChargesNotificationDTO;
 import com.agendaki.financially.dtos.api.dtos.webhook.PaymentNotificationDTO;
 import com.agendaki.financially.dtos.email.EmailFinanciallyToSendDTO;
-import com.agendaki.financially.dtos.email.EmailToPaymentDTO;
 import com.agendaki.financially.dtos.payment.PaymentCreateDTO;
 import com.agendaki.financially.exceptions.ExistingDataException;
 import com.agendaki.financially.models.payment.Payment;

@@ -20,7 +20,7 @@ public class BankSlip extends Payment {
 
     public BankSlip(String idPreUser, PaymentCreateDTO paymentCreateDTO, String linkPDF, String barcode) {
         super(idPreUser, paymentCreateDTO);
-        this.description = paymentCreateDTO.typeSignature().getDateBySignature().description();
+        this.description = paymentCreateDTO.typeSignature().getInformation().description();
         this.due_Date = LocalDate.now().plusDays(3);
         this.linkPDF = linkPDF;
         this.barcode = barcode;

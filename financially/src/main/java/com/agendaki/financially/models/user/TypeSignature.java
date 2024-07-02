@@ -8,7 +8,7 @@ public enum TypeSignature {
     QUARTERLY,
     ANNUAL;
 
-    public SignatureSpecification getDateBySignature() {
+    public SignatureSpecification getInformation() {
         switch (this) {
             case MONTHLY:
                 return new SignatureSpecification(LocalDate.now().plusMonths(1), BigDecimal.valueOf(5000), "Access to a 1-month subscription to AgendaKi services.");

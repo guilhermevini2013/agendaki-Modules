@@ -37,7 +37,7 @@ public abstract class Payment {
     protected Payment(String idPreUser, PaymentCreateDTO paymentCreateDTO) {
         this.idPreUser = idPreUser;
         this.typePayment = paymentCreateDTO.typePayment();
-        this.price = paymentCreateDTO.typeSignature().getDateBySignature().price();
+        this.price = paymentCreateDTO.typeSignature().getInformation().price();
         this.typeSignature = paymentCreateDTO.typeSignature();
         this.dateOpen = LocalDate.now();
         this.paymentStatus = PaymentStatus.WAITING;

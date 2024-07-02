@@ -7,7 +7,12 @@ import com.agendaki.financially.models.user.TypeSignature;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.math.BigDecimal;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
+
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class PaymentReadDTO {
     private BigDecimal price;
@@ -57,5 +62,16 @@ public class PaymentReadDTO {
 
     public LocalDate getDateTransaction() {
         return dateTransaction;
+    }
+
+    public Map<String, Object> toMapToPaymentCreated() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("cpf", cpf);
+        result.put("price", price);
+        result.put("paymentStatus", paymentStatus.getStatusInPtBr());
+        result.put("signatureDescription", typeSignature.getInformation().description());
+        result.put("typePayment", typePayment);
+        result.put("dateOpen", new SimpleDateFormat("dd/MM/yyyy").format(Date.valueOf(dateOpen)));
+        return result;
     }
 }
