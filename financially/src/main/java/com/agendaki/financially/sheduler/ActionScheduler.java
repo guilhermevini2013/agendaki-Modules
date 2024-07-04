@@ -1,5 +1,7 @@
 package com.agendaki.financially.sheduler;
 
+import com.agendaki.financially.configurations.rabbitmq.RabbitMQConstants;
+import com.agendaki.financially.dtos.email.EmailFinanciallyToSendDTO;
 import com.agendaki.financially.repositories.PaymentRepository;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -19,11 +21,11 @@ public class ActionScheduler {
         this.paymentRepository = paymentRepository;
     }
 
-    @Scheduled(cron = "00 10 21 * * ?")
+    @Scheduled(cron = "00 00 19 * * ?")
     public void notificationStatusPaymentToPreUser() {
         List<PaymentRepository.PaymentStatusProjection> allPaymentStatusProjection = paymentRepository.findAllPaymentStatusProjection();
-        allPaymentStatusProjection.forEach(paymentStatus -> {
-            System.out.println(paymentStatus);
+        allPaymentStatusProjection.forEach(paymentProject -> {
+            rabbitTemplate.convertAndSend(RabbitMQConstants.QUEUE_EMAIL_FINANCIALLY.value(), new EmailFinanciallyToSendDTO(paymentProject));
         });
     }
 }

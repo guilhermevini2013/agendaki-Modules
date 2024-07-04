@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .email-container {
+            width: 80%;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #FF0000;
+        }
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        .footer {
+            margin-top: 20px;
+            padding-top: 10px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+<div class="email-container">
+    <h2>Aviso de Pagamento Pendente</h2>
+    <p>Informamos que você tem um pagamento para [[${tradeName}]] pendente referente ao seu pedido.</p>
+
+    <table>
+        <tr>
+            <td>Status</td>
+            <td><b>[[${paymentStatus}]]</b></td>
+        </tr>
+        <tr>
+            <td>Descrição</td>
+            <td><b>[[${signatureDescription}]]</b></td>
+        </tr>
+        <tr>
+            <td>Data de Abertura:</td>
+            <td>[[${dateOpen}]]</td>
+        </tr>
+        <tr>
+            <td>Valor Devido:</td>
+            <td>[[${price}]]</td>
+        </tr>
+        <tr>
+            <td>Tipo de Pagamento:</td>
+            <td>[[${typePayment}]]</td>
+        </tr>
+        <tr>
+            <td>Nome Comercial:</td>
+            <td>[[${tradeName}]]</td>
+        </tr>
+    </table>
+
+    <p>Para mais informações de como efetuar o pagamento se redirecione até a aba <a>pedidos</a> da sua conta.</p>
+
+    <p>Atenciosamente,<br>AgendaKi</p>
+
+    <div class="footer">
+        <p>Este é um e-mail automático. Por favor, não responda.</p>
+    </div>
+</div>
+</body>
+</html>

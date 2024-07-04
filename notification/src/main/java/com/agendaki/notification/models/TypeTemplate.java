@@ -3,8 +3,9 @@ package com.agendaki.notification.models;
 public enum TypeTemplate {
     WELCOME("Bem-vindo a plataforma AgendaKi", "welcomePreUser"),
     PAYMENT_PAID("Pagamento efetuado!", "paymentPaid"),
-    PAYMENT_CREATED("Pedido de pagamento pendente!", "paymentCreated");
-
+    PAYMENT_CREATED("Pedido de pagamento pendente!", "paymentCreated"),
+    WARNING_PAYMENT("Você tem um pedido aberto, efetue o pagamento!", "warningPayment"),
+    ;
     private final String subject;
     private final String resourceFileName;
 
