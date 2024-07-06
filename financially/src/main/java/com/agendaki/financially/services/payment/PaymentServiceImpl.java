@@ -10,7 +10,7 @@ import com.agendaki.financially.dtos.email.EmailFinanciallyToSendDTO;
 import com.agendaki.financially.dtos.payment.PaymentCreateDTO;
 import com.agendaki.financially.exceptions.ExistingDataException;
 import com.agendaki.financially.models.payment.Payment;
-import com.agendaki.financially.models.user.PreUser;
+import com.agendaki.financially.models.preuser.PreUser;
 import com.agendaki.financially.repositories.PaymentRepository;
 import com.agendaki.financially.services.payment.strategy.BankSlipCreate;
 import com.agendaki.financially.services.payment.strategy.PaymentStrategy;

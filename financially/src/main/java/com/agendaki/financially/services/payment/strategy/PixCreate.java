@@ -5,7 +5,7 @@ import com.agendaki.financially.dtos.api.dtos.pix.PaymentPixCreateDTO;
 import com.agendaki.financially.dtos.payment.PaymentCreateDTO;
 import com.agendaki.financially.models.payment.Payment;
 import com.agendaki.financially.models.payment.Pix;
-import com.agendaki.financially.models.user.PreUser;
+import com.agendaki.financially.models.preuser.PreUser;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 

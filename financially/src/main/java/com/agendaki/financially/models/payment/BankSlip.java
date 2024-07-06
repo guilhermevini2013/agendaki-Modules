@@ -1,7 +1,7 @@
 package com.agendaki.financially.models.payment;
 
 import com.agendaki.financially.dtos.payment.PaymentCreateDTO;
-import com.agendaki.financially.models.user.TypeSignature;
+import com.agendaki.financially.models.preuser.TypeSignature;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

@@ -1,4 +1,4 @@
-package com.agendaki.financially.models.user;
+package com.agendaki.financially.models.preuser;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

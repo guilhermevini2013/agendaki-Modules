@@ -1,6 +1,6 @@
 package com.agendaki.financially.services.user;
 
-import com.agendaki.financially.models.user.PreUser;
+import com.agendaki.financially.models.preuser.PreUser;
 import com.agendaki.financially.repositories.PreUserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

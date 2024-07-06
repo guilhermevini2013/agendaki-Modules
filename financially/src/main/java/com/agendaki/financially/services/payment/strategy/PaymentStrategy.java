@@ -3,7 +3,7 @@ package com.agendaki.financially.services.payment.strategy;
 import com.agendaki.financially.api.PagBankClient;
 import com.agendaki.financially.dtos.payment.PaymentCreateDTO;
 import com.agendaki.financially.models.payment.Payment;
-import com.agendaki.financially.models.user.PreUser;
+import com.agendaki.financially.models.preuser.PreUser;
 import com.agendaki.financially.repositories.PaymentRepository;
 import com.agendaki.financially.repositories.PreUserRepository;
 import org.springframework.beans.factory.annotation.Value;

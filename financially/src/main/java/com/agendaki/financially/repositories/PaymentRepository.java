@@ -3,7 +3,7 @@ package com.agendaki.financially.repositories;
 import com.agendaki.financially.models.payment.Payment;
 import com.agendaki.financially.models.payment.PaymentStatus;
 import com.agendaki.financially.models.payment.TypePayment;
-import com.agendaki.financially.models.user.TypeSignature;
+import com.agendaki.financially.models.preuser.TypeSignature;
 import org.springframework.data.mongodb.repository.Aggregation;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;

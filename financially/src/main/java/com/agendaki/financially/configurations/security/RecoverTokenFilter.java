@@ -1,6 +1,6 @@
 package com.agendaki.financially.configurations.security;
 
-import com.agendaki.financially.models.user.PreUser;
+import com.agendaki.financially.models.preuser.PreUser;
 import com.agendaki.financially.repositories.PreUserRepository;
 import com.agendaki.financially.services.jwt.JWTService;
 import jakarta.servlet.FilterChain;

@@ -3,7 +3,7 @@ package com.agendaki.financially.dtos.api.dtos.pix;
 import com.agendaki.financially.dtos.api.dtos.PaymentReadDTO;
 import com.agendaki.financially.models.payment.Payment;
 import com.agendaki.financially.models.payment.Pix;
-import com.agendaki.financially.models.user.SignatureSpecification;
+import com.agendaki.financially.models.preuser.SignatureSpecification;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.time.LocalTime;

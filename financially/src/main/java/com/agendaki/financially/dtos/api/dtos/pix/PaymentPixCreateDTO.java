@@ -1,7 +1,7 @@
 package com.agendaki.financially.dtos.api.dtos.pix;
 
 import com.agendaki.financially.dtos.payment.PaymentCreateDTO;
-import com.agendaki.financially.models.user.PreUser;
+import com.agendaki.financially.models.preuser.PreUser;
 
 import java.util.List;
 

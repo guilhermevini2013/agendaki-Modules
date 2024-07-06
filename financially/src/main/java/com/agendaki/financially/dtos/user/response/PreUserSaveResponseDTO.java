@@ -1,6 +1,6 @@
 package com.agendaki.financially.dtos.user.response;
 
-import com.agendaki.financially.models.user.PreUser;
+import com.agendaki.financially.models.preuser.PreUser;
 
 import java.util.HashMap;
 import java.util.Map;

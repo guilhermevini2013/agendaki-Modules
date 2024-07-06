@@ -1,4 +1,4 @@
-package com.agendaki.financially.models.user;
+package com.agendaki.financially.models.preuser;
 
 import com.agendaki.financially.dtos.user.request.PreUserSaveDTO;
 import com.agendaki.financially.dtos.user.request.PreUserUpdateDTO;

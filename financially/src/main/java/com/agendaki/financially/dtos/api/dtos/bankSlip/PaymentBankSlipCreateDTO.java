@@ -5,7 +5,7 @@ import com.agendaki.financially.dtos.api.dtos.ItemsDTO;
 import com.agendaki.financially.dtos.api.dtos.pix.AmountDTO;
 import com.agendaki.financially.dtos.api.dtos.pix.CustomerDTO;
 import com.agendaki.financially.dtos.payment.PaymentCreateDTO;
-import com.agendaki.financially.models.user.PreUser;
+import com.agendaki.financially.models.preuser.PreUser;
 
 import java.time.LocalDate;
 import java.util.List;
