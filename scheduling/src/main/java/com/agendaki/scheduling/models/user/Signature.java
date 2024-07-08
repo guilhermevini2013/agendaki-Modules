@@ -15,6 +15,11 @@ public class Signature {
     private TypeSignature typeSignature;
     private LocalDate expiryDate;
 
+    public Signature(TypeSignature typeSignature, LocalDate expiryDate) {
+        this.typeSignature = typeSignature;
+        this.expiryDate = expiryDate;
+    }
+
     public Signature() {
     }
 }
