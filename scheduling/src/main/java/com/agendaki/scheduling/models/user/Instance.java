@@ -1,5 +1,6 @@
 package com.agendaki.scheduling.models.user;
 
+import com.agendaki.scheduling.models.scheduling.DateJob;
 import com.agendaki.scheduling.models.scheduling.Scheduling;
 import jakarta.persistence.*;
 
@@ -16,7 +17,9 @@ public class Instance {
     @Column(unique = true)
     private String keyInstance;
     @OneToMany(mappedBy = "instance")
-    private Set<Scheduling> schedulings = new HashSet<>();
+    private Set<Scheduling> schedules = new HashSet<>();
+    @OneToMany
+    private Set<DateJob> dateJobs = new HashSet<>();
 
     public Instance(Long id) {
         this.id = id;
@@ -27,8 +30,8 @@ public class Instance {
 
     }
 
-    public Set<Scheduling> getSchedulings() {
-        return Collections.unmodifiableSet(schedulings);
+    public Set<Scheduling> getSchedules() {
+        return Collections.unmodifiableSet(schedules);
     }
 
     public String getKeyInstance() {
