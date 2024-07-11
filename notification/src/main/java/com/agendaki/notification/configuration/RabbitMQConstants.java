@@ -2,7 +2,7 @@ package com.agendaki.notification.configuration;
 
 public enum RabbitMQConstants {
     QUEUE_EMAIL_FINANCIALLY("email.financially"),
-    EXCHANGE_EMAIL_FINANCIALLY("email.fanout.exchange"),;
+    EXCHANGE_NOTIFICATION_AND_SCHEDULING("fanout.notification.scheduling"),;
     private final String value;
 
     RabbitMQConstants(String value) {

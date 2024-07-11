@@ -43,4 +43,5 @@ public class PixReadDTO extends PaymentReadDTO {
     public SignatureSpecification getSignatureSpecification() {
         return signatureSpecification;
     }
+
 }

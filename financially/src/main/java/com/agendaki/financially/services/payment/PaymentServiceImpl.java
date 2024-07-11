@@ -6,15 +6,17 @@ import com.agendaki.financially.dtos.api.dtos.bankSlip.BankSplitReadDTO;
 import com.agendaki.financially.dtos.api.dtos.pix.PixReadDTO;
 import com.agendaki.financially.dtos.api.dtos.webhook.ChargesNotificationDTO;
 import com.agendaki.financially.dtos.api.dtos.webhook.PaymentNotificationDTO;
-import com.agendaki.financially.dtos.email.EmailFinanciallyToSendDTO;
+import com.agendaki.financially.dtos.exchange.EmailFinanciallyToSendDTO;
 import com.agendaki.financially.dtos.payment.PaymentCreateDTO;
 import com.agendaki.financially.exceptions.ExistingDataException;
 import com.agendaki.financially.models.payment.Payment;
 import com.agendaki.financially.models.preuser.PreUser;
 import com.agendaki.financially.repositories.PaymentRepository;
+import com.agendaki.financially.repositories.PreUserRepository;
 import com.agendaki.financially.services.payment.strategy.BankSlipCreate;
 import com.agendaki.financially.services.payment.strategy.PaymentStrategy;
 import com.agendaki.financially.services.payment.strategy.PixCreate;
+import org.bson.types.ObjectId;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.hateoas.EntityModel;
@@ -29,11 +31,13 @@ public class PaymentServiceImpl implements PaymentService {
     private final PaymentRepository paymentRepository;
     private final PaymentStrategy paymentStrategy;
     private final RabbitTemplate rabbitTemplate;
+    private final PreUserRepository preUserRepository;
 
-    public PaymentServiceImpl(PaymentRepository paymentRepository, PaymentStrategy paymentStrategy, RabbitTemplate rabbitTemplate) {
+    public PaymentServiceImpl(PaymentRepository paymentRepository, PaymentStrategy paymentStrategy, RabbitTemplate rabbitTemplate, PreUserRepository preUserRepository) {
         this.paymentRepository = paymentRepository;
         this.paymentStrategy = paymentStrategy;
         this.rabbitTemplate = rabbitTemplate;
+        this.preUserRepository = preUserRepository;
     }
 
     @Override
@@ -86,7 +90,8 @@ public class PaymentServiceImpl implements PaymentService {
         ChargesNotificationDTO chargesNotificationDTO = paymentNotificationDTO.charges().get(0);
         paymentRepository.updatePaymentStatusAndDateTransactionByIdPreUser(chargesNotificationDTO.reference_id(), chargesNotificationDTO.status(),
                 OffsetDateTime.parse(chargesNotificationDTO.paid_at(), DateTimeFormatter.ISO_OFFSET_DATE_TIME).toLocalDate());
-//        rabbitTemplate.convertAndSend(RabbitMQConstants.EXCHANGE_EMAIL_FINANCIALLY,"",);
+        PaymentRepository.PaymentCompletedProjection paymentCompletedProjection = paymentRepository.getPaymentCompletedProjectionById(new ObjectId(chargesNotificationDTO.reference_id()));
+        rabbitTemplate.convertAndSend(RabbitMQConstants.EXCHANGE_NOTIFICATION_AND_SCHEDULING.value(), new EmailFinanciallyToSendDTO(paymentCompletedProjection));
     }
 
     private String recoverIdOfAuthenticated() {

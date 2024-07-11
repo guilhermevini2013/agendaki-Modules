@@ -1,4 +1,4 @@
-package com.agendaki.financially.dtos.email;
+package com.agendaki.financially.dtos.exchange;
 
 import com.agendaki.financially.dtos.api.dtos.PaymentReadDTO;
 import com.agendaki.financially.dtos.user.response.PreUserSaveResponseDTO;
@@ -10,7 +10,11 @@ public record EmailFinanciallyToSendDTO(Map<String, Object> attributesEmail,
                                         String emailTo, String typeTemplate) {
 
     public EmailFinanciallyToSendDTO(PaymentRepository.PaymentStatusProjection paymentStatusProjection) {
-        this(paymentStatusProjection.toMapPaymentStatus(), paymentStatusProjection.preUserData().email(), "WARNING_PAYMENT");
+        this(paymentStatusProjection.toMap(), paymentStatusProjection.preUserData().email(), "WARNING_PAYMENT");
+    }
+
+    public EmailFinanciallyToSendDTO(PaymentRepository.PaymentCompletedProjection paymentCompletedProjection) {
+        this(paymentCompletedProjection.toMap(), paymentCompletedProjection.preUserData().email(), "PAYMENT_COMPLETED_AND_ACCOUNT_RELEASED");
     }
 
     public EmailFinanciallyToSendDTO(PreUserSaveResponseDTO preUserSaveResponseDTO) {

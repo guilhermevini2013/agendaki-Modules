@@ -25,7 +25,7 @@ public class RabbitMQConfiguration {
     @Bean
     public FanoutExchange fanoutExchange() {
         return ExchangeBuilder
-                .fanoutExchange(RabbitMQConstants.EXCHANGE_EMAIL_FINANCIALLY.value())
+                .fanoutExchange(RabbitMQConstants.EXCHANGE_NOTIFICATION_AND_SCHEDULING.value())
                 .durable(false)
                 .build();
     }

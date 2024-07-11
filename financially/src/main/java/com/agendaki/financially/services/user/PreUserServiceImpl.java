@@ -1,7 +1,7 @@
 package com.agendaki.financially.services.user;
 
 import com.agendaki.financially.configurations.rabbitmq.RabbitMQConstants;
-import com.agendaki.financially.dtos.email.EmailFinanciallyToSendDTO;
+import com.agendaki.financially.dtos.exchange.EmailFinanciallyToSendDTO;
 import com.agendaki.financially.dtos.user.request.PreUserLoadDTO;
 import com.agendaki.financially.dtos.user.request.PreUserSaveDTO;
 import com.agendaki.financially.dtos.user.request.PreUserUpdateDTO;

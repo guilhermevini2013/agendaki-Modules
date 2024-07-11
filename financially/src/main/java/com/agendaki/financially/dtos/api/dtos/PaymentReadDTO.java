@@ -15,6 +15,7 @@ import java.util.Map;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class PaymentReadDTO {
+    private String paymentId;
     private BigDecimal price;
     private String cpf;
     private PaymentStatus paymentStatus;
@@ -31,9 +32,14 @@ public class PaymentReadDTO {
         this.typePayment = payment.getTypePayment();
         this.dateOpen = payment.getDateOpen();
         this.dateTransaction = payment.getDateTransaction();
+        this.paymentId = payment.getId();
     }
 
     public PaymentReadDTO() {
+    }
+
+    public String getPaymentId() {
+        return paymentId;
     }
 
     public BigDecimal getPrice() {
@@ -74,4 +80,5 @@ public class PaymentReadDTO {
         result.put("dateOpen", new SimpleDateFormat("dd/MM/yyyy").format(Date.valueOf(dateOpen)));
         return result;
     }
+
 }

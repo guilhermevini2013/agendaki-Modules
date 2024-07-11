@@ -1,4 +1,4 @@
-package com.agendaki.financially.configurations.rabbitmq;
+package com.agendaki.scheduling.configurations.rabbitmq;
 
 public enum RabbitMQConstants {
     QUEUE_EMAIL_FINANCIALLY("email.financially"),
