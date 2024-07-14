@@ -5,7 +5,7 @@ public enum TypeTemplate {
     PAYMENT_PAID("Pagamento efetuado!", "paymentPaid"),
     PAYMENT_CREATED("Pedido de pagamento pendente!", "paymentCreated"),
     WARNING_PAYMENT("Você tem um pedido aberto, efetue o pagamento!", "warningPayment"),
-    PAYMENT_COMPLETED_AND_ACCOUNT_RELEASED("","")
+    PAYMENT_COMPLETED_AND_ACCOUNT_RELEASED("Pagamento efetuado!, sua conta foi liberada.","paymentPaid")
     ;
     private final String subject;
     private final String resourceFileName;

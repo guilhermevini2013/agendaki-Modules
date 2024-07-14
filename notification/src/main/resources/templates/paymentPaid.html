@@ -48,13 +48,13 @@
 <body>
 <div class="email-container">
     <h2>Pagamento Efetuado</h2>
-    <p>Olá,[[${username}]]!</p>
+    <p>Olá, [[${name}]]!</p>
     <p>Informamos que o pagamento referente ao seu pedido foi efetuado com sucesso.</p>
 
     <table>
         <tr>
             <td>Status</td>
-            <td><b>[[${status}]]</b></td>
+            <td><b>[[${paymentStatus}]]</b></td>
         </tr>
         <tr>
             <td>Descrição</td>
@@ -62,13 +62,15 @@
         </tr>
         <tr>
             <td>Data do Pagamento:</td>
-            <td>[[${date}]]</td>
+            <td>[[${dateOpen}]]</td>
         </tr>
         <tr>
             <td>Valor Pago:</td>
-            <td>[[${totalValue}]]</td>
+            <td>[[${price}]]</td>
         </tr>
     </table>
+
+    <p>Acesse sua conta na plataforma!</p>
 
     <p>Se precisar de mais informações, não hesite em entrar em contato conosco.</p>
 
