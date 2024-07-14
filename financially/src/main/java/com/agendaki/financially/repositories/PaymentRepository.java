@@ -84,6 +84,8 @@ public interface PaymentRepository extends MongoRepository<Payment, String> {
             result.put("price", this.price);
             result.put("typePayment", this.typePayment);
             result.put("paymentStatus", PaymentStatus.PAID.getStatusInPtBr());
+            result.put("typeSignature", this.typeSignature);
+            result.put("expiryDate",this.typeSignature.getInformation().date());
             result.put("signatureDescription", this.typeSignature.getInformation().description());
             return result;
         }

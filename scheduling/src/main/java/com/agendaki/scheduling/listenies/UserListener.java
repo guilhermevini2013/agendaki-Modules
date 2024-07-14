@@ -1,14 +1,20 @@
 package com.agendaki.scheduling.listenies;
 
 import com.agendaki.scheduling.dtos.request.PreUserToSaveDTO;
+import com.agendaki.scheduling.services.UserService;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
 @Component
-public class SchedulingListener {
+public class UserListener {
+    private final UserService userService;
+
+    public UserListener(UserService userService) {
+        this.userService = userService;
+    }
 
     @RabbitListener(queues = "scheduling.financially")
     public void savePreUser(PreUserToSaveDTO preUserToSaveDTO) {
-        System.out.println(preUserToSaveDTO);
+        userService.saveUser(preUserToSaveDTO);
     }
 }

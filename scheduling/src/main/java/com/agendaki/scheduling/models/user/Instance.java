@@ -20,9 +20,11 @@ public class Instance {
     private Set<Scheduling> schedules = new HashSet<>();
     @OneToMany
     private Set<DateJob> dateJobs = new HashSet<>();
+    @OneToOne(fetch = FetchType.LAZY)
+    private User user;
 
-    public Instance(Long id) {
-        this.id = id;
+    public Instance(User user) {
+        this.user = user;
         this.keyInstance = UUID.randomUUID().toString().replace("-", "");
     }
 
@@ -36,5 +38,13 @@ public class Instance {
 
     public String getKeyInstance() {
         return keyInstance;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public User getUser() {
+        return user;
     }
 }
