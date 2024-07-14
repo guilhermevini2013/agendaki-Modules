@@ -16,6 +16,6 @@ public class EmailListener {
 
     @RabbitListener(queues = "email.financially")
     public void sendEmailFinancially(EmailFinanciallyToSendDTO message) {
-        emailService.sendEmail(new EmailToSend(message.emailTo(), message.typeTemplate().getSubject(), message.typeTemplate().getResourceFileName(), message.attributesEmail()));
+        emailService.sendEmail(new EmailToSend(message.emailTo(), message.typeTemplate().getSubject(), message.typeTemplate().getResourceFileName(), message.attributes()));
     }
 }

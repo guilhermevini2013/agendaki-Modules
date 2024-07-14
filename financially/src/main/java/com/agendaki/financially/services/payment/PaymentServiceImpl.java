@@ -31,13 +31,11 @@ public class PaymentServiceImpl implements PaymentService {
     private final PaymentRepository paymentRepository;
     private final PaymentStrategy paymentStrategy;
     private final RabbitTemplate rabbitTemplate;
-    private final PreUserRepository preUserRepository;
 
-    public PaymentServiceImpl(PaymentRepository paymentRepository, PaymentStrategy paymentStrategy, RabbitTemplate rabbitTemplate, PreUserRepository preUserRepository) {
+    public PaymentServiceImpl(PaymentRepository paymentRepository, PaymentStrategy paymentStrategy, RabbitTemplate rabbitTemplate) {
         this.paymentRepository = paymentRepository;
         this.paymentStrategy = paymentStrategy;
         this.rabbitTemplate = rabbitTemplate;
-        this.preUserRepository = preUserRepository;
     }
 
     @Override
@@ -53,6 +51,12 @@ public class PaymentServiceImpl implements PaymentService {
             }
             PreUser preUserAuth = recoverPreUserOfAuthenticated();
             rabbitTemplate.convertAndSend(RabbitMQConstants.QUEUE_EMAIL_FINANCIALLY.value(), new EmailFinanciallyToSendDTO(entityModel.getContent(), preUserAuth.getUsername()));
+
+            // temp
+            PaymentRepository.PaymentCompletedProjection paymentCompletedProjection = paymentRepository.getPaymentCompletedProjectionById(new ObjectId(entityModel.getContent().getPaymentId()));
+            rabbitTemplate.convertAndSend(RabbitMQConstants.EXCHANGE_NOTIFICATION_AND_SCHEDULING.value(),"", new EmailFinanciallyToSendDTO(paymentCompletedProjection));
+            //
+
             return entityModel;
         } catch (DuplicateKeyException ex) {
             throw new ExistingDataException("Request already active on your account");
@@ -90,8 +94,6 @@ public class PaymentServiceImpl implements PaymentService {
         ChargesNotificationDTO chargesNotificationDTO = paymentNotificationDTO.charges().get(0);
         paymentRepository.updatePaymentStatusAndDateTransactionByIdPreUser(chargesNotificationDTO.reference_id(), chargesNotificationDTO.status(),
                 OffsetDateTime.parse(chargesNotificationDTO.paid_at(), DateTimeFormatter.ISO_OFFSET_DATE_TIME).toLocalDate());
-        PaymentRepository.PaymentCompletedProjection paymentCompletedProjection = paymentRepository.getPaymentCompletedProjectionById(new ObjectId(chargesNotificationDTO.reference_id()));
-        rabbitTemplate.convertAndSend(RabbitMQConstants.EXCHANGE_NOTIFICATION_AND_SCHEDULING.value(), new EmailFinanciallyToSendDTO(paymentCompletedProjection));
     }
 
     private String recoverIdOfAuthenticated() {

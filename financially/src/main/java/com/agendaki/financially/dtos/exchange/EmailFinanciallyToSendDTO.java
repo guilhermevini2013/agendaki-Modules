@@ -6,7 +6,7 @@ import com.agendaki.financially.repositories.PaymentRepository;
 
 import java.util.Map;
 
-public record EmailFinanciallyToSendDTO(Map<String, Object> attributesEmail,
+public record EmailFinanciallyToSendDTO(Map<String, Object> attributes,
                                         String emailTo, String typeTemplate) {
 
     public EmailFinanciallyToSendDTO(PaymentRepository.PaymentStatusProjection paymentStatusProjection) {

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 public class SchedulingListener {
 
     @RabbitListener(queues = "scheduling.financially")
-    public void listen(PreUserToSaveDTO preUserToSaveDTO) {
-        System.out.println(preUserToSaveDTO.attributes().get("email"));
+    public void savePreUser(PreUserToSaveDTO preUserToSaveDTO) {
+        System.out.println(preUserToSaveDTO);
     }
 }

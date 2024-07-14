@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
 public class RabbitMQConfiguration {
 
     @Bean
-    public FanoutExchange emailFanoutExchange() {
+    public FanoutExchange notificationFanoutExchange() {
         return ExchangeBuilder
                 .fanoutExchange(RabbitMQConstants.EXCHANGE_NOTIFICATION_AND_SCHEDULING.value())
                 .durable(false)
