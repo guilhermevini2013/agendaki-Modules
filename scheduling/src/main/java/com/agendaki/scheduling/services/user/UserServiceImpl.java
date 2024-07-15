@@ -1,4 +1,4 @@
-package com.agendaki.scheduling.services;
+package com.agendaki.scheduling.services.user;
 
 import com.agendaki.scheduling.dtos.request.PreUserToSaveDTO;
 import com.agendaki.scheduling.models.user.User;

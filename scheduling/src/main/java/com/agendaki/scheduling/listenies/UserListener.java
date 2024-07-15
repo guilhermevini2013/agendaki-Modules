@@ -1,7 +1,7 @@
 package com.agendaki.scheduling.listenies;
 
 import com.agendaki.scheduling.dtos.request.PreUserToSaveDTO;
-import com.agendaki.scheduling.services.UserService;
+import com.agendaki.scheduling.services.user.UserService;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
