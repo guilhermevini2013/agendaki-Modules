@@ -14,19 +14,13 @@ public class User {
     private String name;
     private String password;
     private String tradeName;
+    private String tellPhone;
     @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private Signature signature;
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "user")
     private Instance instance;
-
-    public User(String id, String name, String password, String tradeName, Signature signature, Instance instance) {
-        this.id = id;
-        this.name = name;
-        this.password = password;
-        this.tradeName = tradeName;
-        this.signature = signature;
-        this.instance = instance;
-    }
+    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    private Address address;
 
     public User() {
     }
@@ -34,6 +28,7 @@ public class User {
     public User(Map<String, Object> attributes) {
         this.id = (String) attributes.get("id");
         this.name = (String) attributes.get("name");
+        this.tellPhone = (String) attributes.get("tellPhone");
         this.password = (String) attributes.get("password");
         this.tradeName = (String) attributes.get("tradeName");
         List<Integer> dates = (List<Integer>) attributes.get("expiryDate");
