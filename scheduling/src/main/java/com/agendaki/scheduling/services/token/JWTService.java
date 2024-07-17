@@ -11,7 +11,8 @@ import java.time.Instant;
 
 @Component
 public class JWTService {
-    private final String nameApplication = "AgendaKi";
+    @Value("${spring.application.name}")
+    private String nameApplication;
 
     public String generateToken(String email) {
         try {

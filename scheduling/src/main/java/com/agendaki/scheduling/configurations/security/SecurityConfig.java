@@ -28,8 +28,8 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(httpSecuritySessionManagementConfigurer -> httpSecuritySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(request -> request
-                        .requestMatchers(publicRoutes).permitAll()
                         .requestMatchers(privateRoutes).hasRole("USER")
+                        .requestMatchers(publicRoutes).permitAll()
                         .anyRequest().authenticated())
                 .build();
     }

@@ -4,13 +4,15 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.time.Instant;
 
 @Component
 public class JWTService {
-    private final String nameApplication = "AgendaKi";
+    @Value("${spring.application.name}")
+    private String nameApplication;
 
     public String generateToken(String email) {
         try {
