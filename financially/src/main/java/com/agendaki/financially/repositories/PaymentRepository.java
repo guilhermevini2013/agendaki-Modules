@@ -37,12 +37,17 @@ public interface PaymentRepository extends MongoRepository<Payment, String> {
     })
     List<PaymentStatusProjection> findAllPaymentStatusProjection();
 
+    @Aggregation(pipeline = {
+            "{ $match: { '_id': :#{#id} } }",
+            "{ $lookup: { from: 'pre-user', localField: 'idPreUser', foreignField: '_id', as: 'preUserData' } }",
+            "{ $unwind: '$preUserData' }",
+            "{ $project: { 'paymentStatus': 1, 'typePayment': 1, 'dateOpen': 1, 'preUserData.tradeName': 1, 'preUserData._id': 1, 'preUserData.password': 1, 'preUserData.name': 1, 'preUserData.tellPhone': 1, 'price': 1, 'preUserData.email': 1, 'typeSignature': 1 } }"
+    })
+    PaymentCompletedProjection getPaymentCompletedProjectionById(@Param("id") ObjectId id);
+
     record PaymentStatusProjection(PaymentStatus paymentStatus, TypePayment typePayment, LocalDate dateOpen,
                                    BigDecimal price, PreUserToPaymentStatusProjection preUserData,
                                    TypeSignature typeSignature) {
-
-        public record PreUserToPaymentStatusProjection(String tradeName, String email) {
-        }
 
         public Map<String, Object> toMap() {
             Map<String, Object> result = new HashMap<>();
@@ -54,23 +59,14 @@ public interface PaymentRepository extends MongoRepository<Payment, String> {
             result.put("signatureDescription", this.typeSignature.getInformation().description());
             return result;
         }
-    }
 
-    @Aggregation(pipeline = {
-            "{ $match: { '_id': :#{#id} } }",
-            "{ $lookup: { from: 'pre-user', localField: 'idPreUser', foreignField: '_id', as: 'preUserData' } }",
-            "{ $unwind: '$preUserData' }",
-            "{ $project: { 'paymentStatus': 1, 'typePayment': 1, 'dateOpen': 1, 'preUserData.tradeName': 1, 'preUserData._id': 1, 'preUserData.password': 1, 'preUserData.name': 1, 'preUserData.tellPhone': 1, 'price': 1, 'preUserData.email': 1, 'typeSignature': 1 } }"
-    })
-    PaymentCompletedProjection getPaymentCompletedProjectionById(@Param("id") ObjectId id);
+        public record PreUserToPaymentStatusProjection(String tradeName, String email) {
+        }
+    }
 
     record PaymentCompletedProjection(PaymentStatus paymentStatus, TypePayment typePayment, LocalDate dateOpen,
                                       BigDecimal price, PreUserToPaymentCompletedProjection preUserData,
                                       TypeSignature typeSignature) {
-
-        public record PreUserToPaymentCompletedProjection(String _id, String tradeName, String email, String password,
-                                                          String name, String tellPhone) {
-        }
 
         public Map<String, Object> toMap() {
             Map<String, Object> result = new HashMap<>();
@@ -85,9 +81,13 @@ public interface PaymentRepository extends MongoRepository<Payment, String> {
             result.put("typePayment", this.typePayment);
             result.put("paymentStatus", PaymentStatus.PAID.getStatusInPtBr());
             result.put("typeSignature", this.typeSignature);
-            result.put("expiryDate",this.typeSignature.getInformation().date());
+            result.put("expiryDate", this.typeSignature.getInformation().date());
             result.put("signatureDescription", this.typeSignature.getInformation().description());
             return result;
+        }
+
+        public record PreUserToPaymentCompletedProjection(String _id, String tradeName, String email, String password,
+                                                          String name, String tellPhone) {
         }
 
     }

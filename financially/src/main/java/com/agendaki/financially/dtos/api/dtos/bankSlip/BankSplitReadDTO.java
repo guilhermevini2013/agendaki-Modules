@@ -16,8 +16,7 @@ public class BankSplitReadDTO extends PaymentReadDTO {
 
     public BankSplitReadDTO(Payment payment) {
         super(payment);
-        if (payment instanceof BankSlip) {
-            BankSlip bankSlip = (BankSlip) payment;
+        if (payment instanceof BankSlip bankSlip) {
             this.description = bankSlip.getDescription();
             this.due_Date = bankSlip.getDue_Date();
             this.linkPDF = bankSlip.getLinkPDF();

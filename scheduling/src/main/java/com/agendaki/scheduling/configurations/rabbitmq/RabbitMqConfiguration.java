@@ -23,7 +23,8 @@ public class RabbitMqConfiguration {
     @Bean
     public Queue scheduling() {
         return QueueBuilder
-                .nonDurable(RabbitMQConstants.QUEUE_SCHEDULING_FINANCIALLY.value()).build();
+                .durable(RabbitMQConstants.QUEUE_SCHEDULING_FINANCIALLY.value())
+                .build();
     }
 
     @Bean

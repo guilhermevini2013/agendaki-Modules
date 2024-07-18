@@ -9,6 +9,8 @@ import com.agendaki.scheduling.services.token.JWTService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -31,8 +33,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserTokenDTO loadUser(UserLoadDTO userLoadDTO) {
-        UsernamePasswordAuthenticationToken usernamePasswordAuth = new UsernamePasswordAuthenticationToken(userLoadDTO.email(), userLoadDTO.password());
-        Authentication authenticate = authenticationManager.authenticate(usernamePasswordAuth);
-        return new UserTokenDTO(jwtService.generateToken(((User) authenticate.getPrincipal()).getEmail()));
+        try {
+            UsernamePasswordAuthenticationToken usernamePasswordAuth = new UsernamePasswordAuthenticationToken(userLoadDTO.email(), userLoadDTO.password());
+            Authentication authenticate = authenticationManager.authenticate(usernamePasswordAuth);
+            return new UserTokenDTO(jwtService.generateToken(((User) authenticate.getPrincipal()).getEmail()));
+        } catch (AuthenticationException ex) {
+            throw new UsernameNotFoundException("Credentials not found");
+        }
+
     }
 }

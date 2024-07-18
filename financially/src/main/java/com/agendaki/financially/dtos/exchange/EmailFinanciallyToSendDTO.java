@@ -20,6 +20,7 @@ public record EmailFinanciallyToSendDTO(Map<String, Object> attributes,
     public EmailFinanciallyToSendDTO(PreUserSaveResponseDTO preUserSaveResponseDTO) {
         this(preUserSaveResponseDTO.toMap(), preUserSaveResponseDTO.email(), "WELCOME");
     }
+
     public EmailFinanciallyToSendDTO(PaymentReadDTO content, String username) {
         this(content.toMapToPaymentCreated(), username, "PAYMENT_CREATED");
     }

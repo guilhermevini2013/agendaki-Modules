@@ -17,8 +17,7 @@ public class PixReadDTO extends PaymentReadDTO {
 
     public PixReadDTO(Payment payment) {
         super(payment);
-        if (payment instanceof Pix) {
-            Pix pix = (Pix) payment;
+        if (payment instanceof Pix pix) {
             this.urlPix = pix.getUrlPix();
             this.urlImagePix = pix.getUrlImagePix();
             this.expireTime = pix.getExpireTime();

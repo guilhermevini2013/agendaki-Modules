@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @Document(collection = "payment")
 public abstract class Payment {
     @MongoId
-    private  String id;
+    private String id;
     @Indexed(unique = true)
     private String idPreUser;
     private BigDecimal price;

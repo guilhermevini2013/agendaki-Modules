@@ -12,7 +12,6 @@ import com.agendaki.financially.exceptions.ExistingDataException;
 import com.agendaki.financially.models.payment.Payment;
 import com.agendaki.financially.models.preuser.PreUser;
 import com.agendaki.financially.repositories.PaymentRepository;
-import com.agendaki.financially.repositories.PreUserRepository;
 import com.agendaki.financially.services.payment.strategy.BankSlipCreate;
 import com.agendaki.financially.services.payment.strategy.PaymentStrategy;
 import com.agendaki.financially.services.payment.strategy.PixCreate;
@@ -54,7 +53,7 @@ public class PaymentServiceImpl implements PaymentService {
 
             // temp
             PaymentRepository.PaymentCompletedProjection paymentCompletedProjection = paymentRepository.getPaymentCompletedProjectionById(new ObjectId(entityModel.getContent().getPaymentId()));
-            rabbitTemplate.convertAndSend(RabbitMQConstants.EXCHANGE_NOTIFICATION_AND_SCHEDULING.value(),"", new EmailFinanciallyToSendDTO(paymentCompletedProjection));
+            rabbitTemplate.convertAndSend(RabbitMQConstants.EXCHANGE_NOTIFICATION_AND_SCHEDULING.value(), "", new EmailFinanciallyToSendDTO(paymentCompletedProjection));
             //
 
             return entityModel;

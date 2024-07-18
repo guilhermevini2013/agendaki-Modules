@@ -3,6 +3,7 @@ package com.agendaki.scheduling.controllers;
 import com.agendaki.scheduling.dtos.request.UserLoadDTO;
 import com.agendaki.scheduling.dtos.response.UserTokenDTO;
 import com.agendaki.scheduling.services.user.UserService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,7 +20,7 @@ public class UserController {
     }
 
     @PostMapping(value = "/auth")
-    public ResponseEntity<UserTokenDTO> authUser(@RequestBody UserLoadDTO userLoadDTO) {
+    public ResponseEntity<UserTokenDTO> authUser(@RequestBody @Valid UserLoadDTO userLoadDTO) {
         UserTokenDTO userTokenDTO = userService.loadUser(userLoadDTO);
         return ResponseEntity.ok(userTokenDTO);
     }
