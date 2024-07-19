@@ -1,5 +1,6 @@
 package com.agendaki.scheduling.models.user;
 
+import com.agendaki.scheduling.repositories.UserRepository;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -28,6 +29,12 @@ public class User implements UserDetails {
     private Address address;
 
     public User() {
+    }
+
+    public User(UserRepository.UserAuthProjection userAuthProjection) {
+        this.id = userAuthProjection.getId();
+        this.email = userAuthProjection.getEmail();
+        this.password = userAuthProjection.getPassword();
     }
 
     public User(Map<String, Object> attributes) {
