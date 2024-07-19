@@ -19,6 +19,15 @@ public abstract class DateJob {
     private LocalTime breakInitial;
     private LocalTime breakFinal;
 
+    public DateJob(Instance instance, LocalTime startTime, LocalTime endTime, LocalTime breakInitial, LocalTime breakFinal) {
+        this.instance = instance;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.breakInitial = breakInitial;
+        this.breakFinal = breakFinal;
+    }
+
     public DateJob() {
+
     }
 }

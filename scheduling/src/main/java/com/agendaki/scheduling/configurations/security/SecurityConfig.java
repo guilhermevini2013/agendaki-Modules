@@ -38,6 +38,7 @@ public class SecurityConfig {
                         .requestMatchers(privateRoutes).hasRole("USER")
                         .requestMatchers(publicRoutes).permitAll()
                         .anyRequest().permitAll())
+                .headers(header -> header.frameOptions(frame -> frame.disable()))
                 .addFilterAt(recoverTokenFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }

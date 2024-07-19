@@ -59,6 +59,10 @@ public class User implements UserDetails {
         return this.password;
     }
 
+    public Instance getInstance() {
+        return instance;
+    }
+
     @Override
     public String getUsername() {
         return this.email;

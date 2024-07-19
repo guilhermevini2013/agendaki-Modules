@@ -1,5 +1,6 @@
 package com.agendaki.scheduling.repositories;
 
+import com.agendaki.scheduling.models.user.Instance;
 import com.agendaki.scheduling.models.user.TypeRole;
 import com.agendaki.scheduling.models.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -22,6 +23,8 @@ public interface UserRepository extends JpaRepository<User, String> {
         String getPassword();
 
         String getId();
+
+        Instance getInstance();
 
         Collection<? extends GrantedAuthority> role = List.of(new SimpleGrantedAuthority(TypeRole.ROLE_USER.getAuthority()));
     }
