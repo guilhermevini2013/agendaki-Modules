@@ -7,6 +7,5 @@ public record InsertDateOfSchedulingDTO(LocalTime scheduleInitial,
                                         LocalTime scheduleFinal,
                                         LocalTime breakInitial,
                                         LocalTime breakFinal,
-                                        Optional<DateJobHolidayDTO> dateJobHoliday,
                                         Optional<DateJobCommon> dateJobCommon) {
 }

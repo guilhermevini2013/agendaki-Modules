@@ -1,6 +1,7 @@
 package com.agendaki.scheduling.services.dateJob;
 
 import com.agendaki.scheduling.dtos.request.InsertDateOfSchedulingDTO;
+import com.agendaki.scheduling.dtos.request.InsertHolidayDTO;
 import com.agendaki.scheduling.models.scheduling.DateJobHoliday;
 import com.agendaki.scheduling.repositories.DateJobRepository;
 import com.agendaki.scheduling.repositories.UserRepository;
@@ -20,10 +21,14 @@ public class SchedulingServiceImpl implements DateJobService {
     @Transactional
     public void insertDateOfScheduling(InsertDateOfSchedulingDTO insertDateOfSchedulingDTO) {
         UserRepository.UserAuthProjection projectionOfUserEntityAuthenticated = SecurityUtil.getProjectionOfUserEntityAuthenticated();
-        if (insertDateOfSchedulingDTO.dateJobHoliday().isPresent()) {
-            DateJobHoliday dateJobHoliday = new DateJobHoliday(insertDateOfSchedulingDTO, projectionOfUserEntityAuthenticated);
-            dateJobRepository.save(dateJobHoliday);
-            return;
-        }
     }
+
+    @Override
+    public void insertHoliday(InsertHolidayDTO insertHolidayDTO) {
+        UserRepository.UserAuthProjection projectionOfUserEntityAuthenticated = SecurityUtil.getProjectionOfUserEntityAuthenticated();
+        DateJobHoliday dateJobHoliday = new DateJobHoliday(insertHolidayDTO, projectionOfUserEntityAuthenticated);
+        dateJobRepository.save(dateJobHoliday);
+
+    }
+
 }

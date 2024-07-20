@@ -1,7 +1,6 @@
 package com.agendaki.scheduling.models.scheduling;
 
-import com.agendaki.scheduling.dtos.request.DateJobHolidayDTO;
-import com.agendaki.scheduling.dtos.request.InsertDateOfSchedulingDTO;
+import com.agendaki.scheduling.dtos.request.InsertHolidayDTO;
 import com.agendaki.scheduling.repositories.UserRepository;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
@@ -14,12 +13,11 @@ public class DateJobHoliday extends DateJob {
     private Boolean isOpen;
     private LocalDate date;
 
-    public DateJobHoliday(InsertDateOfSchedulingDTO insertDateOfSchedulingDTO, UserRepository.UserAuthProjection projectionOfUserEntityAuthenticated) {
-        super(projectionOfUserEntityAuthenticated.getInstance(), insertDateOfSchedulingDTO.scheduleInitial(), insertDateOfSchedulingDTO.scheduleFinal(),
-                insertDateOfSchedulingDTO.breakInitial(), insertDateOfSchedulingDTO.breakFinal());
-        DateJobHolidayDTO dateJobHolidayDTO = insertDateOfSchedulingDTO.dateJobHoliday().get();
-        this.isOpen = dateJobHolidayDTO.isOpen();
-        this.date = dateJobHolidayDTO.dateOfHoliday();
+    public DateJobHoliday(InsertHolidayDTO holidayDTO, UserRepository.UserAuthProjection projectionOfUserEntityAuthenticated) {
+        super(projectionOfUserEntityAuthenticated.getInstance(), holidayDTO.scheduleInitial(), holidayDTO.scheduleFinal(),
+                holidayDTO.breakInitial(), holidayDTO.breakFinal());
+        this.isOpen = holidayDTO.isOpen();
+        this.date = holidayDTO.dateOfHoliday();
     }
 
     public DateJobHoliday() {
