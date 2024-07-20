@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Set;
+
 @RestController
 @RequestMapping(value = "/api/scheduling")
 public class DateJobController {
@@ -19,7 +21,7 @@ public class DateJobController {
     }
 
     @PostMapping("/common")
-    public ResponseEntity<Void> insertDateJob(@RequestBody InsertDateOfSchedulingDTO insertDateOfSchedulingDTO) {
+    public ResponseEntity<Void> insertDateJob(@RequestBody Set<InsertDateOfSchedulingDTO> insertDateOfSchedulingDTO) {
         dateJobService.insertDateOfScheduling(insertDateOfSchedulingDTO);
         return ResponseEntity.noContent().build();
     }
