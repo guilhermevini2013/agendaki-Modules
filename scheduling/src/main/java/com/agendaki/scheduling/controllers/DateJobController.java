@@ -2,18 +2,19 @@ package com.agendaki.scheduling.controllers;
 
 import com.agendaki.scheduling.dtos.request.InsertDateOfSchedulingDTO;
 import com.agendaki.scheduling.dtos.request.InsertHolidayDTO;
+import com.agendaki.scheduling.dtos.response.ReadDatesOfSchedulingDTO;
+import com.agendaki.scheduling.dtos.response.ReadHolidayDTO;
 import com.agendaki.scheduling.services.dateJob.DateJobService;
+import com.agendaki.scheduling.utils.HateoasUtil;
 import jakarta.validation.Valid;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
 
 @RestController
-@RequestMapping(value = "/api/scheduling")
+@RequestMapping(value = "/api/dateJob")
 public class DateJobController {
     private final DateJobService dateJobService;
 
@@ -21,16 +22,20 @@ public class DateJobController {
         this.dateJobService = dateJobService;
     }
 
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/common")
-    public ResponseEntity<Void> insertDateJob(@RequestBody @Valid Set<InsertDateOfSchedulingDTO> insertDateOfSchedulingDTO) {
-        dateJobService.insertDateOfScheduling(insertDateOfSchedulingDTO);
-        return ResponseEntity.noContent().build();
+    public EntityModel<ReadDatesOfSchedulingDTO> insertDateJob(@RequestBody @Valid Set<InsertDateOfSchedulingDTO> insertDateOfSchedulingDTO) {
+        EntityModel<ReadDatesOfSchedulingDTO> readDatesOfSchedulingDTOEntityModel = dateJobService.insertDateOfScheduling(insertDateOfSchedulingDTO);
+        HateoasUtil.insertHateoasIntoDateJob(readDatesOfSchedulingDTOEntityModel);
+        return readDatesOfSchedulingDTOEntityModel;
     }
 
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/holiday")
-    public ResponseEntity<Void> insertHoliday(@RequestBody @Valid InsertHolidayDTO insertHolidayDTO) {
-        dateJobService.insertHoliday(insertHolidayDTO);
-        return ResponseEntity.noContent().build();
+    public EntityModel<ReadHolidayDTO> insertHoliday(@RequestBody @Valid InsertHolidayDTO insertHolidayDTO) {
+        EntityModel<ReadHolidayDTO> readHolidayDTOEntityModel = dateJobService.insertHoliday(insertHolidayDTO);
+        HateoasUtil.insertHateoasIntoDateJob(readHolidayDTOEntityModel);
+        return readHolidayDTOEntityModel;
     }
 
 }
