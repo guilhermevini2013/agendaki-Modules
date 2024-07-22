@@ -4,6 +4,7 @@ import com.agendaki.scheduling.dtos.request.InsertDateOfSchedulingDTO;
 import com.agendaki.scheduling.dtos.request.InsertHolidayDTO;
 import com.agendaki.scheduling.dtos.response.ReadDatesOfSchedulingDTO;
 import com.agendaki.scheduling.dtos.response.ReadHolidayDTO;
+import com.agendaki.scheduling.exceptions.DuplicateDataException;
 import com.agendaki.scheduling.models.scheduling.DateJobCommon;
 import com.agendaki.scheduling.models.scheduling.DateJobHoliday;
 import com.agendaki.scheduling.repositories.DateJobRepository;
@@ -37,6 +38,9 @@ public class SchedulingServiceImpl implements DateJobService {
     @Override
     public EntityModel<ReadHolidayDTO> insertHoliday(InsertHolidayDTO insertHolidayDTO) {
         UserRepository.UserAuthProjection projectionOfUserEntityAuthenticated = SecurityUtil.getProjectionOfUserEntityAuthenticated();
+        if (dateJobRepository.existsByDate(projectionOfUserEntityAuthenticated.getInstance(), insertHolidayDTO.dateOfHoliday())) {
+            throw new DuplicateDataException("Holiday in this date already exists");
+        }
         DateJobHoliday dateJobHoliday = new DateJobHoliday(insertHolidayDTO, projectionOfUserEntityAuthenticated);
         dateJobRepository.save(dateJobHoliday);
         return EntityModel.of(new ReadHolidayDTO(insertHolidayDTO));

@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.time.Instant;
-import java.util.List;
 
 @ControllerAdvice
 public class HandlerRequestExceptions {
@@ -23,5 +22,10 @@ public class HandlerRequestExceptions {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ResponseErrorModel> validation(MethodArgumentNotValidException e, HttpServletRequest request) {
         return ResponseEntity.badRequest().body(new ResponseErrorModel(Instant.now(), HttpStatus.BAD_REQUEST.value(), e.getFieldErrors().stream().map(fieldError -> fieldError.getDefaultMessage()).toList(), request.getRequestURI()));
+    }
+
+    @ExceptionHandler(DuplicateDataException.class)
+    public ResponseEntity<ResponseErrorModel> duplicateData(DuplicateDataException e, HttpServletRequest request) {
+        return ResponseEntity.badRequest().body(new ResponseErrorModel(Instant.now(), HttpStatus.BAD_REQUEST.value(), e.getMessage(), request.getRequestURI()));
     }
 }
