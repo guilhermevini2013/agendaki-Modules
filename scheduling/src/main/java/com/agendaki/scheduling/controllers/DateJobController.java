@@ -3,6 +3,7 @@ package com.agendaki.scheduling.controllers;
 import com.agendaki.scheduling.dtos.request.InsertDateOfSchedulingDTO;
 import com.agendaki.scheduling.dtos.request.InsertHolidayDTO;
 import com.agendaki.scheduling.services.dateJob.DateJobService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,13 +22,13 @@ public class DateJobController {
     }
 
     @PostMapping("/common")
-    public ResponseEntity<Void> insertDateJob(@RequestBody Set<InsertDateOfSchedulingDTO> insertDateOfSchedulingDTO) {
+    public ResponseEntity<Void> insertDateJob(@RequestBody @Valid Set<InsertDateOfSchedulingDTO> insertDateOfSchedulingDTO) {
         dateJobService.insertDateOfScheduling(insertDateOfSchedulingDTO);
         return ResponseEntity.noContent().build();
     }
 
     @PostMapping("/holiday")
-    public ResponseEntity<Void> insertHoliday(@RequestBody InsertHolidayDTO insertHolidayDTO) {
+    public ResponseEntity<Void> insertHoliday(@RequestBody @Valid InsertHolidayDTO insertHolidayDTO) {
         dateJobService.insertHoliday(insertHolidayDTO);
         return ResponseEntity.noContent().build();
     }
