@@ -14,6 +14,7 @@ import org.springframework.hateoas.EntityModel;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Service
@@ -28,9 +29,14 @@ public class SchedulingServiceImpl implements DateJobService {
     @Transactional
     public EntityModel<ReadDatesOfSchedulingDTO> insertDateOfScheduling(Set<InsertDateOfSchedulingDTO> datesOfSchedulingDTO) {
         UserRepository.UserAuthProjection projectionOfUserEntityAuthenticated = SecurityUtil.getProjectionOfUserEntityAuthenticated();
+        Set<String> dayOfWeekAlreadyEntered = new HashSet<>();
         datesOfSchedulingDTO.forEach(dateOfScheduling -> {
+            if (dayOfWeekAlreadyEntered.contains(dateOfScheduling.dayOfWeek().toString())) {
+                throw new DuplicateDataException(dateOfScheduling.dayOfWeek() + " in scheduling already exists");
+            }
             DateJobCommon dateJobCommon = new DateJobCommon(dateOfScheduling,projectionOfUserEntityAuthenticated);
             dateJobRepository.save(dateJobCommon);
+            dayOfWeekAlreadyEntered.add(dateOfScheduling.dayOfWeek().toString());
         });
         return EntityModel.of(new ReadDatesOfSchedulingDTO(datesOfSchedulingDTO));
     }
