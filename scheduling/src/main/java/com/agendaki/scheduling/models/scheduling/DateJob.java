@@ -1,5 +1,6 @@
 package com.agendaki.scheduling.models.scheduling;
 
+import com.agendaki.scheduling.dtos.request.InsertDateOfSchedulingDTO;
 import com.agendaki.scheduling.models.user.Instance;
 import jakarta.persistence.*;
 
@@ -14,10 +15,10 @@ public abstract class DateJob {
     private Long id;
     @ManyToOne(fetch = FetchType.LAZY)
     private Instance instance;
-    private LocalTime startTime;
-    private LocalTime endTime;
-    private LocalTime breakInitial;
-    private LocalTime breakFinal;
+    protected LocalTime startTime;
+    protected LocalTime endTime;
+    protected LocalTime breakInitial;
+    protected LocalTime breakFinal;
 
     public DateJob(Instance instance, LocalTime startTime, LocalTime endTime, LocalTime breakInitial, LocalTime breakFinal) {
         this.instance = instance;
@@ -29,5 +30,21 @@ public abstract class DateJob {
 
     public DateJob() {
 
+    }
+
+    public LocalTime getStartTime() {
+        return startTime;
+    }
+
+    public LocalTime getEndTime() {
+        return endTime;
+    }
+
+    public LocalTime getBreakInitial() {
+        return breakInitial;
+    }
+
+    public LocalTime getBreakFinal() {
+        return breakFinal;
     }
 }

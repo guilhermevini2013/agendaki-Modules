@@ -2,11 +2,15 @@ package com.agendaki.scheduling.services.dateJob;
 
 import com.agendaki.scheduling.dtos.request.InsertDateOfSchedulingDTO;
 import com.agendaki.scheduling.dtos.request.InsertHolidayDTO;
+import com.agendaki.scheduling.dtos.response.ReadDateOfSchedulingDTO;
 import com.agendaki.scheduling.dtos.response.ReadDatesOfSchedulingDTO;
 import com.agendaki.scheduling.dtos.response.ReadHolidayDTO;
 import com.agendaki.scheduling.exceptions.DuplicateDataException;
+import com.agendaki.scheduling.exceptions.ResourceNotFoundException;
+import com.agendaki.scheduling.models.scheduling.DateJob;
 import com.agendaki.scheduling.models.scheduling.DateJobCommon;
 import com.agendaki.scheduling.models.scheduling.DateJobHoliday;
+import com.agendaki.scheduling.models.user.Instance;
 import com.agendaki.scheduling.repositories.DateJobRepository;
 import com.agendaki.scheduling.repositories.UserRepository;
 import com.agendaki.scheduling.utils.SecurityUtil;
@@ -41,7 +45,9 @@ public class SchedulingServiceImpl implements DateJobService {
         return EntityModel.of(new ReadDatesOfSchedulingDTO(datesOfSchedulingDTO));
     }
 
+
     @Override
+    @Transactional
     public EntityModel<ReadHolidayDTO> insertHoliday(InsertHolidayDTO insertHolidayDTO) {
         UserRepository.UserAuthProjection projectionOfUserEntityAuthenticated = SecurityUtil.getProjectionOfUserEntityAuthenticated();
         if (dateJobRepository.existsByDate(projectionOfUserEntityAuthenticated.getInstance(), insertHolidayDTO.dateOfHoliday())) {
@@ -50,6 +56,16 @@ public class SchedulingServiceImpl implements DateJobService {
         DateJobHoliday dateJobHoliday = new DateJobHoliday(insertHolidayDTO, projectionOfUserEntityAuthenticated);
         dateJobRepository.save(dateJobHoliday);
         return EntityModel.of(new ReadHolidayDTO(insertHolidayDTO));
+    }
+
+    @Override
+    @Transactional
+    public EntityModel<ReadDateOfSchedulingDTO> updateDateOfScheduling(InsertDateOfSchedulingDTO insertDateOfSchedulingDTO) {
+        Instance instance = SecurityUtil.getProjectionOfUserEntityAuthenticated().getInstance();
+        DateJobCommon dateJobFind = (DateJobCommon) dateJobRepository.findByInstanceAndDayOfWeek(instance, insertDateOfSchedulingDTO.dayOfWeek())
+                .orElseThrow(() -> new ResourceNotFoundException("Date Job in day of week not exist"));
+        dateJobFind.update(insertDateOfSchedulingDTO);
+        return EntityModel.of(new ReadDateOfSchedulingDTO(dateJobFind));
     }
 
 }
