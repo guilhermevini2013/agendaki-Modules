@@ -1,5 +1,6 @@
 package com.agendaki.scheduling.exceptions;
 
+import com.auth0.jwt.exceptions.JWTVerificationException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,4 +34,10 @@ public class HandlerRequestExceptions {
     public ResponseEntity<ResponseErrorModel> resourceNotFound(ResourceNotFoundException e, HttpServletRequest request) {
         return ResponseEntity.unprocessableEntity().body(new ResponseErrorModel(Instant.now(), HttpStatus.UNPROCESSABLE_ENTITY.value(), e.getMessage(), request.getRequestURI()));
     }
+
+    @ExceptionHandler(JWTVerificationException.class)
+    public ResponseEntity<ResponseErrorModel> jwtVerificationException(JWTVerificationException e, HttpServletRequest request) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ResponseErrorModel(Instant.now(), HttpStatus.UNAUTHORIZED.value(), e.getMessage(), request.getRequestURI()));
+    }
+
 }

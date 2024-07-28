@@ -7,6 +7,7 @@ import java.time.DayOfWeek;
 import java.time.LocalTime;
 
 public record ReadDateOfSchedulingDTO(
+        Long id,
         @NotNull
         LocalTime scheduleInitial,
         @NotNull
@@ -19,6 +20,6 @@ public record ReadDateOfSchedulingDTO(
         DayOfWeek dayOfWeek) {
 
     public ReadDateOfSchedulingDTO(DateJobCommon dateJobFind) {
-        this(dateJobFind.getStartTime(), dateJobFind.getEndTime(), dateJobFind.getBreakInitial(), dateJobFind.getBreakFinal(), dateJobFind.getDayOfWeek());
+        this(dateJobFind.getId(),dateJobFind.getStartTime(), dateJobFind.getEndTime(), dateJobFind.getBreakInitial(), dateJobFind.getBreakFinal(), dateJobFind.getDayOfWeek());
     }
 }

@@ -23,4 +23,12 @@ public class DateJobHoliday extends DateJob {
     public DateJobHoliday() {
 
     }
+
+    public Boolean getOpen() {
+        return isOpen;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
 }

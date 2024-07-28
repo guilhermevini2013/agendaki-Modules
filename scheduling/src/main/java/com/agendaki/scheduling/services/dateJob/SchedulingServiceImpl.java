@@ -59,7 +59,7 @@ public class SchedulingServiceImpl implements DateJobService {
         }
         DateJobHoliday dateJobHoliday = new DateJobHoliday(insertHolidayDTO, projectionOfUserEntityAuthenticated);
         dateJobRepository.save(dateJobHoliday);
-        return EntityModel.of(new ReadHolidayDTO(insertHolidayDTO));
+        return EntityModel.of(new ReadHolidayDTO(dateJobHoliday));
     }
 
     @Override
@@ -75,8 +75,15 @@ public class SchedulingServiceImpl implements DateJobService {
     @Override
     public CollectionModel<Set<ReadDateOfSchedulingDTO>> getAllDateOfScheduling() {
         Instance userAuth = SecurityUtil.getProjectionOfUserEntityAuthenticated().getInstance();
-        Set<DateJob> datesJobByInstance = dateJobRepository.findByInstance(userAuth);
+        Set<DateJob> datesJobByInstance = dateJobRepository.findDateJobCommonByInstance(userAuth);
         return CollectionModel.of(Collections.singleton(datesJobByInstance.stream().map(dateJob -> new ReadDateOfSchedulingDTO((DateJobCommon) dateJob)).collect(Collectors.toSet())));
+    }
+
+    @Override
+    public CollectionModel<Set<ReadHolidayDTO>> getAllHoliday() {
+        Instance userAuth = SecurityUtil.getProjectionOfUserEntityAuthenticated().getInstance();
+        Set<DateJob> datesHolidayByInstance = dateJobRepository.findDateJobHolidayByInstance(userAuth);
+        return CollectionModel.of(Collections.singleton(datesHolidayByInstance.stream().map(dateHoliday -> new ReadHolidayDTO((DateJobHoliday) dateHoliday)).collect(Collectors.toSet())));
     }
 
 }

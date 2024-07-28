@@ -32,6 +32,10 @@ public abstract class DateJob {
 
     }
 
+    public Long getId() {
+        return id;
+    }
+
     public LocalTime getStartTime() {
         return startTime;
     }

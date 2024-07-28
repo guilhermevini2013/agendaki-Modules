@@ -23,6 +23,9 @@ public class HateoasUtil {
                         .withRel("Update date job common"),
                 Link.of(URL_BASE_SCHEDULING + "/common", "getAllDateJob")
                         .withType("GET")
-                        .withRel("Get all date job by instance")));
+                        .withRel("Get all date job by instance"),
+                Link.of(URL_BASE_SCHEDULING + "/holiday", "getAllHolidayJob")
+                        .withType("GET")
+                        .withRel("Get all date holiday by instance")));
     }
 }

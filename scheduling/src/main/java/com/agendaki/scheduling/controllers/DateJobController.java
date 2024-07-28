@@ -11,6 +11,7 @@ import jakarta.validation.Valid;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
@@ -25,7 +26,7 @@ public class DateJobController {
     }
 
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping(value ="/common")
+    @PostMapping(value = "/common")
     public EntityModel<ReadDatesOfSchedulingDTO> insertDateJob(@RequestBody @Valid Set<InsertDateOfSchedulingDTO> insertDateOfSchedulingDTOS) {
         EntityModel<ReadDatesOfSchedulingDTO> readDatesOfSchedulingDTOEntityModel = dateJobService.insertDateOfScheduling(insertDateOfSchedulingDTOS);
         HateoasUtil.insertHateoasIntoDateJob(readDatesOfSchedulingDTOEntityModel);
@@ -33,7 +34,7 @@ public class DateJobController {
     }
 
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping(value ="/holiday")
+    @PostMapping(value = "/holiday")
     public EntityModel<ReadHolidayDTO> insertHoliday(@RequestBody @Valid InsertHolidayDTO insertHolidayDTO) {
         EntityModel<ReadHolidayDTO> readHolidayDTOEntityModel = dateJobService.insertHoliday(insertHolidayDTO);
         HateoasUtil.insertHateoasIntoDateJob(readHolidayDTOEntityModel);
@@ -48,11 +49,23 @@ public class DateJobController {
         return readDateOfSchedulingEntityModel;
     }
 
-    @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = "/common")
-    public CollectionModel<Set<ReadDateOfSchedulingDTO>> readDatesOfScheduling() {
+    public ResponseEntity<CollectionModel<Set<ReadDateOfSchedulingDTO>>> getDatesOfScheduling() {
         CollectionModel<Set<ReadDateOfSchedulingDTO>> allDateOfScheduling = dateJobService.getAllDateOfScheduling();
+        if (allDateOfScheduling.getContent().iterator().next().isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
         HateoasUtil.insertHateoasIntoDateJob(allDateOfScheduling);
-        return allDateOfScheduling;
+        return ResponseEntity.ok(allDateOfScheduling);
+    }
+
+    @GetMapping(value = "/holiday")
+    public ResponseEntity<CollectionModel<Set<ReadHolidayDTO>>> getHoliday() {
+        CollectionModel<Set<ReadHolidayDTO>> allHoliday = dateJobService.getAllHoliday();
+        if (allHoliday.getContent().iterator().next().isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+        HateoasUtil.insertHateoasIntoDateJob(allHoliday);
+        return ResponseEntity.ok(allHoliday);
     }
 }

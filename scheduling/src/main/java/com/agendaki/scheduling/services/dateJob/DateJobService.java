@@ -22,4 +22,6 @@ public interface DateJobService {
 
     CollectionModel<Set<ReadDateOfSchedulingDTO>> getAllDateOfScheduling();
 
+    CollectionModel<Set<ReadHolidayDTO>> getAllHoliday();
+
 }

@@ -28,15 +28,12 @@ public class JWTService {
     }
 
     public String verifyToken(String token) {
-        try {
-            Algorithm algorithm = Algorithm.HMAC256(nameApplication);
-            return JWT.require(algorithm)
-                    .withIssuer(nameApplication)
-                    .build()
-                    .verify(token)
-                    .getSubject();
-        } catch (JWTVerificationException exception) {
-            throw new RuntimeException(exception);
-        }
+        Algorithm algorithm = Algorithm.HMAC256(nameApplication);
+        return JWT.require(algorithm)
+                .withIssuer(nameApplication)
+                .build()
+                .verify(token)
+                .getSubject();
+
     }
 }

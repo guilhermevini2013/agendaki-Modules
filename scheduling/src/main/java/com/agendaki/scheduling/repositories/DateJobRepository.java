@@ -18,9 +18,13 @@ public interface DateJobRepository extends JpaRepository<DateJob, Long> {
     @Query("SELECT CASE WHEN (COUNT(dh) > 0) THEN TRUE ELSE FALSE END FROM DateJobHoliday dh WHERE dh.instance = :instance AND dh.date = :date")
     boolean existsByDate(Instance instance, @Param("date") LocalDate date);
 
-    @Query("select d from DateJobCommon d where d.instance= :instance AND d.dayOfWeek= :dayOfWeek")
+    @Query("select dc from DateJobCommon dc where dc.instance= :instance AND dc.dayOfWeek= :dayOfWeek")
     Optional<DateJob> findByInstanceAndDayOfWeek(Instance instance, DayOfWeek dayOfWeek);
 
-    @Query("select d from DateJobCommon d where d.instance= :instance")
-    Set<DateJob> findByInstance(Instance instance);
+    @Query("select dc from DateJobCommon dc where dc.instance= :instance")
+    Set<DateJob> findDateJobCommonByInstance(Instance instance);
+
+    @Query("select dh from DateJobHoliday dh where dh.instance = :instance")
+    Set<DateJob> findDateJobHolidayByInstance(Instance instance);
+
 }
