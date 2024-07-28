@@ -8,6 +8,7 @@ import com.agendaki.scheduling.dtos.response.ReadHolidayDTO;
 import com.agendaki.scheduling.services.dateJob.DateJobService;
 import com.agendaki.scheduling.utils.HateoasUtil;
 import jakarta.validation.Valid;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -45,5 +46,13 @@ public class DateJobController {
         EntityModel<ReadDateOfSchedulingDTO> readDateOfSchedulingEntityModel = dateJobService.updateDateOfScheduling(insertDateOfSchedulingDTO);
         HateoasUtil.insertHateoasIntoDateJob(readDateOfSchedulingEntityModel);
         return readDateOfSchedulingEntityModel;
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping(value = "/common")
+    public CollectionModel<Set<ReadDateOfSchedulingDTO>> readDatesOfScheduling() {
+        CollectionModel<Set<ReadDateOfSchedulingDTO>> allDateOfScheduling = dateJobService.getAllDateOfScheduling();
+        HateoasUtil.insertHateoasIntoDateJob(allDateOfScheduling);
+        return allDateOfScheduling;
     }
 }

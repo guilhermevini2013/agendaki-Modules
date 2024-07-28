@@ -28,4 +28,9 @@ public class HandlerRequestExceptions {
     public ResponseEntity<ResponseErrorModel> duplicateData(DuplicateDataException e, HttpServletRequest request) {
         return ResponseEntity.badRequest().body(new ResponseErrorModel(Instant.now(), HttpStatus.BAD_REQUEST.value(), e.getMessage(), request.getRequestURI()));
     }
+
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<ResponseErrorModel> resourceNotFound(ResourceNotFoundException e, HttpServletRequest request) {
+        return ResponseEntity.unprocessableEntity().body(new ResponseErrorModel(Instant.now(), HttpStatus.UNPROCESSABLE_ENTITY.value(), e.getMessage(), request.getRequestURI()));
+    }
 }

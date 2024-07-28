@@ -14,12 +14,16 @@ import com.agendaki.scheduling.models.user.Instance;
 import com.agendaki.scheduling.repositories.DateJobRepository;
 import com.agendaki.scheduling.repositories.UserRepository;
 import com.agendaki.scheduling.utils.SecurityUtil;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class SchedulingServiceImpl implements DateJobService {
@@ -63,9 +67,16 @@ public class SchedulingServiceImpl implements DateJobService {
     public EntityModel<ReadDateOfSchedulingDTO> updateDateOfScheduling(InsertDateOfSchedulingDTO insertDateOfSchedulingDTO) {
         Instance instance = SecurityUtil.getProjectionOfUserEntityAuthenticated().getInstance();
         DateJobCommon dateJobFind = (DateJobCommon) dateJobRepository.findByInstanceAndDayOfWeek(instance, insertDateOfSchedulingDTO.dayOfWeek())
-                .orElseThrow(() -> new ResourceNotFoundException("Date Job in day of week not exist"));
+                .orElseThrow(() -> new ResourceNotFoundException("Date Job in day of week to update not exist"));
         dateJobFind.update(insertDateOfSchedulingDTO);
         return EntityModel.of(new ReadDateOfSchedulingDTO(dateJobFind));
+    }
+
+    @Override
+    public CollectionModel<Set<ReadDateOfSchedulingDTO>> getAllDateOfScheduling() {
+        Instance userAuth = SecurityUtil.getProjectionOfUserEntityAuthenticated().getInstance();
+        Set<DateJob> datesJobByInstance = dateJobRepository.findByInstance(userAuth);
+        return CollectionModel.of(Collections.singleton(datesJobByInstance.stream().map(dateJob -> new ReadDateOfSchedulingDTO((DateJobCommon) dateJob)).collect(Collectors.toSet())));
     }
 
 }
