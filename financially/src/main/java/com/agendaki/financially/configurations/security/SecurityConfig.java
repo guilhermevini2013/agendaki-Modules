@@ -25,7 +25,7 @@ public class SecurityConfig {
 
     private final String[] publicRoutes = {
             "/api/pre-user",
-            "/api/pre-user/auth",
+            "/api/pre-user/auth"
     };
 
     public SecurityConfig(RecoverTokenFilter recoverTokenFilter) {

@@ -1,8 +1,11 @@
 package com.agendaki.financially.configurations.security;
 
+import com.agendaki.financially.exceptions.EntityNotFoundException;
 import com.agendaki.financially.models.preuser.PreUser;
 import com.agendaki.financially.repositories.PreUserRepository;
 import com.agendaki.financially.services.jwt.JWTService;
+import com.auth0.jwt.exceptions.JWTVerificationException;
+import com.auth0.jwt.exceptions.SignatureVerificationException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -21,18 +24,17 @@ public class RecoverTokenFilter extends OncePerRequestFilter {
     private final JWTService jwtService;
     private final PreUserRepository preUserRepository;
 
-    public RecoverTokenFilter(final JWTService jwtService, final PreUserRepository preUserRepository) {
+    public RecoverTokenFilter(JWTService jwtService, PreUserRepository preUserRepository) {
         this.jwtService = jwtService;
         this.preUserRepository = preUserRepository;
     }
 
     @Override
-    @Transactional
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String token = recoverToken(request);
         if (token != null) {
             String subject = jwtService.verifyToken(token);
-            PreUserRepository.PreUserAuth userAuth = preUserRepository.findByEmail(subject).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+            PreUserRepository.PreUserAuth userAuth = preUserRepository.findByEmail(subject).orElseThrow(() -> new EntityNotFoundException("User not found"));
             PreUser preUser = new PreUser(userAuth);
             UsernamePasswordAuthenticationToken authenticated = UsernamePasswordAuthenticationToken.authenticated(preUser, preUser.getId(), preUser.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authenticated);
