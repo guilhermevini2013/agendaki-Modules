@@ -2,6 +2,7 @@ package com.agendaki.scheduling.models.user;
 
 import com.agendaki.scheduling.models.scheduling.DateJob;
 import com.agendaki.scheduling.models.scheduling.Scheduling;
+import com.agendaki.scheduling.models.template.Template;
 import jakarta.persistence.*;
 
 import java.util.Collections;
@@ -22,6 +23,8 @@ public class Instance {
     private Set<DateJob> dateJobs = new HashSet<>();
     @OneToOne(fetch = FetchType.LAZY)
     private User user;
+    @OneToOne(fetch = FetchType.LAZY)
+    private Template template;
 
     public Instance(User user) {
         this.user = user;
