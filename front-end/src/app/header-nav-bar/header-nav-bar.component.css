@@ -30,6 +30,10 @@
     background-color: #36D698;
 }
 
+.container-header__options div:hover .option-line {
+  background-color: var(--light-green);
+}
+
 .container-header__apps{
     width: max-content;
     display: flex;

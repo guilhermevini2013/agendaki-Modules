@@ -1,9 +1,25 @@
 section{
     display: flex;
+    flex-direction: column;
     background-color: var(--principal-color);
     justify-content: center;
     align-items: center;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    gap: 60px;
 }
+
+.section-title{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.section-title div h1{
+  color: #fff;
+  font-size: 2.3rem;
+}
+
 .container-section{
     width: 70%;
     display: flex;
@@ -35,8 +51,18 @@ section{
     width: max-content;
 }
 .container-section__image div{
-    width: 500px;
-    height: 400px;
-    background-image: url("/image/ellipse.png");
-    background-repeat: no-repeat;
+  background-position: center;
+  background-image: url("/image/ellipse.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 433px;
+  height: 326px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container-section__image div img{
+  width: 350px;
+  height: 252px;
 }
