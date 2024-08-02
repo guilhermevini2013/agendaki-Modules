@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/agendaki-Modules.iml" filepath="$PROJECT_DIR$/agendaki-Modules.iml" />
+      <module fileurl="file://$PROJECT_DIR$/front-end.iml" filepath="$PROJECT_DIR$/front-end.iml" />
     </modules>
   </component>
 </project>
