@@ -9,6 +9,7 @@ public class Input extends Section{
     private String label;
     private Integer width;
     private String placeholder;
+    private Boolean isIdentifier;
 
     public Input() {
     }

@@ -6,7 +6,9 @@ import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -16,18 +18,18 @@ public class Scheduling {
     private Long id;
     @ManyToOne
     private Instance instance;
-    private String tellPhone;
     private BigDecimal totalPrice;
     private String fullName;
     private LocalDate date;
     private LocalTime startHour;
     @ManyToMany
     private Set<Service> services = new HashSet<>();
+    @OneToMany
+    private List<ResponseForm> responseForms = new ArrayList<>();
 
 
-    public Scheduling(Instance instance, String tellPhone, BigDecimal totalPrice, String fullName, LocalDate date, LocalTime startHour) {
+    public Scheduling(Instance instance, BigDecimal totalPrice, String fullName, LocalDate date, LocalTime startHour) {
         this.instance = instance;
-        this.tellPhone = tellPhone;
         this.totalPrice = totalPrice;
         this.fullName = fullName;
         this.date = date;
