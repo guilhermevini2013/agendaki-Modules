@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HeaderNavBarComponent } from '../header-nav-bar/header-nav-bar.component';
+import { HeaderNavBarComponent } from '../../header-nav-bar/header-nav-bar.component';
 
 @Component({
   selector: 'app-section-principal',
