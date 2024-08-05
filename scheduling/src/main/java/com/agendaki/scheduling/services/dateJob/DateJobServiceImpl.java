@@ -34,7 +34,7 @@ public class DateJobServiceImpl implements DateJobService {
 
     @Override
     @Transactional
-    public EntityModel<ReadDatesOfSchedulingDTO> insertDateOfScheduling(Set<InsertDateOfSchedulingDTO> datesOfSchedulingDTO) {
+    public ReadDatesOfSchedulingDTO insertDateOfScheduling(Set<InsertDateOfSchedulingDTO> datesOfSchedulingDTO) {
         UserRepository.UserAuthProjection projectionOfUserEntityAuthenticated = SecurityUtil.getProjectionOfUserEntityAuthenticated();
         Set<String> dayOfWeekAlreadyEntered = new HashSet<>();
         datesOfSchedulingDTO.forEach(dateOfScheduling -> {
@@ -45,44 +45,44 @@ public class DateJobServiceImpl implements DateJobService {
             dateJobRepository.save(dateJobCommon);
             dayOfWeekAlreadyEntered.add(dateOfScheduling.dayOfWeek().toString());
         });
-        return EntityModel.of(new ReadDatesOfSchedulingDTO(datesOfSchedulingDTO));
+        return new ReadDatesOfSchedulingDTO(datesOfSchedulingDTO);
     }
 
 
     @Override
     @Transactional
-    public EntityModel<ReadHolidayDTO> insertHoliday(InsertHolidayDTO insertHolidayDTO) {
+    public ReadHolidayDTO insertHoliday(InsertHolidayDTO insertHolidayDTO) {
         UserRepository.UserAuthProjection projectionOfUserEntityAuthenticated = SecurityUtil.getProjectionOfUserEntityAuthenticated();
         if (dateJobRepository.existsByDate(projectionOfUserEntityAuthenticated.getInstance(), insertHolidayDTO.dateOfHoliday())) {
             throw new DuplicateDataException("Holiday in this date already exists");
         }
         DateJobHoliday dateJobHoliday = new DateJobHoliday(insertHolidayDTO, projectionOfUserEntityAuthenticated);
         dateJobRepository.save(dateJobHoliday);
-        return EntityModel.of(new ReadHolidayDTO(dateJobHoliday));
+        return new ReadHolidayDTO(dateJobHoliday);
     }
 
     @Override
     @Transactional
-    public EntityModel<ReadDateOfSchedulingDTO> updateDateOfScheduling(InsertDateOfSchedulingDTO insertDateOfSchedulingDTO) {
+    public ReadDateOfSchedulingDTO updateDateOfScheduling(InsertDateOfSchedulingDTO insertDateOfSchedulingDTO) {
         Instance instance = SecurityUtil.getProjectionOfUserEntityAuthenticated().getInstance();
         DateJobCommon dateJobFind = (DateJobCommon) dateJobRepository.findByInstanceAndDayOfWeek(instance, insertDateOfSchedulingDTO.dayOfWeek())
                 .orElseThrow(() -> new ResourceNotFoundException("Date Job in day of week to update not exist"));
         dateJobFind.update(insertDateOfSchedulingDTO);
-        return EntityModel.of(new ReadDateOfSchedulingDTO(dateJobFind));
+        return new ReadDateOfSchedulingDTO(dateJobFind);
     }
 
     @Override
-    public CollectionModel<Set<ReadDateOfSchedulingDTO>> getAllDateOfScheduling() {
+    public Set<ReadDateOfSchedulingDTO> getAllDateOfScheduling() {
         Instance userAuth = SecurityUtil.getProjectionOfUserEntityAuthenticated().getInstance();
         Set<DateJob> datesJobByInstance = dateJobRepository.findDateJobCommonByInstance(userAuth);
-        return CollectionModel.of(Collections.singleton(datesJobByInstance.stream().map(dateJob -> new ReadDateOfSchedulingDTO((DateJobCommon) dateJob)).collect(Collectors.toSet())));
+        return datesJobByInstance.stream().map(dateJob -> new ReadDateOfSchedulingDTO((DateJobCommon) dateJob)).collect(Collectors.toSet());
     }
 
     @Override
-    public CollectionModel<Set<ReadHolidayDTO>> getAllHoliday() {
+    public Set<ReadHolidayDTO> getAllHoliday() {
         Instance userAuth = SecurityUtil.getProjectionOfUserEntityAuthenticated().getInstance();
         Set<DateJob> datesHolidayByInstance = dateJobRepository.findDateJobHolidayByInstance(userAuth);
-        return CollectionModel.of(Collections.singleton(datesHolidayByInstance.stream().map(dateHoliday -> new ReadHolidayDTO((DateJobHoliday) dateHoliday)).collect(Collectors.toSet())));
+        return datesHolidayByInstance.stream().map(dateHoliday -> new ReadHolidayDTO((DateJobHoliday) dateHoliday)).collect(Collectors.toSet());
     }
 
     @Override

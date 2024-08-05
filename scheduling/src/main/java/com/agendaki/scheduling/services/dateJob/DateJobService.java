@@ -14,15 +14,15 @@ import java.util.Set;
 @Service
 public interface DateJobService {
 
-    EntityModel<ReadDatesOfSchedulingDTO> insertDateOfScheduling(Set<InsertDateOfSchedulingDTO> insertDateOfSchedulingDTOS);
+    ReadDatesOfSchedulingDTO insertDateOfScheduling(Set<InsertDateOfSchedulingDTO> insertDateOfSchedulingDTOS);
 
-    EntityModel<ReadHolidayDTO> insertHoliday(InsertHolidayDTO insertHolidayDTO);
+    ReadHolidayDTO insertHoliday(InsertHolidayDTO insertHolidayDTO);
 
-    EntityModel<ReadDateOfSchedulingDTO> updateDateOfScheduling(InsertDateOfSchedulingDTO insertDateOfSchedulingDTO);
+    ReadDateOfSchedulingDTO updateDateOfScheduling(InsertDateOfSchedulingDTO insertDateOfSchedulingDTO);
 
-    CollectionModel<Set<ReadDateOfSchedulingDTO>> getAllDateOfScheduling();
+    Set<ReadDateOfSchedulingDTO> getAllDateOfScheduling();
 
-    CollectionModel<Set<ReadHolidayDTO>> getAllHoliday();
+    Set<ReadHolidayDTO> getAllHoliday();
 
     void deleteHolidayById(Long id);
 

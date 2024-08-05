@@ -6,9 +6,7 @@ import com.agendaki.scheduling.dtos.response.ReadDateOfSchedulingDTO;
 import com.agendaki.scheduling.dtos.response.ReadDatesOfSchedulingDTO;
 import com.agendaki.scheduling.dtos.response.ReadHolidayDTO;
 import com.agendaki.scheduling.services.dateJob.DateJobService;
-import com.agendaki.scheduling.utils.HateoasUtil;
 import jakarta.validation.Valid;
-import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,45 +25,40 @@ public class DateJobController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(value = "/common")
-    public EntityModel<ReadDatesOfSchedulingDTO> insertDateJob(@RequestBody @Valid Set<InsertDateOfSchedulingDTO> insertDateOfSchedulingDTOS) {
-        EntityModel<ReadDatesOfSchedulingDTO> readDatesOfSchedulingDTOEntityModel = dateJobService.insertDateOfScheduling(insertDateOfSchedulingDTOS);
-        HateoasUtil.insertHateoasIntoDateJob(readDatesOfSchedulingDTOEntityModel);
-        return readDatesOfSchedulingDTOEntityModel;
+    public ReadDatesOfSchedulingDTO insertDateJob(@RequestBody @Valid Set<InsertDateOfSchedulingDTO> insertDateOfSchedulingDTOS) {
+        ReadDatesOfSchedulingDTO readDatesOfSchedulingDTO = dateJobService.insertDateOfScheduling(insertDateOfSchedulingDTOS);
+        return readDatesOfSchedulingDTO;
     }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(value = "/holiday")
-    public EntityModel<ReadHolidayDTO> insertHoliday(@RequestBody @Valid InsertHolidayDTO insertHolidayDTO) {
-        EntityModel<ReadHolidayDTO> readHolidayDTOEntityModel = dateJobService.insertHoliday(insertHolidayDTO);
-        HateoasUtil.insertHateoasIntoDateJob(readHolidayDTOEntityModel);
-        return readHolidayDTOEntityModel;
+    public ReadHolidayDTO insertHoliday(@RequestBody @Valid InsertHolidayDTO insertHolidayDTO) {
+        ReadHolidayDTO readHolidayDTO = dateJobService.insertHoliday(insertHolidayDTO);
+        return readHolidayDTO;
     }
 
     @ResponseStatus(HttpStatus.OK)
     @PutMapping(value = "/common")
-    public EntityModel<ReadDateOfSchedulingDTO> updateDateJob(@RequestBody @Valid InsertDateOfSchedulingDTO insertDateOfSchedulingDTO) {
-        EntityModel<ReadDateOfSchedulingDTO> readDateOfSchedulingEntityModel = dateJobService.updateDateOfScheduling(insertDateOfSchedulingDTO);
-        HateoasUtil.insertHateoasIntoDateJob(readDateOfSchedulingEntityModel);
-        return readDateOfSchedulingEntityModel;
+    public ReadDateOfSchedulingDTO updateDateJob(@RequestBody @Valid InsertDateOfSchedulingDTO insertDateOfSchedulingDTO) {
+        ReadDateOfSchedulingDTO readDateOfSchedulingDTO = dateJobService.updateDateOfScheduling(insertDateOfSchedulingDTO);
+        return readDateOfSchedulingDTO;
     }
 
     @GetMapping(value = "/common")
-    public ResponseEntity<CollectionModel<Set<ReadDateOfSchedulingDTO>>> getDatesOfScheduling() {
-        CollectionModel<Set<ReadDateOfSchedulingDTO>> allDateOfScheduling = dateJobService.getAllDateOfScheduling();
-        if (allDateOfScheduling.getContent().iterator().next().isEmpty()) {
+    public ResponseEntity<Set<ReadDateOfSchedulingDTO>> getDatesOfScheduling() {
+        Set<ReadDateOfSchedulingDTO> allDateOfScheduling = dateJobService.getAllDateOfScheduling();
+        if (allDateOfScheduling.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
-        HateoasUtil.insertHateoasIntoDateJob(allDateOfScheduling);
         return ResponseEntity.ok(allDateOfScheduling);
     }
 
     @GetMapping(value = "/holiday")
-    public ResponseEntity<CollectionModel<Set<ReadHolidayDTO>>> getHoliday() {
-        CollectionModel<Set<ReadHolidayDTO>> allHoliday = dateJobService.getAllHoliday();
-        if (allHoliday.getContent().iterator().next().isEmpty()) {
+    public ResponseEntity<Set<ReadHolidayDTO>> getHoliday() {
+        Set<ReadHolidayDTO> allHoliday = dateJobService.getAllHoliday();
+        if (allHoliday.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
-        HateoasUtil.insertHateoasIntoDateJob(allHoliday);
         return ResponseEntity.ok(allHoliday);
     }
 
