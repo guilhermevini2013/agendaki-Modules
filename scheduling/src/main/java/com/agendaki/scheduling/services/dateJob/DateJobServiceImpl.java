@@ -21,15 +21,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
-public class SchedulingServiceImpl implements DateJobService {
+public class DateJobServiceImpl implements DateJobService {
     private final DateJobRepository dateJobRepository;
 
-    public SchedulingServiceImpl(DateJobRepository dateJobRepository) {
+    public DateJobServiceImpl(DateJobRepository dateJobRepository) {
         this.dateJobRepository = dateJobRepository;
     }
 
@@ -42,7 +41,7 @@ public class SchedulingServiceImpl implements DateJobService {
             if (dayOfWeekAlreadyEntered.contains(dateOfScheduling.dayOfWeek().toString())) {
                 throw new DuplicateDataException(dateOfScheduling.dayOfWeek() + " in scheduling already exists");
             }
-            DateJobCommon dateJobCommon = new DateJobCommon(dateOfScheduling,projectionOfUserEntityAuthenticated);
+            DateJobCommon dateJobCommon = new DateJobCommon(dateOfScheduling, projectionOfUserEntityAuthenticated);
             dateJobRepository.save(dateJobCommon);
             dayOfWeekAlreadyEntered.add(dateOfScheduling.dayOfWeek().toString());
         });
@@ -84,6 +83,13 @@ public class SchedulingServiceImpl implements DateJobService {
         Instance userAuth = SecurityUtil.getProjectionOfUserEntityAuthenticated().getInstance();
         Set<DateJob> datesHolidayByInstance = dateJobRepository.findDateJobHolidayByInstance(userAuth);
         return CollectionModel.of(Collections.singleton(datesHolidayByInstance.stream().map(dateHoliday -> new ReadHolidayDTO((DateJobHoliday) dateHoliday)).collect(Collectors.toSet())));
+    }
+
+    @Override
+    @Transactional
+    public void deleteHolidayById(Long id) {
+        Instance userAuth = SecurityUtil.getProjectionOfUserEntityAuthenticated().getInstance();
+        dateJobRepository.deleteByIdAndInstance(id, userAuth);
     }
 
 }

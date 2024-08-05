@@ -24,4 +24,6 @@ public interface DateJobService {
 
     CollectionModel<Set<ReadHolidayDTO>> getAllHoliday();
 
+    void deleteHolidayById(Long id);
+
 }

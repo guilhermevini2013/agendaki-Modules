@@ -25,8 +25,7 @@ public class Pix extends Payment {
         this.expireTime = expireTime;
     }
 
-    public Pix() {
-    }
+    public Pix() {}
 
     public String getIdQrCode() {
         return idQrCode;

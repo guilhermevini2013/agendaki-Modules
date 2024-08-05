@@ -25,6 +25,8 @@ public class Instance {
     private User user;
     @OneToOne(fetch = FetchType.LAZY)
     private Template template;
+    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    private Address address;
 
     public Instance(User user) {
         this.user = user;

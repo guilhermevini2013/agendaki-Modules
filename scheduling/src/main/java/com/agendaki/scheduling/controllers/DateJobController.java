@@ -52,7 +52,7 @@ public class DateJobController {
     @GetMapping(value = "/common")
     public ResponseEntity<CollectionModel<Set<ReadDateOfSchedulingDTO>>> getDatesOfScheduling() {
         CollectionModel<Set<ReadDateOfSchedulingDTO>> allDateOfScheduling = dateJobService.getAllDateOfScheduling();
-        if (allDateOfScheduling.getContent().iterator().next().isEmpty()){
+        if (allDateOfScheduling.getContent().iterator().next().isEmpty()) {
             return ResponseEntity.noContent().build();
         }
         HateoasUtil.insertHateoasIntoDateJob(allDateOfScheduling);
@@ -62,10 +62,16 @@ public class DateJobController {
     @GetMapping(value = "/holiday")
     public ResponseEntity<CollectionModel<Set<ReadHolidayDTO>>> getHoliday() {
         CollectionModel<Set<ReadHolidayDTO>> allHoliday = dateJobService.getAllHoliday();
-        if (allHoliday.getContent().iterator().next().isEmpty()){
+        if (allHoliday.getContent().iterator().next().isEmpty()) {
             return ResponseEntity.noContent().build();
         }
         HateoasUtil.insertHateoasIntoDateJob(allHoliday);
         return ResponseEntity.ok(allHoliday);
+    }
+
+    @DeleteMapping(value = "/holiday")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteHoliday(@RequestParam(name = "id") Long id) {
+        dateJobService.deleteHolidayById(id);
     }
 }

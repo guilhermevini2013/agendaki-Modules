@@ -25,8 +25,6 @@ public class User implements UserDetails {
     private Signature signature;
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "user")
     private Instance instance;
-    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    private Address address;
 
     public User() {
     }

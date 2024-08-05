@@ -27,4 +27,6 @@ public interface DateJobRepository extends JpaRepository<DateJob, Long> {
     @Query("select dh from DateJobHoliday dh where dh.instance = :instance")
     Set<DateJob> findDateJobHolidayByInstance(Instance instance);
 
+    void deleteByIdAndInstance(Long id, Instance instance);
+
 }
