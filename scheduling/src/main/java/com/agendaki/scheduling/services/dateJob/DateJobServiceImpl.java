@@ -14,12 +14,8 @@ import com.agendaki.scheduling.models.user.Instance;
 import com.agendaki.scheduling.repositories.DateJobRepository;
 import com.agendaki.scheduling.repositories.UserRepository;
 import com.agendaki.scheduling.utils.SecurityUtil;
-import org.springframework.hateoas.CollectionModel;
-import org.springframework.hateoas.EntityModel;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
