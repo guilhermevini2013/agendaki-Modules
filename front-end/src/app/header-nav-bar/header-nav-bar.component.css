@@ -46,6 +46,15 @@
     transform-origin: center center;
     padding: 10px;
 }
+
+.container-header__apps div div{
+    padding-left: 0px;
+    padding-right: 0px;
+    transform: rotateY(-30deg) rotateX(20deg);
+    transform-origin: center center;
+    padding: 0px;
+}
+
 .container-header__apps div span{
     color: #fff;
     font-size: 17px;
