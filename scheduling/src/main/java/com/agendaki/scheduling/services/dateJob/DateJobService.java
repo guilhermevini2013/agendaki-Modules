@@ -24,4 +24,6 @@ public interface DateJobService {
 
     void deleteHolidayById(Long id);
 
+    ReadHolidayDTO updateHolidayById(InsertHolidayDTO insertHolidayDTO,Long id);
+
 }

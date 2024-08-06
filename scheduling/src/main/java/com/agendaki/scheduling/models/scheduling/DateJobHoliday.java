@@ -31,4 +31,13 @@ public class DateJobHoliday extends DateJob {
     public LocalDate getDate() {
         return date;
     }
+
+    public void update(InsertHolidayDTO insertHolidayDTO) {
+        super.breakFinal = insertHolidayDTO.breakFinal();
+        super.breakInitial = insertHolidayDTO.breakInitial();
+        super.endTime = insertHolidayDTO.scheduleFinal();
+        super.startTime = insertHolidayDTO.scheduleInitial();
+        this.isOpen = insertHolidayDTO.isOpen();
+        this.date = insertHolidayDTO.dateOfHoliday();
+    }
 }

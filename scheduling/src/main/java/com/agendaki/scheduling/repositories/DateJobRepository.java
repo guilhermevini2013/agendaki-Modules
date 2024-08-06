@@ -1,6 +1,7 @@
 package com.agendaki.scheduling.repositories;
 
 import com.agendaki.scheduling.models.scheduling.DateJob;
+import com.agendaki.scheduling.models.scheduling.DateJobHoliday;
 import com.agendaki.scheduling.models.user.Instance;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -29,4 +30,6 @@ public interface DateJobRepository extends JpaRepository<DateJob, Long> {
 
     void deleteByIdAndInstance(Long id, Instance instance);
 
+    @Query("select dh from DateJobHoliday dh where dh.id= :id and dh.instance= :instance")
+    Optional<DateJobHoliday> getDateHolidayByidAndInstance(Long id, Instance instance);
 }

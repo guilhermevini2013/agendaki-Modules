@@ -66,4 +66,11 @@ public class DateJobController {
     public void deleteHoliday(@RequestParam(name = "id") Long id) {
         dateJobService.deleteHolidayById(id);
     }
+
+    @ResponseStatus(HttpStatus.OK)
+    @PutMapping(value = "/holiday")
+    public ReadHolidayDTO updateHoliday(@RequestBody @Valid InsertHolidayDTO insertHolidayDTO,@RequestParam(name = "id") Long id) {
+        ReadHolidayDTO readHolidayDTO = dateJobService.updateHolidayById(insertHolidayDTO, id);
+        return readHolidayDTO;
+    }
 }

@@ -16,6 +16,7 @@ import com.agendaki.scheduling.repositories.UserRepository;
 import com.agendaki.scheduling.utils.SecurityUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -68,6 +69,7 @@ public class DateJobServiceImpl implements DateJobService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Set<ReadDateOfSchedulingDTO> getAllDateOfScheduling() {
         Instance userAuth = SecurityUtil.getProjectionOfUserEntityAuthenticated().getInstance();
         Set<DateJob> datesJobByInstance = dateJobRepository.findDateJobCommonByInstance(userAuth);
@@ -75,6 +77,7 @@ public class DateJobServiceImpl implements DateJobService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Set<ReadHolidayDTO> getAllHoliday() {
         Instance userAuth = SecurityUtil.getProjectionOfUserEntityAuthenticated().getInstance();
         Set<DateJob> datesHolidayByInstance = dateJobRepository.findDateJobHolidayByInstance(userAuth);
@@ -86,6 +89,16 @@ public class DateJobServiceImpl implements DateJobService {
     public void deleteHolidayById(Long id) {
         Instance userAuth = SecurityUtil.getProjectionOfUserEntityAuthenticated().getInstance();
         dateJobRepository.deleteByIdAndInstance(id, userAuth);
+    }
+
+    @Override
+    @Transactional
+    public ReadHolidayDTO updateHolidayById(InsertHolidayDTO insertHolidayDTO, Long id) {
+        Instance userAuth = SecurityUtil.getProjectionOfUserEntityAuthenticated().getInstance();
+        DateJobHoliday dateJobHoliday = dateJobRepository.getDateHolidayByidAndInstance(id, userAuth)
+                .orElseThrow(() -> new ResourceNotFoundException("Date Holiday for instance not exist"));
+        dateJobHoliday.update(insertHolidayDTO);
+        return new ReadHolidayDTO(dateJobHoliday);
     }
 
 }
