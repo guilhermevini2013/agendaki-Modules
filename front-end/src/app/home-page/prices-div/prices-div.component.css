@@ -10,14 +10,25 @@ section{
 }
 
 .section-title{
-  width: 100%;
+  width: 40%;
   display: flex;
   justify-content: center;
   text-align: center;
+  transform: rotateY(30deg) rotateX(50deg);
+  transform-origin: center center;
+}
+
+.section-title div{
+  height: max-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: rotateY(-30deg) rotateX(40deg);
+  transform-origin: center center;
 }
 
 .section-title div h1{
-  color: #fff;
+  color: var(--principal-color);
   font-size: 2.3rem;
 }
 
@@ -49,12 +60,17 @@ section{
   width: 100%;
   justify-content: space-evenly;
   gap: 40px;
+  max-height: 466px;
 }
 
 .container-example-template__card{
-  width: 200px;
-  min-width: 200px;
-  height: 150px;
+  width: 257px;
+  min-width: 257px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 161px;
   background-color: #F9F9F9;
   box-shadow: -10px 10px 4px var(--box-shadow-color);
   border-radius: 20px;
@@ -62,14 +78,14 @@ section{
 }
 
 .container-example-template__card:hover{
-  width: 210px;
-  min-width: 210px;
-  height: 160px;
+  width: 267px;
+  min-width: 267px;
+  height: 171px;
+  margin-bottom: 10px;
 }
 
 .container-example-template__card h1{
   font-size: 2rem;
-  padding-top: 15%;
   color: #fff;
 }
 
