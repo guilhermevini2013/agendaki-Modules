@@ -61,15 +61,15 @@ public class DateJobController {
         return ResponseEntity.ok(allHoliday);
     }
 
-    @DeleteMapping(value = "/holiday")
+    @DeleteMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteHoliday(@RequestParam(name = "id") Long id) {
-        dateJobService.deleteHolidayById(id);
+    public void deleteDateJob(@RequestParam(name = "id") Long id) {
+        dateJobService.deleteDateJobById(id);
     }
 
     @ResponseStatus(HttpStatus.OK)
     @PutMapping(value = "/holiday")
-    public ReadHolidayDTO updateHoliday(@RequestBody @Valid InsertHolidayDTO insertHolidayDTO,@RequestParam(name = "id") Long id) {
+    public ReadHolidayDTO updateHoliday(@RequestBody @Valid InsertHolidayDTO insertHolidayDTO, @RequestParam(name = "id") Long id) {
         ReadHolidayDTO readHolidayDTO = dateJobService.updateHolidayById(insertHolidayDTO, id);
         return readHolidayDTO;
     }

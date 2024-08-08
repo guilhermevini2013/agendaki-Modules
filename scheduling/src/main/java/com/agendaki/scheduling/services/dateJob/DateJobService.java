@@ -22,7 +22,7 @@ public interface DateJobService {
 
     Set<ReadHolidayDTO> getAllHoliday();
 
-    void deleteHolidayById(Long id);
+    void deleteDateJobById(Long id);
 
     ReadHolidayDTO updateHolidayById(InsertHolidayDTO insertHolidayDTO,Long id);
 

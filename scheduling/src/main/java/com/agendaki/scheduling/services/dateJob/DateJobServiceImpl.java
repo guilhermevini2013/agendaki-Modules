@@ -86,7 +86,7 @@ public class DateJobServiceImpl implements DateJobService {
 
     @Override
     @Transactional
-    public void deleteHolidayById(Long id) {
+    public void deleteDateJobById(Long id) {
         Instance userAuth = SecurityUtil.getProjectionOfUserEntityAuthenticated().getInstance();
         dateJobRepository.deleteByIdAndInstance(id, userAuth);
     }
