@@ -32,3 +32,33 @@ article {
    
     margin-bottom: 10px;
 }
+
+.section-faqs {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 25px;
+}
+
+.section-faqs-faq {
+  width: 80%;
+  max-width: 700px;
+
+  background-color: transparent;
+  box-shadow: 3px 7px 4px  rgba(0, 0, 0, 0.25);;
+  border-radius: 5px;
+
+  text-align: center;
+  color: var(--principal-color);
+  font-size: 1.3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.section-faqs-faq-header {
+  height: 50px;
+}
