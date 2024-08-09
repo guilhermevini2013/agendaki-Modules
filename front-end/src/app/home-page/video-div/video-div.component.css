@@ -1,7 +1,7 @@
 article {
     gap: 50px;
     display: flex;
-    padding-top: 50px;
+    padding-top: 80px;
     flex-direction: column;
 }
 
@@ -14,7 +14,7 @@ article {
     gap: 30px;
     text-align: center;
 }
-  
+
 .section-title div h1{
   font-size: 2.3rem;
 }
@@ -29,7 +29,7 @@ article {
 
 .video-section {
     width: 65%;
-   
+
     margin-bottom: 10px;
 }
 

@@ -94,3 +94,18 @@ section{
   color: #fff;
 }
 
+@media (max-width: 910px) {
+  .section-title{
+    width: 100%;
+  }
+}
+
+@media (max-width: 620px) {
+
+}
+
+@media (max-width: 360px) {
+
+
+}
+
