@@ -1,7 +1,9 @@
 package com.agendaki.scheduling.models.user;
 
 import com.agendaki.scheduling.models.scheduling.DateJob;
+import com.agendaki.scheduling.models.scheduling.Professional;
 import com.agendaki.scheduling.models.scheduling.Scheduling;
+import com.agendaki.scheduling.models.scheduling.Service;
 import com.agendaki.scheduling.models.template.Template;
 import jakarta.persistence.*;
 
@@ -25,8 +27,10 @@ public class Instance {
     private User user;
     @OneToOne(fetch = FetchType.LAZY)
     private Template template;
-    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    private Address address;
+    @OneToMany
+    private Set<Service> services = new HashSet<>();
+    @OneToMany
+    private Set<Professional> professionals = new HashSet<>();
 
     public Instance(User user) {
         this.user = user;
