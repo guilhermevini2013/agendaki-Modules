@@ -7,7 +7,7 @@ import java.util.Set;
 
 public interface ProfessionalService {
 
-    void insertProfessionalToInstance(Set<ProfessionalInsertDTO> professionals);
+    void insertProfessionalToInstance(ProfessionalInsertDTO professionals);
 
     void deleteProfessionalFromInstance(Long idProfessional);
 }

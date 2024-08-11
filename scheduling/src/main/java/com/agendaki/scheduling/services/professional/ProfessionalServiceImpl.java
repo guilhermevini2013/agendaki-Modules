@@ -1,6 +1,7 @@
 package com.agendaki.scheduling.services.professional;
 
 import com.agendaki.scheduling.dtos.request.ProfessionalInsertDTO;
+import com.agendaki.scheduling.exceptions.ResourceNotFoundException;
 import com.agendaki.scheduling.models.scheduling.Professional;
 import com.agendaki.scheduling.models.scheduling.Service;
 import com.agendaki.scheduling.models.user.Instance;
@@ -24,18 +25,26 @@ public class ProfessionalServiceImpl implements ProfessionalService {
 
     @Override
     @Transactional
-    public void insertProfessionalToInstance(Set<ProfessionalInsertDTO> professionals) {
+    public void insertProfessionalToInstance(ProfessionalInsertDTO professional) {
         Instance instanceToAuth = SecurityUtil.getProjectionOfUserEntityAuthenticated().getInstance();
-        professionals.forEach(professional -> {
-            Professional professionalCreated = createProfessional(professional, instanceToAuth);
-            professionalRepository.save(professionalCreated);
-        });
+        Professional professionalCreated = createProfessional(professional, instanceToAuth);
+        professionalRepository.save(professionalCreated);
     }
 
     private Professional createProfessional(ProfessionalInsertDTO professionalInsertDTO, Instance instance) {
         List<Service> servicesFind = serviceRepository.findAllById(professionalInsertDTO.servicesToJobIDs());
+        verifyAllServiceExists(servicesFind,professionalInsertDTO.servicesToJobIDs());
         Professional professional = new Professional(professionalInsertDTO, servicesFind, instance);
         return professional;
+    }
+
+    private void verifyAllServiceExists(List<Service> servicesFind, Set<Long> servicesToAdd) {
+        List<Long> idsOfServicesFind = servicesFind.stream().map(service -> service.getId()).toList();
+        for (Long idServiceToAdd : servicesToAdd) {
+            if (!idsOfServicesFind.contains(idServiceToAdd)) {
+                throw new ResourceNotFoundException("Service for id: " + idServiceToAdd + " not found");
+            }
+        }
     }
 
     @Override

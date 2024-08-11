@@ -1,9 +1,8 @@
 package com.agendaki.scheduling.models.scheduling;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.agendaki.scheduling.dtos.request.InsertServiceDTO;
+import com.agendaki.scheduling.models.user.Instance;
+import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.time.Duration;
@@ -15,15 +14,21 @@ public class Service {
     private Long id;
     private String name;
     private BigDecimal price;
-    private Duration duration;
+    private Short durationInMinutes;
+    @ManyToOne
+    private Instance instance;
 
-    public Service(String name, BigDecimal price, Duration duration) {
-        this.name = name;
-        this.price = price;
-        this.duration = duration;
+    public Service(InsertServiceDTO serviceDTO, Instance instance) {
+        this.name = serviceDTO.name();
+        this.price = serviceDTO.price();
+        this.durationInMinutes = serviceDTO.duration();
+        this.instance = instance;
     }
 
-    public Service() {
+    protected Service() {
+    }
 
+    public Long getId() {
+        return id;
     }
 }

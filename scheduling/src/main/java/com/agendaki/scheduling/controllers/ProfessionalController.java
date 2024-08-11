@@ -19,7 +19,7 @@ public class ProfessionalController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void insertProfessional(@RequestBody @Valid Set<ProfessionalInsertDTO> professionals) {
+    public void insertProfessional(@RequestBody @Valid ProfessionalInsertDTO professionals) {
         professionalService.insertProfessionalToInstance(professionals);
     }
 
