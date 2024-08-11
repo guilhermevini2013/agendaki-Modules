@@ -14,7 +14,7 @@ public class Professional {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     private Set<Service> services;
     @ManyToOne(fetch = FetchType.LAZY)
     private Instance instance;

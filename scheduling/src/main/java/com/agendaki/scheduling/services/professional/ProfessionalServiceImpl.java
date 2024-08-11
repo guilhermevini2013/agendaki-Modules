@@ -38,10 +38,10 @@ public class ProfessionalServiceImpl implements ProfessionalService {
         return professional;
     }
 
-
     @Override
     @Transactional
-    public void deleteProfessionalFromInstance() {
-
+    public void deleteProfessionalFromInstance(Long idProfessional) {
+        Instance instanceAuth = SecurityUtil.getProjectionOfUserEntityAuthenticated().getInstance();
+        professionalRepository.deleteByIdAndInstance(idProfessional, instanceAuth);
     }
 }

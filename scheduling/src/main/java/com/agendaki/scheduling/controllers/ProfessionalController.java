@@ -22,4 +22,10 @@ public class ProfessionalController {
     public void insertProfessional(@RequestBody @Valid Set<ProfessionalInsertDTO> professionals) {
         professionalService.insertProfessionalToInstance(professionals);
     }
+
+    @DeleteMapping
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteProfessional(@RequestParam(name = "id") Long id) {
+        professionalService.deleteProfessionalFromInstance(id);
+    }
 }

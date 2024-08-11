@@ -9,5 +9,5 @@ public interface ProfessionalService {
 
     void insertProfessionalToInstance(Set<ProfessionalInsertDTO> professionals);
 
-    void deleteProfessionalFromInstance();
+    void deleteProfessionalFromInstance(Long idProfessional);
 }
