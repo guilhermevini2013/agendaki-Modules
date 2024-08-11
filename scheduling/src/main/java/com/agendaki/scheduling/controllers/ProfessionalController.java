@@ -1,0 +1,25 @@
+package com.agendaki.scheduling.controllers;
+
+import com.agendaki.scheduling.dtos.request.ProfessionalInsertDTO;
+import com.agendaki.scheduling.services.professional.ProfessionalService;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Set;
+
+@RestController
+@RequestMapping(value = "/api/professional")
+public class ProfessionalController {
+    private final ProfessionalService professionalService;
+
+    public ProfessionalController(ProfessionalService professionalService) {
+        this.professionalService = professionalService;
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public void insertProfessional(@RequestBody @Valid Set<ProfessionalInsertDTO> professionals) {
+        professionalService.insertProfessionalToInstance(professionals);
+    }
+}

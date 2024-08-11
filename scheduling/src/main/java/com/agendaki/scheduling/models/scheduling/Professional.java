@@ -1,29 +1,43 @@
 package com.agendaki.scheduling.models.scheduling;
 
+import com.agendaki.scheduling.dtos.request.ProfessionalInsertDTO;
 import com.agendaki.scheduling.models.user.Instance;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 public class Professional {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     @ManyToMany
     private Set<Service> services;
-    @OneToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Instance instance;
 
-    public Professional() {
+    protected Professional() {
 
     }
 
-    public Professional(Long id, String name) {
-        this.id = id;
-        this.name = name;
+    public Professional(ProfessionalInsertDTO professionalInsertDTO, List<Service> servicesFind, Instance instance) {
+        this.name = professionalInsertDTO.name();
+        this.services = servicesFind.stream().collect(Collectors.toSet());
+        this.instance = instance;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Set<Service> getServices() {
+        return services;
+    }
+
+    public Instance getInstance() {
+        return instance;
     }
 }

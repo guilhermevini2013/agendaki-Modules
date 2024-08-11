@@ -17,6 +17,8 @@ public class SecurityConfig {
 
     private final String[] privateRoutes = {
             "/api/scheduling/**",
+            "/api/professional",
+            "/api/professional/**"
     };
 
     private final String[] publicRoutes = {
