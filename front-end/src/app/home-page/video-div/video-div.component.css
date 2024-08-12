@@ -62,3 +62,26 @@ article {
 .section-faqs-faq-header {
   height: 50px;
 }
+
+
+@media (max-width: 910px) {
+  .video-section {
+    width: 100%;
+  }
+
+  .section-video-text {
+    width: 90%;
+    text-align: justify;
+  }
+}
+
+@media (max-width: 620px) {
+
+}
+
+@media (max-width: 360px) {
+
+
+}
+
+

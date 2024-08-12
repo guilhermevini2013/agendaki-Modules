@@ -13,6 +13,10 @@
     --tertiary-color:#2536A6;
     --light-green:#58FFBE;
     --box-shadow-color: #58FFBE66;
+
+    --media-big: 910px;
+    --media-medium: 620px;
+    --media-small: 360px;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body { height: 100%; margin: 0; box-sizing: border-box; padding: 0; width: 100%;}
+

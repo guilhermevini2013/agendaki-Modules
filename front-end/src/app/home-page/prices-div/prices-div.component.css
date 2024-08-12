@@ -95,8 +95,24 @@ section{
 }
 
 @media (max-width: 910px) {
+  .container-section__content {
+    width: 60%;
+  }
   .section-title{
-    width: 100%;
+    margin-top: 60px;
+    width: 90%;
+  }
+
+  .section-title div h1{
+    text-indent: -9999px;
+     line-height: 0; /* Collapse the original line */
+  }
+
+  .section-title div h1::after{
+    content: "Crie sua conta!";
+    text-indent: 0;
+    display: block;
+    line-height: initial; /* New content takes up original line height */
   }
 }
 

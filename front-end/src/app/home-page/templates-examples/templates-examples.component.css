@@ -52,6 +52,9 @@ article{
     width: 90%;
   }
 
+  .container-example-template__inf {
+    width: 85%;
+  }
 }
 
 @media (max-width: 620px){
@@ -60,12 +63,10 @@ article{
     flex-direction: column-reverse;
     align-items: center;
   }
-
 }
 
 @media (max-width: 360px){
   .container-example-template__card{
     width: 100%;
   }
-
 }
