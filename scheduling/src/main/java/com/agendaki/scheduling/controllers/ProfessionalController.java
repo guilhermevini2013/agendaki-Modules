@@ -29,9 +29,16 @@ public class ProfessionalController {
         professionalService.deleteProfessionalFromInstance(id);
     }
 
-    @PutMapping
+    @PutMapping(value = "/disassociate")
     @ResponseStatus(HttpStatus.OK)
-    public void disassociateProfessionalOfService(@RequestBody Set<Long> idsToDisassociate,@RequestParam(name = "id") Long id) {
+    public void disassociateProfessionalOfService(@RequestBody Set<Long> idsToDisassociate, @RequestParam(name = "id") Long id) {
         professionalService.disassociateProfessionalOfService(idsToDisassociate, id);
     }
+
+    @PutMapping(value = "/associate")
+    @ResponseStatus(HttpStatus.OK)
+    public void associateProfessionalOfService(@RequestBody Set<Long> idsToAssociate, @RequestParam(name = "id") Long id) {
+        professionalService.associateProfessionalToService(idsToAssociate, id);
+    }
+
 }

@@ -32,19 +32,20 @@ public class ProfessionalServiceImpl implements ProfessionalService {
     }
 
     private Professional createProfessional(ProfessionalInsertDTO professionalInsertDTO, Instance instance) {
-        List<Service> servicesFind = serviceRepository.findAllById(professionalInsertDTO.servicesToJobIDs());
-        verifyAllServiceExists(servicesFind,professionalInsertDTO.servicesToJobIDs());
-        Professional professional = new Professional(professionalInsertDTO, servicesFind, instance);
+        List<Service> servicesFindAndVerify = verifyAllServiceExists(professionalInsertDTO.servicesToJobIDs());
+        Professional professional = new Professional(professionalInsertDTO, servicesFindAndVerify, instance);
         return professional;
     }
 
-    private void verifyAllServiceExists(List<Service> servicesFind, Set<Long> servicesToAdd) {
+    private List<Service> verifyAllServiceExists(Set<Long> servicesToAdd) {
+        List<Service> servicesFind = serviceRepository.findAllById(servicesToAdd);
         List<Long> idsOfServicesFind = servicesFind.stream().map(service -> service.getId()).toList();
         for (Long idServiceToAdd : servicesToAdd) {
             if (!idsOfServicesFind.contains(idServiceToAdd)) {
                 throw new ResourceNotFoundException("Service for id: " + idServiceToAdd + " not found");
             }
         }
+        return servicesFind;
     }
 
     @Override
@@ -57,12 +58,21 @@ public class ProfessionalServiceImpl implements ProfessionalService {
     @Override
     @Transactional
     public void disassociateProfessionalOfService(Set<Long> idsToDisassociate, Long idProfessional) {
-        List<Service> servicesFind = serviceRepository.findAllById(idsToDisassociate);
-        verifyAllServiceExists(servicesFind, idsToDisassociate);
+        verifyAllServiceExists(idsToDisassociate);
         Instance instance = SecurityUtil.getProjectionOfUserEntityAuthenticated().getInstance();
         Professional professional = professionalRepository.findByIdAndInstance(idProfessional, instance)
                 .orElseThrow(() -> new ResourceNotFoundException("Professional not found"));
-        professional.updateServices(idsToDisassociate);
+        professional.disassociateServices(idsToDisassociate);
+    }
+
+    @Override
+    @Transactional
+    public void associateProfessionalToService(Set<Long> idsToAssociate, Long idProfessional) {
+        List<Service> services = verifyAllServiceExists(idsToAssociate);
+        Instance instance = SecurityUtil.getProjectionOfUserEntityAuthenticated().getInstance();
+        Professional professional = professionalRepository.findByIdAndInstance(idProfessional, instance)
+                .orElseThrow(() -> new ResourceNotFoundException("Professional not found"));
+        professional.associateServices(services);
     }
 
 }

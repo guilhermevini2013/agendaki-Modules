@@ -29,10 +29,14 @@ public class Professional {
         this.instance = instance;
     }
 
-    public void updateServices(Set<Long> idsToDisassociate) {
+    public void disassociateServices(Set<Long> idsToDisassociate) {
         for (Long idServiceToDisassociate : idsToDisassociate) {
             this.services.removeIf(service -> service.getId().equals(idServiceToDisassociate));
         }
+    }
+
+    public void associateServices(List<Service> services) {
+        this.services.addAll(services);
     }
 
     public String getName() {
