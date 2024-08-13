@@ -53,4 +53,16 @@ public class ProfessionalServiceImpl implements ProfessionalService {
         Instance instanceAuth = SecurityUtil.getProjectionOfUserEntityAuthenticated().getInstance();
         professionalRepository.deleteByIdAndInstance(idProfessional, instanceAuth);
     }
+
+    @Override
+    @Transactional
+    public void disassociateProfessionalOfService(Set<Long> idsToDisassociate, Long idProfessional) {
+        List<Service> servicesFind = serviceRepository.findAllById(idsToDisassociate);
+        verifyAllServiceExists(servicesFind, idsToDisassociate);
+        Instance instance = SecurityUtil.getProjectionOfUserEntityAuthenticated().getInstance();
+        Professional professional = professionalRepository.findByIdAndInstance(idProfessional, instance)
+                .orElseThrow(() -> new ResourceNotFoundException("Professional not found"));
+        professional.updateServices(idsToDisassociate);
+    }
+
 }

@@ -29,6 +29,12 @@ public class Professional {
         this.instance = instance;
     }
 
+    public void updateServices(Set<Long> idsToDisassociate) {
+        for (Long idServiceToDisassociate : idsToDisassociate) {
+            this.services.removeIf(service -> service.getId().equals(idServiceToDisassociate));
+        }
+    }
+
     public String getName() {
         return name;
     }
@@ -39,5 +45,9 @@ public class Professional {
 
     public Instance getInstance() {
         return instance;
+    }
+
+    public Long getId() {
+        return id;
     }
 }

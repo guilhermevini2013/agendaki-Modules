@@ -10,4 +10,6 @@ public interface ProfessionalService {
     void insertProfessionalToInstance(ProfessionalInsertDTO professionals);
 
     void deleteProfessionalFromInstance(Long idProfessional);
+
+    void disassociateProfessionalOfService(Set<Long> idsToDisassociate,Long idProfessional);
 }

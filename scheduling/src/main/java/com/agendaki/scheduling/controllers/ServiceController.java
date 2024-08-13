@@ -20,4 +20,5 @@ public class ServiceController {
     public void insertServiceToInstance(@RequestBody @Valid InsertServiceDTO insertServiceDTO) {
         serviceSchedulingService.insertService(insertServiceDTO);
     }
+
 }

@@ -28,4 +28,10 @@ public class ProfessionalController {
     public void deleteProfessional(@RequestParam(name = "id") Long id) {
         professionalService.deleteProfessionalFromInstance(id);
     }
+
+    @PutMapping
+    @ResponseStatus(HttpStatus.OK)
+    public void disassociateProfessionalOfService(@RequestBody Set<Long> idsToDisassociate,@RequestParam(name = "id") Long id) {
+        professionalService.disassociateProfessionalOfService(idsToDisassociate, id);
+    }
 }
