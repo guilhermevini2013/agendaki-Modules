@@ -2,7 +2,7 @@ section{
     display: flex;
     background-color: var(--principal-color);
     width: 100%;
-    height: max-content;
+    height: 70%;
     justify-content: center;
     align-items: center;
 }
@@ -10,7 +10,8 @@ section{
     width: 60%;
     display: flex;
     flex-direction: row;
-    gap: 30px;
+    gap: 100px;
+  justify-content: center;
 }
 
 .register-container__inf{
@@ -19,10 +20,11 @@ section{
     color: #ffff;
     gap: 40px;
     align-items: center;
+  max-width: 400px;
 }
 
 .register-container__inf div{
-    
+
     display: flex;
     flex-direction: column;
 }
@@ -49,10 +51,18 @@ section{
 }
 
 .register-container__inf__text span{
-    width: 85%;
     text-align: justify;
 }
 
 .register-container__inf__suporte{
-    width: 70%;
+    width: 100%;
+  padding-left: 30px;
+  gap: 10px;
+}
+.register-container__inf__suporte div{
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  justify-content: start;
+  align-items: center;
 }
