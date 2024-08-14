@@ -12,7 +12,7 @@
 .container-form form{
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 8px;
 }
 
 .container-form form label{
@@ -51,4 +51,16 @@
 .container-form__help span{
   font-size: 14px;
   color: #ffff;
+}
+
+.alert-danger{
+  width: 100%;
+  float: right;
+}
+
+.alert-danger div span{
+  float: right;
+  color: #b20000;
+  font-size: 13px;
+  max-width: 300px;
 }
