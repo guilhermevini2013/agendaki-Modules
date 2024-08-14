@@ -18,14 +18,6 @@ export class PreUserServiceService {
         'Content-Type': 'application/json'
       }),
     });
-     observable.subscribe(
-       response => {
-         console.log('Response from server:', response);
-       },
-       error => {
-         console.error('Error occurred:', error);
-       }
-     );
      return observable;
   }
 }
