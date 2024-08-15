@@ -1,18 +1,14 @@
 :host {
     display: flex;
-    background-color: transparent;
-    background: transparent;
-  }
-
-.ng-star-inserted {
-    background-color: transparent;
-    background: transparent;
 }
 
-.example-pizza-party {
+.message-SnackBar {
     color: #ffff;
     background-color: var(--principal-color);
     box-shadow: 5px 5px 10px var(--secundary-color);
+    display: flex;
+    justify-content: space-evenly;
+  align-items: center;
 }
 
 .mdc-snackbar__surface mat-mdc-snackbar-surface ng-tns-c808971067-2 {

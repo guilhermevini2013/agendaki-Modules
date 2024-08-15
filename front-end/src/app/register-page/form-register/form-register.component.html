@@ -66,6 +66,9 @@
       </div>
     </label>
     <button type="submit">Cadastrar</button>
+    <ng-template [ngIf]="isLoading">
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </ng-template>
   </form>
   <div class="container-form__help">
     <span>Já tem uma conta? <a href="" style="color: var(--secundary-color)">Login</a></span>
