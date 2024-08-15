@@ -1,0 +1,76 @@
+<div class="container-form">
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <label for="fullName">
+      Nome completo
+      <input type="text" id="fullName" formControlName="name" required>
+      <div *ngIf="name?.invalid && name?.dirty"
+           class="alert-danger">
+        <div *ngIf="name?.hasError('required')">
+          <span>*Nome completo deve ser preenchido.</span>
+        </div>
+        <div *ngIf="name?.hasError('minlength') || name?.hasError('maxlength')">
+          <span>*Nome completo deve conter de 3 a 70 caracteres</span>
+        </div>
+      </div>
+    </label>
+    <label for="nameEnterprise">
+      <span>Nome do seu <span style="color: var(--secundary-color);">negócio</span></span>
+      <input type="text" id="nameEnterprise" formControlName="tradeName" required>
+      <div *ngIf="tradeName?.invalid && tradeName?.dirty"
+           class="alert-danger">
+        <div *ngIf="tradeName?.hasError('required')">
+          <span>*Nome do negocio deve ser preenchido.</span>
+        </div>
+        <div *ngIf="tradeName?.hasError('minlength') || tradeName?.hasError('maxlength')">
+          <span>*Nome do negocio deve conter de 3 a 50 caracteres</span>
+        </div>
+      </div>
+    </label>
+    <label for="tellEnterprise">
+      <span>Telefone do seu <span style="color: var(--secundary-color);">negócio</span></span>
+      <input type="text" id="tellEnterprise" formControlName="tellPhone" required>
+      <div *ngIf="tellPhone?.invalid && tellPhone?.dirty"
+           class="alert-danger">
+        <div *ngIf="tellPhone?.hasError('pattern')">
+          <span>*Telefone deve conter o formato de (00) 00000-0000.</span>
+        </div>
+        <div *ngIf="tellPhone?.hasError('required')">
+          <span>*Telefone deve ser preenchido.</span>
+        </div>
+      </div>
+    </label>
+    <label for="email">
+      E-mail
+      <input type="text" id="email" formControlName="email" required>
+      <div *ngIf="email?.invalid && email?.dirty"
+           class="alert-danger">
+        <div *ngIf="email?.hasError('email')">
+          <span>*Email incorreto</span>
+        </div>
+        <div *ngIf="email?.hasError('required')">
+          <span>*Email deve ser preenchido.</span>
+        </div>
+      </div>
+    </label>
+    <label for="password">
+      Senha
+      <input type="password" id="password" formControlName="password" required>
+      <div *ngIf="password?.invalid && password?.dirty"
+           class="alert-danger">
+        <div *ngIf="password?.hasError('minlength') || password?.hasError('maxlength')">
+          <span>*Senha deve conter de 6 a 20 caracteres</span>
+        </div>
+        <div *ngIf="password?.hasError('required')">
+          <span>*Senha deve ser preenchido.</span>
+        </div>
+      </div>
+    </label>
+    <button type="submit">Cadastrar</button>
+    <ng-template [ngIf]="isLoading">
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </ng-template>
+  </form>
+  <div class="container-form__help">
+    <span>Já tem uma conta? <a href="" style="color: var(--secundary-color)">Login</a></span>
+  </div>
+</div>

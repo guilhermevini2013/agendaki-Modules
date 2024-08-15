@@ -1,0 +1,18 @@
+footer{
+  background-color: var(--principal-color);
+  height: max-content;
+  display: flex;
+  flex-direction: column;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  justify-content: center;
+  align-items: center;
+}
+
+footer hr{
+  width: 100%;
+  border: 0;
+  border-top: 2px solid var(--tertiary-color);
+  margin: 20px 0;
+}
+
