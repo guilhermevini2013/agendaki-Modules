@@ -1,6 +1,6 @@
 footer{
   background-color: var(--principal-color);
-  height: max-content;
+  height: 100%;
   display: flex;
   flex-direction: column;
   padding-top: 12px;

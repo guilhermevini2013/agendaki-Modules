@@ -64,3 +64,19 @@
   font-size: 13px;
   max-width: 300px;
 }
+
+
+@media (max-width: 1100px){
+  .container-form {
+    box-shadow: 0px 5px 25px var(--secundary-color);
+    margin-bottom: 50px;
+  }
+}
+
+@media (max-width: 620px){
+
+}
+
+@media (max-width: 360px){
+  
+}

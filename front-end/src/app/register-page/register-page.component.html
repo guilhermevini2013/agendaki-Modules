@@ -1,27 +1,29 @@
-<section>
-    <div class="register-container">
-        <div class="register-container__inf">
-            <div style="gap: 20px;">
-                <div class="register-container__inf__title">
-                    <h1><span style="color: var(--secundary-color);">Cadastra-se</span> agora!</h1>
+<div class="register-page">
+    <section>
+        <div class="register-container">
+            <div class="register-container__inf">
+                <div style="gap: 20px;">
+                    <div class="register-container__inf__title">
+                        <h1><span style="color: var(--secundary-color);">Cadastra-se</span> agora!</h1>
+                    </div>
+                    <div class="register-container__inf__text">
+                        <span>Ao se cadastrar, você terá acesso ao portal do cliente, onde poderá gerenciar seus planos de assinatura e contar com o suporte da nossa equipe.</span>
+                    </div>
                 </div>
-                <div class="register-container__inf__text">
-                    <span>Ao se cadastrar, você terá acesso ao portal do cliente, onde poderá gerenciar seus planos de assinatura e contar com o suporte da nossa equipe.</span>
+                <div class="register-container__inf__suporte">
+                    <h2>Suporte</h2>
+                    <div>
+                        <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="phone"></mat-icon>
+                        <span>(19) 98115-1194</span>
+                    </div>
+                    <div>
+                        <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="mail"></mat-icon>
+                        <span>agendakiii_gmail.com</span>
+                    </div>
                 </div>
             </div>
-            <div class="register-container__inf__suporte">
-                <h2>Suporte</h2>
-                <div>
-                    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="phone"></mat-icon>
-                    <span>(19) 98115-1194</span>
-                </div>
-                <div>
-                    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="mail"></mat-icon>
-                    <span>agendakiii_gmail.com</span>
-                </div>
-            </div>
+            <app-form-register class="app-form-register"></app-form-register>
         </div>
-        <app-form-register></app-form-register>
-    </div>
-</section>
-<app-footer-register></app-footer-register>
+    </section>
+    <app-footer-register class="app-footer-register"></app-footer-register>
+</div>
