@@ -27,7 +27,8 @@
 .option-line{
     width: auto;
     height: 2px;
-    background-color: #36D698;
+    background-color: #20805b;
+    transition: .5s;
 }
 
 .container-header__options div:hover .option-line {
