@@ -52,3 +52,32 @@ section{
     justify-content: start;
     align-items: center;
 }
+
+
+@media (max-width: 900px){
+    .section-principal__title {
+        text-align: center;
+    }
+    .section-principal__inf {
+      flex-direction: column-reverse;
+      gap: 10px;
+    }
+    section{
+        height: 1000px;
+    }
+  }
+  
+  @media (max-width: 620px){
+  }
+  
+  @media (max-width: 360px){
+    .section__image{
+    width: 232px;
+    height: 96px;
+}
+    .section__image img{
+        width: 100%;
+        height: 100%;
+    }
+  }
+  

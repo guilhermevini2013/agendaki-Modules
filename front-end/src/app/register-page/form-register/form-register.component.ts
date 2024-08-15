@@ -5,11 +5,12 @@ import {PreUserServiceService} from "../../service/pre-user-service.service";
 import {MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition,} from '@angular/material/snack-bar';
 import {PopUpComponent} from '../pop-up/pop-up.component';
 import {MatProgressBar} from "@angular/material/progress-bar";
+import {NgxMaskDirective, NgxMaskPipe} from 'ngx-mask';
 
 @Component({
   selector: 'app-form-register',
   standalone: true,
-  imports: [ReactiveFormsModule, NgIf, PopUpComponent, MatProgressBar],
+  imports: [ReactiveFormsModule, NgIf, PopUpComponent, MatProgressBar, NgxMaskDirective, NgxMaskPipe],
   templateUrl: './form-register.component.html',
   styleUrl: './form-register.component.css'
 })
@@ -25,7 +26,7 @@ export class FormRegisterComponent {
       tradeName: new FormControl("", [Validators.minLength(3), Validators.maxLength(50)]),
       password: new FormControl("", [Validators.minLength(6), Validators.maxLength(20)]),
       email: new FormControl("", [Validators.email]),
-      tellPhone: new FormControl("", [Validators.pattern("^\\(\\d{2}\\)\\s\\d{5}-\\d{4}$")])
+      tellPhone: new FormControl("", Validators.minLength(11))
     }
   );
 
@@ -83,7 +84,7 @@ export class FormRegisterComponent {
             horizontalPosition: this.horizontalPosition,
             verticalPosition: this.verticalPosition,
             data: {
-              message: error.message,
+              message: "Erro no servidor. Tente novamente mais tarde.",
               icon: "error"
             }
           });

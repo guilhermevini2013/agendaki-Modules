@@ -28,12 +28,12 @@
     </label>
     <label for="tellEnterprise">
       <span>Telefone do seu <span style="color: var(--secundary-color);">negócio</span></span>
-      <input type="tel" id="tellEnterprise" formControlName="tellPhone" maxlength="15"
-      placeholder="(00) 90000-0000" required>
+      <input type="text" id="tellEnterprise" formControlName="tellPhone" maxlength="15"
+      placeholder="(00) 90000-0000" mask="(99) 99999-9999" required>
       <div *ngIf="tellPhone?.invalid && tellPhone?.dirty"
            class="alert-danger">
-        <div *ngIf="tellPhone?.hasError('pattern')">
-          <span>*Telefone deve conter o formato de (00) 00000-0000.</span>
+        <div *ngIf="tellPhone?.hasError('minlength')">
+          <span>*Numero invalido</span>
         </div>
         <div *ngIf="tellPhone?.hasError('required')">
           <span>*Telefone deve ser preenchido.</span>
