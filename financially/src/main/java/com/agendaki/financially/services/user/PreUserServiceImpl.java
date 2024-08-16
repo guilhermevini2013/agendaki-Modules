@@ -8,6 +8,7 @@ import com.agendaki.financially.dtos.user.request.PreUserUpdateDTO;
 import com.agendaki.financially.dtos.user.response.PreUserProfileResponseDTO;
 import com.agendaki.financially.dtos.user.response.PreUserSaveResponseDTO;
 import com.agendaki.financially.dtos.user.response.PreUserTokenDTO;
+import com.agendaki.financially.exceptions.EntityNotFoundException;
 import com.agendaki.financially.exceptions.ExistingDataException;
 import com.agendaki.financially.models.preuser.PreUser;
 import com.agendaki.financially.repositories.PreUserRepository;
@@ -60,7 +61,7 @@ public class PreUserServiceImpl implements PreUserService {
             Authentication authenticate = authenticationManager.authenticate(usernamePasswordAuth);
             return new PreUserTokenDTO(jwtService.generateToken(((PreUser) authenticate.getPrincipal()).getUsername()));
         } catch (AuthenticationException ex) {
-            throw new UsernameNotFoundException("Credentials not found or incorrect");
+            throw new EntityNotFoundException("Credentials not found or incorrect");
         }
     }
 

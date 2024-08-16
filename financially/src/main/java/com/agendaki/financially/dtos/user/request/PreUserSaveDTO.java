@@ -19,6 +19,6 @@ public record PreUserSaveDTO(
         @Email
         String email,
         @NotBlank(message = "TellPhone is blank")
-        @Pattern(regexp = "^\\(\\d{2}\\)\\s\\d{5}-\\d{4}$", message = "Pattern incorrect, use (00) 00000-0000.")
+        @Pattern(regexp = "^(\\d{11}|\\(\\d{2}\\) \\d{5}-\\d{4})$", message = "Pattern incorrect, use (00) 00000-0000.")
         String tellPhone) {
 }

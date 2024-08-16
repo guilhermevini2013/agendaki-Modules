@@ -1,20 +1,30 @@
 <div class="container-form">
-    <form>
+  <form [formGroup]="loginForm" (ngSubmit)="authUserToPortalClient()">
       <label for="email">
         E-mail
-        <input type="text" id="email" formControlName="email" required>
+        <input type="text" id="email" formControlName="email" required formControlName="email">
+        <div *ngIf="email?.invalid && email?.dirty"
+             class="alert-danger">
+          <div *ngIf="email?.hasError('required')">
+            <span>*Email deve ser preenchido.</span>
+          </div>
+          <div *ngIf="email?.hasError('email')">
+            <span>*Email incorreto</span>
+          </div>
+        </div>
       </label>
       <label for="password">
         Senha
-        <input type="password" id="password" formControlName="password" required>
+        <input type="password" id="password" formControlName="password" required formControlName="password">
       </label>
       <div>
         <button type="submit" class="button-login administration">Administração</button>
-       <button type="submit" class="button-login portal-client">Portal cliente</button>
+        <button type="submit" class="button-login portal-client">Portal cliente
+        </button>
       </div>
     </form>
     <div class="container-form__help">
-      <span>Ainda não tem conta? <a href="" style="color: var(--secundary-color)">Cadastra-se</a></span>
+      <span>Ainda não tem conta? <a href="http://localhost:4200/register" style="color: var(--secundary-color)">Cadastra-se</a></span>
     </div>
   </div>
-  
+

@@ -59,39 +59,36 @@ export class FormRegisterComponent {
   onSubmit() {
     if (this.registerForm.valid) {
       this.isLoading = true;
+      console.log(this.registerForm.value.tellPhone)
 
       this.preUserService.savePreUser(this.registerForm.value).subscribe(
         response => {
           switch (response.status) {
             case 201:
-              this._snackBar.openFromComponent(PopUpComponent, {
-                duration: 8000,
-                horizontalPosition: this.horizontalPosition,
-                verticalPosition: this.verticalPosition,
-                data: {
-                  message: "Conta criada com sucesso!",
-                  icon: "check_circle"
-                }
-              });
+              this.openPopUp("Conta criada com sucesso!", "check_circle")
               this.isLoading = false;
               this.registerForm.reset();
               break;
           }
         },
         error => {
-          this._snackBar.openFromComponent(PopUpComponent, {
-            duration: 8000,
-            horizontalPosition: this.horizontalPosition,
-            verticalPosition: this.verticalPosition,
-            data: {
-              message: "Erro no servidor. Tente novamente mais tarde.",
-              icon: "error"
-            }
-          });
+          this.openPopUp("Erro no servidor. Tente novamente mais tarde.", "error")
           this.isLoading = false;
         }
       );
     }
+  }
+
+  openPopUp(message: string, icon: string): void {
+    this._snackBar.openFromComponent(PopUpComponent, {
+      duration: 8000,
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+      data: {
+        message: message,
+        icon: icon
+      }
+    });
   }
 
 }
