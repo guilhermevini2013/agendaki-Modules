@@ -1,5 +1,5 @@
 <div class="container-form">
-  <form [formGroup]="loginForm" (ngSubmit)="authUserToPortalClient()">
+    <form [formGroup]="loginForm" (ngSubmit)="submitFormLogin($event)">
       <label for="email">
         E-mail
         <input type="text" id="email" formControlName="email" required formControlName="email">
@@ -18,8 +18,8 @@
         <input type="password" id="password" formControlName="password" required formControlName="password">
       </label>
       <div>
-        <button type="submit" class="button-login administration">Administração</button>
-        <button type="submit" class="button-login portal-client">Portal cliente
+        <button type="submit" name="action" value="administration" class="button-login administration">Administração</button>
+        <button type="submit" name="action" value="portal-client" class="button-login portal-client">Portal cliente
         </button>
       </div>
     </form>

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Injector, OnInit} from '@angular/core';
 import {Router, RouterOutlet} from '@angular/router';
 import { LoginPageComponent } from "./components/login-page/login-page.component";
 import {NgIf} from "@angular/common";
@@ -12,6 +12,7 @@ import {PreUserService} from "./services/pre-user.service";
   styleUrl: './app.component.css'
 })
 export class AppComponent implements OnInit{
+
 
   constructor(private preUserService:PreUserService, private router:Router) {
   }
