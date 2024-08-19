@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-administration-principal',
@@ -7,6 +8,12 @@ import { Component } from '@angular/core';
   templateUrl: './administration-principal.component.html',
   styleUrl: './administration-principal.component.css'
 })
-export class AdministrationPrincipalComponent {
+export class AdministrationPrincipalComponent implements OnInit{
+
+  constructor(private router:Router) {
+  }
+
+  ngOnInit(): void {
+  }
 
 }

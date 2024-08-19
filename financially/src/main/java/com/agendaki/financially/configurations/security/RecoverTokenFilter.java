@@ -8,6 +8,7 @@ import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.exceptions.SignatureVerificationException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -16,6 +17,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.filter.OncePerRequestFilter;
+import org.springframework.web.util.WebUtils;
 
 import java.io.IOException;
 
@@ -31,13 +33,17 @@ public class RecoverTokenFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        String token = recoverToken(request);
-        if (token != null) {
-            String subject = jwtService.verifyToken(token);
-            PreUserRepository.PreUserAuth userAuth = preUserRepository.findByEmail(subject).orElseThrow(() -> new EntityNotFoundException("User not found"));
-            PreUser preUser = new PreUser(userAuth);
-            UsernamePasswordAuthenticationToken authenticated = UsernamePasswordAuthenticationToken.authenticated(preUser, preUser.getId(), preUser.getAuthorities());
-            SecurityContextHolder.getContext().setAuthentication(authenticated);
+        HttpServletRequest httpRequest = (HttpServletRequest) request;
+        Cookie cookie = WebUtils.getCookie(httpRequest, "jwt");
+        if (cookie != null) {
+            String token = cookie.getValue();
+            if (token != null) {
+                String subject = jwtService.verifyToken(token);
+                PreUserRepository.PreUserAuth userAuth = preUserRepository.findByEmail(subject).orElseThrow(() -> new EntityNotFoundException("User not found"));
+                PreUser preUser = new PreUser(userAuth);
+                UsernamePasswordAuthenticationToken authenticated = UsernamePasswordAuthenticationToken.authenticated(preUser, preUser.getId(), preUser.getAuthorities());
+                SecurityContextHolder.getContext().setAuthentication(authenticated);
+            }
         }
         filterChain.doFilter(request, response);
     }

@@ -14,12 +14,10 @@ import {PreUserService} from "./services/pre-user.service";
 export class AppComponent implements OnInit{
 
 
-  constructor(private preUserService:PreUserService, private router:Router) {
+  constructor(private router:Router) {
   }
 
   ngOnInit(): void {
-    if (localStorage.getItem("tokenPortalClient") == null){
-      this.router.navigate(['/']);
-    }
+
   }
 }

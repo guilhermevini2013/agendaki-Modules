@@ -22,18 +22,11 @@ export class PreUserService {
       pathToAuth = "scheduling/api/user/auth"
     }
     return this.http.post<PreUserTokenDTO>(this._baseUrlAPI + pathToAuth, preUser, {
+      withCredentials: true,
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       }),
       observe: 'response'
-    }).pipe(
-      tap(response =>{
-        if (typePageToAuth == TypePage.PORTAL_CLIENT){
-          localStorage.setItem("tokenPortalClient",<string>response.body?.token);
-        }else if (typePageToAuth == TypePage.ADMINISTRATION){
-          localStorage.setItem("tokenAdministration",<string>response.body?.token);
-        }
-      })
-    );
+    });
   }
 }

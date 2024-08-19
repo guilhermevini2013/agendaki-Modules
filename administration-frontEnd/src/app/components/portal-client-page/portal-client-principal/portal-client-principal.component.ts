@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-portal-client-principal',
@@ -7,6 +8,13 @@ import { Component } from '@angular/core';
   templateUrl: './portal-client-principal.component.html',
   styleUrl: './portal-client-principal.component.css'
 })
-export class PortalClientPrincipalComponent {
+export class PortalClientPrincipalComponent implements OnInit{
+
+  constructor(private router:Router) {
+  }
+
+  ngOnInit(): void {
+  }
+
 
 }

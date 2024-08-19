@@ -8,10 +8,13 @@ import com.agendaki.financially.dtos.user.response.PreUserSaveResponseDTO;
 import com.agendaki.financially.dtos.user.response.PreUserTokenDTO;
 import com.agendaki.financially.services.user.PreUserService;
 import com.agendaki.financially.utils.HateoasUtil;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.WebUtils;
 
 @RestController
 @RequestMapping(value = "/api/pre-user")
@@ -32,8 +35,13 @@ public class PreUserController {
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping(value = "/auth")
-    public PreUserTokenDTO loadPreUsers(@RequestBody @Valid PreUserLoadDTO preUserLoadDTO) {
-        return preUserService.load(preUserLoadDTO);
+    public void loadPreUsers(@RequestBody @Valid PreUserLoadDTO preUserLoadDTO, HttpServletResponse response) {
+        String token = preUserService.load(preUserLoadDTO).token();
+        Cookie cookie = new Cookie("jwtPortalClient",token);
+        cookie.setPath("/");
+        cookie.setMaxAge(259200);
+        cookie.setHttpOnly(false);
+        response.addCookie(cookie);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
