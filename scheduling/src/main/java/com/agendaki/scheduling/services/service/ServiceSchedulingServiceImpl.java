@@ -1,10 +1,13 @@
 package com.agendaki.scheduling.services.service;
 
 import com.agendaki.scheduling.dtos.request.InsertServiceDTO;
+import com.agendaki.scheduling.dtos.response.ReadServiceByInstanceDTO;
 import com.agendaki.scheduling.models.scheduling.Service;
 import com.agendaki.scheduling.models.user.Instance;
 import com.agendaki.scheduling.repositories.ServiceRepository;
 import com.agendaki.scheduling.utils.SecurityUtil;
+
+import java.util.List;
 
 @org.springframework.stereotype.Service
 public class ServiceSchedulingServiceImpl implements ServiceSchedulingService {
@@ -29,5 +32,12 @@ public class ServiceSchedulingServiceImpl implements ServiceSchedulingService {
     @Override
     public void updateService() {
 
+    }
+
+    @Override
+    public List<ReadServiceByInstanceDTO> getServicesByInstance() {
+        Instance instance = SecurityUtil.getProjectionOfUserEntityAuthenticated().getInstance();
+        List<Service> servicesByInstance = serviceRepository.findByInstance(instance);
+        return servicesByInstance.stream().map(service -> new ReadServiceByInstanceDTO(service)).toList();
     }
 }
