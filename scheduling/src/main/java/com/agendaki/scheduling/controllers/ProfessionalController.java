@@ -1,11 +1,14 @@
 package com.agendaki.scheduling.controllers;
 
 import com.agendaki.scheduling.dtos.request.ProfessionalInsertDTO;
+import com.agendaki.scheduling.dtos.response.ProfessionalReadByServiceDTO;
 import com.agendaki.scheduling.services.professional.ProfessionalService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -39,6 +42,15 @@ public class ProfessionalController {
     @ResponseStatus(HttpStatus.OK)
     public void associateProfessionalOfService(@RequestBody Set<Long> idsToAssociate, @RequestParam(name = "id") Long id) {
         professionalService.associateProfessionalToService(idsToAssociate, id);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<ProfessionalReadByServiceDTO>> getProfessionalsByService(@RequestParam(name = "service") Long idService){
+        List<ProfessionalReadByServiceDTO> professionalsByService = professionalService.getProfessionalsByService(idService);
+        if (professionalsByService.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(professionalsByService);
     }
 
 }

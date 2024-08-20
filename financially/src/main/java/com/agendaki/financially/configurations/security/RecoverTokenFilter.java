@@ -34,7 +34,7 @@ public class RecoverTokenFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
-        Cookie cookie = WebUtils.getCookie(httpRequest, "jwt");
+        Cookie cookie = WebUtils.getCookie(httpRequest, "jwtPortalClient");
         if (cookie != null) {
             String token = cookie.getValue();
             if (token != null) {

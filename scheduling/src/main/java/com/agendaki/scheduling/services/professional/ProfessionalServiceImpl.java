@@ -1,6 +1,7 @@
 package com.agendaki.scheduling.services.professional;
 
 import com.agendaki.scheduling.dtos.request.ProfessionalInsertDTO;
+import com.agendaki.scheduling.dtos.response.ProfessionalReadByServiceDTO;
 import com.agendaki.scheduling.exceptions.ResourceNotFoundException;
 import com.agendaki.scheduling.models.scheduling.Professional;
 import com.agendaki.scheduling.models.scheduling.Service;
@@ -73,6 +74,13 @@ public class ProfessionalServiceImpl implements ProfessionalService {
         Professional professional = professionalRepository.findByIdAndInstance(idProfessional, instance)
                 .orElseThrow(() -> new ResourceNotFoundException("Professional not found"));
         professional.associateServices(services);
+    }
+
+    @Override
+    public List<ProfessionalReadByServiceDTO> getProfessionalsByService(Long idService) {
+        Instance instance = SecurityUtil.getProjectionOfUserEntityAuthenticated().getInstance();
+        List<Professional> byServiceAndInstance = professionalRepository.findByServiceAndInstance(idService, instance);
+        return byServiceAndInstance.stream().map(professional -> new ProfessionalReadByServiceDTO(professional)).toList();
     }
 
 }
