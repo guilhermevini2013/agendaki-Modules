@@ -6,6 +6,7 @@ import com.agendaki.scheduling.models.scheduling.Service;
 import com.agendaki.scheduling.models.user.Instance;
 import com.agendaki.scheduling.repositories.ServiceRepository;
 import com.agendaki.scheduling.utils.SecurityUtil;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -25,8 +26,10 @@ public class ServiceSchedulingServiceImpl implements ServiceSchedulingService {
     }
 
     @Override
-    public void deleteService() {
-
+    @Transactional
+    public void deleteService(Long id) {
+        Instance instance = SecurityUtil.getProjectionOfUserEntityAuthenticated().getInstance();
+        serviceRepository.removeServiceAndAssociations(id, instance.getId());
     }
 
     @Override

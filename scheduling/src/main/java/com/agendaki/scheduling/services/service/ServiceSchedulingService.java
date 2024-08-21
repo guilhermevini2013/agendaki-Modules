@@ -9,7 +9,7 @@ public interface ServiceSchedulingService {
 
     void insertService(InsertServiceDTO serviceDTO);
 
-    void deleteService();
+    void deleteService(Long id);
 
     void updateService();
 

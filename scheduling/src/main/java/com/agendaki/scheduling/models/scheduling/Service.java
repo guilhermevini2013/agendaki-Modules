@@ -6,6 +6,8 @@ import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.time.Duration;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Service {
@@ -15,8 +17,10 @@ public class Service {
     private String name;
     private BigDecimal price;
     private Short durationInMinutes;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Instance instance;
+    @ManyToMany(mappedBy = "services")
+    private Set<Professional> professionals = new HashSet<>();
 
     public Service(InsertServiceDTO serviceDTO, Instance instance) {
         this.name = serviceDTO.name();

@@ -24,6 +24,12 @@ public class ServiceController {
         serviceSchedulingService.insertService(insertServiceDTO);
     }
 
+    @DeleteMapping
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteService(@RequestParam(name = "id") Long id) {
+        serviceSchedulingService.deleteService(id);
+    }
+
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<ReadServiceByInstanceDTO> getServicesByInstance() {
