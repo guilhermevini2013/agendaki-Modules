@@ -59,8 +59,6 @@ export class FormRegisterComponent {
   onSubmit() {
     if (this.registerForm.valid) {
       this.isLoading = true;
-      console.log(this.registerForm.value.tellPhone)
-
       this.preUserService.savePreUser(this.registerForm.value).subscribe(
         response => {
           switch (response.status) {
@@ -69,11 +67,24 @@ export class FormRegisterComponent {
               this.isLoading = false;
               this.registerForm.reset();
               break;
+            case 400:
+              this.openPopUp("E-mail já está associado a uma conta", "error")
+              this.isLoading = false;
+              this.registerForm.reset();
+              break;
           }
         },
         error => {
-          this.openPopUp("Erro no servidor. Tente novamente mais tarde.", "error")
-          this.isLoading = false;
+          switch (error.status) {
+            case 400:
+              this.openPopUp("E-mail já está associado a uma conta.", "error")
+              this.isLoading = false;
+              break;
+            case 500:
+              this.openPopUp("Problemas interno com servidor, tente mais tarde.", "error")
+              this.isLoading = false;
+              break;
+          }
         }
       );
     }
