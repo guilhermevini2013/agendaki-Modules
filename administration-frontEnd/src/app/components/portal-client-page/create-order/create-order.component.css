@@ -1,0 +1,13 @@
+.formOptions {
+    display: flex;
+    justify-content: space-around;
+}
+
+.formOptionsExpand {
+    display: flex;
+    justify-content: space-around;
+}
+
+.formOptionsExpand mat-expansion-panel {
+   width: 200px;
+}

@@ -1,5 +1,5 @@
 import {Component, Injector, OnInit} from '@angular/core';
-import {Router, RouterOutlet} from '@angular/router';
+import {Router, RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
 import { LoginPageComponent } from "./components/login-page/login-page.component";
 import {NgIf} from "@angular/common";
 import {PreUserService} from "./services/pre-user.service";
@@ -7,7 +7,7 @@ import {PreUserService} from "./services/pre-user.service";
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, LoginPageComponent, NgIf],
+  imports: [RouterOutlet, LoginPageComponent, NgIf, RouterLink, RouterLinkActive],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

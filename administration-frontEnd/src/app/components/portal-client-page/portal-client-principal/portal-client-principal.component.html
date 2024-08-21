@@ -1,12 +1,12 @@
 <div class="example-container" >
     <mat-toolbar color="primary" class="example-toolbar">
       <div class="tool-button">
-        <button mat-icon-button (click)="snav.toggle()"><mat-icon style="font-size: 30px;">menu</mat-icon></button>
+        <button mat-icon-button (click)="snav.toggle()"><mat-icon style="transform: scale(1.25);">menu</mat-icon></button>
       </div>
       <div class="toolbar-content">
         <div class="toolbar-content_image">
             <img src="image/logoPortalClient.png" alt="">
-          </div>
+        </div>
       </div>
     </mat-toolbar>
     <mat-sidenav-container class="example-sidenav-container">
@@ -21,11 +21,11 @@
                     <div class="content-sidenav__inf">
                         <div>
                             <mat-icon>edit</mat-icon>
-                            <span><a href="">Criar</a></span>
+                            <span><a routerLink="create-order" routerLinkActire="active">Criar</a></span>
                         </div>
                         <div>
                             <mat-icon>visibility</mat-icon>
-                            <span><a href="">Ver</a></span>
+                            <span><a routerLink="client-orders" routerLinkActire="active">Ver</a></span>
                         </div>
                     </div>
                 </div>
@@ -57,7 +57,7 @@
         </mat-nav-list>
       </mat-sidenav>
       <mat-sidenav-content>
-        <router-outlet name="portal-client-content"></router-outlet>
+        <router-outlet></router-outlet>
       </mat-sidenav-content>
     </mat-sidenav-container>
   </div>

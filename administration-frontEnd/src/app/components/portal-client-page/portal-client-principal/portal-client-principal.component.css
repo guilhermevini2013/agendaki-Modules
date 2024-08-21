@@ -48,6 +48,19 @@
     height: 55px;
     color: #12122C;
     border-radius: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+  }
+
+  .tool-button mat-icon {
+    transition: .2s;
+  }
+
+  .tool-button mat-icon:hover {
+    color: white;
   }
 
   mat-nav-list{
@@ -96,6 +109,10 @@
   .content-sidenav__inf div span a{
     text-decoration: none;
     color: #ffff;
+    transition: .5s;
+  }
+  .content-sidenav__inf div mat-icon{
+    transition: .25s;
   }
 
   .content-sidenav__inf div:hover mat-icon{
