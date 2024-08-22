@@ -10,6 +10,7 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatIconModule} from '@angular/material/icon';
 import {DatePipe} from '@angular/common';
 import {MatListModule} from '@angular/material/list';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 
 @Component({
@@ -26,7 +27,8 @@ import {MatListModule} from '@angular/material/list';
     MatListModule, 
     MatIconModule,
     MatDividerModule, 
-    DatePipe
+    DatePipe,
+    MatButtonToggleModule
   ],
   templateUrl: './create-order.component.html',
   styleUrl: './create-order.component.css'

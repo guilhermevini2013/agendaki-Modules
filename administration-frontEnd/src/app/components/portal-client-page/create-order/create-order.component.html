@@ -1,50 +1,104 @@
 <div class="content">
       <mat-stepper [linear]="true" #stepper>
         <mat-step [stepControl]="firstFormGroup">
-          <form [formGroup]="firstFormGroup">
-            <ng-template matStepLabel>Escolha seu plano!</ng-template>
-            <mat-radio-group class="formOptions" aria-label="Select an option" formControlName="firstCtrl" required>
+          <form [formGroup]="firstFormGroup" class="firstFormGroup">
+            <ng-template matStepLabel class="test">Escolha seu plano!</ng-template>
+            <!-- <mat-radio-group class="formOptions" aria-label="Select an option" formControlName="firstCtrl" required>
+              <div class="formOptionsExpand">
                 <mat-radio-button value="1"></mat-radio-button>
+                <div class="formOptionsCard">
+                  <mat-icon>bar_chart</mat-icon>
+                  <h1>Mensal</h1>
+                  <span>o nosso plano mensal charabim charabal na cabeça do birinbal</span>
+                  <p>por apenas:</p>
+                  <div class="formOptionsCardPrice">
+                    <span class="formOptionsCardMoneyType">R$</span>
+                    <span class="formOptionsCardValue">20,50</span>
+                    <i><p>/mês</p></i> 
+                  </div>
+                </div>
+              </div>
+
+              <div class="formOptionsExpand">
                 <mat-radio-button value="2"></mat-radio-button>
+                
+                <div class="formOptionsCard">
+                  <mat-icon>analytics</mat-icon>
+                  <h1>Tri-Mensal</h1>
+                  <span>o nosso plano mensal charabim charabal na cabeça do birinbal</span>
+                  <p>por apenas:</p>
+                  <div class="formOptionsCardPrice">
+                    <span class="formOptionsCardMoneyType">R$</span>
+                    <span class="formOptionsCardValue">20,50</span>
+                    <i><p>/mês</p></i> 
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="formOptionsExpand">
                 <mat-radio-button value="3"></mat-radio-button>
-            </mat-radio-group>   
-            <div class="formOptionsExpand">
-                <!--NÃO TIRAR O MAT ACCORDION OU O BAGULHO VAI BUGAR-->
-                <mat-accordion>
-                    <mat-expansion-panel>
-                        <mat-expansion-panel-header>
-                          <mat-panel-title>Mensal</mat-panel-title>
-                        </mat-expansion-panel-header>
-                        <p>No nosso plano Mensal temos um mês :D</p>
+                <div class="formOptionsCard">
+                  <mat-icon>account_tree</mat-icon>
+                  <h1>Anual</h1>
+                  <span>o nosso plano mensal charabim charabal na cabeça do birinbal</span>
+                  <p>por apenas:</p>
+                  <div class="formOptionsCardPrice">
+                    <span class="formOptionsCardMoneyType">R$</span>
+                    <span class="formOptionsCardValue">20,50</span>
+                    <i><p>/mês</p></i> 
+                  </div>
+                </div>
+              </div>
+              
+             
+               
+                
+            </mat-radio-group>              -->
 
-                        <mat-list-item>
-                            <mat-icon matListItemIcon>check</mat-icon>
-                            <div matListItemTitle>1 Template</div>
-                          </mat-list-item>
+            <mat-button-toggle-group appearance="legacy" class="formOptions" aria-label="Select an option" formControlName="firstCtrl">
+              <mat-button-toggle value=1>
+                <div class="formOptionsCard">
+                  <mat-icon>bar_chart</mat-icon>
+                  <h1>Mensal</h1>
+                  <span class="formOptionsCardText">o nosso plano mensal charabim charabal na cabeça do birinbal</span>
+                  <p>por apenas:</p>
+                  <div class="formOptionsCardPrice">
+                    <span class="formOptionsCardMoneyType">R$</span>
+                    <span class="formOptionsCardValue">20,50</span>
+                    <i><p>/mês</p></i> 
+                  </div>
+                </div>
+              </mat-button-toggle>
+               
 
-                          <mat-list-item>
-                            <mat-icon matListItemIcon>close</mat-icon>
-                            <div matListItemTitle>1 Template</div>
-                          </mat-list-item>
-                    </mat-expansion-panel>
-                </mat-accordion>
-                <mat-accordion>
-                    <mat-expansion-panel>
-                        <mat-expansion-panel-header>
-                          <mat-panel-title>Tri-Mensal</mat-panel-title>
-                        </mat-expansion-panel-header>
-                        <p>No nosso plano tri mensal temos três mês :D</p>
-                      </mat-expansion-panel>
-                </mat-accordion>
-                <mat-accordion>
-                    <mat-expansion-panel>
-                        <mat-expansion-panel-header>
-                          <mat-panel-title>Anual</mat-panel-title>
-                        </mat-expansion-panel-header>
-                        <p>No nosso plano anual temos 12 mês :D</p>
-                      </mat-expansion-panel>
-                </mat-accordion>
-            </div>                
+              <mat-button-toggle value=2>
+                <div class="formOptionsCard">
+                  <mat-icon>analytics</mat-icon>
+                  <h1>Tri-Mensal</h1>
+                  <span class="formOptionsCardText">o nosso plano mensal charabim charabal na cabeça do birinbal</span>
+                  <p>por apenas:</p>
+                  <div class="formOptionsCardPrice">
+                    <span class="formOptionsCardMoneyType">R$</span>
+                    <span class="formOptionsCardValue">20,50</span>
+                    <i><p>/mês</p></i> 
+                  </div>
+                </div>
+              </mat-button-toggle>
+              <mat-button-toggle value=3>
+                <div class="formOptionsCard">
+                  <mat-icon>account_tree</mat-icon>
+                  <h1>Anual</h1>
+                  <span class="formOptionsCardText">o nosso plano mensal charabim charabal na cabeça do birinbal</span>
+                  <p>por apenas:</p>
+                  <div class="formOptionsCardPrice">
+                    <span class="formOptionsCardMoneyType">R$</span>
+                    <span class="formOptionsCardValue">20,50</span>
+                    <i><p>/mês</p></i> 
+                  </div>
+                </div>
+              </mat-button-toggle>
+            </mat-button-toggle-group>
             <div>
               <button mat-button matStepperNext>Próximo</button>
             </div>
