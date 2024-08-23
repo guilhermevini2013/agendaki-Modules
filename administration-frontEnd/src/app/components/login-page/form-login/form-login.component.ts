@@ -1,5 +1,5 @@
 import {Component, inject} from '@angular/core';
-import {PreUserService} from "../../../services/pre-user.service";
+import {UserService} from "../../../services/user.service";
 import {MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition} from "@angular/material/snack-bar";
 import {PopUpComponent} from "../../pop-up/pop-up.component";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
@@ -21,7 +21,7 @@ export class FormLoginComponent {
   private _snackBar = inject(MatSnackBar);
   horizontalPosition: MatSnackBarHorizontalPosition = 'end';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
-  constructor(private preUserService:PreUserService,private router:Router) {
+  constructor(private preUserService:UserService, private router:Router) {
   }
 
   protected loginForm:FormGroup = new FormGroup<any>(
@@ -45,7 +45,7 @@ export class FormLoginComponent {
   }
 
   protected authUser(typePageToAuth:TypePage):void{
-    this.preUserService.authPreUser({email:this.loginForm.value.email, password:this.loginForm.value.password},typePageToAuth).subscribe(
+    this.preUserService.authUser({email:this.loginForm.value.email, password:this.loginForm.value.password},typePageToAuth).subscribe(
       response =>{
         switch (response.status) {
           case 422:

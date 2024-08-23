@@ -11,7 +11,5 @@ public interface ServiceSchedulingService {
 
     void deleteService(Long id);
 
-    void updateService();
-
     List<ReadServiceByInstanceDTO> getServicesByInstance();
 }

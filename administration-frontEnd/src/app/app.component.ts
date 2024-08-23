@@ -2,7 +2,7 @@ import {Component, Injector, OnInit} from '@angular/core';
 import {Router, RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
 import { LoginPageComponent } from "./components/login-page/login-page.component";
 import {NgIf} from "@angular/common";
-import {PreUserService} from "./services/pre-user.service";
+import {UserService} from "./services/user.service";
 
 @Component({
   selector: 'app-root',

@@ -25,6 +25,8 @@ public interface PaymentRepository extends MongoRepository<Payment, String> {
 
     void deleteByIdPreUser(String id);
 
+    List<Payment> findAllByIdPreUser(String id);
+
     boolean existsByIdPreUser(String id);
 
     @Query("{'idPreUser': ?0}")

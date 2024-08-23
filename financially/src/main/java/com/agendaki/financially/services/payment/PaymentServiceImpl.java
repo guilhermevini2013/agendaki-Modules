@@ -8,6 +8,7 @@ import com.agendaki.financially.dtos.api.dtos.webhook.ChargesNotificationDTO;
 import com.agendaki.financially.dtos.api.dtos.webhook.PaymentNotificationDTO;
 import com.agendaki.financially.dtos.exchange.EmailFinanciallyToSendDTO;
 import com.agendaki.financially.dtos.payment.PaymentCreateDTO;
+import com.agendaki.financially.dtos.payment.PaymentViewOrderDTO;
 import com.agendaki.financially.exceptions.ExistingDataException;
 import com.agendaki.financially.models.payment.Payment;
 import com.agendaki.financially.models.preuser.PreUser;
@@ -24,6 +25,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 @Service
 public class PaymentServiceImpl implements PaymentService {
@@ -77,6 +79,13 @@ public class PaymentServiceImpl implements PaymentService {
             }
             default -> throw new IllegalArgumentException("Type payment not supported");
         }
+    }
+
+    @Override
+    public List<PaymentViewOrderDTO> getAllOrders() {
+        String idAuth = recoverIdOfAuthenticated();
+        List<Payment> allByIdPreUser = paymentRepository.findAllByIdPreUser(idAuth);
+        return allByIdPreUser.stream().map(payment -> new PaymentViewOrderDTO(payment)).toList();
     }
 
     @Override

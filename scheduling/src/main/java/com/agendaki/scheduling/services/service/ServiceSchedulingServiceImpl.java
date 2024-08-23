@@ -33,11 +33,6 @@ public class ServiceSchedulingServiceImpl implements ServiceSchedulingService {
     }
 
     @Override
-    public void updateService() {
-
-    }
-
-    @Override
     public List<ReadServiceByInstanceDTO> getServicesByInstance() {
         Instance instance = SecurityUtil.getProjectionOfUserEntityAuthenticated().getInstance();
         List<Service> servicesByInstance = serviceRepository.findByInstance(instance);
