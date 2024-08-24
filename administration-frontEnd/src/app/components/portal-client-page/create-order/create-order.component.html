@@ -1,11 +1,11 @@
 <div class="content">
       <mat-stepper [linear]="true" #stepper>
-        
+
         <mat-step [stepControl]="firstFormGroup" label="Escolha seu plano!">
-          
+
           <form [formGroup]="firstFormGroup" class="firstFormGroup">
             <mat-button-toggle-group appearance="legacy" class="formOptions" aria-label="Select an option" formControlName="typeSignature">
-              <mat-button-toggle value=1>
+              <mat-button-toggle value="1">
                 <div class="formOptionsCard">
                   <mat-icon>bar_chart</mat-icon>
                   <h1>Mensal</h1>
@@ -19,7 +19,7 @@
                 </div>
               </mat-button-toggle>
 
-              <mat-button-toggle value=2>
+              <mat-button-toggle value="2">
                 <div class="formOptionsCard">
                   <mat-icon>analytics</mat-icon>
                   <h1>Tri-Mensal</h1>
@@ -33,7 +33,7 @@
                 </div>
               </mat-button-toggle>
 
-              <mat-button-toggle value=3>
+              <mat-button-toggle value="3">
                 <div class="formOptionsCard">
                   <mat-icon>account_tree</mat-icon>
                   <h1>Anual</h1>
@@ -57,13 +57,13 @@
         <mat-step [stepControl]="secondFormGroup" label="Forma de pagamento!">
           <form [formGroup]="secondFormGroup" class="secondFormGroup">
             <mat-button-toggle-group appearance="legacy" class="formOptions PaymentOptions" aria-label="Select an option" formControlName="typePayment">
-              <mat-button-toggle value=1>
+              <mat-button-toggle value="1">
                 <div class="formOptionsCard Payment">
                   <mat-icon>attach_money</mat-icon>
                   <h1>Pix</h1>
                 </div>
               </mat-button-toggle>
-              <mat-button-toggle value=2>
+              <mat-button-toggle value="2">
                 <div class="formOptionsCard Payment">
                   <mat-icon>account_balance</mat-icon>
                   <h1>Boleto</h1>
@@ -92,7 +92,7 @@
               </div>
             <div>
               <button mat-button matStepperPrevious>Voltar</button>
-              <button mat-button matStepperNext>Próximo</button>
+              <button mat-button matStepperNext (click)="createPaymentPix()">Próximo</button>
             </div>
           </form>
           </ng-template>
@@ -132,7 +132,7 @@
               </div>
               <div>
                 <button mat-button matStepperPrevious>Voltar</button>
-                <button mat-button matStepperNext>Próximo</button>
+                <button mat-button matStepperNext (click)="createPaymentPix()">Próximo</button>
               </div>
             </form>
             </ng-template>
