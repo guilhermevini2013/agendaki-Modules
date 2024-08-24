@@ -159,7 +159,54 @@ mat-button-toggle {
     gap: 10px;
 }
 
-  
+.section-payment{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.section-payment__inf{
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  justify-content: center;
+  align-items: center;
+  width: 500px;
+}
+
+.section-payment__inf__qrcode{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: max-content;
+  padding-top: 10px;
+}
+
+.section-payment__inf__key{
+  width: 100%;
+  word-break: break-all;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.section-payment__inf__expire{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.section-payment__inf__qrcode img{
+  width: 230px;
+}
 @media (max-width: 1100px){
     .formOptions {
         display: flex;
@@ -168,11 +215,11 @@ mat-button-toggle {
         gap: 50px;
     }
   }
-  
+
   @media (max-width: 620px){
-    
+
   }
-  
+
   @media (max-width: 360px){
-    
+
   }

@@ -1,31 +1,31 @@
 <section>
-    <div class="payment-view">
-        <div class="payment-view__title">
-            <h1>Historico de pedidos</h1>
-        </div>
-        <div class="payment-view__card">
-            <div class="line"></div>
-            <div class="icon">
-                <mat-icon>request_quote</mat-icon>
-            </div>
-            <div class="payment-view__card__inf">
-                <div>
-                    <div class="payment-view__card__inf__title">
-                        <h1>Titulo do plano contratado</h1>
-                    </div>
-                    <div class="payment-view__card__inf__plan">
-                        <span>Descricao do plano</span>
-                        <div class="line"></div>
-                        <span>Valor</span>
-                    </div>
-                </div>
-                <div class="payment-view__card__inf__actions">
-                    <div>
-                        <span class="status paid">Status</span>
-                        <button>Cancelar pedido</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <div class="payment-view">
+    <div class="payment-view__title">
+      <h1>Historico de pedidos</h1>
     </div>
+    <div *ngFor="let order of ordersList" class="payment-view__card">
+      <div class="line"></div>
+      <div class="icon">
+        <mat-icon>request_quote</mat-icon>
+      </div>
+      <div class="payment-view__card__inf">
+        <div class="payment-view__card__inf__er">
+          <div class="payment-view__card__inf__title">
+            <h1>{{order.titlePlan}}</h1>
+          </div>
+          <div class="payment-view__card__inf__plan">
+            <span>{{order.descriptionPlan}}</span>
+            <div class="line"></div>
+            <span>R${{order.valuePlan}}</span>
+          </div>
+        </div>
+        <div class="payment-view__card__inf__actions">
+          <div>
+            <span class="status paid">{{order.paymentStatus}}</span>
+            <button *ngIf="order.paymentStatus == 'AGUARDANDO'">Cancelar pedido</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>

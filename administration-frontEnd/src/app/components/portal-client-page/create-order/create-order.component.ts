@@ -1,27 +1,29 @@
-import {Component, inject} from '@angular/core';
-import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatStepperModule} from '@angular/material/stepper';
-import {MatButtonModule} from '@angular/material/button';
-import {MatRadioModule} from '@angular/material/radio';
-import {MatExpansionModule} from '@angular/material/expansion';
-import {MatDividerModule} from '@angular/material/divider';
-import {MatIconModule} from '@angular/material/icon';
-import {DatePipe, NgIf} from '@angular/common';
-import {MatListModule} from '@angular/material/list';
-import {MatButtonToggleModule} from '@angular/material/button-toggle';
-import {NgxMaskDirective, NgxMaskPipe} from 'ngx-mask';
-import {PaymentService} from "../../../services/payment.service";
-import {TypePayment} from "../../../models/TypePayment";
-import {TypeSignature} from "../../../models/TypeSignature";
-import {PaymentPixCreateDTO} from "../../../models/payment-pix-create-dto";
-
+import { Component, CUSTOM_ELEMENTS_SCHEMA, inject, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatButtonModule } from '@angular/material/button';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatIconModule } from '@angular/material/icon';
+import { DatePipe, NgIf, CommonModule } from '@angular/common';
+import { MatListModule } from '@angular/material/list';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
+import { PaymentService } from "../../../services/payment.service";
+import { TypePayment } from "../../../models/TypePayment";
+import { TypeSignature } from "../../../models/TypeSignature";
+import { PaymentPixCreateDTO } from "../../../models/payment-pix-create-dto";
+import {NgxSpinnerModule, NgxSpinnerService} from "ngx-spinner";
 
 @Component({
   selector: 'app-create-order',
   standalone: true,
-  imports: [MatButtonModule,
+  imports: [
+    CommonModule, // Use CommonModule instead of BrowserModule
+    MatButtonModule,
     MatStepperModule,
     FormsModule,
     ReactiveFormsModule,
@@ -36,13 +38,22 @@ import {PaymentPixCreateDTO} from "../../../models/payment-pix-create-dto";
     MatButtonToggleModule,
     NgIf,
     NgxMaskDirective,
-    NgxMaskPipe
+    NgxMaskPipe,
+    NgxSpinnerModule, // Include NgxSpinnerModule here
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './create-order.component.html',
-  styleUrl: './create-order.component.css'
+  styleUrls: ['./create-order.component.css'] // Corrected styleUrl to styleUrls
 })
-export class CreateOrderComponent {
+export class CreateOrderComponent{
   private _formBuilder = inject(FormBuilder);
+  protected pixGenerated:{imagePix:string,urlPix:string,dateExpire:string} = {
+    imagePix:"",
+    urlPix:"",
+    dateExpire:""
+  }
+
+  protected viewPaymentInf:boolean = false;
 
   firstFormGroup = this._formBuilder.group({
     typeSignature: ['', Validators.required],
@@ -51,6 +62,7 @@ export class CreateOrderComponent {
   secondFormGroup = this._formBuilder.group({
     typePayment: ['', Validators.required],
   });
+
   formTo: FormGroup | undefined;
 
   formGroupBank = this._formBuilder.group({
@@ -65,8 +77,7 @@ export class CreateOrderComponent {
     cpf: ['', Validators.required],
   });
 
-  constructor(private paymentService: PaymentService) {
-  }
+  constructor(private paymentService: PaymentService) { }
 
   private getTypeSignature(value: string): TypeSignature {
     switch (value) {
@@ -105,7 +116,12 @@ export class CreateOrderComponent {
 
       this.paymentService.createPayment(paymentDto).subscribe(
         response => {
-          console.log(response.body);
+          this.pixGenerated = {
+            imagePix:response.body?.urlImagePix!,
+            urlPix:response.body?.urlPix!,
+            dateExpire:response.body?.expireTime!
+          }
+          this.viewPaymentInf = true;
         },
         error => {
           console.error(error);
@@ -117,15 +133,16 @@ export class CreateOrderComponent {
   protected checkTypePayment(): string {
     const value = this.secondFormGroup.value?.typePayment;
     if (typeof value === 'string') {
-        if(value == '1'){
-          this.formTo = this.formGroupPix
-        }else{
-          this.formTo = this.formGroupBank
-        }
-        return value;
+      if (value === '1') {
+        this.formTo = this.formGroupPix;
+      } else {
+        this.formTo = this.formGroupBank;
+      }
+      return value;
     } else {
-        console.log(typeof value)
-        return '0';
+      console.log(typeof value);
+      return '0';
     }
   }
 }
+

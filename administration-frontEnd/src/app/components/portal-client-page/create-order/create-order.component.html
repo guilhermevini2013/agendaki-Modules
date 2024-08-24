@@ -139,8 +139,32 @@
         </mat-step>
         <mat-step>
           <ng-template matStepLabel>Informações do pagamento</ng-template>
-          <p>You are now done.</p>
+          <ng-template [ngIf]="viewPaymentInf">
+            <ng-template [ngIf]="checkTypePayment() == '1'">
+              <div class="section-payment">
+                <div>
+                </div>
+                <div class="section-payment__inf">
+                  <div class="section-payment__inf__qrcode">
+                    <img [src]="pixGenerated.imagePix" alt="">
+                    <span>Leia o QR-code e efetue o pagamento!</span>
+                  </div>
+                  <div class="section-payment__inf__key">
+                    <span>Ou se preferir efetue o pagamento pela chave PIX.</span>
+                    <span style="color: #2536A6">{{pixGenerated.urlPix}}</span>
+                  </div>
+                  <div class="section-payment__inf__expire">
+                    <span>Sua chave e Qr-code PIX expira em: {{pixGenerated.dateExpire}}</span>
+                    <span>AgendaKi agradece o seu pagamento :).</span>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+            <ng-template [ngIf]="checkTypePayment() == '2'">
+
+            </ng-template>
+          </ng-template>
         </mat-step>
       </mat-stepper>
-
 </div>
+
