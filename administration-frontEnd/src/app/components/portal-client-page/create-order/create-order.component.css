@@ -117,9 +117,8 @@ mat-button-toggle {
 }
 
 .Payment {
-    width: 500px;
-    height: 100px;
-    border-radius: 20px;
+    height: max-content;
+    border-radius: 10px;
     box-shadow: 0px 5px 0px var(--light-green);
     background-color: #f7f7fc;
     display: flex;
@@ -220,6 +219,14 @@ mat-button-toggle {
 
   }
 
-  @media (max-width: 360px){
-
+  @media (max-width: 450px){
+    mat-button-toggle{
+        width: 100%;
+    }
+    .form-payment-inf div {
+        display: contents;
+    }
+    .mat-mdc-form-field{
+        width: 45%;
+    }
   }
