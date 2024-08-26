@@ -92,7 +92,7 @@
               </div>
             <div>
               <button mat-button matStepperPrevious>Voltar</button>
-              <button mat-button matStepperNext (click)="createPaymentPix()">Próximo</button>
+              <button mat-button matStepperNext (click)="createPayment()">Próximo</button>
             </div>
           </form>
           </ng-template>
@@ -132,7 +132,7 @@
               </div>
               <div>
                 <button mat-button matStepperPrevious>Voltar</button>
-                <button mat-button matStepperNext (click)="createPaymentPix()">Próximo</button>
+                <button mat-button matStepperNext (click)="createPayment()">Próximo</button>
               </div>
             </form>
             </ng-template>
@@ -161,7 +161,23 @@
               </div>
             </ng-template>
             <ng-template [ngIf]="checkTypePayment() == '2'">
-
+              <div class="section-payment">
+                <div>
+                </div>
+                <div class="section-payment__inf">
+                  <div class="section-payment__inf__qrcode">
+                    <a [href]="bankGenerated.linkPDF" target="_blank">Click aqui para se direcionar</a>
+                    <span>Se direcione para o boleto.</span>
+                  </div>
+                  <div class="section-payment__inf__key">
+                    <span>Ou se preferir efetue o pagamento pelo codigo de barra</span>
+                    <span style="color: #2536A6">{{bankGenerated.barcode}}</span>
+                  </div>
+                  <div class="section-payment__inf__expire">
+                    <span>AgendaKi agradece o seu pagamento :).</span>
+                  </div>
+                </div>
+              </div>
             </ng-template>
           </ng-template>
         </mat-step>

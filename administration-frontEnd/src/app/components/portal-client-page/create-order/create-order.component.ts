@@ -1,22 +1,23 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA, inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatStepperModule } from '@angular/material/stepper';
-import { MatButtonModule } from '@angular/material/button';
-import { MatRadioModule } from '@angular/material/radio';
-import { MatExpansionModule } from '@angular/material/expansion';
-import { MatDividerModule } from '@angular/material/divider';
-import { MatIconModule } from '@angular/material/icon';
-import { DatePipe, NgIf, CommonModule } from '@angular/common';
-import { MatListModule } from '@angular/material/list';
-import { MatButtonToggleModule } from '@angular/material/button-toggle';
-import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
-import { PaymentService } from "../../../services/payment.service";
-import { TypePayment } from "../../../models/TypePayment";
-import { TypeSignature } from "../../../models/TypeSignature";
-import { PaymentPixCreateDTO } from "../../../models/payment-pix-create-dto";
-import {NgxSpinnerModule, NgxSpinnerService} from "ngx-spinner";
+import {Component, CUSTOM_ELEMENTS_SCHEMA, inject} from '@angular/core';
+import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatButtonModule} from '@angular/material/button';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatIconModule} from '@angular/material/icon';
+import {CommonModule, DatePipe, NgIf} from '@angular/common';
+import {MatListModule} from '@angular/material/list';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {NgxMaskDirective, NgxMaskPipe} from 'ngx-mask';
+import {PaymentService} from "../../../services/payment.service";
+import {TypePayment} from "../../../models/TypePayment";
+import {TypeSignature} from "../../../models/TypeSignature";
+import {PaymentPixCreateDTO} from "../../../models/payment-pix-create-dto";
+import {NgxSpinnerModule} from "ngx-spinner";
+import {PaymentBankCreateDTO} from "../../../models/payment-bank-create-dto";
 
 @Component({
   selector: 'app-create-order',
@@ -51,6 +52,14 @@ export class CreateOrderComponent{
     imagePix:"",
     urlPix:"",
     dateExpire:""
+  }
+
+  protected bankGenerated: {
+    linkPDF: string,
+    barcode: string
+  } = {
+    linkPDF: "",
+    barcode: ""
   }
 
   protected viewPaymentInf:boolean = false;
@@ -97,24 +106,61 @@ export class CreateOrderComponent{
       case '1':
         return TypePayment.PIX;
       case '2':
-        return TypePayment.BOLETO;
+        return TypePayment.BANK_SLIP;
       default:
         throw new Error('Invalid TypePayment value');
     }
   }
 
-  protected createPaymentPix(): void {
-    if (this.formGroupPix.valid && this.secondFormGroup.valid && this.formTo?.valid) {
+  protected createPayment(): void {
+    if (this.formGroupPix.valid || this.formGroupBank.valid && this.secondFormGroup.valid && this.formTo?.valid) {
       const typeSignature = this.getTypeSignature(this.firstFormGroup.value.typeSignature!);
-      const typePayment = this.getTypePayment(this.secondFormGroup.value.typePayment!);
+      if (this.getTypePayment(this.secondFormGroup.value.typePayment!) == TypePayment.PIX) {
+        this.createPaymentPix(typeSignature);
+      } else {
+        this.createPaymentBank(typeSignature)
+      }
+    }
+  }
 
+  private createPaymentBank(typeSignature: TypeSignature): void {
+    const paymentDto: PaymentBankCreateDTO = {
+      cpf: this.formGroupBank.value.cpf!.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4'),
+      typePayment: TypePayment.BANK_SLIP,
+      typeSignature: typeSignature,
+      address: {
+        city: this.formGroupBank.value.city!,
+        number: Number(this.formGroupBank.value.number),
+        street: this.formGroupBank.value.street!,
+        postal_code: this.formGroupBank.value.cep!,
+        country: "Brasil",
+        locality: "Pinheiros",
+        region: "Sao Paulo",
+        region_code: "SP"
+      }
+    }
+
+    this.paymentService.createPaymentBank(paymentDto).subscribe(
+      value => {
+        this.bankGenerated = {
+          barcode: value.body?.barcode!,
+          linkPDF: value.body?.linkPDF!
+        }
+        this.viewPaymentInf = true;
+      },
+      error => {
+        console.error(error);
+      }
+    )
+  }
+
+  private createPaymentPix(typeSignature: TypeSignature): void {
       const paymentDto: PaymentPixCreateDTO = {
         cpf: this.formGroupPix.value.cpf!.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4'),
-        typePayment: typePayment,
+        typePayment: TypePayment.PIX,
         typeSignature: typeSignature
       };
-
-      this.paymentService.createPayment(paymentDto).subscribe(
+    this.paymentService.createPaymentPix(paymentDto).subscribe(
         response => {
           this.pixGenerated = {
             imagePix:response.body?.urlImagePix!,
@@ -128,7 +174,6 @@ export class CreateOrderComponent{
         }
       );
     }
-  }
 
   protected checkTypePayment(): string {
     const value = this.secondFormGroup.value?.typePayment;

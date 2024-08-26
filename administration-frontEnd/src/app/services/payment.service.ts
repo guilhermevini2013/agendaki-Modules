@@ -4,6 +4,8 @@ import {Observable} from "rxjs";
 import {PaymentOrdersDTO} from "../models/payment-orders-dto";
 import {PaymentPixCreateDTO} from "../models/payment-pix-create-dto";
 import {PaymentInfo} from "../models/payment-info";
+import {PaymentBankCreateDTO} from "../models/payment-bank-create-dto";
+import {PaymentBankDetailsDTO} from "../models/payment-bank-details-dto";
 
 @Injectable({
   providedIn: 'root'
@@ -18,12 +20,18 @@ export class PaymentService {
     });
   }
 
-  public createPayment(createPayment:PaymentPixCreateDTO): Observable<HttpResponse<PaymentInfo>> {
-    console.log(createPayment)
+  public createPaymentPix(createPayment:PaymentPixCreateDTO): Observable<HttpResponse<PaymentInfo>> {
     return this.http.post<PaymentInfo>(this._baseUrlAPI + "financially/api/payment", createPayment,
       {
         observe: "response",
         withCredentials: true
       })
+  }
+
+  public createPaymentBank(createPayment:PaymentBankCreateDTO): Observable<HttpResponse<PaymentBankDetailsDTO>>{
+    return this.http.post<PaymentBankDetailsDTO>(this._baseUrlAPI + "financially/api/payment",createPayment,{
+      observe: "response",
+      withCredentials: true
+    })
   }
 }
