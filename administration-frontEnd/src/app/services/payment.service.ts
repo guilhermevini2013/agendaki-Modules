@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpResponse} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {Observable, catchError, throwError} from "rxjs";
 import {PaymentOrdersDTO} from "../models/payment-orders-dto";
 import {PaymentPixCreateDTO} from "../models/payment-pix-create-dto";
 import {PaymentInfo} from "../models/payment-info";
@@ -25,7 +25,15 @@ export class PaymentService {
       {
         observe: "response",
         withCredentials: true
-      })
+      }).pipe(
+        catchError(error => {
+         let errorMessage: string = '';
+         if (error.status === 503) {
+            errorMessage = 'Erro no servidor. Tente novamente mais tarde.';
+          }
+          return throwError({ status: error.status, message: errorMessage });
+        })
+      )
   }
 
   public createPaymentBank(createPayment:PaymentBankCreateDTO): Observable<HttpResponse<PaymentBankDetailsDTO>>{

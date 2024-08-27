@@ -18,6 +18,8 @@ import {TypeSignature} from "../../../models/TypeSignature";
 import {PaymentPixCreateDTO} from "../../../models/payment-pix-create-dto";
 import {NgxSpinnerModule} from "ngx-spinner";
 import {PaymentBankCreateDTO} from "../../../models/payment-bank-create-dto";
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { PopUpComponent } from '../../pop-up/pop-up.component';
 
 @Component({
   selector: 'app-create-order',
@@ -47,6 +49,10 @@ import {PaymentBankCreateDTO} from "../../../models/payment-bank-create-dto";
   styleUrls: ['./create-order.component.css'] // Corrected styleUrl to styleUrls
 })
 export class CreateOrderComponent{
+  private _snackBar = inject(MatSnackBar);
+  horizontalPosition: MatSnackBarHorizontalPosition = 'end';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
+
   private _formBuilder = inject(FormBuilder);
   protected pixGenerated:{imagePix:string,urlPix:string,dateExpire:string} = {
     imagePix:"",
@@ -149,9 +155,26 @@ export class CreateOrderComponent{
         this.viewPaymentInf = true;
       },
       error => {
-        console.error(error);
+        switch (error.status) {
+          case 503:
+            this.openPopUp("Erro no servidor, tente mais tarde!","error")
+            break;
+        }
+        //console.error(error);
       }
     )
+  }
+
+  openPopUp(message: string, icon: string): void {
+    this._snackBar.openFromComponent(PopUpComponent, {
+      duration: 8000,
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+      data: {
+        message: message,
+        icon: icon
+      }
+    });
   }
 
   private createPaymentPix(typeSignature: TypeSignature): void {

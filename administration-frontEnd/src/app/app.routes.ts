@@ -10,6 +10,9 @@ import {AuthPortalClientGuard} from "./auth-portal-client-guard.service";
 import {AuthAdministrationGuard} from "./auth-administration-guard.service";
 import { ClientOrdersComponent } from './components/portal-client-page/client-orders/client-orders.component';
 import { CreateOrderComponent } from './components/portal-client-page/create-order/create-order.component';
+import { ManagePageComponent } from './components/administration-page/manage-page/manage-page.component';
+import { BlockedPageComponent } from './components/administration-page/blocked-page/blocked-page.component';
+import { WorkDatePageComponent } from './components/administration-page/work-date-page/work-date-page.component';
 
 export const routes: Routes = [
   {
@@ -19,7 +22,22 @@ export const routes: Routes = [
 
   {
     path:"administration",
-     component:AdministrationPrincipalComponent
+     component:AdministrationPrincipalComponent,
+
+      children:[
+      {
+        path:"manage-page",
+        component:ManagePageComponent
+      },
+      {
+        path:"blocked-page",
+        component:BlockedPageComponent
+      },
+      {
+        path:"work-date-page",
+        component:WorkDatePageComponent
+      },
+    ]
   },
 
   {

@@ -1,1 +1,72 @@
-<p>administration-principal works!</p>
+<div class="example-container" >
+    <mat-toolbar color="primary" class="example-toolbar">
+      <div class="tool-button">
+        <button mat-icon-button (click)="snav.toggle()"><mat-icon style="transform: scale(1.25);">menu</mat-icon></button>
+      </div>
+      <div class="toolbar-content">
+        <div class="toolbar-content_image">
+            <img src="image/logoAdministration.png" alt="">
+        </div>
+      </div>
+    </mat-toolbar>
+    <mat-sidenav-container class="example-sidenav-container">
+      <mat-sidenav #snav>
+        <mat-nav-list>
+            <div class="content-sidenav">
+                <div>
+                    <div>
+                        <span class="title-content">Agendamento</span>
+                        <div class="line"></div>
+                    </div>
+                    <div class="content-sidenav__inf">
+                        <div>
+                            <mat-icon>build</mat-icon>
+                            <span><a routerLink="manage-page" routerLinkActire="active">Gerenciar</a></span>
+                        </div>
+                        <div>
+                            <mat-icon>lock</mat-icon>
+                            <span><a routerLink="blocked-page" routerLinkActire="active">Bloqueados</a></span>
+                        </div>
+                        <div>
+                            <mat-icon>engineering</mat-icon>
+                            <span><a routerLink="" routerLinkActire="active">Profissionais & Serviços</a></span>
+                        </div>
+                        <div>
+                            <mat-icon>event</mat-icon>
+                            <span><a routerLink="work-date-page" routerLinkActire="active">Datas de trabalho</a></span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <span class="title-content">Ferramentas</span>
+                        <div class="line"></div>
+                    </div>
+                    <div class="content-sidenav__inf">
+                        <div>
+                            <mat-icon>deselect</mat-icon>
+                            <span><a href="">AgendakiTools</a></span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <span class="title-content">Outros</span>
+                        <div class="line"></div>
+                    </div>
+                    <div class="content-sidenav__inf">
+                        <div>
+                            <mat-icon>logout</mat-icon>
+                            <span><a href="">Sair do painel</a></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </mat-nav-list>
+      </mat-sidenav>
+      <mat-sidenav-content>
+        <router-outlet></router-outlet>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+  </div>
+  
