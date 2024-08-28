@@ -1,9 +1,8 @@
-//package com.agendaki.scheduling.models.template;
-//
-//public enum TypeSection {
-//    PORTFOLIO,
-//    PERFIL,
-//    INPUT,
-//    HELP,
-//    CALENDAR
-//}
+package com.agendaki.scheduling.models.template;
+
+public enum TypeSection {
+    IMAGE,
+    INPUT,
+    HELP,
+    CALENDAR
+}

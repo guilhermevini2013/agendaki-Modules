@@ -11,9 +11,30 @@ public abstract class Section {
     private Long id;
     private Short position;
     private String horizontalAlignment;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Template template;
 
+    public Section(Short position, String horizontalAlignment) {
+        this.position = position;
+        this.horizontalAlignment = horizontalAlignment;
+    }
+
     public Section() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public Short getPosition() {
+        return position;
+    }
+
+    public String getHorizontalAlignment() {
+        return horizontalAlignment;
+    }
+
+    public Template getTemplate() {
+        return template;
     }
 }

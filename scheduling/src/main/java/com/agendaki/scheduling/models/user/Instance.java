@@ -25,7 +25,7 @@ public class Instance {
     private Set<DateJob> dateJobs = new HashSet<>();
     @OneToOne(fetch = FetchType.LAZY)
     private User user;
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY,mappedBy = "instance")
     private Template template;
     @OneToMany
     private Set<Service> services = new HashSet<>();

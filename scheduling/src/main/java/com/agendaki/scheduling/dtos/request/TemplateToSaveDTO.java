@@ -1,4 +1,7 @@
 package com.agendaki.scheduling.dtos.request;
 
-public record TemplateToSaveDTO(String backgroundColor,String primaryColor, String secondaryColor, String tertiaryColor, String fontStyle) {
+import java.util.List;
+
+public record TemplateToSaveDTO(String backgroundColor, String primaryColor, String secondaryColor,
+                                String tertiaryColor, String fontStyle, List<SectionToSaveDTO> sections) {
 }
