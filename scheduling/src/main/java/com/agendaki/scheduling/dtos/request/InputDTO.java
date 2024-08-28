@@ -5,10 +5,10 @@ import com.agendaki.scheduling.models.template.TypeSection;
 public class InputDTO extends SectionToSaveDTO {
     private String label;
     private Integer width;
+    private boolean isIdentifier;
     private String placeholder;
-    private Boolean isIdentifier;
 
-    public InputDTO(TypeSection typeSection, Short position, String horizontalAlignment, String label, Integer width, String placeholder, Boolean isIdentifier) {
+    public InputDTO(TypeSection typeSection, Short position, String horizontalAlignment,boolean isIdentifier, String label, Integer width, String placeholder) {
         super(typeSection, position, horizontalAlignment);
         this.label = label;
         this.width = width;
@@ -27,11 +27,11 @@ public class InputDTO extends SectionToSaveDTO {
         return width;
     }
 
-    public String getPlaceholder() {
-        return placeholder;
+    public boolean isIdentifier() {
+        return isIdentifier;
     }
 
-    public Boolean getIdentifier() {
-        return isIdentifier;
+    public String getPlaceholder() {
+        return placeholder;
     }
 }

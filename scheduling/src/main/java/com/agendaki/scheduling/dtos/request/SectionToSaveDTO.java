@@ -3,8 +3,11 @@ package com.agendaki.scheduling.dtos.request;
 import com.agendaki.scheduling.models.template.TypeSection;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-
-public class SectionToSaveDTO {
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = InputDTO.class, name = "input")
+})
+public abstract class SectionToSaveDTO {
     private TypeSection typeSection;
     private Short position;
     private String horizontalAlignment;
@@ -28,9 +31,5 @@ public class SectionToSaveDTO {
 
     public TypeSection getTypeSection() {
         return typeSection;
-    }
-
-    public void setTypeSection(TypeSection typeSection) {
-        this.typeSection = typeSection;
     }
 }

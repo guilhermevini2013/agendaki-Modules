@@ -16,8 +16,8 @@ public class Help extends Section{
     public Help() {
     }
 
-    public Help(SectionToSaveDTO sectionToSaveDTO) {
-        super(sectionToSaveDTO.getPosition(), sectionToSaveDTO.getHorizontalAlignment());
+    public Help(SectionToSaveDTO sectionToSaveDTO, Template template) {
+        super(sectionToSaveDTO.getPosition(), sectionToSaveDTO.getHorizontalAlignment(), template);
         if (sectionToSaveDTO instanceof HelpDTO) {
             HelpDTO helpDTO = (HelpDTO) sectionToSaveDTO;
             this.title = helpDTO.getTitle();

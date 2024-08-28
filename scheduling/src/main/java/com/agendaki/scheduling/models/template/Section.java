@@ -14,9 +14,10 @@ public abstract class Section {
     @ManyToOne(fetch = FetchType.LAZY)
     private Template template;
 
-    public Section(Short position, String horizontalAlignment) {
+    public Section(Short position, String horizontalAlignment, Template template) {
         this.position = position;
         this.horizontalAlignment = horizontalAlignment;
+        this.template = template;
     }
 
     public Section() {

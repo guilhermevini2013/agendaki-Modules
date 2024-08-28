@@ -8,8 +8,8 @@ import jakarta.persistence.Entity;
 @Entity
 @DiscriminatorValue("CALENDAR")
 public class Calendar extends Section{
-    public Calendar(SectionToSaveDTO sectionToSaveDTO) {
-        super(sectionToSaveDTO.getPosition(), sectionToSaveDTO.getHorizontalAlignment());
+    public Calendar(SectionToSaveDTO sectionToSaveDTO,Template template) {
+        super(sectionToSaveDTO.getPosition(), sectionToSaveDTO.getHorizontalAlignment(),template);
     }
 
     public Calendar() {

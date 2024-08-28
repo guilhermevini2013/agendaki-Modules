@@ -18,7 +18,7 @@ public class Template {
     private String fontStyle;
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "template")
     private List<Section> sections;
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY )
     private Instance instance;
 
     public Template(TemplateToSaveDTO templateToSaveDTO, Instance instance) {
@@ -31,16 +31,16 @@ public class Template {
         this.sections = templateToSaveDTO.sections().stream().map(sectionToSaveDTO -> {
             switch (sectionToSaveDTO.getTypeSection()) {
                 case HELP -> {
-                    return new Help(sectionToSaveDTO);
+                    return new Help(sectionToSaveDTO,this);
                 }
                 case CALENDAR -> {
-                    return new Calendar(sectionToSaveDTO);
+                    return new Calendar(sectionToSaveDTO,this);
                 }
                 case INPUT -> {
-                    return new Input(sectionToSaveDTO);
+                    return new Input(sectionToSaveDTO,this);
                 }
                 case IMAGE -> {
-                    return new Image(sectionToSaveDTO);
+                    return new Image(sectionToSaveDTO,this);
                 }
                 default -> {
                     throw new RuntimeException("Invalid section type: " + sectionToSaveDTO.getTypeSection());

@@ -12,8 +12,8 @@ public class Image extends Section{
     private String bio;
     private String imageToBase64;
 
-    public Image(SectionToSaveDTO sectionToSaveDTO) {
-        super(sectionToSaveDTO.getPosition(), sectionToSaveDTO.getHorizontalAlignment());
+    public Image(SectionToSaveDTO sectionToSaveDTO, Template template) {
+        super(sectionToSaveDTO.getPosition(), sectionToSaveDTO.getHorizontalAlignment(),template);
         if (sectionToSaveDTO instanceof ImageDTO) {
             ImageDTO imageDTO = (ImageDTO) sectionToSaveDTO;
             this.isPortfolio = imageDTO.getIsPortfolio();
