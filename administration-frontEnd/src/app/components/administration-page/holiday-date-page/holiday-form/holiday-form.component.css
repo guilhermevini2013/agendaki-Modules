@@ -1,0 +1,50 @@
+.formOptionsCard {
+    width: 600px;
+    height: 600px;
+   /* border-radius: 20px;*/
+    box-shadow: 5px 0px 0px #f7f7fc, -5px 0px 0px #f7f7fc;
+    /*background-color: #f7f7fc;*/
+    display: flex;
+    align-items: center;
+    align-content: center;
+    flex-direction: column;
+    text-align: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    transition: .75s;
+}
+
+form {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.formOptionsCard:hover{
+    transform: translateY(.5vh);
+}
+
+
+.formOptionsCard h1 {
+    margin-top: 15px;
+    font-size: 2em;
+}
+
+.formOptionsCard mat-icon {
+    margin-top: 50px;
+    scale: 4;
+}
+
+.formOptionsCard span {
+    width: 90%;
+}
+
+.formOptionsCardText {
+    text-wrap: wrap;
+}
+
+.formOptionsCard p {
+    font-size: 1em;
+    font-weight: bolder;
+}

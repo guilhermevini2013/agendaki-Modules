@@ -1,0 +1,53 @@
+<div class="formOptionsCard">
+    <h1>Adicionar Feriado</h1>
+    <div class="card_side"></div>
+    <span class="formOptionsCardText"></span>
+    <form [formGroup]="firstFormGroup" class="firstFormGroup">
+      <mat-radio-group aria-label="Select an option" formControlName="doWork">
+        <mat-radio-button value="1">Trabalho</mat-radio-button>
+        <mat-radio-button value="2">Não Trabalho</mat-radio-button>
+      </mat-radio-group>  
+    </form>
+
+    <ng-template [ngIf]="checkIfWork() == '1'">
+      <form [formGroup]="secondFormGroup" class="secondFormGroup">
+        <mat-form-field appearance="outline" >
+            <mat-label>Data</mat-label>
+            <input matInput placeholder="00/00/0000" mask="00/00/0000" formControlName="dateHoliday" required>
+          </mat-form-field>
+          
+        <mat-form-field appearance="outline" >
+          <mat-label>Inicio Expediente</mat-label>
+          <input matInput placeholder="00:00" mask="00:00" formControlName="startWork" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" >
+          <mat-label>Fim Expediente</mat-label>
+          <input matInput placeholder="00:00" mask="00:00" formControlName="endWork" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Inicio Almoço</mat-label>
+          <input matInput placeholder="00:00" mask="00:00" formControlName="startOffHour" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Fim Almoço</mat-label>
+          <input matInput placeholder="00:00" mask="00:00"  formControlName="endOffHour" required>
+        </mat-form-field>
+      </form>
+    </ng-template>
+
+    <ng-template [ngIf]="checkIfWork() == '2'">
+        <form [formGroup]="secondFormGroup" class="secondFormGroup">
+            <mat-form-field appearance="outline" >
+              <mat-label>Data</mat-label>
+              <input matInput placeholder="00/00/0000" mask="00/00/0000" formControlName="dateHoliday" required>
+            </mat-form-field>
+          </form>
+    </ng-template>
+
+    <div>
+      <button mat-button>Salvar e Adicionar</button>
+    </div>
+  </div>

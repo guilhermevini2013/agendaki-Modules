@@ -13,6 +13,7 @@ import { CreateOrderComponent } from './components/portal-client-page/create-ord
 import { ManagePageComponent } from './components/administration-page/manage-page/manage-page.component';
 import { BlockedPageComponent } from './components/administration-page/blocked-page/blocked-page.component';
 import { WorkDatePageComponent } from './components/administration-page/work-date-page/work-date-page.component';
+import { HolidayDatePageComponent } from './components/administration-page/holiday-date-page/holiday-date-page.component';
 
 export const routes: Routes = [
   {
@@ -36,6 +37,10 @@ export const routes: Routes = [
       {
         path:"work-date-page",
         component:WorkDatePageComponent
+      },
+      {
+        path:"holiday-date-page",
+        component:HolidayDatePageComponent
       },
     ]
   },

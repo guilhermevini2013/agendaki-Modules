@@ -1,0 +1,43 @@
+<div class="content">
+    <div class="Cards">
+      <div class="formOptionsCard">
+        <h1>{{weekName}}</h1>
+        <div class="card_side"></div>
+        <span class="formOptionsCardText"></span>
+        <form [formGroup]="firstFormGroup" class="firstFormGroup">
+          <mat-radio-group aria-label="Select an option" formControlName="doWork">
+            <mat-radio-button value="1">Trabalho</mat-radio-button>
+            <mat-radio-button value="2">Não Trabalho</mat-radio-button>
+          </mat-radio-group>  
+        </form>
+    
+        <ng-template [ngIf]="checkIfWork() == '1'">
+          <form [formGroup]="secondFormGroup" class="secondFormGroup">
+            <mat-form-field appearance="outline" >
+              <mat-label>Inicio Expediente</mat-label>
+              <input matInput placeholder="00:00" mask="00:00" formControlName="startWork" required>
+            </mat-form-field>
+    
+            <mat-form-field appearance="outline" >
+              <mat-label>Fim Expediente</mat-label>
+              <input matInput placeholder="00:00" mask="00:00" formControlName="endWork" required>
+            </mat-form-field>
+    
+            <mat-form-field appearance="outline">
+              <mat-label>Inicio Almoço</mat-label>
+              <input matInput placeholder="00:00" mask="00:00" formControlName="startOffHour" required>
+            </mat-form-field>
+    
+            <mat-form-field appearance="outline">
+              <mat-label>Fim Almoço</mat-label>
+              <input matInput placeholder="00:00" mask="00:00"  formControlName="endOffHour" required>
+            </mat-form-field>
+          </form>
+        </ng-template>
+    
+        <div>
+          <button mat-button>Salvar</button>
+        </div>
+      </div>
+    </div>
+  </div>
