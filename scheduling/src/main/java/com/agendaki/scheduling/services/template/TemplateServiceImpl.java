@@ -25,7 +25,7 @@ public class TemplateServiceImpl implements TemplateService {
     /**
      * Esse metodo tem que salvar ou dar Update quando necessario( se caso nao existir template para a Instancia )
      * ele tem que checar se nao existe posicoes sobrepostas. FEITO
-     * ele tem que checar se existem mais de 4 inputs
+     * ele tem que checar se existem mais de 4 inputs. FEITO
      * ele tem que checar se existem, calendario, escolher servico e profissional
      * deve conter apenas 1 input indentificador
      *
