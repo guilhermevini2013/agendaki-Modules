@@ -57,7 +57,4 @@ public class Instance {
         return user;
     }
 
-    public Professional getProfessional(Long professionalId) {
-        return professionals.stream().filter(professional -> professional.getId().equals(professionalId)).findFirst().orElseThrow(() -> new RuntimeException("Professional not found"));
-    }
 }

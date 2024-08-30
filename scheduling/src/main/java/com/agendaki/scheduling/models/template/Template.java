@@ -4,6 +4,7 @@ import com.agendaki.scheduling.dtos.request.TemplateToSaveDTO;
 import com.agendaki.scheduling.models.user.Instance;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -16,9 +17,9 @@ public class Template {
     private String secondaryColor;
     private String tertiaryColor;
     private String fontStyle;
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "template")
-    private List<Section> sections;
-    @OneToOne(fetch = FetchType.LAZY )
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "template", orphanRemoval = true)
+    private List<Section> sections = new ArrayList<>();
+    @OneToOne(fetch = FetchType.LAZY)
     private Instance instance;
 
     public Template(TemplateToSaveDTO templateToSaveDTO, Instance instance) {
@@ -28,7 +29,25 @@ public class Template {
         this.secondaryColor = templateToSaveDTO.secondaryColor();
         this.tertiaryColor = templateToSaveDTO.tertiaryColor();
         this.fontStyle = templateToSaveDTO.fontStyle();
-        this.sections = templateToSaveDTO.sections().stream().map(sectionToSaveDTO -> {
+        this.sections = createSections(templateToSaveDTO);
+    }
+
+    public Template() {
+
+    }
+
+    public void update(TemplateToSaveDTO templateToSaveDTO) {
+        this.backgroundColor = templateToSaveDTO.backgroundColor();
+        this.primaryColor = templateToSaveDTO.primaryColor();
+        this.secondaryColor = templateToSaveDTO.secondaryColor();
+        this.tertiaryColor = templateToSaveDTO.tertiaryColor();
+        this.fontStyle = templateToSaveDTO.fontStyle();
+        this.sections.clear();
+        this.sections.addAll(createSections(templateToSaveDTO));
+    }
+
+    private List<Section> createSections(TemplateToSaveDTO templateToSaveDTO) {
+         return templateToSaveDTO.sections().stream().map(sectionToSaveDTO -> {
             switch (sectionToSaveDTO.getTypeSection()) {
                 case HELP -> {
                     return new Help(sectionToSaveDTO,this);
@@ -47,9 +66,5 @@ public class Template {
                 }
             }
         }).toList();
-    }
-
-    public Template() {
-
     }
 }

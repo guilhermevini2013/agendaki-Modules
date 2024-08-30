@@ -5,6 +5,8 @@ import com.agendaki.scheduling.dtos.request.SectionToSaveDTO;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 
+import java.util.List;
+
 @Entity
 @DiscriminatorValue("HELP")
 public class Help extends Section{
@@ -21,10 +23,16 @@ public class Help extends Section{
         if (sectionToSaveDTO instanceof HelpDTO) {
             HelpDTO helpDTO = (HelpDTO) sectionToSaveDTO;
             this.title = helpDTO.getTitle();
-            this.content = helpDTO.getContent();
+            this.content = formatListToContent(helpDTO.getContent());
             this.fontSizeTitle = helpDTO.getFontSizeTitle();
             this.fontSizeContent = helpDTO.getFontSizeContent();
         }
+    }
+
+    private String formatListToContent(List<String> contentList) {
+        StringBuilder sb = new StringBuilder();
+        contentList.forEach(content -> sb.append("&").append(content));
+        return sb.toString();
     }
 
     public String getTitle() {

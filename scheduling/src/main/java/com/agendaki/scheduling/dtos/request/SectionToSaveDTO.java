@@ -5,7 +5,9 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
 @JsonSubTypes({
-        @JsonSubTypes.Type(value = InputDTO.class, name = "input")
+        @JsonSubTypes.Type(value = InputDTO.class, name = "input"),
+        @JsonSubTypes.Type(value = HelpDTO.class, name = "help"),
+        @JsonSubTypes.Type(value = ImageDTO.class, name = "image")
 })
 public abstract class SectionToSaveDTO {
     private TypeSection typeSection;
