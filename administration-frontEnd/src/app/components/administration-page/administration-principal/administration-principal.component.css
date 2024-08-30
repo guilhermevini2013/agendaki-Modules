@@ -55,12 +55,12 @@
     align-content: center;
   }
 
-  .tool-button mat-icon {
-    transition: .2s;
+  .tool-button button:hover mat-icon {
+    color: white;
   }
 
-  .tool-button mat-icon:hover {
-    color: white;
+  .tool-button mat-icon {
+    transition: .2s;
   }
 
   mat-nav-list{

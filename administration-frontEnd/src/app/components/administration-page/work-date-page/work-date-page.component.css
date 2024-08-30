@@ -1,3 +1,14 @@
+.title-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 15px;
+    color: var(--principal-color);
+
+    width: 100%;
+}
+
 .content {
     display: flex;
     justify-content: center;
