@@ -4,5 +4,8 @@ public enum TypeSection {
     IMAGE,
     INPUT,
     HELP,
-    CALENDAR
+    CALENDAR,
+    SERVICE,
+    PROFESSIONAL,
+    TIME
 }

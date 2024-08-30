@@ -3,6 +3,7 @@ package com.agendaki.scheduling.models.template;
 import com.agendaki.scheduling.dtos.request.TemplateToSaveDTO;
 import com.agendaki.scheduling.models.user.Instance;
 import jakarta.persistence.*;
+import org.bouncycastle.util.Times;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,6 +55,15 @@ public class Template {
                 }
                 case CALENDAR -> {
                     return new Calendar(sectionToSaveDTO,this);
+                }
+                case SERVICE -> {
+                    return new ServiceSection(sectionToSaveDTO,this);
+                }
+                case PROFESSIONAL -> {
+                    return new ProfessionalSection(sectionToSaveDTO, this);
+                }
+                case TIME -> {
+                    return new TimeSection(sectionToSaveDTO,this);
                 }
                 case INPUT -> {
                     return new Input(sectionToSaveDTO,this);
