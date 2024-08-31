@@ -1,6 +1,7 @@
 package com.agendaki.scheduling.models.template;
 
 import com.agendaki.scheduling.dtos.request.SectionToSaveDTO;
+import com.agendaki.scheduling.dtos.request.TimeDTO;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 
@@ -12,5 +13,10 @@ public class TimeSection extends Section{
         super(sectionToSaveDTO.getPosition(), sectionToSaveDTO.getHorizontalAlignment(),template);
     }
     public TimeSection() {}
+
+    @Override
+    public SectionToSaveDTO getDtoForClass() {
+        return new TimeDTO(this);
+    }
 }
 

@@ -1,11 +1,12 @@
 package com.agendaki.scheduling.models.template;
 
-import com.agendaki.scheduling.dtos.request.TemplateToSaveDTO;
+import com.agendaki.scheduling.dtos.request.TemplateDTO;
 import com.agendaki.scheduling.models.user.Instance;
 import jakarta.persistence.*;
-import org.bouncycastle.util.Times;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @Entity
@@ -23,32 +24,33 @@ public class Template {
     @OneToOne(fetch = FetchType.LAZY)
     private Instance instance;
 
-    public Template(TemplateToSaveDTO templateToSaveDTO, Instance instance) {
+    public Template(TemplateDTO templateDTO, Instance instance) {
         this.instance = instance;
-        this.backgroundColor = templateToSaveDTO.backgroundColor();
-        this.primaryColor = templateToSaveDTO.primaryColor();
-        this.secondaryColor = templateToSaveDTO.secondaryColor();
-        this.tertiaryColor = templateToSaveDTO.tertiaryColor();
-        this.fontStyle = templateToSaveDTO.fontStyle();
-        this.sections = createSections(templateToSaveDTO);
+        this.backgroundColor = templateDTO.backgroundColor();
+        this.primaryColor = templateDTO.primaryColor();
+        this.secondaryColor = templateDTO.secondaryColor();
+        this.tertiaryColor = templateDTO.tertiaryColor();
+        this.fontStyle = templateDTO.fontStyle();
+        this.sections = createSections(templateDTO);
     }
 
     public Template() {
 
     }
 
-    public void update(TemplateToSaveDTO templateToSaveDTO) {
-        this.backgroundColor = templateToSaveDTO.backgroundColor();
-        this.primaryColor = templateToSaveDTO.primaryColor();
-        this.secondaryColor = templateToSaveDTO.secondaryColor();
-        this.tertiaryColor = templateToSaveDTO.tertiaryColor();
-        this.fontStyle = templateToSaveDTO.fontStyle();
+    public void update(TemplateDTO templateDTO) {
+        this.backgroundColor = templateDTO.backgroundColor();
+        this.primaryColor = templateDTO.primaryColor();
+        this.secondaryColor = templateDTO.secondaryColor();
+        this.tertiaryColor = templateDTO.tertiaryColor();
+        this.fontStyle = templateDTO.fontStyle();
         this.sections.clear();
-        this.sections.addAll(createSections(templateToSaveDTO));
+        this.sections.addAll(createSections(templateDTO));
     }
 
-    private List<Section> createSections(TemplateToSaveDTO templateToSaveDTO) {
-         return templateToSaveDTO.sections().stream().map(sectionToSaveDTO -> {
+        //Melhorar isso com abstracao
+    private List<Section> createSections(TemplateDTO templateDTO) {
+         return templateDTO.sections().stream().map(sectionToSaveDTO -> {
             switch (sectionToSaveDTO.getTypeSection()) {
                 case HELP -> {
                     return new Help(sectionToSaveDTO,this);
@@ -76,5 +78,37 @@ public class Template {
                 }
             }
         }).toList();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getBackgroundColor() {
+        return backgroundColor;
+    }
+
+    public String getPrimaryColor() {
+        return primaryColor;
+    }
+
+    public String getSecondaryColor() {
+        return secondaryColor;
+    }
+
+    public String getTertiaryColor() {
+        return tertiaryColor;
+    }
+
+    public String getFontStyle() {
+        return fontStyle;
+    }
+
+    public List<Section> getSections() {
+        return Collections.unmodifiableList(this.sections);
+    }
+
+    public Instance getInstance() {
+        return instance;
     }
 }

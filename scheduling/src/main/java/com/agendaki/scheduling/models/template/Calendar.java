@@ -15,4 +15,9 @@ public class Calendar extends Section{
     public Calendar() {
 
     }
+
+    @Override
+    public SectionToSaveDTO getDtoForClass() {
+        return new CalendarDTO(this);
+    }
 }

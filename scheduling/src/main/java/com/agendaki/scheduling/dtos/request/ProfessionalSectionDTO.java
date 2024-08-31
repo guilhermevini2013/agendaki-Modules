@@ -1,5 +1,6 @@
 package com.agendaki.scheduling.dtos.request;
 
+import com.agendaki.scheduling.models.template.ProfessionalSection;
 import com.agendaki.scheduling.models.template.TypeSection;
 
 public class ProfessionalSectionDTO extends SectionToSaveDTO{
@@ -9,5 +10,10 @@ public class ProfessionalSectionDTO extends SectionToSaveDTO{
     }
 
     public ProfessionalSectionDTO() {
+    }
+
+    public ProfessionalSectionDTO(ProfessionalSection professionalSection) {
+        super(TypeSection.PROFESSIONAL,professionalSection.getPosition(),professionalSection.getHorizontalAlignment());
+
     }
 }

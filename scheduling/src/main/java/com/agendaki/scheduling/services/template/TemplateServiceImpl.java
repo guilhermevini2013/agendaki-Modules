@@ -1,6 +1,7 @@
 package com.agendaki.scheduling.services.template;
 
-import com.agendaki.scheduling.dtos.request.TemplateToSaveDTO;
+import com.agendaki.scheduling.dtos.request.TemplateDTO;
+import com.agendaki.scheduling.exceptions.ResourceNotFoundException;
 import com.agendaki.scheduling.models.template.Template;
 import com.agendaki.scheduling.models.user.Instance;
 import com.agendaki.scheduling.repositories.TemplateRepository;
@@ -22,26 +23,31 @@ public class TemplateServiceImpl implements TemplateService {
         this.checkTemplateToSaves = checkTemplateToSaves;
     }
 
-    /**
-     * Esse metodo tem que salvar ou dar Update quando necessario( se caso nao existir template para a Instancia )
-     * ele tem que checar se nao existe posicoes sobrepostas. FEITO
-     * ele tem que checar se existem mais de 4 inputs. FEITO
-     * ele tem que checar se existem, calendario, escolher servico, profissional e horas. FEITO
-     * deve conter apenas 1 input indentificador
-     * @param templateToSaveDTO
-     */
     @Override
     @Transactional
-    public void updateTemplate(TemplateToSaveDTO templateToSaveDTO) {
-        checkTemplateToSaves.forEach(check -> check.checkSectionsToSave(templateToSaveDTO.sections()));
+    public void updateTemplate(TemplateDTO templateDTO) {
+        checkTemplateToSaves.forEach(check -> check.checkSectionsToSave(templateDTO.sections()));
         Instance instanceToAuth = SecurityUtil.getProjectionOfUserEntityAuthenticated().getInstance();
         Optional<Template> templateByInstance = templateRepository.findByInstance(instanceToAuth);
         if (templateByInstance.isPresent()){
             Template templateFind = templateByInstance.get();
-            templateFind.update(templateToSaveDTO);
+            templateFind.update(templateDTO);
         }else {
-            Template template = new Template(templateToSaveDTO, instanceToAuth);
+            Template template = new Template(templateDTO, instanceToAuth);
             templateRepository.save(template);
         }
+    }
+
+    @Override
+    public TemplateDTO getTemplate() {
+        Instance instanceToAuth = SecurityUtil.getProjectionOfUserEntityAuthenticated().getInstance();
+        Template templateByInstance = templateRepository.findByInstance(instanceToAuth).orElseThrow(() -> new ResourceNotFoundException("Template for instance not exist"));
+        return new TemplateDTO(templateByInstance);
+    }
+
+    @Override
+    public TemplateDTO getTemplate(String uuid) {
+        Template templateByInstance = templateRepository.findByInstanceId(uuid).orElseThrow(() -> new ResourceNotFoundException("Template for instance not exist"));
+        return new TemplateDTO(templateByInstance);
     }
 }

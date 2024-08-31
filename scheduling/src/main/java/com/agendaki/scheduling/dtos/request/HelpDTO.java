@@ -1,7 +1,9 @@
 package com.agendaki.scheduling.dtos.request;
 
+import com.agendaki.scheduling.models.template.Help;
 import com.agendaki.scheduling.models.template.TypeSection;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class HelpDTO extends SectionToSaveDTO{
@@ -19,6 +21,14 @@ public class HelpDTO extends SectionToSaveDTO{
     }
 
     public HelpDTO() {
+    }
+
+    public HelpDTO(Help help) {
+        super(TypeSection.HELP, help.getPosition(), help.getHorizontalAlignment());
+        this.title = help.getTitle();
+        this.content = Arrays.stream(help.getContent().split("&")).toList();
+        this.fontSizeTitle = help.getFontSizeTitle();
+        this.fontSizeContent = help.getFontSizeContent();
     }
 
     public String getTitle() {

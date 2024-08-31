@@ -1,5 +1,6 @@
 package com.agendaki.scheduling.dtos.request;
 
+import com.agendaki.scheduling.models.template.ServiceSection;
 import com.agendaki.scheduling.models.template.TypeSection;
 
 public class ServiceSectionDTO extends SectionToSaveDTO{
@@ -9,5 +10,9 @@ public class ServiceSectionDTO extends SectionToSaveDTO{
     }
 
     public ServiceSectionDTO() {
+    }
+
+    public ServiceSectionDTO(ServiceSection serviceSection) {
+        super(TypeSection.SERVICE, serviceSection.getPosition(), serviceSection.getHorizontalAlignment());
     }
 }

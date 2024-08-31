@@ -18,6 +18,11 @@ public class Help extends Section{
     public Help() {
     }
 
+    @Override
+    public SectionToSaveDTO getDtoForClass() {
+        return new HelpDTO(this);
+    }
+
     public Help(SectionToSaveDTO sectionToSaveDTO, Template template) {
         super(sectionToSaveDTO.getPosition(), sectionToSaveDTO.getHorizontalAlignment(), template);
         if (sectionToSaveDTO instanceof HelpDTO) {
@@ -31,7 +36,7 @@ public class Help extends Section{
 
     private String formatListToContent(List<String> contentList) {
         StringBuilder sb = new StringBuilder();
-        contentList.forEach(content -> sb.append("&").append(content));
+        contentList.forEach(content -> sb.append(content).append("&"));
         return sb.toString();
     }
 

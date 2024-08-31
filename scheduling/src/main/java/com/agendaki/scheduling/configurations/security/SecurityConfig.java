@@ -2,6 +2,7 @@ package com.agendaki.scheduling.configurations.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -20,7 +21,7 @@ public class SecurityConfig {
             "/api/professional",
             "/api/professional/**",
             "/api/service",
-            "/api/service/**",
+            "/api/service/**"
     };
 
     private final String[] publicRoutes = {
@@ -40,6 +41,8 @@ public class SecurityConfig {
                 .sessionManagement(httpSecuritySessionManagementConfigurer -> httpSecuritySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(request -> request
                         .requestMatchers(privateRoutes).hasRole("USER")
+                        .requestMatchers(HttpMethod.GET,"/api/template").hasRole("USER")
+                        .requestMatchers(HttpMethod.GET,"/api/template/free").permitAll()
                         .requestMatchers(publicRoutes).permitAll()
                         .anyRequest().permitAll())
                 .headers(header -> header.frameOptions(frame -> frame.disable()))

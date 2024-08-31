@@ -15,7 +15,7 @@ public class Image extends Section{
     private Boolean isPortfolio;
     private String bio;
     @Column(columnDefinition = "TEXT")
-    private String uuid;
+    private String uuidImage;
 
     public Image(SectionToSaveDTO sectionToSaveDTO, Template template) {
         super(sectionToSaveDTO.getPosition(), sectionToSaveDTO.getHorizontalAlignment(),template);
@@ -28,11 +28,16 @@ public class Image extends Section{
             final ImageService imageService = new ImageService();
             String uuidCreated = UUID.randomUUID().toString().replace("-", "");
             imageService.saveImageIntoArchive(imageDTO.getImageToBase64(), uuidCreated);
-            this.uuid = uuidCreated;
+            this.uuidImage = uuidCreated;
         }
     }
 
     public Image() {
+    }
+
+    @Override
+    public SectionToSaveDTO getDtoForClass() {
+        return new ImageDTO(this);
     }
 
     public Boolean getPortfolio() {
@@ -43,7 +48,7 @@ public class Image extends Section{
         return bio;
     }
 
-    public String getUuid() {
-        return uuid;
+    public String getUuidImage() {
+        return uuidImage;
     }
 }

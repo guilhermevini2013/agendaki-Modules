@@ -1,5 +1,6 @@
 package com.agendaki.scheduling.dtos.request;
 
+import com.agendaki.scheduling.models.template.Input;
 import com.agendaki.scheduling.models.template.TypeSection;
 
 public class InputDTO extends SectionToSaveDTO {
@@ -17,6 +18,13 @@ public class InputDTO extends SectionToSaveDTO {
     }
 
     public InputDTO() {
+    }
+
+    public InputDTO(Input section) {
+        super(TypeSection.INPUT, section.getPosition(), section.getHorizontalAlignment());
+        this.label = section.getLabel();
+        this.width = section.getWidth();
+        this.isIdentifier = section.getIdentifier();
     }
 
     public String getLabel() {

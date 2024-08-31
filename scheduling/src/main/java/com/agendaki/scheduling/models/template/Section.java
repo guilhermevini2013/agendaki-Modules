@@ -1,5 +1,6 @@
 package com.agendaki.scheduling.models.template;
 
+import com.agendaki.scheduling.dtos.request.SectionToSaveDTO;
 import jakarta.persistence.*;
 
 @Entity
@@ -21,7 +22,10 @@ public abstract class Section {
     }
 
     public Section() {
+
     }
+
+    public abstract SectionToSaveDTO getDtoForClass();
 
     public Long getId() {
         return id;

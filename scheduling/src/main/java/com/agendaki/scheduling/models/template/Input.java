@@ -24,7 +24,28 @@ public class Input extends Section{
         }
     }
 
+    @Override
+    public SectionToSaveDTO getDtoForClass() {
+        return new InputDTO(this);
+    }
+
     public Input() {
 
+    }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public Integer getWidth() {
+        return width;
+    }
+
+    public String getPlaceholder() {
+        return placeholder;
+    }
+
+    public Boolean getIdentifier() {
+        return isIdentifier;
     }
 }

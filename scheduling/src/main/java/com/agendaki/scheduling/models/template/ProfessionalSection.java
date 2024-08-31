@@ -1,5 +1,6 @@
 package com.agendaki.scheduling.models.template;
 
+import com.agendaki.scheduling.dtos.request.ProfessionalSectionDTO;
 import com.agendaki.scheduling.dtos.request.SectionToSaveDTO;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
@@ -13,4 +14,9 @@ public class ProfessionalSection extends Section{
     }
 
     public ProfessionalSection() {}
+
+    @Override
+    public SectionToSaveDTO getDtoForClass() {
+        return new ProfessionalSectionDTO(this);
+    }
 }
