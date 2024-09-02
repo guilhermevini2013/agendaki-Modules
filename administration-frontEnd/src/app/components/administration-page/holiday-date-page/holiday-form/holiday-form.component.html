@@ -10,7 +10,7 @@
     </form>
 
     <ng-template [ngIf]="checkIfWork() == '1'">
-      <form [formGroup]="secondFormGroup" class="secondFormGroup">
+      <form [formGroup]="secondFormGroup" (ngSubmit)="createHoliday()" class="secondFormGroup">
         <mat-form-field appearance="outline" >
             <mat-label>Data</mat-label>
             <input matInput placeholder="00/00/0000" mask="00/00/0000" formControlName="dateHoliday" required>
@@ -35,6 +35,9 @@
           <mat-label>Fim Almoço</mat-label>
           <input matInput placeholder="00:00" mask="00:00"  formControlName="endOffHour" required>
         </mat-form-field>
+        <div>
+          <button mat-button type="submit">Salvar e Adicionar</button>
+        </div>
       </form>
     </ng-template>
 
@@ -46,8 +49,4 @@
             </mat-form-field>
           </form>
     </ng-template>
-
-    <div>
-      <button mat-button>Salvar e Adicionar</button>
-    </div>
   </div>

@@ -13,6 +13,7 @@ import {MatListModule} from '@angular/material/list';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {NgxMaskDirective, NgxMaskPipe} from 'ngx-mask';
 import {NgxSpinnerModule} from "ngx-spinner";
+import { HolidayCreateDTO } from '../../../../models/holiday-create-dto';
 
 @Component({
   selector: 'app-holiday-form',
@@ -52,6 +53,7 @@ export class HolidayFormComponent {
   });
 
   secondFormGroup = this._formBuilder.group({
+    dateHoliday: ['', Validators.required],
     startWork: ['', Validators.required],
     endWork: ['', Validators.required],
     startOffHour: ['', Validators.required],
@@ -66,5 +68,18 @@ export class HolidayFormComponent {
       console.log(typeof value);
       return '0';
     }
+  }
+
+  protected createHoliday():void{
+      const holidayDto:HolidayCreateDTO = {
+        scheduleInitial: this.secondFormGroup.value.startWork!,
+        scheduleFinal: this.secondFormGroup.value.endWork!,
+        breakInitial: this.secondFormGroup.value.startOffHour!,
+        breakFinal: this.secondFormGroup.value.endOffHour!,
+        dateOfHoliday: new Date(this.secondFormGroup.value.dateHoliday!),
+        isOpen:true
+      }
+      console.log(holidayDto);
+      
   }
 }
