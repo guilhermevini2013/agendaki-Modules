@@ -16,22 +16,22 @@
           <form [formGroup]="secondFormGroup" class="secondFormGroup" (ngSubmit)="createDayOfWeek()">
             <mat-form-field appearance="outline" >
               <mat-label>Inicio Expediente</mat-label>
-              <input matInput placeholder="00:00" mask="00:00" formControlName="startWork" required>
+              <input matInput placeholder="00:00" mask="00:00" formControlName="startWork" minlength="4" required>
             </mat-form-field>
     
             <mat-form-field appearance="outline" >
               <mat-label>Fim Expediente</mat-label>
-              <input matInput placeholder="00:00" mask="00:00" formControlName="endWork" required>
+              <input matInput placeholder="00:00" mask="00:00" formControlName="endWork" minlength="4" required>
             </mat-form-field>
     
             <mat-form-field appearance="outline">
               <mat-label>Inicio Almoço</mat-label>
-              <input matInput placeholder="00:00" mask="00:00" formControlName="startOffHour" required>
+              <input matInput placeholder="00:00" mask="00:00" formControlName="startOffHour" minlength="4" required>
             </mat-form-field>
     
             <mat-form-field appearance="outline">
               <mat-label>Fim Almoço</mat-label>
-              <input matInput placeholder="00:00" mask="00:00"  formControlName="endOffHour" required>
+              <input matInput placeholder="00:00" mask="00:00"  formControlName="endOffHour" minlength="4" required>
             </mat-form-field>
 
             <div>
