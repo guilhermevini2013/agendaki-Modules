@@ -15,5 +15,5 @@ public record InsertDateOfSchedulingDTO(
         @NotNull
         LocalTime breakFinal,
         @NotNull
-        DayOfWeek dayOfWeek) {
+        DayOfWeek dayOfWeek) { 
 }

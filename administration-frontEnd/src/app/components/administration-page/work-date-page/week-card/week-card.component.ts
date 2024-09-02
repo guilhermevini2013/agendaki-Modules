@@ -1,4 +1,4 @@
-import { Component, Input, inject } from '@angular/core';
+import { Component, Input, inject, input } from '@angular/core';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -13,6 +13,8 @@ import {MatListModule} from '@angular/material/list';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {NgxMaskDirective, NgxMaskPipe} from 'ngx-mask';
 import {NgxSpinnerModule} from "ngx-spinner";
+import { DayOfWeek } from '../../../../models/dayOfWeek';
+import { WeekCreateDTO } from '../../../../models/week-create-dto';
 
 @Component({
   selector: 'app-week-card',
@@ -46,6 +48,8 @@ export class WeekCardComponent {
   private _formBuilder = inject(FormBuilder);
   @Input()
   public weekName:string = "";
+  @Input()
+  public weekEnum:DayOfWeek = DayOfWeek.NONE;
 
   firstFormGroup = this._formBuilder.group({
     doWork: ['', Validators.required],
@@ -66,5 +70,26 @@ export class WeekCardComponent {
       console.log(typeof value);
       return '0';
     }
+  }
+
+  protected notWorkingDay():void {
+    this.secondFormGroup.reset()
+
+    //TODO: enviar para api
+  }
+
+  protected createDayOfWeek(): void {
+    if (this.secondFormGroup.valid) {
+      const day: WeekCreateDTO = {
+        dayOfWeek: this.weekEnum,
+        scheduleInitial: this.secondFormGroup.value.startWork!,
+        scheduleFinal: this.secondFormGroup.value.endWork!,
+        breakInitial: this.secondFormGroup.value.startOffHour!,
+        breakFinal: this.secondFormGroup.value.endOffHour!
+      }
+
+      console.log(day);
+    } 
+
   }
 }

@@ -24,7 +24,7 @@ export const routes: Routes = [
   {
     path:"administration",
     component:AdministrationPrincipalComponent,
-    canActivate: [AuthAdministrationGuard],
+    //canActivate: [AuthAdministrationGuard],
       children:[
       {
         path:"manage-page",
@@ -48,7 +48,7 @@ export const routes: Routes = [
   {
     path:"portalClient",
     component:PortalClientPrincipalComponent,
-    canActivate: [AuthPortalClientGuard],
+    //canActivate: [AuthPortalClientGuard],
     children:[
       {
         path:"create-order",

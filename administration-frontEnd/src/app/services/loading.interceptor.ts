@@ -14,13 +14,13 @@ export class LoadingInterceptor implements HttpInterceptor{
   intercept(req: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     this.spinner.show();
     return next.handle(req).pipe(
-      catchError((error: HttpErrorResponse) => {
+     /* catchError((error: HttpErrorResponse) => {
         if (error.status == 403 || 401) {
           this.router.navigate(["/"])
           this.popUpService.openPopUp("Seu login expirou, faça novamente.", "error")
         }
         return throwError(() => error);
-      }),
+      }),*/
       finalize(()=>{
         this.spinner.hide();
       })
