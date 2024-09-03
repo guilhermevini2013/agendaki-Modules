@@ -1,0 +1,48 @@
+article{
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    width: 100%;
+    height: 100%;
+    align-items: start;
+}
+.tools{
+    width: max-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.title_tools{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.title_tools h1 {
+    font-size: 27px;
+    color: #000B54;
+}
+
+.title_tools span{
+    font-size: 15px;
+    color: #9e9e9e;
+}
+
+.tools__component{
+    min-height: 750px;
+    min-width: 360px;
+}
+
+.tools__component_options{
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.tools__visualizer{
+    min-height: 750px;
+    min-width: 720px;
+}
