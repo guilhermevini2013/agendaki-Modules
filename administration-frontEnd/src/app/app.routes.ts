@@ -15,6 +15,7 @@ import {BlockedPageComponent} from './components/administration-page/blocked-pag
 import {WorkDatePageComponent} from './components/administration-page/work-date-page/work-date-page.component';
 import {HolidayDatePageComponent} from './components/administration-page/holiday-date-page/holiday-date-page.component';
 import { AgendakiToolsComponent } from './components/administration-page/agendaki-tools/agendaki-tools.component';
+import { ServicesProfessionalsPageComponent } from './components/administration-page/services-professionals-page/services-professionals-page.component';
 
 export const routes: Routes = [
   {
@@ -38,6 +39,10 @@ export const routes: Routes = [
       {
         path:"work-date-page",
         component:WorkDatePageComponent
+      },
+      {
+        path:"services-professionals-page",
+        component:ServicesProfessionalsPageComponent
       },
       {
         path:"holiday-date-page",
