@@ -17,7 +17,6 @@ public class SecurityConfig {
     private final RecoverTokenFilter recoverTokenFilter;
 
     private final String[] privateRoutes = {
-            "/api/scheduling/**",
             "/api/professional",
             "/api/professional/**",
             "/api/service",
@@ -27,6 +26,8 @@ public class SecurityConfig {
     private final String[] publicRoutes = {
             "/api/user/auth",
             "/api/scheduling",
+            "/api/scheduling",
+            "/api/scheduling/**",
     };
 
     public SecurityConfig(RecoverTokenFilter recoverTokenFilter) {

@@ -29,6 +29,10 @@ public class Professional {
         this.instance = instance;
     }
 
+    public Professional(Long id) {
+        this.id = id;
+    }
+
     public void disassociateServices(Set<Long> idsToDisassociate) {
         for (Long idServiceToDisassociate : idsToDisassociate) {
             this.services.removeIf(service -> service.getId().equals(idServiceToDisassociate));

@@ -11,8 +11,16 @@ public class ResponseForm {
     @ManyToOne
     private Input input;
     private String response;
+    @ManyToOne
+    private Scheduling scheduling;
 
     public ResponseForm() {
 
+    }
+
+    public ResponseForm(Long idInput, String response, Scheduling scheduling) {
+        this.input = new Input(idInput);
+        this.response = response;
+        this.scheduling = scheduling;
     }
 }

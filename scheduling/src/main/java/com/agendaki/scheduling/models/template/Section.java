@@ -9,7 +9,7 @@ import jakarta.persistence.*;
 public abstract class Section {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    protected Long id;
     private Short position;
     private String horizontalAlignment;
     @ManyToOne(fetch = FetchType.LAZY)

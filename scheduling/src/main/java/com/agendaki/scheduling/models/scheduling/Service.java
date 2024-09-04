@@ -39,4 +39,20 @@ public class Service {
     public String getName() {
         return name;
     }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public Short getDurationInMinutes() {
+        return durationInMinutes;
+    }
+
+    public Instance getInstance() {
+        return instance;
+    }
+
+    public Set<Professional> getProfessionals() {
+        return professionals;
+    }
 }

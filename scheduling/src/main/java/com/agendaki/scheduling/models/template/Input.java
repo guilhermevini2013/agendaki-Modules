@@ -24,6 +24,10 @@ public class Input extends Section{
         }
     }
 
+    public Input(Long idInput) {
+        super.id = idInput;
+    }
+
     @Override
     public SectionToSaveDTO getDtoForClass() {
         return new InputDTO(this);
