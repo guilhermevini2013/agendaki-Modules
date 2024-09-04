@@ -1,0 +1,18 @@
+.container__input{
+    width: max-content;
+}
+.container__input label{
+    display: flex;
+    flex-direction: column;
+}
+
+.container__input label span{
+    font-size: 17px;
+}
+
+.container__input label input{
+    font-size: 15px;
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 30px;
+}
