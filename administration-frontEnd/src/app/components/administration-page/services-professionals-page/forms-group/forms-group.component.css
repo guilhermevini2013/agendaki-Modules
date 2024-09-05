@@ -1,0 +1,9 @@
+.secondFormGroup {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    width: 700px;
+    height: 700px;
+}

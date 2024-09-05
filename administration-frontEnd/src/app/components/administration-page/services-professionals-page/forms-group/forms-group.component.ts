@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component , inject } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
@@ -11,10 +11,11 @@ import { MatOption, MatSelect } from '@angular/material/select';
 import { MatTabsModule } from '@angular/material/tabs';
 import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { FormsGroupComponent } from './forms-group/forms-group.component';
+import { WorkerCreateDTO } from '../../../../models/worker-create-dto';
+import { ServiceCreateDTO } from '../../../../models/service-create-dto';
 
 @Component({
-  selector: 'app-services-professionals-page',
+  selector: 'app-forms-group',
   standalone: true,
   imports: [
     MatTabsModule,
@@ -32,12 +33,38 @@ import { FormsGroupComponent } from './forms-group/forms-group.component';
     NgxMaskDirective,
     NgxMaskPipe,
     NgxSpinnerModule, // Include NgxSpinnerModule here
-
-    FormsGroupComponent
   ],
-  templateUrl: './services-professionals-page.component.html',
-  styleUrl: './services-professionals-page.component.css'
+  templateUrl: './forms-group.component.html',
+  styleUrl: './forms-group.component.css'
 })
-export class ServicesProfessionalsPageComponent {
-  
+export class FormsGroupComponent {
+  private _formBuilder = inject(FormBuilder);
+
+  workerFormGroup = this._formBuilder.group({
+    name: ['', Validators.required],
+  });
+
+  serviceFormGroup = this._formBuilder.group({
+    name: ['', Validators.required],
+    price: ['', Validators.required],
+    time: ['', Validators.required],
+  });
+
+  protected createWorker():void{
+    const workerDto:WorkerCreateDTO = {
+      name: this.workerFormGroup.value.name!,
+    }
+   
+    console.log(workerDto);
+  }
+
+  protected createService():void{
+    const serviceDto:ServiceCreateDTO = {
+      name: this.serviceFormGroup.value.name!,
+      price: this.serviceFormGroup.value.price!,
+      time: this.serviceFormGroup.value.time !,
+    }
+   
+    console.log(serviceDto);
+  }
 }
