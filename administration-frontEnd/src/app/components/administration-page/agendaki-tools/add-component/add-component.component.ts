@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ComponentCommunicationService } from '../../../../services/component-communication.service';
 
 @Component({
   selector: 'app-add-component',
@@ -8,5 +9,9 @@ import { Component } from '@angular/core';
   styleUrl: './add-component.component.css'
 })
 export class AddComponentComponent {
+  constructor(private commService: ComponentCommunicationService) {}
 
+  addComponent(type: string) {
+    this.commService.triggerComponentAction(type);
+  }
 }

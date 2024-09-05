@@ -1,0 +1,11 @@
+section{
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+
+}
+
+.demo-inline-calendar-card {
+    width: 240px;
+  }

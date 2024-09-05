@@ -1,0 +1,39 @@
+section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.photoPerfil {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden; /* Garante que a imagem não ultrapasse o contêiner */
+}
+
+.photoPerfil img {
+    width: 100%;
+    height: 100%; /* Garante que a imagem preencha o contêiner */
+    object-fit: cover; /* Mantém a proporção da imagem e cobre o contêiner */
+}
+
+.bio {
+    max-width: 65%; /* Define a largura máxima da div bio */
+    width: 100%; /* Garante que a largura seja 100% do seu contêiner pai, limitado pelo max-width */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box; /* Inclui padding e bordas no cálculo da largura */
+}
+
+.bio span {
+    max-width: 270px;
+    display: block; /* Faz com que o span ocupe toda a largura disponível */
+    word-break: break-word; /* Quebra palavras longas */
+    text-align: justify; /* Centraliza o texto */
+    padding: 0 10px; /* Adiciona algum espaçamento interno */
+    box-sizing: border-box; /* Inclui padding e bordas no cálculo da largura */
+}
