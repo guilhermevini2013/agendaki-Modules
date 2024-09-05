@@ -4,6 +4,9 @@ import { CommonModule } from '@angular/common';
 import { InputComponent } from '../sections/input/input.component';
 import {ɵEmptyOutletComponent} from "@angular/router";
 import {DynamicComponentContainer} from "../dynamic-component-container/dynamic-component-container.component";
+import { PerfilComponent } from '../sections/perfil/perfil.component';
+import { CalendarComponent } from '../sections/calendar/calendar.component';
+import { ComponentCommunicationService } from '../../../../services/component-communication.service';
 export interface ComponentWithId {
   component: Type<any>;
   data: any;
@@ -25,12 +28,29 @@ export interface ComponentWithId {
 })
 export class PreVisualizerComponent {
   components: ComponentWithId[] = [
-    {component: InputComponent, data: { label: 'test', placeHolder: 'Enter text', width:"100%", horizontalAlignment:"start" } },
-    {component: InputComponent, data: { label: 'test2', placeHolder: 'Enter more text', width:"100%",horizontalAlignment:"center" } },
   ];
 
   drop(event: CdkDragDrop<ComponentWithId[]>) {
     moveItemInArray(this.components, event.previousIndex, event.currentIndex);
-    console.log(this.components)
+  }
+  constructor(private commService: ComponentCommunicationService) {}
+
+  ngOnInit() {
+    this.commService.componentAction$.subscribe(action => {
+      this.addComponent(action);
+    });
+  }
+  addComponent(type: string) {
+    switch (type) {
+      case 'perfil':
+        this.components.push({component: PerfilComponent, data:{ urlPhotoPerfil: 'https://noticiastu.com/wp-content/uploads/2020/08/Poses-de-Fotos-de-Perfil-1.jpg', bio:'Nutricionista boa de conversa, formada na UNASP e aluna muito boa do curso de desenvolviemnto de sistemas'}});
+        break;
+      case 'calendar':
+        this.components.push({component: CalendarComponent, data: {horizontalAlignment:"center"} });
+        break;
+      case 'input':
+        this.components.push({component: InputComponent, data: { label: 'Telefone', placeHolder: '(00)00000-0000', width:"100%", horizontalAlignment:"center" } });
+        break;
+    }
   }
 }

@@ -3,11 +3,9 @@
         <span class="list__title">Lista de componentes</span>
         <div class="list_options">
             <ul>
-                <li><button>Descrição</button></li>
-                <li><button>Informações</button></li>
-                <li><button>Campo de texto</button></li>
-                <li><button>Portfolio</button></li>
-                <li><button>Perfil</button></li>
+                <li><button (click)="addComponent('input')">Campo de texto</button></li>
+                <li><button (click)="addComponent('perfil')">Perfil</button></li>
+                <li><button (click)="addComponent('calendar')">Calendario</button></li>
             </ul>
         </div>
     </div>
