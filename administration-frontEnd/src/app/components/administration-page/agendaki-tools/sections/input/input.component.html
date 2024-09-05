@@ -1,6 +1,8 @@
 <div class="container__input">
-    <label for="">
+    <div [ngStyle]="{'justify-content': horizontalAlignment}">
+      <label >
         <span>{{label}}</span>
-        <input type="text" [placeholder]="placeHolder">
-    </label>
+        <input type="text" [placeholder]="placeHolder" [ngStyle]="{'width': width}">
+      </label>
+    </div>
 </div>

@@ -1,13 +1,24 @@
 .container__input{
-    width: max-content;
+  width: 100%;
+  display: flex;
 }
+
+.container__input div {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
 .container__input label{
     display: flex;
     flex-direction: column;
+  width: max-content;
 }
 
 .container__input label span{
     font-size: 17px;
+  width: max-content;
 }
 
 .container__input label input{
