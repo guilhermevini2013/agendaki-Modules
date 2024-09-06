@@ -60,4 +60,9 @@ export class PreVisualizerComponent {
         this.components.push({component: SelectServiceAndProfessionalComponent, data:{}})
     }
   }
+
+  click(event:Event){
+    console.log(event);
+    
+  }
 }
