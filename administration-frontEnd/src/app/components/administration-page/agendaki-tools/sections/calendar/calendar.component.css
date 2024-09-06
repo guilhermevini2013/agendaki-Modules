@@ -1,9 +1,13 @@
 section{
     width: 100%;
-    justify-content: center;
     align-items: center;
     display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
 
+section span{
+  font-size: 17px;
 }
 
 .demo-inline-calendar-card {

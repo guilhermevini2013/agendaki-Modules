@@ -3,9 +3,22 @@
         <span class="list__title">Lista de componentes</span>
         <div class="list_options">
             <ul>
-                <li><button (click)="addComponent('input')">Campo de texto</button></li>
-                <li><button (click)="addComponent('perfil')">Perfil</button></li>
-                <li><button (click)="addComponent('calendar')">Calendario</button></li>
+                <li><button (click)="addComponent('input')">
+                  <span>Campo de texto</span>
+                  <span>{{ totalInput }}/4</span>
+                </button></li>
+                <li><button (click)="addComponent('perfil')">
+                  <span>Perfil</span>
+                  <span>0/1</span>
+                </button></li>
+                <li><button (click)="addComponent('calendar')">
+                  <span>Calendario</span>
+                  <span>0/1</span>
+                </button></li>
+                <li><button (click)="addComponent('select')">
+                  <span>Servicos e profissionais</span>
+                  <span>0/1</span>
+                </button></li>
             </ul>
         </div>
     </div>
@@ -17,7 +30,7 @@
     </div>
     <div class="optionToSave">
         <div>
-            <button>Salvar</button> 
+            <button>Salvar</button>
         </div>
         <div>
             <span>Desfazer alteraçôes</span>

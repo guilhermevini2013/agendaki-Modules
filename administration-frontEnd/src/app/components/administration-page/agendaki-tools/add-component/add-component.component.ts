@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { ComponentCommunicationService } from '../../../../services/component-communication.service';
 
 @Component({
@@ -8,10 +8,17 @@ import { ComponentCommunicationService } from '../../../../services/component-co
   templateUrl: './add-component.component.html',
   styleUrl: './add-component.component.css'
 })
-export class AddComponentComponent {
+export class AddComponentComponent implements OnInit{
   constructor(private commService: ComponentCommunicationService) {}
 
   addComponent(type: string) {
-    this.commService.triggerComponentAction(type);
+    this.commService.triggerAddComponentAction(type);
+  }
+  public totalInput:number = 0;
+
+  ngOnInit(): void {
+    this.commService.countComponentAction$.subscribe(() =>{
+      this.totalInput++;
+    })
   }
 }

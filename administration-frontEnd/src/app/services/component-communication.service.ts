@@ -5,9 +5,17 @@ import { Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class ComponentCommunicationService {
-  private componentSubject = new Subject<string>();
-  componentAction$ = this.componentSubject.asObservable();
-  triggerComponentAction(action: string) {
-    this.componentSubject.next(action);
+  private componentSubjectToAdd = new Subject<string>();
+  addComponentAction$ = this.componentSubjectToAdd.asObservable();
+
+  private componentSubjectToCount = new Subject<void>();
+  countComponentAction$ = this.componentSubjectToCount.asObservable();
+
+  triggerAddComponentAction(action: string) {
+    this.componentSubjectToAdd.next(action);
+  }
+
+  triggerCountComponent():void{
+    this.componentSubjectToCount.next()
   }
 }

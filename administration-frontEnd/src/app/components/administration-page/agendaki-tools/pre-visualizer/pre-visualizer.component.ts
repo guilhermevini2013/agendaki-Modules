@@ -7,6 +7,9 @@ import {DynamicComponentContainer} from "../dynamic-component-container/dynamic-
 import { PerfilComponent } from '../sections/perfil/perfil.component';
 import { CalendarComponent } from '../sections/calendar/calendar.component';
 import { ComponentCommunicationService } from '../../../../services/component-communication.service';
+import {
+  SelectServiceAndProfessionalComponent
+} from "../sections/select-service-and-professional/select-service-and-professional.component";
 export interface ComponentWithId {
   component: Type<any>;
   data: any;
@@ -24,7 +27,7 @@ export interface ComponentWithId {
     DynamicComponentContainer,
   ],
   templateUrl: './pre-visualizer.component.html',
-  styleUrls: ['./pre-visualizer.component.css'] // Corrigido de styleUrl para styleUrls
+  styleUrls: ['./pre-visualizer.component.css']
 })
 export class PreVisualizerComponent {
   components: ComponentWithId[] = [
@@ -36,10 +39,11 @@ export class PreVisualizerComponent {
   constructor(private commService: ComponentCommunicationService) {}
 
   ngOnInit() {
-    this.commService.componentAction$.subscribe(action => {
+    this.commService.addComponentAction$.subscribe(action => {
       this.addComponent(action);
     });
   }
+
   addComponent(type: string) {
     switch (type) {
       case 'perfil':
@@ -50,7 +54,10 @@ export class PreVisualizerComponent {
         break;
       case 'input':
         this.components.push({component: InputComponent, data: { label: 'Telefone', placeHolder: '(00)00000-0000', width:"100%", horizontalAlignment:"center" } });
+        this.commService.triggerCountComponent();
         break;
+      case 'select':
+        this.components.push({component: SelectServiceAndProfessionalComponent, data:{}})
     }
   }
 }

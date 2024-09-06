@@ -30,6 +30,7 @@ section {
 }
 
 .bio span {
+  font-size: 16px;
     max-width: 270px;
     display: block; /* Faz com que o span ocupe toda a largura disponível */
     word-break: break-word; /* Quebra palavras longas */
