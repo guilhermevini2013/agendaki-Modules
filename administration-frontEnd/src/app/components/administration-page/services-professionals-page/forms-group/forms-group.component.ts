@@ -13,11 +13,13 @@ import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { WorkerCreateDTO } from '../../../../models/worker-create-dto';
 import { ServiceCreateDTO } from '../../../../models/service-create-dto';
+import { NgFor } from '@angular/common';
 
 @Component({
   selector: 'app-forms-group',
   standalone: true,
   imports: [
+    NgFor,
     MatTabsModule,
     MatButton,
     FormsModule,
@@ -37,8 +39,12 @@ import { ServiceCreateDTO } from '../../../../models/service-create-dto';
   templateUrl: './forms-group.component.html',
   styleUrl: './forms-group.component.css'
 })
+
 export class FormsGroupComponent {
   private _formBuilder = inject(FormBuilder);
+
+  public workers:WorkerCreateDTO[] = [];
+  public services:ServiceCreateDTO[] = [];
 
   workerFormGroup = this._formBuilder.group({
     name: ['', Validators.required],
@@ -50,12 +56,18 @@ export class FormsGroupComponent {
     time: ['', Validators.required],
   });
 
+  protected switchResetForms():void {
+    this.serviceFormGroup.reset()
+    this.workerFormGroup.reset()
+  }
+
   protected createWorker():void{
     const workerDto:WorkerCreateDTO = {
       name: this.workerFormGroup.value.name!,
     }
    
-    console.log(workerDto);
+    this.workers.push(workerDto);
+    this.workerFormGroup.reset()
   }
 
   protected createService():void{
@@ -65,6 +77,7 @@ export class FormsGroupComponent {
       time: this.serviceFormGroup.value.time !,
     }
    
-    console.log(serviceDto);
+    this.services.push(serviceDto);
+    this.serviceFormGroup.reset()
   }
 }

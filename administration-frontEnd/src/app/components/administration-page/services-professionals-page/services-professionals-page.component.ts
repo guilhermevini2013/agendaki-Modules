@@ -12,6 +12,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { FormsGroupComponent } from './forms-group/forms-group.component';
+import { TableShowComponent } from './table-show/table-show.component';
 
 @Component({
   selector: 'app-services-professionals-page',
@@ -33,7 +34,8 @@ import { FormsGroupComponent } from './forms-group/forms-group.component';
     NgxMaskPipe,
     NgxSpinnerModule, // Include NgxSpinnerModule here
 
-    FormsGroupComponent
+    FormsGroupComponent,
+    TableShowComponent
   ],
   templateUrl: './services-professionals-page.component.html',
   styleUrl: './services-professionals-page.component.css'
