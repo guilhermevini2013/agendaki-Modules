@@ -63,6 +63,6 @@ export class PreVisualizerComponent {
 
   click(event:Event){
     console.log(event);
-    
+
   }
 }
