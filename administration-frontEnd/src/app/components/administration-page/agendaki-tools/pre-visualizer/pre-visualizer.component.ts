@@ -40,29 +40,7 @@ export class PreVisualizerComponent {
 
   ngOnInit() {
     this.commService.addComponentAction$.subscribe(action => {
-      this.addComponent(action);
+      this.components.push(action)
     });
-  }
-
-  addComponent(type: string) {
-    switch (type) {
-      case 'perfil':
-        this.components.push({component: PerfilComponent, data:{ urlPhotoPerfil: 'https://noticiastu.com/wp-content/uploads/2020/08/Poses-de-Fotos-de-Perfil-1.jpg', bio:'Nutricionista boa de conversa, formada na UNASP e aluna muito boa do curso de desenvolviemnto de sistemas'}});
-        break;
-      case 'calendar':
-        this.components.push({component: CalendarComponent, data: {horizontalAlignment:"center"} });
-        break;
-      case 'input':
-        this.components.push({component: InputComponent, data: { label: 'Telefone', placeHolder: '(00)00000-0000', width:"100%", horizontalAlignment:"center" } });
-        this.commService.triggerCountComponent();
-        break;
-      case 'select':
-        this.components.push({component: SelectServiceAndProfessionalComponent, data:{}})
-    }
-  }
-
-  click(event:Event){
-    console.log(event);
-
   }
 }

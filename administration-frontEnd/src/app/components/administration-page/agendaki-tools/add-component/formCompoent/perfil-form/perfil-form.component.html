@@ -1,0 +1,16 @@
+<article>
+  <h2 mat-dialog-title>Edite o perfil</h2>
+  <mat-dialog-content class="mat-form">
+    <form [formGroup]="formEditPerfil" (ngSubmit)="submitForm()">
+      <label>
+        <span>Selecione a foto de perfil:</span>
+        <input type="file" (change)="onFileSelected($event)"/>
+      </label>
+      <label>
+        <span>Bio:</span>
+        <input type="text" formControlName="bio">
+      </label>
+      <button type="submit" mat-button mat-dialog-close>Salvar</button>
+    </form>
+  </mat-dialog-content>
+</article>

@@ -1,5 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, inject, OnInit, Type} from '@angular/core';
 import { ComponentCommunicationService } from '../../../../services/component-communication.service';
+import {MatDialog} from "@angular/material/dialog";
+import {FormInputComponent} from "./formCompoent/form-input/form-input.component";
+import {PerfilFormComponent} from "./formCompoent/perfil-form/perfil-form.component";
 
 @Component({
   selector: 'app-add-component',
@@ -10,9 +13,9 @@ import { ComponentCommunicationService } from '../../../../services/component-co
 })
 export class AddComponentComponent implements OnInit{
   constructor(private commService: ComponentCommunicationService) {}
-
-  addComponent(type: string) {
-    this.commService.triggerAddComponentAction(type);
+  readonly dialog = inject(MatDialog);
+  openDialog(form:Type<any>) {
+    this.dialog.open(form);
   }
   public totalInput:number = 0;
 
@@ -21,4 +24,7 @@ export class AddComponentComponent implements OnInit{
       this.totalInput++;
     })
   }
+
+  protected readonly FormInputComponent = FormInputComponent;
+  protected readonly PerfilFormComponent = PerfilFormComponent;
 }

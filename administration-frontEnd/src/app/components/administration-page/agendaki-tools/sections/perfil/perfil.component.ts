@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 
 @Component({
   selector: 'app-perfil',
@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
   styleUrl: './perfil.component.css'
 })
 export class PerfilComponent {
-  public urlPhotoPerfil:string = "";
-  public bio:string = "";
+  @Input() urlPhotoPerfil: string | ArrayBuffer | null = null;
+  @Input() bio: string = "";
 
 }

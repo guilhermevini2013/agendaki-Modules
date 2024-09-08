@@ -1,0 +1,24 @@
+<article>
+  <h2 mat-dialog-title>Edite o campo de texto</h2>
+  <mat-dialog-content class="mat-form">
+    <form [formGroup]="formEditInput" (ngSubmit)="submitForm()">
+      <label>
+        <span>Nome do campo:</span>
+        <input type="text" formControlName="label">
+      </label>
+      <label>
+        <span>texto de ajuda:</span>
+        <input type="text" formControlName="placeHolder">
+      </label>
+      <label>
+        <span>largura:</span>
+        <input type="text" formControlName="width">
+      </label>
+      <label>
+        <span>alinhamento horizontal:</span>
+        <input type="text" formControlName="horizontalAlignment">
+      </label>
+      <button type="submit" mat-button mat-dialog-close>Salvar</button>
+    </form>
+  </mat-dialog-content>
+</article>
