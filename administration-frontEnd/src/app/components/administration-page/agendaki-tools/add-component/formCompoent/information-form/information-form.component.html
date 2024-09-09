@@ -1,0 +1,20 @@
+<article>
+    <h2 mat-dialog-title>Edite o perfil</h2>
+    <mat-dialog-content class="mat-form">
+      <form [formGroup]="formEditInformation" (ngSubmit)="submitForm()">
+        <label>
+          <span>Titulo:</span>
+          <input type="text" formControlName="title" />
+        </label>
+        <label>
+          <span>Conteudo:</span>
+          <input type="text" [(ngModel)]="inputValue" formControlName="informationList"/>
+            <button type="button" (click)="addInformation()">Adicionar</button>
+        </label>
+        <li *ngFor="let information of informationList">
+            {{ information }}
+          </li>
+        <button type="submit" mat-button mat-dialog-close>Salvar</button>
+      </form>
+    </mat-dialog-content>
+</article>
