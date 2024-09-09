@@ -3,6 +3,9 @@ import { ComponentCommunicationService } from '../../../../services/component-co
 import {MatDialog} from "@angular/material/dialog";
 import {FormInputComponent} from "./formCompoent/form-input/form-input.component";
 import {PerfilFormComponent} from "./formCompoent/perfil-form/perfil-form.component";
+import {CalendarComponent} from "../sections/calendar/calendar.component";
+import {CalendarFormComponent} from "./formCompoent/calendar-form/calendar-form.component";
+import {PortfolioFormComponent} from "./formCompoent/portfolio-form/portfolio-form.component";
 
 @Component({
   selector: 'app-add-component',
@@ -27,4 +30,7 @@ export class AddComponentComponent implements OnInit{
 
   protected readonly FormInputComponent = FormInputComponent;
   protected readonly PerfilFormComponent = PerfilFormComponent;
+  protected readonly CalendarComponent = CalendarComponent;
+  protected readonly CalendarFormComponent = CalendarFormComponent;
+  protected readonly PortfolioFormComponent = PortfolioFormComponent;
 }

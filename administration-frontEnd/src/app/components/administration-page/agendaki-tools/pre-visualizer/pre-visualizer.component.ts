@@ -10,6 +10,7 @@ import { ComponentCommunicationService } from '../../../../services/component-co
 import {
   SelectServiceAndProfessionalComponent
 } from "../sections/select-service-and-professional/select-service-and-professional.component";
+import {PortfolioComponent} from "../sections/portfolio/portfolio.component";
 export interface ComponentWithId {
   component: Type<any>;
   data: any;

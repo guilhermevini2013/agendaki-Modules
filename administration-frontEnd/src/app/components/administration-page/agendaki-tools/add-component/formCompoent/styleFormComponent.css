@@ -1,20 +1,51 @@
-article{
+article {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
   height: 100%;
   padding: 25px;
+  box-sizing: border-box; /* Garante que o padding não afete a largura total do elemento */
+  background-color: #f9f9f9; /* Adiciona uma cor de fundo suave */
 }
 
-.mat-form form{
+.mat-form form {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  max-width: 600px; /* Limita a largura do formulário */
+  width: 100%;
 }
 
-.mat-form form label{
+.mat-form form label span {
   display: flex;
   flex-direction: column;
+  font-weight: bold; /* Destaca o texto do rótulo */
+  color: #333; /* Adiciona uma cor de texto mais escura para melhor contraste */
 }
+
+.mat-form input, .mat-form select, .mat-form textarea {
+  border: 1px solid #ccc; /* Adiciona uma borda leve aos campos de entrada */
+  border-radius: 4px; /* Adiciona cantos arredondados */
+  padding: 10px; /* Adiciona um espaçamento interno */
+  font-size: 16px; /* Ajusta o tamanho da fonte */
+  width: 100%; /* Garante que os campos de entrada ocupem toda a largura disponível */
+  box-sizing: border-box; /* Inclui padding e border no cálculo da largura total */
+}
+
+.mat-form button {
+  background-color: #007bff; /* Adiciona uma cor de fundo ao botão */
+  color: white; /* Define a cor do texto como branco */
+  border: none; /* Remove a borda padrão */
+  border-radius: 4px; /* Adiciona cantos arredondados ao botão */
+  padding: 10px 20px; /* Adiciona espaçamento interno ao botão */
+  font-size: 16px; /* Ajusta o tamanho da fonte */
+  cursor: pointer; /* Altera o cursor para indicar que o botão é clicável */
+  transition: background-color 0.3s ease; /* Adiciona uma transição suave para a cor de fundo */
+}
+
+.mat-form button:hover {
+  background-color: #0056b3; /* Muda a cor de fundo do botão ao passar o mouse */
+}
+
