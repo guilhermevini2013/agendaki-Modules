@@ -1,0 +1,51 @@
+section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: max-content; /* Ajusta a altura com base no conteúdo */
+  box-sizing: border-box; /* Garante que o padding não afete a largura total do elemento */
+}
+
+.portfolio {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centraliza horizontalmente o conteúdo */
+  width: 100%; /* Garante que o portfólio ocupe toda a largura disponível */
+  max-width: 1200px; /* Limita a largura máxima do portfólio para manter o layout consistente */
+  padding: 20px; /* Adiciona espaçamento interno */
+  box-sizing: border-box; /* Garante que o padding não afete a largura total do elemento */
+}
+
+.portfolio__title {
+  font-size: 24px; /* Tamanho da fonte do título */
+  margin-bottom: 20px; /* Espaço abaixo do título */
+  color: #333; /* Cor do texto do título */
+  text-align: center; /* Centraliza o texto */
+}
+
+.portfolio__image-container {
+  overflow-x: auto; /* Permite rolar horizontalmente */
+  overflow-y: hidden; /* Oculta a rolagem vertical */
+  white-space: nowrap; /* Mantém os itens em uma linha horizontal */
+  width: 100%; /* Garante que o container ocupe toda a largura disponível */
+  padding: 10px 0; /* Espaçamento vertical ao redor da área de rolagem */
+}
+
+.portfolio__image {
+  display: inline-flex; /* Exibe as imagens em linha horizontal */
+  gap: 20px; /* Espaçamento entre as imagens */
+}
+
+.portfolio__image img {
+  display: block; /* Remove o espaço abaixo das imagens */
+  width: max-content; /* Largura fixa das imagens */
+  height: auto; /* Mantém a proporção da altura das imagens */
+  border-radius: 8px; /* Cantos arredondados das imagens */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adiciona uma sombra suave */
+  transition: transform 0.3s ease; /* Transição suave para efeitos de hover */
+}
+
+.portfolio__image img:hover {
+  transform: scale(1.05); /* Levemente amplia a imagem ao passar o mouse */
+}
