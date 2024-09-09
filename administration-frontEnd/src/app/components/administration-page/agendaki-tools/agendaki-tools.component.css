@@ -44,5 +44,5 @@ article{
 
 .tools__visualizer{
     min-height: 750px;
-    max-width: 1000px;
+    min-width: 800px;
 }

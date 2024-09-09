@@ -1,1 +1,9 @@
+mat-slider {
+    width: 95%;
+}
 
+.inputMat input {
+    height: 15px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+} 

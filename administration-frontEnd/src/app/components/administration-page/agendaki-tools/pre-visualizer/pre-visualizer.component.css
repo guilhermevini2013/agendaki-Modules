@@ -42,11 +42,11 @@ section{
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
-    cursor: move;
     background: white;
     font-size: 14px;
     width: 100%;
   }
+
   .example-container{
     width: 100%;
     display: flex;
@@ -78,8 +78,18 @@ section{
     background: #ccc;
     border: dotted 3px #999;
     width: 100%;
-    min-height: 80px;
+    height: 100%;
+    display: block;
     transition: transform 300ms cubic-bezier(0, 0, 0.2, 1);
+  }
+
+  .example-handle {
+    position: relative;
+    margin-right: 10px;
+    color: #ccc;
+    cursor: move;
+    width: 24px;
+    height: 24px;
   }
 
   app-dynamic-component-container{

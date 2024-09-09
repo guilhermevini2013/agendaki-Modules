@@ -1,5 +1,5 @@
 import { Component, Type } from '@angular/core';
-import { CdkDropList, CdkDrag, CdkDragPlaceholder, moveItemInArray, CdkDragDrop } from '@angular/cdk/drag-drop';
+import { CdkDropList, CdkDrag, CdkDragPlaceholder, moveItemInArray, CdkDragDrop, CdkDragHandle } from '@angular/cdk/drag-drop';
 import { CommonModule } from '@angular/common';
 import { InputComponent } from '../sections/input/input.component';
 import {ɵEmptyOutletComponent} from "@angular/router";
@@ -23,6 +23,7 @@ export interface ComponentWithId {
     CdkDropList,
     CdkDrag,
     CdkDragPlaceholder,
+    CdkDragHandle,
     CommonModule,
     ɵEmptyOutletComponent,
     DynamicComponentContainer,
