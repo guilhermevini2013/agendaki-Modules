@@ -6,6 +6,7 @@ import {PerfilFormComponent} from "./formCompoent/perfil-form/perfil-form.compon
 import {CalendarComponent} from "../sections/calendar/calendar.component";
 import {CalendarFormComponent} from "./formCompoent/calendar-form/calendar-form.component";
 import {PortfolioFormComponent} from "./formCompoent/portfolio-form/portfolio-form.component";
+import { InformationFormComponent } from './formCompoent/information-form/information-form.component';
 
 @Component({
   selector: 'app-add-component',
@@ -33,4 +34,5 @@ export class AddComponentComponent implements OnInit{
   protected readonly CalendarComponent = CalendarComponent;
   protected readonly CalendarFormComponent = CalendarFormComponent;
   protected readonly PortfolioFormComponent = PortfolioFormComponent;
+  protected readonly InformationFormComponent = InformationFormComponent;
 }
