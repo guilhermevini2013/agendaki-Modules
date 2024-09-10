@@ -12,8 +12,11 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { WorkerCreateDTO } from '../../../../models/worker-create-dto';
-import { ServiceCreateDTO } from '../../../../models/service-create-dto';
+import { ServiceCreateDTO } from '../../../../models/professionalAndService/service-create-dto';
 import { NgFor } from '@angular/common';
+import {
+  ProfessionalAndServiceService
+} from "../../../../services/professionalAndService/professional-and-service.service";
 
 @Component({
   selector: 'app-forms-group',
@@ -45,7 +48,8 @@ export class FormsGroupComponent {
 
   public workers:WorkerCreateDTO[] = [];
   public services:ServiceCreateDTO[] = [];
-
+  constructor(private professionalAndService:ProfessionalAndServiceService) {
+  }
   workerFormGroup = this._formBuilder.group({
     name: ['', Validators.required],
   });
@@ -65,7 +69,7 @@ export class FormsGroupComponent {
     const workerDto:WorkerCreateDTO = {
       name: this.workerFormGroup.value.name!,
     }
-   
+
     this.workers.push(workerDto);
     this.workerFormGroup.reset()
   }
@@ -73,11 +77,16 @@ export class FormsGroupComponent {
   protected createService():void{
     const serviceDto:ServiceCreateDTO = {
       name: this.serviceFormGroup.value.name!,
-      price: this.serviceFormGroup.value.price!,
-      time: this.serviceFormGroup.value.time !,
+      price: Number(this.serviceFormGroup.value.price!),
+      duration: Number(this.serviceFormGroup.value.time!),
     }
-   
-    this.services.push(serviceDto);
-    this.serviceFormGroup.reset()
+    this.professionalAndService.insertService(serviceDto).subscribe(next =>{
+      if (next.status == 201){
+        this.services.push(serviceDto);
+        this.serviceFormGroup.reset()
+      }
+    });
+
+
   }
 }

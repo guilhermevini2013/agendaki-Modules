@@ -47,12 +47,4 @@ public class RecoverTokenFilter extends OncePerRequestFilter {
         }
         filterChain.doFilter(request, response);
     }
-
-    private String recoverToken(final HttpServletRequest request) {
-        String authorization = request.getHeader("Authorization");
-        if (authorization == null) {
-            return null;
-        }
-        return authorization.replace("Bearer ", "");
-    }
 }

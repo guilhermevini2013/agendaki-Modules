@@ -12,9 +12,9 @@
                 </div>
             </form>
         </div>
-      
+
     </mat-tab>
-    <mat-tab label="Serviço"> 
+    <mat-tab label="Serviço">
         <div class="FormGroups">
             <form [formGroup]="serviceFormGroup" (ngSubmit)="createService()" class="secondFormGroup">
                 <mat-form-field appearance="outline" >
@@ -29,7 +29,7 @@
 
                 <mat-form-field appearance="outline" >
                     <mat-label>Tempo</mat-label>
-                    <input matInput placeholder="20.." mask="00:00" formControlName="time" required>
+                    <input matInput placeholder="20.." mask="000" formControlName="time" required>
                 </mat-form-field>
 
                 <div>
@@ -43,7 +43,7 @@
             <form [formGroup]="workerFormGroup" (ngSubmit)="createWorker()" class="secondFormGroup">
                 <mat-form-field appearance="outline">
                     <mat-label>Funcionário</mat-label>
-                    <mat-select> 
+                    <mat-select>
                         <mat-option *ngFor="let worker of workers" value="worker.name">{{worker.name}}</mat-option>
                     </mat-select>
                   </mat-form-field>
