@@ -3,8 +3,15 @@
   <mat-dialog-content class="mat-form">
     <form [formGroup]="formEditCalendar" (ngSubmit)="submitForm()">
       <label>
-        <span>alinhamento horizontal:</span>
-        <input type="text" formControlName="horizontalAlignment">
+        <span>Alinhamento Horizontal:</span>
+        <mat-form-field appearance="outline">
+          <mat-label>Centro</mat-label>
+          <mat-select formControlName="horizontalAlignment">
+            <mat-option value="center">Centro</mat-option>
+            <mat-option value="start">Começo</mat-option>
+            <mat-option value="end">Final</mat-option>
+          </mat-select>
+        </mat-form-field>
       </label>
       <button type="submit" mat-button mat-dialog-close>Salvar</button>
     </form>

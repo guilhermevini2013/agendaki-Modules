@@ -4,12 +4,14 @@
     <form [formGroup]="formEditPerfil" (ngSubmit)="submitForm()">
       <label>
         <span>Selecione a foto de perfil:</span>
-        <input type="file" (change)="onFileSelected($event)"/>
+        <input type="file" accept="image/png, image/gif, image/jpeg" (change)="onFileSelected($event)"/>
       </label>
-      <label>
-        <span>Bio:</span>
-        <input type="text" formControlName="bio">
-      </label>
+    
+      <mat-form-field appearance="outline" class="inputMat" >
+        <mat-label>Bio</mat-label>
+        <input matInput type="text" formControlName="bio" required>
+      </mat-form-field>
+    
       <button type="submit" mat-button mat-dialog-close>Salvar</button>
     </form>
   </mat-dialog-content>

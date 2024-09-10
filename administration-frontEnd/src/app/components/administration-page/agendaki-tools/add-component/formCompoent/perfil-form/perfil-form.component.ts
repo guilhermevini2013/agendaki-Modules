@@ -4,6 +4,9 @@ import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {NgIf} from "@angular/common";
 import {ComponentCommunicationService} from "../../../../../../services/component-communication.service";
 import {PerfilComponent} from "../../../sections/perfil/perfil.component";
+import { MatInput } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-perfil-form',
@@ -13,6 +16,9 @@ import {PerfilComponent} from "../../../sections/perfil/perfil.component";
     MatDialogActions,
     MatDialogContent,
     ReactiveFormsModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    MatInput,
     NgIf
   ],
   templateUrl: './perfil-form.component.html',

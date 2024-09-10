@@ -18,15 +18,18 @@
           <input matSliderThumb formControlName="width"/>
         </mat-slider>
       </label>
-
-      <mat-form-field appearance="outline">
-        <mat-label>Alinhamento Horizontal</mat-label>
-        <mat-select formControlName="horizontalAlignment" [(value)]="alignSelected">
-          <mat-option value="center">Centro</mat-option>
-          <mat-option value="start">Começo</mat-option>
-          <mat-option value="end">Final</mat-option>
-        </mat-select>
-      </mat-form-field>
+      <label>
+        <span>Alinhamento Horizontal:</span>
+        <mat-form-field appearance="outline">
+          <mat-label>Centro</mat-label>
+          <mat-select formControlName="horizontalAlignment" [(value)]="alignSelected">
+            <mat-option value="center">Centro</mat-option>
+            <mat-option value="start">Começo</mat-option>
+            <mat-option value="end">Final</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </label>
+    
     
       <button type="submit" mat-button mat-dialog-close>Salvar</button>
     </form>

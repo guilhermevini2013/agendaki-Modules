@@ -3,6 +3,9 @@ import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from "@angular
 import {MatDialogClose, MatDialogContent} from "@angular/material/dialog";
 import {ComponentCommunicationService} from "../../../../../../services/component-communication.service";
 import {CalendarComponent} from "../../../sections/calendar/calendar.component";
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
 
 @Component({
   selector: 'app-calendar-form',
@@ -11,7 +14,11 @@ import {CalendarComponent} from "../../../sections/calendar/calendar.component";
     FormsModule,
     MatDialogClose,
     MatDialogContent,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    
+    MatSelectModule,
+    MatFormFieldModule,
+    MatInput,
   ],
   templateUrl: './calendar-form.component.html',
   styleUrls: ['./calendar-form.component.css','../styleFormComponent.css']

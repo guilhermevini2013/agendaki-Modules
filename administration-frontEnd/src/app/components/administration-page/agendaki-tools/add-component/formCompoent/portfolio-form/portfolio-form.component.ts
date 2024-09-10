@@ -5,6 +5,9 @@ import {ComponentCommunicationService} from "../../../../../../services/componen
 import {PerfilComponent} from "../../../sections/perfil/perfil.component";
 import {NgForOf} from "@angular/common";
 import {PortfolioComponent} from "../../../sections/portfolio/portfolio.component";
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
 
 @Component({
   selector: 'app-portfolio-form',
@@ -14,7 +17,10 @@ import {PortfolioComponent} from "../../../sections/portfolio/portfolio.componen
     MatDialogClose,
     MatDialogContent,
     ReactiveFormsModule,
-    NgForOf
+    NgForOf,
+    MatSelectModule,
+    MatFormFieldModule,
+    MatInput,
   ],
   templateUrl: './portfolio-form.component.html',
   styleUrls: ['./portfolio-form.component.css','../styleFormComponent.css']

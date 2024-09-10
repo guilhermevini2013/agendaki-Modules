@@ -4,6 +4,9 @@ import { CommonModule } from '@angular/common'; // Importar CommonModule para Ng
 import { MatDialogModule } from '@angular/material/dialog'; // Importar MatDialogModule para MatDialogClose, MatDialogActions, MatDialogContent
 import { ComponentCommunicationService } from '../../../../../../services/component-communication.service';
 import { InformationComponent } from '../../../sections/information/information.component';
+import { MatInput } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-information-form',
@@ -12,7 +15,10 @@ import { InformationComponent } from '../../../sections/information/information.
     CommonModule, // Importar CommonModule para usar NgIf e NgFor
     MatDialogModule, // Importar MatDialogModule para usar MatDialogClose, MatDialogActions, MatDialogContent
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    MatInput,
   ],
   templateUrl: './information-form.component.html',
   styleUrls: ['./information-form.component.css', '../styleFormComponent.css']
