@@ -26,6 +26,25 @@
             </ul>
         </div>
     </div>
+
+    <div class="colors">
+      <label>
+        <span>Cor primaria:</span>
+        <input type="color" [(ngModel)]="colorPrimary">
+      </label>
+      <label>
+        <span>Cor secundaria:</span>
+        <input type="color" [(ngModel)]="colorSecundary">
+      </label>
+      <label>
+        <span>Cor terciaria:</span>
+        <input type="color" [(ngModel)]="colorTerciary">
+      </label>
+      <div class="button__colors">
+        <button (click)="saveColors()">Salvar cores</button>
+      </div>
+    </div>
+
     <div class="warn">
         <span>
             Avisos:

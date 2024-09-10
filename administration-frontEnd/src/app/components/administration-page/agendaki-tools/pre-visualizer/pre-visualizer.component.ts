@@ -27,6 +27,7 @@ export interface ComponentWithId {
 export class PreVisualizerComponent {
   components: ComponentWithId[] = [
   ];
+  protected primaryColor:string | null = "#ffff";
 
   drop(event: CdkDragDrop<ComponentWithId[]>) {
     moveItemInArray(this.components, event.previousIndex, event.currentIndex);
@@ -38,5 +39,9 @@ export class PreVisualizerComponent {
     this.commService.addComponentAction$.subscribe(action => {
       this.components.push(action)
     });
+
+    this.commService.colorPrimaryAction$.subscribe(action =>{
+      this.primaryColor = action;
+    })
   }
 }

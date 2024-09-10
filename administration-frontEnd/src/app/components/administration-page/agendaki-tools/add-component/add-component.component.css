@@ -107,3 +107,40 @@ section{
     color: rgb(142, 0, 0);
     cursor: pointer;
 }
+
+.colors{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    height: max-content;
+}
+
+.colors label{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: max-content;
+}
+
+.colors label span {
+    font-size: 17px;
+}
+
+.button__colors{
+    width: 100%;
+    display: flex;
+    justify-content: start;
+}
+
+.button__colors button{
+    width: 30%;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    border: none;
+    background-color: #36D698;
+    color: #ffff;
+    font-size: 13px;
+    cursor: pointer;
+    border-radius: 5px;
+}

@@ -7,15 +7,22 @@ import {CalendarComponent} from "../sections/calendar/calendar.component";
 import {CalendarFormComponent} from "./formCompoent/calendar-form/calendar-form.component";
 import {PortfolioFormComponent} from "./formCompoent/portfolio-form/portfolio-form.component";
 import { InformationFormComponent } from './formCompoent/information-form/information-form.component';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-add-component',
   standalone: true,
-  imports: [],
+  imports: [
+    FormsModule
+  ],
   templateUrl: './add-component.component.html',
   styleUrl: './add-component.component.css'
 })
 export class AddComponentComponent implements OnInit{
+  colorPrimary:string | null=null;
+  colorSecundary:string | null=null;
+  colorTerciary:string | null=null;
+
   constructor(private commService: ComponentCommunicationService) {}
   readonly dialog = inject(MatDialog);
   openDialog(form:Type<any>) {
@@ -27,6 +34,10 @@ export class AddComponentComponent implements OnInit{
     this.commService.countComponentAction$.subscribe(() =>{
       this.totalInput++;
     })
+  }
+
+  saveColors():void{
+      this.commService.triggerColorPrimary(this.colorPrimary!);
   }
 
   protected readonly FormInputComponent = FormInputComponent;
