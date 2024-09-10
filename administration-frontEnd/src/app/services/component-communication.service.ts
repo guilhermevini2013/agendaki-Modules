@@ -29,4 +29,11 @@ export class ComponentCommunicationService {
   triggerSectionProperty(value: SectionProperty):void{
     this.sectionProperty.next(value);
   }
+
+  private colorPrimary = new Subject<string>();
+  colorPrimaryAction$ = this.colorPrimary.asObservable();
+
+  triggerColorPrimary(color:string):void{
+    this.colorPrimary.next(color);
+  }
 }

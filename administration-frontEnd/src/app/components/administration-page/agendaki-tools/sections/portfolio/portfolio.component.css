@@ -12,13 +12,13 @@ section {
   flex-direction: column;
   align-items: center; /* Centraliza horizontalmente o conteúdo */
   width: 100%; /* Garante que o portfólio ocupe toda a largura disponível */
-  max-width: 1200px; /* Limita a largura máxima do portfólio para manter o layout consistente */
+  max-width: 780px; /* Limita a largura máxima do portfólio para manter o layout consistente */
   padding: 20px; /* Adiciona espaçamento interno */
   box-sizing: border-box; /* Garante que o padding não afete a largura total do elemento */
 }
 
 .portfolio__title {
-  font-size: 24px; /* Tamanho da fonte do título */
+  font-size: 28px; /* Tamanho da fonte do título */
   margin-bottom: 20px; /* Espaço abaixo do título */
   color: #333; /* Cor do texto do título */
   text-align: center; /* Centraliza o texto */
@@ -34,13 +34,19 @@ section {
 
 .portfolio__image {
   display: inline-flex; /* Exibe as imagens em linha horizontal */
-  gap: 20px; /* Espaçamento entre as imagens */
+  gap: 25px; /* Espaçamento entre as imagens */
+}
+
+.portfolio__image div {
+  width: 250px; /* Largura fixa do contêiner da imagem */
+  height: 220px; /* Altura fixa do contêiner da imagem */
+  overflow: hidden; /* Oculta partes da imagem que saem dos limites do contêiner */
 }
 
 .portfolio__image img {
-  display: block; /* Remove o espaço abaixo das imagens */
-  width: max-content; /* Largura fixa das imagens */
-  height: auto; /* Mantém a proporção da altura das imagens */
+  width: 100%; /* Ajusta a largura da imagem ao contêiner */
+  height: 100%; /* Ajusta a altura da imagem ao contêiner */
+  object-fit: cover; /* Garante que a imagem cubra completamente o contêiner sem distorção */
   border-radius: 8px; /* Cantos arredondados das imagens */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adiciona uma sombra suave */
   transition: transform 0.3s ease; /* Transição suave para efeitos de hover */

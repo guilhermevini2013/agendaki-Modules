@@ -6,7 +6,12 @@
                     <mat-label>Nome</mat-label>
                     <input matInput placeholder="Jucilano.." formControlName="name" required>
                 </mat-form-field>
-
+                <mat-form-field appearance="outline">
+                    <mat-label>Serviço</mat-label>
+                    <mat-select  formControlName="idService">
+                        <mat-option *ngFor="let service of services" value="service.name">{{service.name}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
                 <div>
                   <button mat-button type="submit">Adicionar</button>
                 </div>
@@ -26,36 +31,14 @@
                     <mat-label>Preço</mat-label>
                     <input matInput placeholder="20.." mask="00.00" formControlName="price" required>
                 </mat-form-field>
-
-                <mat-form-field appearance="outline" >
-                    <mat-label>Tempo</mat-label>
-                    <input matInput placeholder="20.." mask="000" formControlName="time" required>
-                </mat-form-field>
-
+                <div class="slider">
+                    <span>Escolhe o tempo do serviço</span>
+                    <mat-slider min="5" max="120" step="5"  showTickMarks discrete>
+                        <input matSliderThumb formControlName="time"/>
+                    </mat-slider>
+                </div>
                 <div>
                   <button mat-button type="submit">Adicionar</button>
-                </div>
-            </form>
-        </div>
-    </mat-tab>
-    <mat-tab label="Atribuir">
-        <div class="FormGroups">
-            <form [formGroup]="workerFormGroup" (ngSubmit)="createWorker()" class="secondFormGroup">
-                <mat-form-field appearance="outline">
-                    <mat-label>Funcionário</mat-label>
-                    <mat-select>
-                        <mat-option *ngFor="let worker of workers" value="worker.name">{{worker.name}}</mat-option>
-                    </mat-select>
-                  </mat-form-field>
-
-                  <mat-form-field appearance="outline">
-                    <mat-label>Serviço</mat-label>
-                    <mat-select>
-                        <mat-option *ngFor="let service of services" value="service.name">{{service.name}}</mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                <div>
-                  <button mat-button type="submit">Atribuir</button>
                 </div>
             </form>
         </div>

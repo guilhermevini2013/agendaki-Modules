@@ -7,3 +7,8 @@
     width: 700px;
     height: 700px;
 }
+.slider{
+    display: flex;
+    flex-direction: column;
+    width: 230px;
+}

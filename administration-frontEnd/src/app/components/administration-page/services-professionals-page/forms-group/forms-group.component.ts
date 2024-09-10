@@ -14,6 +14,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { WorkerCreateDTO } from '../../../../models/worker-create-dto';
 import { ServiceCreateDTO } from '../../../../models/professionalAndService/service-create-dto';
 import { NgFor } from '@angular/common';
+import {MatSliderModule} from '@angular/material/slider';
+
 import {
   ProfessionalAndServiceService
 } from "../../../../services/professionalAndService/professional-and-service.service";
@@ -38,6 +40,7 @@ import {
     NgxMaskDirective,
     NgxMaskPipe,
     NgxSpinnerModule, // Include NgxSpinnerModule here
+    MatSliderModule,
   ],
   templateUrl: './forms-group.component.html',
   styleUrl: './forms-group.component.css'
@@ -45,19 +48,20 @@ import {
 
 export class FormsGroupComponent {
   private _formBuilder = inject(FormBuilder);
-
   public workers:WorkerCreateDTO[] = [];
   public services:ServiceCreateDTO[] = [];
   constructor(private professionalAndService:ProfessionalAndServiceService) {
   }
   workerFormGroup = this._formBuilder.group({
     name: ['', Validators.required],
+    idService: [0,Validators.required]
   });
+  defaltTIme:number = 30;
 
   serviceFormGroup = this._formBuilder.group({
     name: ['', Validators.required],
     price: ['', Validators.required],
-    time: ['', Validators.required],
+    time: [this.defaltTIme, Validators.required],
   });
 
   protected switchResetForms():void {
@@ -80,13 +84,15 @@ export class FormsGroupComponent {
       price: Number(this.serviceFormGroup.value.price!),
       duration: Number(this.serviceFormGroup.value.time!),
     }
-    this.professionalAndService.insertService(serviceDto).subscribe(next =>{
+    /*this.professionalAndService.insertService(serviceDto).subscribe(next =>{
       if (next.status == 201){
-        this.services.push(serviceDto);
-        this.serviceFormGroup.reset()
-      }
+        
+    });*/
+    this.services.push(serviceDto);
+    this.serviceFormGroup.reset()
+    this.serviceFormGroup.patchValue({
+      time: this.defaltTIme
     });
-
-
   }
+
 }
