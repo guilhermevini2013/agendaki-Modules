@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import {ɵEmptyOutletComponent} from "@angular/router";
 import {DynamicComponentContainer} from "../dynamic-component-container/dynamic-component-container.component";
 import { ComponentCommunicationService } from '../../../../services/component-communication.service';
+import { PresentationComponent } from '../sections/presentation/presentation.component';
 export interface ComponentWithId {
   component: Type<any>;
   data: any;
@@ -35,7 +36,6 @@ export class PreVisualizerComponent {
   constructor(private commService: ComponentCommunicationService) {}
 
   ngOnInit() {
-
     this.commService.addComponentAction$.subscribe(action => {
       this.components.push(action)
     });

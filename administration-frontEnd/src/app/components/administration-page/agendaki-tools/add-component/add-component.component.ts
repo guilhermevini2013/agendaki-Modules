@@ -8,6 +8,7 @@ import {CalendarFormComponent} from "./formCompoent/calendar-form/calendar-form.
 import {PortfolioFormComponent} from "./formCompoent/portfolio-form/portfolio-form.component";
 import { InformationFormComponent } from './formCompoent/information-form/information-form.component';
 import { FormsModule } from '@angular/forms';
+import { PresentationFormComponent } from './formCompoent/presentation-form/presentation-form.component';
 
 @Component({
   selector: 'app-add-component',
@@ -46,4 +47,5 @@ export class AddComponentComponent implements OnInit{
   protected readonly CalendarFormComponent = CalendarFormComponent;
   protected readonly PortfolioFormComponent = PortfolioFormComponent;
   protected readonly InformationFormComponent = InformationFormComponent;
+  protected readonly PresentationFormComponent = PresentationFormComponent;
 }
