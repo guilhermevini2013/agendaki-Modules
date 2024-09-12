@@ -6,7 +6,12 @@ import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { HolidayFormComponent } from '../../holiday-date-page/holiday-form/holiday-form.component';
 import { UserData } from '../../manage-page/manage-page.component';
-import {Event} from "@angular/router";
+import {
+  ProfessionalAndServiceService
+} from "../../../../services/professionalAndService/professional-and-service.service";
+import {
+  ProfessionalAndServiceReadDTO
+} from "../../../../models/professionalAndService/professional-and-service-read-dto";
 
 @Component({
   selector: 'app-table-show',
@@ -23,13 +28,13 @@ import {Event} from "@angular/router";
   styleUrl: './table-show.component.css'
 })
 export class TableShowComponent implements OnInit{
-  displayedColumns: string[] = ['date', 'isOpen'];
-  dataSource: MatTableDataSource<UserData>;
+  displayedColumns: string[] = ['nameProfessional', 'nameService',"action"];
+  dataSource: MatTableDataSource<ProfessionalAndServiceReadDTO>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor() {
+  constructor(private professionalAndServiceService: ProfessionalAndServiceService) {
     this.dataSource = new MatTableDataSource();
   }
 
@@ -38,7 +43,7 @@ export class TableShowComponent implements OnInit{
     this.dataSource.sort = this.sort;
   }
 
-  applyFilter(event: Event) {
+  applyFilter(event: KeyboardEvent) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
 
@@ -48,9 +53,20 @@ export class TableShowComponent implements OnInit{
   }
 
   ngOnInit(): void {
-
+    this.professionalAndServiceService.getProfessionalsAndServices().subscribe(
+      response => {
+        this.dataSource = new MatTableDataSource(response.body!);
+      }
+    );
   }
 
+  disassociateProfessional(idProfessional: number, idService: number) {
+    this.professionalAndServiceService.disassociateProfessionalAndService(idProfessional, idService).subscribe(
+      () => {
+        this.ngOnInit();
+      }
+    );
+  }
 }
 
 

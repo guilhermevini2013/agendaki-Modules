@@ -1,12 +1,13 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {MatDialogActions, MatDialogClose, MatDialogContent} from "@angular/material/dialog";
 import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {NgIf} from "@angular/common";
-import { MatInput } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatSelectModule } from '@angular/material/select';
-import { ComponentCommunicationService } from '../../../../../../services/component-communication.service';
-import { PresentationComponent } from '../../../sections/presentation/presentation.component';
+import {MatInput} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatSelectModule} from '@angular/material/select';
+import {ComponentCommunicationService} from '../../../../../../services/component-communication.service';
+import {PresentationComponent} from '../../../sections/presentation/presentation.component';
+
 @Component({
   selector: 'app-presentation-form',
   standalone: true,
@@ -21,7 +22,7 @@ import { PresentationComponent } from '../../../sections/presentation/presentati
     NgIf
   ],
   templateUrl: './presentation-form.component.html',
-  styleUrl: './presentation-form.component.css'
+  styleUrls: ['./presentation-form.component.css', '../styleFormComponent.css']
 })
 export class PresentationFormComponent {
   selectedImage: string | ArrayBuffer | null = null;
