@@ -55,7 +55,7 @@ export class FormsGroupComponent implements OnInit{
   }
   workerFormGroup = this._formBuilder.group({
     name: ['', Validators.required],
-    idService: [0,Validators.required]
+    idService: [[],Validators.required]
   });
   defaltTIme:number = 30;
 
@@ -71,34 +71,37 @@ export class FormsGroupComponent implements OnInit{
   }
 
   protected createWorker():void{
-    const workerDto:ProfessionalCreateDto = {
-      name: this.workerFormGroup.value.name!,
-      servicesToJobIDs: [Number(this.workerFormGroup.value.idService!)]
-    }
-
-    console.log(workerDto)
-    this.professionalAndService.insertProfessional(workerDto).pipe().subscribe(next => {
-      if (next.status == 201) {
-        this.workerFormGroup.reset()
+    if (this.workerFormGroup.valid){
+      const workerDto:ProfessionalCreateDto = {
+        name: this.workerFormGroup.value.name!,
+        servicesToJobIDs: this.workerFormGroup.value.idService! as number[]
       }
-    });
-
+      this.professionalAndService.insertProfessional(workerDto).pipe().subscribe(next => {
+        if (next.status == 201) {
+          this.workerFormGroup.reset();
+        }
+      });
+      window.location.reload();
+    }
   }
 
   protected createService():void{
-    const serviceDto:ServiceCreateDTO = {
-      name: this.serviceFormGroup.value.name!,
-      price: Number(this.serviceFormGroup.value.price!),
-      duration: Number(this.serviceFormGroup.value.time!),
-    }
-    this.professionalAndService.insertService(serviceDto).subscribe(next => {
-      if (next.status == 201) {
-        this.serviceFormGroup.reset()
-        this.serviceFormGroup.patchValue({
-          time: this.defaltTIme
-        });
+    if (this.serviceFormGroup.valid){
+      const serviceDto:ServiceCreateDTO = {
+        name: this.serviceFormGroup.value.name!,
+        price: Number(this.serviceFormGroup.value.price!),
+        duration: Number(this.serviceFormGroup.value.time!),
       }
-    });
+      this.professionalAndService.insertService(serviceDto).subscribe(next => {
+        if (next.status == 201) {
+          this.serviceFormGroup.reset()
+          this.serviceFormGroup.patchValue({
+            time: this.defaltTIme
+          });
+        }
+      });
+      window.location.reload();
+    }
   }
 
   ngOnInit(): void {

@@ -1,6 +1,7 @@
 package com.agendaki.scheduling.services.professional;
 
 import com.agendaki.scheduling.dtos.request.ProfessionalInsertDTO;
+import com.agendaki.scheduling.dtos.response.ProfessionalAndServiceReadDTO;
 import com.agendaki.scheduling.dtos.response.ProfessionalReadByServiceDTO;
 import com.agendaki.scheduling.exceptions.ResourceNotFoundException;
 import com.agendaki.scheduling.models.scheduling.Professional;
@@ -11,6 +12,7 @@ import com.agendaki.scheduling.repositories.ServiceRepository;
 import com.agendaki.scheduling.utils.SecurityUtil;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -81,6 +83,23 @@ public class ProfessionalServiceImpl implements ProfessionalService {
         Instance instance = SecurityUtil.getProjectionOfUserEntityAuthenticated().getInstance();
         List<Professional> byServiceAndInstance = professionalRepository.findByServiceAndInstance(idService, instance);
         return byServiceAndInstance.stream().map(professional -> new ProfessionalReadByServiceDTO(professional)).toList();
+    }
+
+    @Override
+    public List<ProfessionalAndServiceReadDTO> getAllProfessionalAndServices() {
+        List<ProfessionalAndServiceReadDTO> professionalAndServiceReadDTOList = new ArrayList<>();
+        populatedProfessionalAndServiceReadDTOList(professionalAndServiceReadDTOList);
+        return professionalAndServiceReadDTOList;
+    }
+
+    private void populatedProfessionalAndServiceReadDTOList(List<ProfessionalAndServiceReadDTO> listToPopulated) {
+        Instance instanceAuth = SecurityUtil.getProjectionOfUserEntityAuthenticated().getInstance();
+        List<Professional> byServiceAndInstance = professionalRepository.findByServiceAndInstance(instanceAuth);
+        byServiceAndInstance.forEach(professional -> {
+            professional.getServices().forEach(service -> {
+                listToPopulated.add(new ProfessionalAndServiceReadDTO(professional.getId(), professional.getName(), service.getId(), service.getName()));
+            });
+        });
     }
 
 }

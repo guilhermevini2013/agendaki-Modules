@@ -1,6 +1,7 @@
 package com.agendaki.scheduling.controllers;
 
 import com.agendaki.scheduling.dtos.request.ProfessionalInsertDTO;
+import com.agendaki.scheduling.dtos.response.ProfessionalAndServiceReadDTO;
 import com.agendaki.scheduling.dtos.response.ProfessionalReadByServiceDTO;
 import com.agendaki.scheduling.services.professional.ProfessionalService;
 import jakarta.validation.Valid;
@@ -51,6 +52,11 @@ public class ProfessionalController {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.ok(professionalsByService);
+    }
+
+    @GetMapping(value = "/all")
+    public List<ProfessionalAndServiceReadDTO> getProfessionalsAndServices(){
+        return this.professionalService.getAllProfessionalAndServices();
     }
 
 }

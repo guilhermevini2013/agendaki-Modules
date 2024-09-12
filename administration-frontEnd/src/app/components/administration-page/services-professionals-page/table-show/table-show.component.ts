@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
@@ -6,6 +6,7 @@ import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { HolidayFormComponent } from '../../holiday-date-page/holiday-form/holiday-form.component';
 import { UserData } from '../../manage-page/manage-page.component';
+import {Event} from "@angular/router";
 
 @Component({
   selector: 'app-table-show',
@@ -13,15 +14,15 @@ import { UserData } from '../../manage-page/manage-page.component';
   imports: [
     MatFormFieldModule,
     MatInputModule,
-    MatTableModule, 
-    MatSortModule, 
+    MatTableModule,
+    MatSortModule,
     MatPaginatorModule,
     HolidayFormComponent
   ],
   templateUrl: './table-show.component.html',
   styleUrl: './table-show.component.css'
 })
-export class TableShowComponent {
+export class TableShowComponent implements OnInit{
   displayedColumns: string[] = ['date', 'isOpen'];
   dataSource: MatTableDataSource<UserData>;
 
@@ -44,6 +45,10 @@ export class TableShowComponent {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  ngOnInit(): void {
+
   }
 
 }

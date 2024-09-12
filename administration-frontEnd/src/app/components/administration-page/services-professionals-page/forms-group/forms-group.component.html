@@ -6,12 +6,11 @@
                     <mat-label>Nome</mat-label>
                     <input matInput placeholder="Jucilano.." formControlName="name" required>
                 </mat-form-field>
-                <mat-form-field appearance="outline">
-                    <mat-label>Serviço</mat-label>
-                    <mat-select  formControlName="idService">
-                        <mat-option *ngFor="let service of services" [value]="service.id">{{service.name}}</mat-option>
-                    </mat-select>
-                  </mat-form-field>
+              <mat-form-field>
+                <mat-select placeholder="Escolha" formControlName="idService" multiple>
+                  <mat-option *ngFor="let service of services" [value]="service.id">{{service.name}}</mat-option>
+                </mat-select>
+              </mat-form-field>
                 <div>
                   <button mat-button type="submit">Adicionar</button>
                 </div>
