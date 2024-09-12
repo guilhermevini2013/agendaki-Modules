@@ -20,14 +20,16 @@ public class SecurityConfig {
             "/api/professional",
             "/api/professional/**",
             "/api/service",
-            "/api/service/**"
+            "/api/service/**",
+            "/api/scheduling/private",
+            "/api/scheduling/private/**",
     };
 
     private final String[] publicRoutes = {
             "/api/user/auth",
             "/api/scheduling",
-            "/api/scheduling",
-            "/api/scheduling/**",
+            "/api/scheduling/public",
+            "/api/scheduling/public/**",
     };
 
     public SecurityConfig(RecoverTokenFilter recoverTokenFilter) {

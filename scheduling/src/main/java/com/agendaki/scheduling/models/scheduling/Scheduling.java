@@ -24,7 +24,7 @@ public class Scheduling {
     private LocalTime startHour;
     @ManyToOne(fetch = FetchType.LAZY)
     private Service service;
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Professional professional;
     @OneToMany(cascade = CascadeType.ALL)
     private List<ResponseForm> responseForms = new ArrayList<>();
@@ -40,5 +40,37 @@ public class Scheduling {
         this.professional = new Professional(insertSchedulingDTO.idProfessional());
         this.responseForms.addAll(insertSchedulingDTO.responsesForms()
                 .stream().map(responseFormDTO -> new ResponseForm(responseFormDTO.id(),responseFormDTO.response(),this)).toList());
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public Instance getInstance() {
+        return instance;
+    }
+
+    public BigDecimal getTotalPrice() {
+        return totalPrice;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public LocalTime getStartHour() {
+        return startHour;
+    }
+
+    public Service getService() {
+        return service;
+    }
+
+    public Professional getProfessional() {
+        return professional;
+    }
+
+    public List<ResponseForm> getResponseForms() {
+        return responseForms;
     }
 }

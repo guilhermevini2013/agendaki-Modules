@@ -23,4 +23,16 @@ public class ResponseForm {
         this.response = response;
         this.scheduling = scheduling;
     }
+
+    public Input getInput() {
+        return input;
+    }
+
+    public String getResponse() {
+        return response;
+    }
+
+    public Scheduling getScheduling() {
+        return scheduling;
+    }
 }
