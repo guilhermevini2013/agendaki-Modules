@@ -32,6 +32,7 @@ public class TemplateServiceImpl implements TemplateService {
         if (templateByInstance.isPresent()){
             Template templateFind = templateByInstance.get();
             templateFind.update(templateDTO);
+            templateRepository.save(templateFind);
         }else {
             Template template = new Template(templateDTO, instanceToAuth);
             templateRepository.save(template);

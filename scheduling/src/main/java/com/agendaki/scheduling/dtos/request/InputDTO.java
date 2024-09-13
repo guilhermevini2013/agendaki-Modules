@@ -9,8 +9,8 @@ public class InputDTO extends SectionToSaveDTO {
     private boolean isIdentifier;
     private String placeholder;
 
-    public InputDTO(TypeSection typeSection, Short position, String horizontalAlignment,boolean isIdentifier, String label, Integer width, String placeholder) {
-        super(typeSection, position, horizontalAlignment);
+    public InputDTO(Long id,TypeSection typeSection, Short position, String horizontalAlignment,boolean isIdentifier, String label, Integer width, String placeholder) {
+        super(id,typeSection, position, horizontalAlignment);
         this.label = label;
         this.width = width;
         this.placeholder = placeholder;
@@ -21,7 +21,7 @@ public class InputDTO extends SectionToSaveDTO {
     }
 
     public InputDTO(Input section) {
-        super(TypeSection.INPUT, section.getPosition(), section.getHorizontalAlignment());
+        super(section.getId(), TypeSection.INPUT, section.getPosition(), section.getHorizontalAlignment());
         this.label = section.getLabel();
         this.width = section.getWidth();
         this.isIdentifier = section.getIdentifier();

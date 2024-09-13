@@ -1,5 +1,6 @@
 package com.agendaki.scheduling.models.template;
 
+import com.agendaki.scheduling.dtos.request.SectionToSaveDTO;
 import com.agendaki.scheduling.dtos.request.TemplateDTO;
 import com.agendaki.scheduling.models.user.Instance;
 import jakarta.persistence.*;

@@ -27,6 +27,9 @@ public class Help extends Section{
         super(sectionToSaveDTO.getPosition(), sectionToSaveDTO.getHorizontalAlignment(), template);
         if (sectionToSaveDTO instanceof HelpDTO) {
             HelpDTO helpDTO = (HelpDTO) sectionToSaveDTO;
+            if (sectionToSaveDTO.getId() != null) {
+                this.id = sectionToSaveDTO.getId();
+            }
             this.title = helpDTO.getTitle();
             this.content = formatListToContent(helpDTO.getContent());
             this.fontSizeTitle = helpDTO.getFontSizeTitle();

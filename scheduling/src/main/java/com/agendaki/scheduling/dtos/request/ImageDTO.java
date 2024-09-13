@@ -8,15 +8,15 @@ public class ImageDTO extends SectionToSaveDTO{
     private String bio;
     private String imageToBase64;
 
-    public ImageDTO(TypeSection typeSection, Short position, String horizontalAlignment, boolean isPortfolio, String bio, String imageToBase64) {
-        super(typeSection, position, horizontalAlignment);
+    public ImageDTO(Long id,TypeSection typeSection, Short position, String horizontalAlignment, boolean isPortfolio, String bio, String imageToBase64) {
+        super(id,typeSection, position, horizontalAlignment);
         this.isPortfolio = isPortfolio;
         this.bio = bio;
         this.imageToBase64 = imageToBase64;
     }
 
     public ImageDTO(Image image) {
-        super(TypeSection.IMAGE, image.getPosition(), image.getHorizontalAlignment());
+        super(image.getId(), TypeSection.IMAGE, image.getPosition(), image.getHorizontalAlignment());
         this.isPortfolio = image.getPortfolio();
         this.bio = image.getBio();
         this.imageToBase64 = image.getUuidImage();

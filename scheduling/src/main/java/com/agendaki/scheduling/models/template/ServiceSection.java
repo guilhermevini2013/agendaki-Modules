@@ -11,6 +11,9 @@ public class ServiceSection extends Section{
 
     public ServiceSection(SectionToSaveDTO sectionToSaveDTO, Template template) {
         super(sectionToSaveDTO.getPosition(), sectionToSaveDTO.getHorizontalAlignment(),template);
+        if (sectionToSaveDTO.getId() != null) {
+            super.id = sectionToSaveDTO.getId();
+        }
     }
 
     public ServiceSection() {}

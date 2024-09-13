@@ -14,17 +14,23 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
         @JsonSubTypes.Type(value = TimeDTO.class, name = "time")
 })
 public abstract class SectionToSaveDTO {
+    private Long id;
     private TypeSection typeSection;
     private Short position;
     private String horizontalAlignment;
 
-    public SectionToSaveDTO(TypeSection typeSection, Short position, String horizontalAlignment) {
+    public SectionToSaveDTO(Long id, TypeSection typeSection, Short position, String horizontalAlignment) {
+        this.id = id;
         this.typeSection = typeSection;
         this.position = position;
         this.horizontalAlignment = horizontalAlignment;
     }
 
     public SectionToSaveDTO() {
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public Short getPosition() {

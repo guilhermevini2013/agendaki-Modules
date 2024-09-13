@@ -10,6 +10,9 @@ import jakarta.persistence.Entity;
 public class Calendar extends Section{
     public Calendar(SectionToSaveDTO sectionToSaveDTO,Template template) {
         super(sectionToSaveDTO.getPosition(), sectionToSaveDTO.getHorizontalAlignment(),template);
+        if (sectionToSaveDTO.getId() != null) {
+            this.id = sectionToSaveDTO.getId();
+        }
     }
 
     public Calendar() {

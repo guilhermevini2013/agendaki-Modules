@@ -8,7 +8,8 @@ public class ResponseForm {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "input_id")
     private Input input;
     private String response;
     @ManyToOne

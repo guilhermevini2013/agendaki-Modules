@@ -5,7 +5,6 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { HolidayFormComponent } from '../../holiday-date-page/holiday-form/holiday-form.component';
-import { UserData } from '../../manage-page/manage-page.component';
 import {
   ProfessionalAndServiceService
 } from "../../../../services/professionalAndService/professional-and-service.service";

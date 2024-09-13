@@ -21,6 +21,13 @@ public abstract class Section {
         this.template = template;
     }
 
+    public Section(Long id, Short position, String horizontalAlignment, Template template) {
+        this.id = id;
+        this.position = position;
+        this.horizontalAlignment = horizontalAlignment;
+        this.template = template;
+    }
+
     public Section() {
 
     }

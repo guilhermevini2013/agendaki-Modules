@@ -26,7 +26,7 @@ public class Scheduling {
     private Service service;
     @ManyToOne(fetch = FetchType.LAZY)
     private Professional professional;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "scheduling", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ResponseForm> responseForms = new ArrayList<>();
 
     public Scheduling() {}

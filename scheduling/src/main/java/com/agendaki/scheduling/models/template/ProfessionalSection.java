@@ -11,6 +11,9 @@ public class ProfessionalSection extends Section{
 
     public ProfessionalSection(SectionToSaveDTO sectionToSaveDTO, Template template) {
         super(sectionToSaveDTO.getPosition(), sectionToSaveDTO.getHorizontalAlignment(),template);
+        if (sectionToSaveDTO.getId() != null) {
+            super.id = sectionToSaveDTO.getId();
+        }
     }
 
     public ProfessionalSection() {}

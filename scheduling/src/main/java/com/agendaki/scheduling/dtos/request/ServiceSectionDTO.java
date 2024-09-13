@@ -5,14 +5,14 @@ import com.agendaki.scheduling.models.template.TypeSection;
 
 public class ServiceSectionDTO extends SectionToSaveDTO{
 
-    public ServiceSectionDTO(TypeSection typeSection, Short position, String horizontalAlignment) {
-        super(typeSection, position, horizontalAlignment);
+    public ServiceSectionDTO(Long id,TypeSection typeSection, Short position, String horizontalAlignment) {
+        super(id,typeSection, position, horizontalAlignment);
     }
 
     public ServiceSectionDTO() {
     }
 
     public ServiceSectionDTO(ServiceSection serviceSection) {
-        super(TypeSection.SERVICE, serviceSection.getPosition(), serviceSection.getHorizontalAlignment());
+        super(serviceSection.getId(), TypeSection.SERVICE, serviceSection.getPosition(), serviceSection.getHorizontalAlignment());
     }
 }

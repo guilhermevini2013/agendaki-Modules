@@ -22,6 +22,9 @@ public class Image extends Section{
         if (sectionToSaveDTO instanceof ImageDTO) {
             ImageDTO imageDTO = (ImageDTO) sectionToSaveDTO;
             this.isPortfolio = imageDTO.isPortfolio();
+            if (sectionToSaveDTO.getId() != null) {
+                super.id = sectionToSaveDTO.getId();
+            }
             if (!imageDTO.isPortfolio()) {
                 this.bio = imageDTO.getBio();
             }

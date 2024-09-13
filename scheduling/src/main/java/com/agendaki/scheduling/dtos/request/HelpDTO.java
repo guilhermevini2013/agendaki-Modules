@@ -12,8 +12,8 @@ public class HelpDTO extends SectionToSaveDTO{
     private String fontSizeTitle;
     private String fontSizeContent;
 
-    public HelpDTO(TypeSection typeSection, Short position, String horizontalAlignment, String title, List<String> content, String fontSizeTitle, String fontSizeContent) {
-        super(typeSection, position, horizontalAlignment);
+    public HelpDTO(Long id,TypeSection typeSection, Short position, String horizontalAlignment, String title, List<String> content, String fontSizeTitle, String fontSizeContent) {
+        super(id,typeSection, position, horizontalAlignment);
         this.title = title;
         this.content = content;
         this.fontSizeTitle = fontSizeTitle;
@@ -24,7 +24,7 @@ public class HelpDTO extends SectionToSaveDTO{
     }
 
     public HelpDTO(Help help) {
-        super(TypeSection.HELP, help.getPosition(), help.getHorizontalAlignment());
+        super(help.getId(), TypeSection.HELP, help.getPosition(), help.getHorizontalAlignment());
         this.title = help.getTitle();
         this.content = Arrays.stream(help.getContent().split("&")).toList();
         this.fontSizeTitle = help.getFontSizeTitle();

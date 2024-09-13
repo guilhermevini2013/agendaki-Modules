@@ -5,15 +5,15 @@ import com.agendaki.scheduling.models.template.TypeSection;
 
 public class ProfessionalSectionDTO extends SectionToSaveDTO{
 
-    public ProfessionalSectionDTO(TypeSection typeSection, Short position, String horizontalAlignment) {
-        super(typeSection, position, horizontalAlignment);
+    public ProfessionalSectionDTO(Long id,TypeSection typeSection, Short position, String horizontalAlignment) {
+        super(id,typeSection, position, horizontalAlignment);
     }
 
     public ProfessionalSectionDTO() {
     }
 
     public ProfessionalSectionDTO(ProfessionalSection professionalSection) {
-        super(TypeSection.PROFESSIONAL,professionalSection.getPosition(),professionalSection.getHorizontalAlignment());
+        super(professionalSection.getId(), TypeSection.PROFESSIONAL,professionalSection.getPosition(),professionalSection.getHorizontalAlignment());
 
     }
 }
