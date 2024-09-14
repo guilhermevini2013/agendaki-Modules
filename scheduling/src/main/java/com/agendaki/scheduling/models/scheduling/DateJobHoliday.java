@@ -1,5 +1,6 @@
 package com.agendaki.scheduling.models.scheduling;
 
+import com.agendaki.scheduling.dtos.request.InsertDateOfSchedulingDTO;
 import com.agendaki.scheduling.dtos.request.InsertHolidayDTO;
 import com.agendaki.scheduling.repositories.UserRepository;
 import jakarta.persistence.DiscriminatorValue;

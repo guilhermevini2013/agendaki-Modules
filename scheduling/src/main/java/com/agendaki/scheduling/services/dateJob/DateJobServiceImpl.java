@@ -3,7 +3,6 @@ package com.agendaki.scheduling.services.dateJob;
 import com.agendaki.scheduling.dtos.request.InsertDateOfSchedulingDTO;
 import com.agendaki.scheduling.dtos.request.InsertHolidayDTO;
 import com.agendaki.scheduling.dtos.response.ReadDateOfSchedulingDTO;
-import com.agendaki.scheduling.dtos.response.ReadDatesOfSchedulingDTO;
 import com.agendaki.scheduling.dtos.response.ReadHolidayDTO;
 import com.agendaki.scheduling.exceptions.DuplicateDataException;
 import com.agendaki.scheduling.exceptions.ResourceNotFoundException;
@@ -17,7 +16,7 @@ import com.agendaki.scheduling.utils.SecurityUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -31,18 +30,15 @@ public class DateJobServiceImpl implements DateJobService {
 
     @Override
     @Transactional
-    public ReadDatesOfSchedulingDTO insertDateOfScheduling(Set<InsertDateOfSchedulingDTO> datesOfSchedulingDTO) {
+    public ReadDateOfSchedulingDTO insertDateOfScheduling(InsertDateOfSchedulingDTO datesOfSchedulingDTO) {
         UserRepository.UserAuthProjection projectionOfUserEntityAuthenticated = SecurityUtil.getProjectionOfUserEntityAuthenticated();
-        Set<String> dayOfWeekAlreadyEntered = new HashSet<>();
-        datesOfSchedulingDTO.forEach(dateOfScheduling -> {
-            if (dayOfWeekAlreadyEntered.contains(dateOfScheduling.dayOfWeek().toString())) {
-                throw new DuplicateDataException(dateOfScheduling.dayOfWeek() + " in scheduling already exists");
-            }
-            DateJobCommon dateJobCommon = new DateJobCommon(dateOfScheduling, projectionOfUserEntityAuthenticated);
-            dateJobRepository.save(dateJobCommon);
-            dayOfWeekAlreadyEntered.add(dateOfScheduling.dayOfWeek().toString());
-        });
-        return new ReadDatesOfSchedulingDTO(datesOfSchedulingDTO);
+        Optional<DateJob> dateJobInstanceAndDayOfWeek = dateJobRepository.findByInstanceAndDayOfWeek(projectionOfUserEntityAuthenticated.getInstance(), datesOfSchedulingDTO.dayOfWeek());
+        if (dateJobInstanceAndDayOfWeek.isPresent()) {
+            ((DateJobCommon) dateJobInstanceAndDayOfWeek.get()).update(datesOfSchedulingDTO);
+            return new ReadDateOfSchedulingDTO((DateJobCommon) dateJobInstanceAndDayOfWeek.get());
+        }
+        DateJobCommon dateJobCommonSaved = dateJobRepository.save(new DateJobCommon(datesOfSchedulingDTO, projectionOfUserEntityAuthenticated));
+        return new ReadDateOfSchedulingDTO(dateJobCommonSaved);
     }
 
 
@@ -56,16 +52,6 @@ public class DateJobServiceImpl implements DateJobService {
         DateJobHoliday dateJobHoliday = new DateJobHoliday(insertHolidayDTO, projectionOfUserEntityAuthenticated);
         dateJobRepository.save(dateJobHoliday);
         return new ReadHolidayDTO(dateJobHoliday);
-    }
-
-    @Override
-    @Transactional
-    public ReadDateOfSchedulingDTO updateDateOfScheduling(InsertDateOfSchedulingDTO insertDateOfSchedulingDTO) {
-        Instance instance = SecurityUtil.getProjectionOfUserEntityAuthenticated().getInstance();
-        DateJobCommon dateJobFind = (DateJobCommon) dateJobRepository.findByInstanceAndDayOfWeek(instance, insertDateOfSchedulingDTO.dayOfWeek())
-                .orElseThrow(() -> new ResourceNotFoundException("Date Job in day of week to update not exist"));
-        dateJobFind.update(insertDateOfSchedulingDTO);
-        return new ReadDateOfSchedulingDTO(dateJobFind);
     }
 
     @Override

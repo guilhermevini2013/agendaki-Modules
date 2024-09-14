@@ -1,5 +1,5 @@
 import { Component, Input, inject, input } from '@angular/core';
-import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
+import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatStepperModule} from '@angular/material/stepper';
@@ -13,8 +13,9 @@ import {MatListModule} from '@angular/material/list';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {NgxMaskDirective, NgxMaskPipe} from 'ngx-mask';
 import {NgxSpinnerModule} from "ngx-spinner";
-import { DayOfWeek } from '../../../../models/dayOfWeek';
-import { WeekCreateDTO } from '../../../../models/week-create-dto';
+import { DayOfWeek } from '../../../../models/dateJob/dayOfWeek';
+import { WeekCreateDTO } from '../../../../models/dateJob/week-create-dto';
+import {DateService} from "../../../../services/dateJob/date.service";
 
 @Component({
   selector: 'app-week-card',
@@ -39,7 +40,7 @@ import { WeekCreateDTO } from '../../../../models/week-create-dto';
     NgIf,
     NgxMaskDirective,
     NgxMaskPipe,
-    NgxSpinnerModule, // Include NgxSpinnerModule here
+    NgxSpinnerModule,
   ],
   templateUrl: './week-card.component.html',
   styleUrl: './week-card.component.css'
@@ -54,6 +55,9 @@ export class WeekCardComponent {
   firstFormGroup = this._formBuilder.group({
     doWork: ['', Validators.required],
   });
+
+  constructor(private dateJobService:DateService) {
+  }
 
   secondFormGroup = this._formBuilder.group({
     startWork: ['', Validators.required],
@@ -82,14 +86,21 @@ export class WeekCardComponent {
     if (this.secondFormGroup.valid) {
       const day: WeekCreateDTO = {
         dayOfWeek: this.weekEnum,
-        scheduleInitial: this.secondFormGroup.value.startWork!,
-        scheduleFinal: this.secondFormGroup.value.endWork!,
-        breakInitial: this.secondFormGroup.value.startOffHour!,
-        breakFinal: this.secondFormGroup.value.endOffHour!
+        scheduleInitial: this.formatTimeString(this.secondFormGroup.value.startWork!),
+        scheduleFinal: this.formatTimeString(this.secondFormGroup.value.endWork!),
+        breakInitial: this.formatTimeString(this.secondFormGroup.value.startOffHour!),
+        breakFinal: this.formatTimeString(this.secondFormGroup.value.endOffHour!)
       }
+      console.log(day)
+      this.dateJobService.insertDateOfJob(day).subscribe();
+    }
 
-      console.log(day);
-    } 
+  }
 
+  private formatTimeString(value: string): string {
+    const cleanValue = value.replace(/\D/g, '');
+    const hours = cleanValue.slice(0, 2);
+    const minutes = cleanValue.slice(2, 4);
+    return `${hours}:${minutes}`;
   }
 }

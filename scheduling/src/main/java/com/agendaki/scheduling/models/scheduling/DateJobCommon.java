@@ -30,6 +30,7 @@ public class DateJobCommon extends DateJob {
         super.breakFinal = insertDateOfSchedulingDTO.breakFinal();
         super.endTime = insertDateOfSchedulingDTO.scheduleFinal();
         super.startTime = insertDateOfSchedulingDTO.scheduleInitial();
+        this.dayOfWeek = insertDateOfSchedulingDTO.dayOfWeek();
     }
 
     public DayOfWeek getDayOfWeek() {

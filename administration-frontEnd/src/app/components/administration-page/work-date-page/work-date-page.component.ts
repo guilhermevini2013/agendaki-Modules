@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { WeekCardComponent } from './week-card/week-card.component';
-import { DayOfWeek } from '../../../models/dayOfWeek';
+import { DayOfWeek } from '../../../models/dateJob/dayOfWeek';
 
 @Component({
   selector: 'app-work-date-page',

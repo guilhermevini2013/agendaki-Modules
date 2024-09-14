@@ -3,7 +3,6 @@ package com.agendaki.scheduling.controllers;
 import com.agendaki.scheduling.dtos.request.InsertDateOfSchedulingDTO;
 import com.agendaki.scheduling.dtos.request.InsertHolidayDTO;
 import com.agendaki.scheduling.dtos.response.ReadDateOfSchedulingDTO;
-import com.agendaki.scheduling.dtos.response.ReadDatesOfSchedulingDTO;
 import com.agendaki.scheduling.dtos.response.ReadHolidayDTO;
 import com.agendaki.scheduling.services.dateJob.DateJobService;
 import jakarta.validation.Valid;
@@ -24,8 +23,8 @@ public class DateJobController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(value = "/common")
-    public ReadDatesOfSchedulingDTO insertDateJob(@RequestBody @Valid Set<InsertDateOfSchedulingDTO> insertDateOfSchedulingDTOS) {
-        ReadDatesOfSchedulingDTO readDatesOfSchedulingDTO = dateJobService.insertDateOfScheduling(insertDateOfSchedulingDTOS);
+    public ReadDateOfSchedulingDTO insertDateJob(@RequestBody @Valid InsertDateOfSchedulingDTO insertDateOfSchedulingDTO) {
+        ReadDateOfSchedulingDTO readDatesOfSchedulingDTO = dateJobService.insertDateOfScheduling(insertDateOfSchedulingDTO);
         return readDatesOfSchedulingDTO;
     }
 
@@ -34,13 +33,6 @@ public class DateJobController {
     public ReadHolidayDTO insertHoliday(@RequestBody @Valid InsertHolidayDTO insertHolidayDTO) {
         ReadHolidayDTO readHolidayDTO = dateJobService.insertHoliday(insertHolidayDTO);
         return readHolidayDTO;
-    }
-
-    @ResponseStatus(HttpStatus.OK)
-    @PutMapping(value = "/common")
-    public ReadDateOfSchedulingDTO updateDateJob(@RequestBody @Valid InsertDateOfSchedulingDTO insertDateOfSchedulingDTO) {
-        ReadDateOfSchedulingDTO readDateOfSchedulingDTO = dateJobService.updateDateOfScheduling(insertDateOfSchedulingDTO);
-        return readDateOfSchedulingDTO;
     }
 
     @GetMapping(value = "/common")
