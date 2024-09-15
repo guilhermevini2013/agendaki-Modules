@@ -1,46 +1,42 @@
 <div class="content">
-    <div class="Cards">
-      <div class="formOptionsCard">
-        <h1>{{weekName}}</h1>
-        <div class="card_side"></div>
-        <span class="formOptionsCardText"></span>
+  <div class="Cards">
+    <div class="formOptionsCard">
+      <h1>{{weekName}}</h1>
+      <div class="card_side"></div>
+      <span class="formOptionsCardText"></span>
 
-        <form [formGroup]="firstFormGroup" class="firstFormGroup">
-          <mat-radio-group aria-label="Select an option" formControlName="doWork">
-            <mat-radio-button value="1">Trabalho</mat-radio-button>
-            <mat-radio-button value="2" (click) = 'notWorkingDay()' [checked]="'true'" >Não Trabalho</mat-radio-button>
-          </mat-radio-group>
+      <form [formGroup]="firstFormGroup" class="firstFormGroup">
+        <mat-radio-group aria-label="Select an option" formControlName="doWork">
+          <mat-radio-button value="1" [checked]="dayOfWeekInf?.isOpen">Trabalho</mat-radio-button>
+          <mat-radio-button value="2" [checked]="!dayOfWeekInf?.isOpen" (change)="alterDayOfWeek(false)">Não Trabalho</mat-radio-button>
+        </mat-radio-group>
+      </form>
+      <ng-template [ngIf]="checkIfWork() == '1'">
+        <form [formGroup]="secondFormGroup" class="secondFormGroup" (ngSubmit)="alterDayOfWeek(true)">
+          <mat-form-field appearance="outline">
+            <mat-label>Inicio Expediente</mat-label>
+            <input matInput placeholder="00:00" mask="00:00" formControlName="startWork" minlength="4" required>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Fim Expediente</mat-label>
+            <input matInput placeholder="00:00" mask="00:00" formControlName="endWork" minlength="4" required>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Inicio Almoço</mat-label>
+            <input matInput placeholder="00:00" mask="00:00" formControlName="startOffHour" minlength="4" required>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Fim Almoço</mat-label>
+            <input matInput placeholder="00:00" mask="00:00" formControlName="endOffHour" minlength="4" required>
+          </mat-form-field>
+          <div>
+            <button mat-button type="submit">Salvar</button>
+          </div>
         </form>
-
-        <ng-template [ngIf]="checkIfWork() == '1'">
-          <form [formGroup]="secondFormGroup" class="secondFormGroup" (ngSubmit)="createDayOfWeek()">
-            <mat-form-field appearance="outline" >
-              <mat-label>Inicio Expediente</mat-label>
-              <input matInput placeholder="00:00" mask="00:00" formControlName="startWork" minlength="4" required>
-            </mat-form-field>
-
-            <mat-form-field appearance="outline" >
-              <mat-label>Fim Expediente</mat-label>
-              <input matInput placeholder="00:00" mask="00:00" formControlName="endWork" minlength="4" required>
-            </mat-form-field>
-
-            <mat-form-field appearance="outline">
-              <mat-label>Inicio Almoço</mat-label>
-              <input matInput placeholder="00:00" mask="00:00" formControlName="startOffHour" minlength="4" required>
-            </mat-form-field>
-
-            <mat-form-field appearance="outline">
-              <mat-label>Fim Almoço</mat-label>
-              <input matInput placeholder="00:00" mask="00:00"  formControlName="endOffHour" minlength="4" required>
-            </mat-form-field>
-
-            <div>
-              <button mat-button type="submit">Salvar</button>
-            </div>
-          </form>
-        </ng-template>
-
-
-      </div>
+      </ng-template>
     </div>
   </div>
+</div>

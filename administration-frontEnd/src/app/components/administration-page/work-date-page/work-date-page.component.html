@@ -4,13 +4,7 @@
 
 <div class="content">
   <div class="Cards">
-    <app-week-card weekName="Segunda" [weekEnum]="DayOfWeek.MONDAY"></app-week-card>
-    <app-week-card weekName="Terça" [weekEnum]="DayOfWeek.TUESDAY"></app-week-card>
-    <app-week-card weekName="Quarta" [weekEnum]="DayOfWeek.WEDNESDAY"></app-week-card>
-    <app-week-card weekName="Quinta" [weekEnum]="DayOfWeek.THURSDAY"></app-week-card>
-    <app-week-card weekName="Sexta" [weekEnum]="DayOfWeek.FRIDAY"></app-week-card>
-    <app-week-card weekName="Sábado" [weekEnum]="DayOfWeek.SATURDAY"></app-week-card>
-    <app-week-card weekName="Domingo" [weekEnum]="DayOfWeek.SUNDAY"></app-week-card>
+    <app-week-card *ngFor="let dayOfWeek of daysOfWeek" [dayOfWeekInf]="dayOfWeek" [weekEnum]="dayOfWeek.dayOfWeek"></app-week-card>
   </div>
-  
+
 </div>

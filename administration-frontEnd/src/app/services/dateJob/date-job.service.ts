@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpResponse} from "@angular/common/http";
 import {WeekCreateDTO} from "../../models/dateJob/week-create-dto";
 import {Observable} from "rxjs";
+import {DateJobReadDTO} from "../../models/dateJob/date-job-read-DTO";
 
 @Injectable({
   providedIn: 'root'
 })
-export class DateService {
+export class DateJobService {
   private baseUrl = 'http://localhost:8081';
   constructor(private http:HttpClient) { }
 
@@ -17,6 +18,14 @@ export class DateService {
         observe: 'response'
       }
     );
+  }
 
+  getAllDateOfJobCommon():Observable<HttpResponse<DateJobReadDTO[]>>{
+    return this.http.get<DateJobReadDTO[]>(this.baseUrl+'/scheduling/api/dateJob/common',
+      {
+        withCredentials: true,
+        observe: 'response'
+      }
+    );
   }
 }

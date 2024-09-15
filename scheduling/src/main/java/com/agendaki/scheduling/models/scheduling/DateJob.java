@@ -14,18 +14,20 @@ public abstract class DateJob {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne(fetch = FetchType.LAZY)
-    private Instance instance;
+    protected Instance instance;
     protected LocalTime startTime;
     protected LocalTime endTime;
     protected LocalTime breakInitial;
     protected LocalTime breakFinal;
+    protected Boolean isOpen;
 
-    public DateJob(Instance instance, LocalTime startTime, LocalTime endTime, LocalTime breakInitial, LocalTime breakFinal) {
+    public DateJob(Instance instance, LocalTime startTime, LocalTime endTime, LocalTime breakInitial, LocalTime breakFinal, Boolean isOpen) {
         this.instance = instance;
         this.startTime = startTime;
         this.endTime = endTime;
         this.breakInitial = breakInitial;
         this.breakFinal = breakFinal;
+        this.isOpen = isOpen;
     }
 
     public DateJob() {
@@ -50,5 +52,13 @@ public abstract class DateJob {
 
     public LocalTime getBreakFinal() {
         return breakFinal;
+    }
+
+    public Boolean getOpen() {
+        return isOpen;
+    }
+
+    public Instance getInstance() {
+        return instance;
     }
 }

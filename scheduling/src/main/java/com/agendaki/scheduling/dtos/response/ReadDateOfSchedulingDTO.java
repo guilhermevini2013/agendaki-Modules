@@ -11,8 +11,9 @@ public record ReadDateOfSchedulingDTO(
         LocalTime scheduleFinal,
         LocalTime breakInitial,
         LocalTime breakFinal,
-        DayOfWeek dayOfWeek) {
+        DayOfWeek dayOfWeek,
+        Boolean isOpen) {
         public ReadDateOfSchedulingDTO(DateJobCommon dateJob) {
-                this(dateJob.getId(), dateJob.getStartTime(), dateJob.getEndTime(), dateJob.getBreakInitial(), dateJob.getBreakFinal(), dateJob.getDayOfWeek());
+                this(dateJob.getId(), dateJob.getStartTime(), dateJob.getEndTime(), dateJob.getBreakInitial(), dateJob.getBreakFinal(), dateJob.getDayOfWeek(), dateJob.getOpen());
         }
 }

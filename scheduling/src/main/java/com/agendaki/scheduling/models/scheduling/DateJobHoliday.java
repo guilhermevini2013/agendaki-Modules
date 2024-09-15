@@ -1,6 +1,5 @@
 package com.agendaki.scheduling.models.scheduling;
 
-import com.agendaki.scheduling.dtos.request.InsertDateOfSchedulingDTO;
 import com.agendaki.scheduling.dtos.request.InsertHolidayDTO;
 import com.agendaki.scheduling.repositories.UserRepository;
 import jakarta.persistence.DiscriminatorValue;
@@ -11,24 +10,19 @@ import java.time.LocalDate;
 @Entity
 @DiscriminatorValue("HOLIDAY")
 public class DateJobHoliday extends DateJob {
-    private Boolean isOpen;
     private LocalDate date;
 
     public DateJobHoliday(InsertHolidayDTO holidayDTO, UserRepository.UserAuthProjection projectionOfUserEntityAuthenticated) {
         super(projectionOfUserEntityAuthenticated.getInstance(), holidayDTO.scheduleInitial(), holidayDTO.scheduleFinal(),
-                holidayDTO.breakInitial(), holidayDTO.breakFinal());
-        this.isOpen = holidayDTO.isOpen();
+                holidayDTO.breakInitial(), holidayDTO.breakFinal(), holidayDTO.isOpen());
         this.date = holidayDTO.dateOfHoliday();
     }
 
-    public DateJobHoliday() {
-
-    }
+    public DateJobHoliday() {}
 
     public Boolean getOpen() {
         return isOpen;
     }
-
     public LocalDate getDate() {
         return date;
     }
@@ -38,7 +32,7 @@ public class DateJobHoliday extends DateJob {
         super.breakInitial = insertHolidayDTO.breakInitial();
         super.endTime = insertHolidayDTO.scheduleFinal();
         super.startTime = insertHolidayDTO.scheduleInitial();
-        this.isOpen = insertHolidayDTO.isOpen();
+        super.isOpen = insertHolidayDTO.isOpen();
         this.date = insertHolidayDTO.dateOfHoliday();
     }
 }

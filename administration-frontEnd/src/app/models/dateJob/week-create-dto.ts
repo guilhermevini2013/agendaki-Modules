@@ -6,4 +6,5 @@ export interface WeekCreateDTO {
   scheduleFinal: string;
   breakInitial: string;
   breakFinal: string;
+  isOpen:boolean;
 }

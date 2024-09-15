@@ -2,6 +2,7 @@ package com.agendaki.scheduling.models.scheduling;
 
 import com.agendaki.scheduling.dtos.request.InsertDateOfSchedulingDTO;
 import com.agendaki.scheduling.dtos.response.ReadDateOfSchedulingDTO;
+import com.agendaki.scheduling.models.user.Instance;
 import com.agendaki.scheduling.repositories.UserRepository;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
@@ -18,8 +19,14 @@ public class DateJobCommon extends DateJob {
 
     public DateJobCommon(InsertDateOfSchedulingDTO dateOfSchedulingDTO, UserRepository.UserAuthProjection projectionOfUserEntityAuthenticated) {
         super(projectionOfUserEntityAuthenticated.getInstance(), dateOfSchedulingDTO.scheduleInitial(), dateOfSchedulingDTO.scheduleFinal(),
-                dateOfSchedulingDTO.breakInitial(), dateOfSchedulingDTO.breakFinal());
+                dateOfSchedulingDTO.breakInitial(), dateOfSchedulingDTO.breakFinal(), dateOfSchedulingDTO.isOpen());
         this.dayOfWeek = dateOfSchedulingDTO.dayOfWeek();
+    }
+
+    public DateJobCommon(DayOfWeek dayOfWeek, Instance instance) {
+        super.instance = instance;
+        this.isOpen = false;
+        this.dayOfWeek = dayOfWeek;
     }
 
     public DateJobCommon() {
@@ -31,9 +38,12 @@ public class DateJobCommon extends DateJob {
         super.endTime = insertDateOfSchedulingDTO.scheduleFinal();
         super.startTime = insertDateOfSchedulingDTO.scheduleInitial();
         this.dayOfWeek = insertDateOfSchedulingDTO.dayOfWeek();
+        this.isOpen = insertDateOfSchedulingDTO.isOpen();
     }
 
     public DayOfWeek getDayOfWeek() {
         return dayOfWeek;
     }
+
+
 }

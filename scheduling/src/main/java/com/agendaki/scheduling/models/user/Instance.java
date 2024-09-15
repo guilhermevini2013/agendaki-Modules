@@ -1,12 +1,10 @@
 package com.agendaki.scheduling.models.user;
 
-import com.agendaki.scheduling.models.scheduling.DateJob;
-import com.agendaki.scheduling.models.scheduling.Professional;
-import com.agendaki.scheduling.models.scheduling.Scheduling;
-import com.agendaki.scheduling.models.scheduling.Service;
+import com.agendaki.scheduling.models.scheduling.*;
 import com.agendaki.scheduling.models.template.Template;
 import jakarta.persistence.*;
 
+import java.time.DayOfWeek;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
@@ -21,7 +19,7 @@ public class Instance {
     private String keyInstance;
     @OneToMany(mappedBy = "instance")
     private Set<Scheduling> schedules = new HashSet<>();
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private Set<DateJob> dateJobs = new HashSet<>();
     @OneToOne(fetch = FetchType.LAZY)
     private User user;
@@ -35,6 +33,8 @@ public class Instance {
     public Instance(User user) {
         this.user = user;
         this.keyInstance = UUID.randomUUID().toString().replace("-", "");
+        this.dateJobs = Set.of(new DateJobCommon(DayOfWeek.FRIDAY,this), new DateJobCommon(DayOfWeek.MONDAY, this), new DateJobCommon(DayOfWeek.SATURDAY, this), new DateJobCommon(DayOfWeek.SUNDAY,this),
+                new DateJobCommon(DayOfWeek.THURSDAY,this), new DateJobCommon(DayOfWeek.TUESDAY,this), new DateJobCommon(DayOfWeek.WEDNESDAY,this));
     }
 
     public Instance() {
