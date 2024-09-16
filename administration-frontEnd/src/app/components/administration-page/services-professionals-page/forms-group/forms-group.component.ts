@@ -65,6 +65,15 @@ export class FormsGroupComponent implements OnInit{
     time: [this.defaltTIme, Validators.required],
   });
 
+  deleteWorkerFormGroup = this._formBuilder.group({
+    name: ['', Validators.required],
+  });
+
+  deleteServiceFormGroup = this._formBuilder.group({
+    name: ['', Validators.required],
+  });
+
+
   protected switchResetForms():void {
     this.serviceFormGroup.reset()
     this.workerFormGroup.reset()

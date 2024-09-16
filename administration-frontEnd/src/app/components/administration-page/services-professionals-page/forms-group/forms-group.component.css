@@ -1,14 +1,27 @@
+.FormGroups {
+    display: flex;
+    flex-direction: row;
+    gap: 1px;
+    width: 700px;
+    height: 350px;
+}
+
 .secondFormGroup {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
 
-    width: 700px;
-    height: 700px;
+    width: 100%;
+    height: 100%;
 }
 .slider{
     display: flex;
     flex-direction: column;
     width: 230px;
+}
+
+label {
+    display: flex;
+    flex-direction: column;
 }
