@@ -16,6 +16,7 @@ import com.agendaki.scheduling.utils.SecurityUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -56,10 +57,10 @@ public class DateJobServiceImpl implements DateJobService {
 
     @Override
     @Transactional(readOnly = true)
-    public Set<ReadDateOfSchedulingDTO> getAllDateOfScheduling() {
+    public List<ReadDateOfSchedulingDTO> getAllDateOfScheduling() {
         Instance userAuth = SecurityUtil.getProjectionOfUserEntityAuthenticated().getInstance();
-        Set<DateJob> datesJobByInstance = dateJobRepository.findDateJobCommonByInstance(userAuth);
-        return datesJobByInstance.stream().map(dateJob -> new ReadDateOfSchedulingDTO((DateJobCommon) dateJob)).collect(Collectors.toSet());
+        List<DateJob> datesJobByInstance = dateJobRepository.findDateJobCommonByInstance(userAuth);
+        return datesJobByInstance.stream().map(dateJob -> new ReadDateOfSchedulingDTO((DateJobCommon) dateJob)).toList();
     }
 
     @Override

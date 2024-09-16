@@ -1,5 +1,13 @@
 import { Component, Type } from '@angular/core';
-import { CdkDropList, CdkDrag, CdkDragPlaceholder, moveItemInArray, CdkDragDrop, CdkDragHandle } from '@angular/cdk/drag-drop';
+import {
+  CdkDropList,
+  CdkDrag,
+  CdkDragPlaceholder,
+  moveItemInArray,
+  CdkDragDrop,
+  CdkDragHandle,
+  CdkDragStart
+} from '@angular/cdk/drag-drop';
 import { CommonModule } from '@angular/common';
 import {ɵEmptyOutletComponent} from "@angular/router";
 import {DynamicComponentContainer} from "../dynamic-component-container/dynamic-component-container.component";
@@ -43,5 +51,11 @@ export class PreVisualizerComponent {
     this.commService.colorPrimaryAction$.subscribe(action =>{
       this.primaryColor = action;
     })
+  }
+
+  onDragStarted(event: CdkDragStart) {
+    const placeholderElement = event.source.getPlaceholderElement();
+    const sourceElement = event.source.element.nativeElement;
+    placeholderElement.style.height = `${sourceElement.clientHeight}px`;
   }
 }

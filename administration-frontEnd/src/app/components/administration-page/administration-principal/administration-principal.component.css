@@ -9,11 +9,11 @@
     right: 0;
     background-color: aqua;
   }
-  
+
   .example-sidenav-container {
     flex: 1;
   }
-  
+
   .example-is-mobile .example-sidenav-container {
     flex: 1 0 auto;
   }
@@ -105,6 +105,10 @@
     width: 100%;
     padding-left: 15px;
   }
+.content-sidenav__inf div span{
+  width: 80%;
+  word-break: break-all;
+}
 
   .content-sidenav__inf div span a{
     text-decoration: none;

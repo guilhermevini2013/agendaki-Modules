@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -23,7 +24,7 @@ public interface DateJobRepository extends JpaRepository<DateJob, Long> {
     Optional<DateJob> findByInstanceAndDayOfWeek(Instance instance, DayOfWeek dayOfWeek);
 
     @Query("select dc from DateJobCommon dc where dc.instance= :instance")
-    Set<DateJob> findDateJobCommonByInstance(Instance instance);
+    List<DateJob> findDateJobCommonByInstance(Instance instance);
 
     @Query("select dh from DateJobHoliday dh where dh.instance = :instance")
     Set<DateJob> findDateJobHolidayByInstance(Instance instance);

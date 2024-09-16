@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -36,8 +37,8 @@ public class DateJobController {
     }
 
     @GetMapping(value = "/common")
-    public ResponseEntity<Set<ReadDateOfSchedulingDTO>> getDatesOfScheduling() {
-        Set<ReadDateOfSchedulingDTO> allDateOfScheduling = dateJobService.getAllDateOfScheduling();
+    public ResponseEntity<List<ReadDateOfSchedulingDTO>> getDatesOfScheduling() {
+        List<ReadDateOfSchedulingDTO> allDateOfScheduling = dateJobService.getAllDateOfScheduling();
         if (allDateOfScheduling.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
