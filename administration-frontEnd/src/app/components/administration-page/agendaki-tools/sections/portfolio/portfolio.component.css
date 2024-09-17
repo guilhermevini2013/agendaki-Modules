@@ -20,7 +20,6 @@ section {
 .portfolio__title {
   font-size: 28px; /* Tamanho da fonte do título */
   margin-bottom: 20px; /* Espaço abaixo do título */
-  color: #333; /* Cor do texto do título */
   text-align: center; /* Centraliza o texto */
 }
 

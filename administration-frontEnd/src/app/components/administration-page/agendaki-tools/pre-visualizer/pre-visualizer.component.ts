@@ -38,6 +38,8 @@ export class PreVisualizerComponent {
   ];
   protected primaryColor:string | null = "#ffff";
 
+  protected secundaryColor:string | null = "#000";
+
   drop(event: CdkDragDrop<ComponentWithId[]>) {
     moveItemInArray(this.components, event.previousIndex, event.currentIndex);
   }
@@ -50,6 +52,12 @@ export class PreVisualizerComponent {
 
     this.commService.colorPrimaryAction$.subscribe(action =>{
       this.primaryColor = action;
+    })
+
+    this.commService.colorSecundaryAction$.subscribe(action =>{
+      console.log("color");
+      
+      this.secundaryColor = action;
     })
   }
 

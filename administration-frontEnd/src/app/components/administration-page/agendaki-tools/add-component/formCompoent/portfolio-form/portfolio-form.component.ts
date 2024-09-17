@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {MatDialogClose, MatDialogContent} from "@angular/material/dialog";
+import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
+import {MatDialogClose, MatDialogContent, MatDialogRef} from "@angular/material/dialog";
 import {ComponentCommunicationService} from "../../../../../../services/component-communication.service";
 import {PerfilComponent} from "../../../sections/perfil/perfil.component";
 import {NgForOf} from "@angular/common";
@@ -29,11 +29,11 @@ export class PortfolioFormComponent {
   selectedFiles: { name: string, base64: string }[] = [];
 
   formEditPortfolio: FormGroup = new FormGroup({
-    urlsPhotos: new FormControl<string[]>([]),
-    title: new FormControl('')
+    urlsPhotos: new FormControl<string[]>([],Validators.required),
+    title: new FormControl('',Validators.required)
   });
 
-  constructor(private communicationComponent: ComponentCommunicationService) {}
+  constructor(private communicationComponent: ComponentCommunicationService,private dialogRef: MatDialogRef<PortfolioFormComponent>) {}
 
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
@@ -66,10 +66,14 @@ export class PortfolioFormComponent {
   }
 
   submitForm(): void {
-    console.log(this.formEditPortfolio.value.urlsPhotos);
-    this.communicationComponent.triggerAddComponentAction({
-      component: PortfolioComponent,
-      data: this.formEditPortfolio.value
-    });
+    if(this.selectedFiles.length > 0){
+      if (this.formEditPortfolio.valid) {
+        this.communicationComponent.triggerAddComponentAction({
+          component: PortfolioComponent,
+          data: this.formEditPortfolio.value
+        });
+        this.dialogRef.close();
+      }
+    }
   }
 }

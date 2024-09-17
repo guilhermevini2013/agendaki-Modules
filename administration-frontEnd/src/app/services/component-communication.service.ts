@@ -36,4 +36,11 @@ export class ComponentCommunicationService {
   triggerColorPrimary(color:string):void{
     this.colorPrimary.next(color);
   }
+
+  private colorSecundary = new Subject<string>();
+  colorSecundaryAction$ = this.colorSecundary.asObservable();
+
+  triggerColorSecundary(color:string):void{
+    this.colorSecundary.next(color);
+  }
 }

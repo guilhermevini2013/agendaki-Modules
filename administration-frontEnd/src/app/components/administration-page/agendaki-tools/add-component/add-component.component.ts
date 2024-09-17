@@ -39,6 +39,7 @@ export class AddComponentComponent implements OnInit{
 
   saveColors():void{
       this.commService.triggerColorPrimary(this.colorPrimary!);
+      this.commService.triggerColorSecundary(this.colorSecundary!);
   }
 
   protected readonly FormInputComponent = FormInputComponent;

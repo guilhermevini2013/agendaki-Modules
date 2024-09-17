@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {MatDialogClose, MatDialogContent} from "@angular/material/dialog";
+import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
+import {MatDialogClose, MatDialogContent, MatDialogRef} from "@angular/material/dialog";
 import {ComponentCommunicationService} from "../../../../../../services/component-communication.service";
 import {CalendarComponent} from "../../../sections/calendar/calendar.component";
 import { MatSelectModule } from '@angular/material/select';
@@ -26,16 +26,19 @@ import { MatInput } from '@angular/material/input';
 export class CalendarFormComponent {
 
   protected formEditCalendar:FormGroup = new FormGroup<any>({
-    horizontalAlignment: new FormControl('')
+    horizontalAlignment: new FormControl('',Validators.required)
   });
 
-  constructor(private communicationComponent:ComponentCommunicationService) {
+  constructor(private communicationComponent:ComponentCommunicationService, private dialogRef: MatDialogRef<CalendarFormComponent>) {
   }
 
   submitForm():void{
-    this.communicationComponent.triggerAddComponentAction({
-      component:CalendarComponent,
-      data:this.formEditCalendar.value
-    })
+    if(this.formEditCalendar.valid){
+      this.communicationComponent.triggerAddComponentAction({
+        component:CalendarComponent,
+        data:this.formEditCalendar.value
+      })
+      this.dialogRef.close();
+    }
   }
 }

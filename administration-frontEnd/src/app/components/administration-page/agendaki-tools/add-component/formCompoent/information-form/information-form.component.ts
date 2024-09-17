@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common'; // Importar CommonModule para NgIf e NgFor
-import { MatDialogModule } from '@angular/material/dialog'; // Importar MatDialogModule para MatDialogClose, MatDialogActions, MatDialogContent
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog'; // Importar MatDialogModule para MatDialogClose, MatDialogActions, MatDialogContent
 import { ComponentCommunicationService } from '../../../../../../services/component-communication.service';
 import { InformationComponent } from '../../../sections/information/information.component';
 import { MatInput } from '@angular/material/input';
@@ -27,11 +27,11 @@ export class InformationFormComponent {
   protected informationList: string[] = [];
   inputValue: string = '';
   formEditInformation: FormGroup = new FormGroup({
-    title: new FormControl(''),
-    informationList: new FormControl(this.informationList)
+    title: new FormControl('',Validators.required),
+    informationList: new FormControl(this.informationList,Validators.required)
   });
 
-  constructor(private communicationComponent: ComponentCommunicationService) {}
+  constructor(private communicationComponent: ComponentCommunicationService, private dialogRef: MatDialogRef<InformationFormComponent>) {}
 
   addInformation(): void {
     if (this.inputValue.trim()) {
@@ -41,12 +41,15 @@ export class InformationFormComponent {
   }
 
   submitForm(): void {
-    this.formEditInformation.patchValue({
-      informationList: this.informationList
-    });
-    this.communicationComponent.triggerAddComponentAction({
-      component: InformationComponent,
-      data: this.formEditInformation.value
-    });
+    if(this.formEditInformation.valid){
+      this.formEditInformation.patchValue({
+        informationList: this.informationList
+      });
+      this.communicationComponent.triggerAddComponentAction({
+        component: InformationComponent,
+        data: this.formEditInformation.value
+      });
+      this.dialogRef.close();
+    }
   }
 }

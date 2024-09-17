@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import {MatDialogActions, MatDialogClose, MatDialogContent} from "@angular/material/dialog";
-import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
+import {MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef} from "@angular/material/dialog";
+import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {ComponentCommunicationService} from "../../../../../../services/component-communication.service";
 import {InputComponent} from "../../../sections/input/input.component";
 import {MatSliderModule} from '@angular/material/slider';
@@ -30,14 +30,14 @@ export class FormInputComponent {
   alignSelected:string = "center";
 
   formEditInput:FormGroup = new FormGroup<any>({
-    label: new FormControl(''),
-    placeHolder: new FormControl(''),
-    width: new FormControl(''),
-    horizontalAlignment: new FormControl('')
+    label: new FormControl('',Validators.required),
+    placeHolder: new FormControl('',Validators.required),
+    width: new FormControl('',Validators.required),
+    horizontalAlignment: new FormControl('',Validators.required)
     
   });
 
-  constructor(private communicationComponent:ComponentCommunicationService) {
+  constructor(private communicationComponent:ComponentCommunicationService, private dialogRef: MatDialogRef<FormInputComponent>) {
   }
 
   submitForm():void{
@@ -47,9 +47,12 @@ export class FormInputComponent {
 
     this.formEditInput.value.width +="%";
 
-    this.communicationComponent.triggerAddComponentAction({
-      component:InputComponent,
-      data: this.formEditInput.value
-    })
+    if(this.formEditInput.valid){
+      this.communicationComponent.triggerAddComponentAction({
+        component:InputComponent,
+        data: this.formEditInput.value
+      })
+      this.dialogRef.close();
+    }
   }
 }

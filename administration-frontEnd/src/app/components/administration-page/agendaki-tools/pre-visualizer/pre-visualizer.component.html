@@ -15,7 +15,8 @@
         <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
         <app-dynamic-component-container
           [component]="component.component"
-          [data]="component.data">
+          [data]="component.data"
+          [ngStyle]="{'color': secundaryColor!}">
         </app-dynamic-component-container>
       </div>
     </div>
