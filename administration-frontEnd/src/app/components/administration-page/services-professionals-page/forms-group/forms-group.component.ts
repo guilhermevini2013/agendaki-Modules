@@ -57,12 +57,12 @@ export class FormsGroupComponent implements OnInit{
     name: ['', Validators.required],
     idService: [[],Validators.required]
   });
-  defaltTIme:number = 30;
+  defaultTime:number = 30;
 
   serviceFormGroup = this._formBuilder.group({
     name: ['', Validators.required],
     price: ['', Validators.required],
-    time: [this.defaltTIme, Validators.required],
+    time: [this.defaultTime, Validators.required],
   });
 
   deleteWorkerFormGroup = this._formBuilder.group({
@@ -70,14 +70,8 @@ export class FormsGroupComponent implements OnInit{
   });
 
   deleteServiceFormGroup = this._formBuilder.group({
-    name: ['', Validators.required],
+    id: [0, Validators.required],
   });
-
-
-  protected switchResetForms():void {
-    this.serviceFormGroup.reset()
-    this.workerFormGroup.reset()
-  }
 
   protected createWorker():void{
     if (this.workerFormGroup.valid){
@@ -105,10 +99,11 @@ export class FormsGroupComponent implements OnInit{
         if (next.status == 201) {
           this.serviceFormGroup.reset()
           this.serviceFormGroup.patchValue({
-            time: this.defaltTIme
+            time: this.defaultTime
           });
         }
       });
+      this.serviceFormGroup.reset();
       window.location.reload();
     }
   }
@@ -121,5 +116,11 @@ export class FormsGroupComponent implements OnInit{
     });
   }
 
+  deleteService() {
+    if (this.deleteServiceFormGroup.valid){
+      this.professionalAndService.deleteService(this.deleteServiceFormGroup.value.id!).subscribe();
+      window.location.reload();
+    }
+  }
 }
 

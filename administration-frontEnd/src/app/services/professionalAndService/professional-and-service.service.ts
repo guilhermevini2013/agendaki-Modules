@@ -56,11 +56,27 @@ export class ProfessionalAndServiceService {
   }
 
   disassociateProfessionalAndService(idProfessional:number,idService:number):Observable<void>{
-    return this.http.put<void>(this.baseHttp+"/scheduling/api/professional/disassociate?id="+idProfessional,Array.of(idService),{
+    return this.http.put<void>(this.baseHttp + "/scheduling/api/professional/disassociate", Array.of(idService), {
       withCredentials:true,
+      params: {
+        id: idProfessional
+      },
       headers:{
         'Content-Type':'application/json'
       }
     })
+  }
+
+  deleteService(id: number): Observable<HttpResponse<void>> {
+    return this.http.delete<void>(this.baseHttp + "/scheduling/api/service", {
+      withCredentials: true,
+      params: {
+        id: id
+      },
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      observe: 'response'
+    });
   }
 }

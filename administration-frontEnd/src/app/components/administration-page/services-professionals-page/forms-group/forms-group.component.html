@@ -49,27 +49,27 @@
                 <label>
                     <span>Delete um Funcionário</span>
                      <mat-form-field>
-                        <mat-select placeholder="Escolha" formControlName="deleteWorkers" multiple>
+                        <mat-select placeholder="Escolha" multiple>
                             <mat-option *ngFor="let worker of workers" [value]="worker.name">{{worker.name}}</mat-option>
                         </mat-select>
                     </mat-form-field>
                 </label>
-            
+
                 <div>
                   <button mat-button type="submit">Deletar</button>
                 </div>
             </form>
 
-            <form [formGroup]="deleteServiceFormGroup" (ngSubmit)="createWorker()" class="secondFormGroup">
+            <form [formGroup]="deleteServiceFormGroup" (ngSubmit)="deleteService()" class="secondFormGroup">
                 <label>
                     <span>Delete um Serviço</span>
                      <mat-form-field>
-                        <mat-select placeholder="Escolha" formControlName="deleteServices" multiple>
+                        <mat-select placeholder="Escolha" formControlName="id">
                             <mat-option *ngFor="let service of services" [value]="service.id">{{service.name}}</mat-option>
                         </mat-select>
                     </mat-form-field>
                 </label>
-            
+
                 <div>
                   <button mat-button type="submit">Deletar</button>
                 </div>
@@ -84,25 +84,25 @@
                 <label>
                     <span>Associe um Funcionário</span>
                      <mat-form-field>
-                        <mat-select placeholder="Escolha" formControlName="deleteWorkers" multiple>
+                        <mat-select placeholder="Escolha">
                             <mat-option *ngFor="let worker of workers" [value]="worker.name">{{worker.name}}</mat-option>
                         </mat-select>
                     </mat-form-field>
-    
+
                     <span>Á um Serviço</span>
                     <mat-form-field>
-                        <mat-select placeholder="Escolha" formControlName="deleteServices" multiple>
+                        <mat-select placeholder="Escolha" multiple>
                             <mat-option *ngFor="let service of services" [value]="service.id">{{service.name}}</mat-option>
                         </mat-select>
                     </mat-form-field>
                 </label>
-            
+
                 <div>
                   <button mat-button type="submit">Associar</button>
                 </div>
             </form>
         </div>
-      
+
 
     </mat-tab>
 </mat-tab-group>
