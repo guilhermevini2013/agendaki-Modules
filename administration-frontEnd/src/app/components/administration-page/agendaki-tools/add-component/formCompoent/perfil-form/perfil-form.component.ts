@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import {MatDialogActions, MatDialogClose, MatDialogContent} from "@angular/material/dialog";
-import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
+import {MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef} from "@angular/material/dialog";
+import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {NgIf} from "@angular/common";
 import {ComponentCommunicationService} from "../../../../../../services/component-communication.service";
 import {PerfilComponent} from "../../../sections/perfil/perfil.component";
@@ -28,12 +28,12 @@ export class PerfilFormComponent {
   selectedImage: string | ArrayBuffer | null = null;
 
   formEditPerfil: FormGroup = new FormGroup({
-    urlPhotoPerfil: new FormControl(this.selectedImage!),
-    bio: new FormControl(''),
-    horizontalAlignment: new FormControl('')
+    urlPhotoPerfil: new FormControl(this.selectedImage!,Validators.required),
+    bio: new FormControl('',Validators.required),
+    horizontalAlignment: new FormControl('',Validators.required)
   });
 
-  constructor(private communicationComponent: ComponentCommunicationService) {}
+  constructor(private communicationComponent: ComponentCommunicationService,private dialogRef: MatDialogRef<PerfilFormComponent>) {}
 
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
@@ -51,9 +51,14 @@ export class PerfilFormComponent {
   }
 
   submitForm(): void {
-    this.communicationComponent.triggerAddComponentAction({
-      component: PerfilComponent,
-      data: this.formEditPerfil.value
-    });
+    if(this.selectedImage != null){
+      if(this.formEditPerfil.valid){
+        this.communicationComponent.triggerAddComponentAction({
+          component: PerfilComponent,
+          data: this.formEditPerfil.value
+        });
+        this.dialogRef.close();
+      }
+    }
   }
 }
