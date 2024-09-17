@@ -45,12 +45,12 @@
 
     <mat-tab label="Deletar">
         <div class="FormGroups">
-            <form [formGroup]="deleteWorkerFormGroup" (ngSubmit)="createWorker()" class="secondFormGroup">
+            <form [formGroup]="deleteWorkerFormGroup" (ngSubmit)="deleteProfessional()" class="secondFormGroup">
                 <label>
                     <span>Delete um Funcionário</span>
                      <mat-form-field>
-                        <mat-select placeholder="Escolha" multiple>
-                            <mat-option *ngFor="let worker of workers" [value]="worker.name">{{worker.name}}</mat-option>
+                        <mat-select placeholder="Escolha" formControlName="id">
+                            <mat-option *ngFor="let worker of professionals" [value]="worker.id">{{worker.name}}</mat-option>
                         </mat-select>
                     </mat-form-field>
                 </label>
@@ -76,33 +76,5 @@
             </form>
 
         </div>
-    </mat-tab>
-
-    <mat-tab label="Associar">
-        <div class="FormGroups">
-            <form [formGroup]="deleteWorkerFormGroup" (ngSubmit)="createWorker()" class="secondFormGroup">
-                <label>
-                    <span>Associe um Funcionário</span>
-                     <mat-form-field>
-                        <mat-select placeholder="Escolha">
-                            <mat-option *ngFor="let worker of workers" [value]="worker.name">{{worker.name}}</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-
-                    <span>Á um Serviço</span>
-                    <mat-form-field>
-                        <mat-select placeholder="Escolha" multiple>
-                            <mat-option *ngFor="let service of services" [value]="service.id">{{service.name}}</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </label>
-
-                <div>
-                  <button mat-button type="submit">Associar</button>
-                </div>
-            </form>
-        </div>
-
-
     </mat-tab>
 </mat-tab-group>

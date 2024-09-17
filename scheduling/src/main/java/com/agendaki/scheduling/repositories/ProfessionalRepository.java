@@ -21,4 +21,6 @@ public interface ProfessionalRepository extends JpaRepository<Professional, Long
 
     @Query("select distinct p from Professional p join p.services s where p.instance = :instance")
     List<Professional> findByServiceAndInstance(Instance instance);
+
+    List<Professional> findAllByInstance(Instance instance);
 }

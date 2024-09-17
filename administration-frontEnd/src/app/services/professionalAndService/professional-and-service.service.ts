@@ -5,6 +5,7 @@ import {ServiceCreateDTO} from "../../models/professionalAndService/service-crea
 import {ServiceReadDto} from "../../models/professionalAndService/service-read-dto";
 import {ProfessionalCreateDto} from "../../models/professionalAndService/professional-create-dto";
 import {ProfessionalAndServiceReadDTO} from "../../models/professionalAndService/professional-and-service-read-dto";
+import {ProfessionalReadDto} from "../../models/professionalAndService/professional-read-dto";
 
 @Injectable({
   providedIn: 'root'
@@ -73,6 +74,29 @@ export class ProfessionalAndServiceService {
       params: {
         id: id
       },
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      observe: 'response'
+    });
+  }
+
+  deleteProfessional(id: number): Observable<HttpResponse<void>> {
+    return this.http.delete<void>(this.baseHttp + "/scheduling/api/professional", {
+      withCredentials: true,
+      params: {
+        id: id
+      },
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      observe: 'response'
+    });
+  }
+
+  getAllProfessionals(): Observable<HttpResponse<ProfessionalReadDto[]>> {
+    return this.http.get<ProfessionalReadDto[]>(this.baseHttp + "/scheduling/api/professional", {
+      withCredentials: true,
       headers: {
         'Content-Type': 'application/json'
       },

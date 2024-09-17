@@ -46,8 +46,13 @@ public class ProfessionalController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ProfessionalReadByServiceDTO>> getProfessionalsByService(@RequestParam(name = "service") Long idService){
-        List<ProfessionalReadByServiceDTO> professionalsByService = professionalService.getProfessionalsByService(idService);
+    public ResponseEntity<List<ProfessionalReadByServiceDTO>> getProfessionalsByService(@RequestParam(name = "service", required = false) Long idService) {
+        List<ProfessionalReadByServiceDTO> professionalsByService;
+        if (idService != null) {
+            professionalsByService = professionalService.getProfessionalsByService(idService);
+        } else {
+            professionalsByService = professionalService.getProfessionals();
+        }
         if (professionalsByService.isEmpty()){
             return ResponseEntity.noContent().build();
         }

@@ -20,6 +20,7 @@ import {
   ProfessionalAndServiceService
 } from "../../../../services/professionalAndService/professional-and-service.service";
 import {ServiceReadDto} from "../../../../models/professionalAndService/service-read-dto";
+import {ProfessionalReadDto} from "../../../../models/professionalAndService/professional-read-dto";
 
 @Component({
   selector: 'app-forms-group',
@@ -49,8 +50,8 @@ import {ServiceReadDto} from "../../../../models/professionalAndService/service-
 
 export class FormsGroupComponent implements OnInit{
   private _formBuilder = inject(FormBuilder);
-  public workers:ProfessionalCreateDto[] = [];
-  public services:ServiceReadDto[] = [];
+  protected professionals: ProfessionalReadDto[] = [];
+  protected services:ServiceReadDto[] = [];
   constructor(private professionalAndService:ProfessionalAndServiceService) {
   }
   workerFormGroup = this._formBuilder.group({
@@ -66,7 +67,7 @@ export class FormsGroupComponent implements OnInit{
   });
 
   deleteWorkerFormGroup = this._formBuilder.group({
-    name: ['', Validators.required],
+    id: [0, Validators.required],
   });
 
   deleteServiceFormGroup = this._formBuilder.group({
@@ -114,11 +115,22 @@ export class FormsGroupComponent implements OnInit{
         this.services = next.body!;
       }
     });
+
+    this.professionalAndService.getAllProfessionals().subscribe(next => {
+      this.professionals = next.body!;
+    });
   }
 
   deleteService() {
     if (this.deleteServiceFormGroup.valid){
       this.professionalAndService.deleteService(this.deleteServiceFormGroup.value.id!).subscribe();
+      window.location.reload();
+    }
+  }
+
+  deleteProfessional(){
+    if (this.deleteWorkerFormGroup.valid){
+      this.professionalAndService.deleteProfessional(this.deleteWorkerFormGroup.value.id!).subscribe();
       window.location.reload();
     }
   }

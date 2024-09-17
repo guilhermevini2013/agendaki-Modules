@@ -86,6 +86,13 @@ public class ProfessionalServiceImpl implements ProfessionalService {
     }
 
     @Override
+    public List<ProfessionalReadByServiceDTO> getProfessionals() {
+        Instance instance = SecurityUtil.getProjectionOfUserEntityAuthenticated().getInstance();
+        List<Professional> allByInstance = professionalRepository.findAllByInstance(instance);
+        return allByInstance.stream().map(professional -> new ProfessionalReadByServiceDTO(professional)).toList();
+    }
+
+    @Override
     public List<ProfessionalAndServiceReadDTO> getAllProfessionalAndServices() {
         List<ProfessionalAndServiceReadDTO> professionalAndServiceReadDTOList = new ArrayList<>();
         populatedProfessionalAndServiceReadDTOList(professionalAndServiceReadDTOList);

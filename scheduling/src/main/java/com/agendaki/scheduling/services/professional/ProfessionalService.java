@@ -20,5 +20,7 @@ public interface ProfessionalService {
 
     List<ProfessionalReadByServiceDTO> getProfessionalsByService(Long idService);
 
+    List<ProfessionalReadByServiceDTO> getProfessionals();
+
     List<ProfessionalAndServiceReadDTO> getAllProfessionalAndServices();
 }
