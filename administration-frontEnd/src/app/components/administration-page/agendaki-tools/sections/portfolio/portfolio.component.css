@@ -32,6 +32,28 @@ section {
   padding: 10px 0; /* Espaçamento vertical ao redor da área de rolagem */
 }
 
+/* width */
+.portfolio__image-container::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+.portfolio__image-container::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+  border-radius: 10px;
+}
+ 
+/* Handle */
+.portfolio__image-container::-webkit-scrollbar-thumb {
+  background: #888; 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+.portfolio__image-container::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
 .portfolio__image {
   display: inline-flex; /* Exibe as imagens em linha horizontal */
   gap: 25px; /* Espaçamento entre as imagens */
@@ -42,6 +64,11 @@ section {
   height: 220px; /* Altura fixa do contêiner da imagem */
   overflow: hidden; /* Oculta partes da imagem que saem dos limites do contêiner */
 }
+
+.portfolio__image div::after {
+  transform: rotateZ(180deg);
+}
+
 
 .portfolio__image img {
   width: 100%; /* Ajusta a largura da imagem ao contêiner */

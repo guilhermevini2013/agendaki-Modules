@@ -28,6 +28,27 @@ section{
     display: block;
 }
 
+/* width */
+.list_options::-webkit-scrollbar {
+    width: 5px;
+}
+  
+/* Track */
+.list_options::-webkit-scrollbar-track {
+    background: #006319; 
+}
+   
+/* Handle */
+.list_options::-webkit-scrollbar-thumb {
+    background: var(--light-green); 
+    border-radius: 10px;
+}
+  
+/* Handle on hover */
+.list_options::-webkit-scrollbar-thumb:hover {
+    background: var(--secundary-color); 
+}
+
 .list_options {
     max-height: 130px;
     overflow-y: auto;
@@ -115,6 +136,21 @@ section{
     gap: 15px;
     height: max-content;
 }
+
+.colorInput {
+   width: 30px;
+   height: 30px;
+   overflow: hidden;
+   border-radius: 100%;
+}
+
+.colorInput input[type="color"] {
+    width: 140%;
+    border: none;
+    height: 140%;
+    outline: none;
+    transform: translate(-5px, -5px);
+ }
 
 .colors label{
     display: flex;
