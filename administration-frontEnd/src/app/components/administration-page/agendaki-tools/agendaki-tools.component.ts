@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import { PreVisualizerComponent } from './pre-visualizer/pre-visualizer.component';
 import { AddComponentComponent } from './add-component/add-component.component';
 
@@ -10,5 +10,9 @@ import { AddComponentComponent } from './add-component/add-component.component';
   styleUrl: './agendaki-tools.component.css'
 })
 export class AgendakiToolsComponent {
+  @ViewChild(PreVisualizerComponent) preVisualizerComponent!: PreVisualizerComponent;
 
+  saveComponents() {
+    return this.preVisualizerComponent.saveComponents();
+  }
 }

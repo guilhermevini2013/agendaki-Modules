@@ -5,27 +5,24 @@
             <ul>
                 <li><button (click)="openDialog(FormInputComponent)">
                   <span>Campo de texto</span>
-                  <span>{{ totalInput }}/4</span>
                 </button></li>
                 <li><button (click)="openDialog(PerfilFormComponent)">
                   <span>Perfil</span>
-                  <span>0/1</span>
                 </button></li>
+              <li><button (click)="openDialog(SelectServiceAndProfessionalFormComponent)">
+                <span>Selecionar profissionais e servicos</span>
+              </button></li>
                 <li><button (click)="openDialog(CalendarFormComponent)">
                   <span>Calendario</span>
-                  <span>0/1</span>
                 </button></li>
               <li><button (click)="openDialog(PortfolioFormComponent)">
                 <span>Portfolio</span>
-                <span>0/1</span>
               </button></li>
                 <li><button (click)="openDialog(InformationFormComponent)">
                   <span>Informação</span>
-                  <span>0/1</span>
                 </button></li>
                 <li><button (click)="openDialog(PresentationFormComponent)">
                   <span>Apresentação</span>
-                  <span>0/1</span>
                 </button></li>
             </ul>
         </div>
@@ -38,8 +35,8 @@
           <input type="color" [(ngModel)]="colorPrimary">
         </div>
       </label>
-    
-    
+
+
       <label>
         <span>Cor secundária:</span>
         <div class="colorInput">
@@ -51,7 +48,7 @@
         <div class="colorInput">
           <input type="color" [(ngModel)]="colorTerciary">
         </div>
-      </label> 
+      </label>
       <div class="button__colors">
         <button (click)="saveColors()">Salvar cores</button>
       </div>
@@ -65,7 +62,7 @@
     </div>
     <div class="optionToSave">
         <div>
-            <button>Salvar</button>
+            <button (click)="saveComponents()">Salvar</button>
         </div>
         <div>
             <span>Desfazer alteraçôes</span>

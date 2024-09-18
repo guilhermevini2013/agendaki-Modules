@@ -11,23 +11,8 @@ import {
 export class ComponentCommunicationService {
   private componentSubjectToAdd = new Subject<ComponentWithId>();
   addComponentAction$ = this.componentSubjectToAdd.asObservable();
-
-  private componentSubjectToCount = new Subject<void>();
-  countComponentAction$ = this.componentSubjectToCount.asObservable();
-
-  private sectionProperty = new Subject<SectionProperty>();
-  sectionPropertyAction$ = this.sectionProperty.asObservable();
-
   triggerAddComponentAction(action: ComponentWithId) {
     this.componentSubjectToAdd.next(action);
-  }
-
-  triggerCountComponent():void{
-    this.componentSubjectToCount.next()
-  }
-
-  triggerSectionProperty(value: SectionProperty):void{
-    this.sectionProperty.next(value);
   }
 
   private colorPrimary = new Subject<string>();

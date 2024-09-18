@@ -1,4 +1,4 @@
-import {Component, inject, OnInit, Type} from '@angular/core';
+import {Component, inject, OnInit, Type, ViewChild} from '@angular/core';
 import { ComponentCommunicationService } from '../../../../services/component-communication.service';
 import {MatDialog} from "@angular/material/dialog";
 import {FormInputComponent} from "./formCompoent/form-input/form-input.component";
@@ -9,6 +9,11 @@ import {PortfolioFormComponent} from "./formCompoent/portfolio-form/portfolio-fo
 import { InformationFormComponent } from './formCompoent/information-form/information-form.component';
 import { FormsModule } from '@angular/forms';
 import { PresentationFormComponent } from './formCompoent/presentation-form/presentation-form.component';
+import {
+  SelectServiceAndProfessionalFormComponent
+} from "./formCompoent/select-service-and-professional-form/select-service-and-professional-form.component";
+import {PreVisualizerComponent} from "../pre-visualizer/pre-visualizer.component";
+import {AgendakiToolsComponent} from "../agendaki-tools.component";
 
 @Component({
   selector: 'app-add-component',
@@ -19,22 +24,17 @@ import { PresentationFormComponent } from './formCompoent/presentation-form/pres
   templateUrl: './add-component.component.html',
   styleUrl: './add-component.component.css'
 })
-export class AddComponentComponent implements OnInit{
+export class AddComponentComponent{
+  @ViewChild(PreVisualizerComponent) preVisualizerComponent!: PreVisualizerComponent;
+
   colorPrimary:string | null=null;
   colorSecundary:string | null=null;
   colorTerciary:string | null=null;
 
-  constructor(private commService: ComponentCommunicationService) {}
+  constructor(private commService: ComponentCommunicationService, private parent: AgendakiToolsComponent) {}
   readonly dialog = inject(MatDialog);
   openDialog(form:Type<any>) {
     this.dialog.open(form);
-  }
-  public totalInput:number = 0;
-
-  ngOnInit(): void {
-    this.commService.countComponentAction$.subscribe(() =>{
-      this.totalInput++;
-    })
   }
 
   saveColors():void{
@@ -42,11 +42,15 @@ export class AddComponentComponent implements OnInit{
       this.commService.triggerColorSecundary(this.colorSecundary!);
   }
 
+  saveComponents() {
+    console.log(this.parent.saveComponents());
+  }
+
   protected readonly FormInputComponent = FormInputComponent;
   protected readonly PerfilFormComponent = PerfilFormComponent;
-  protected readonly CalendarComponent = CalendarComponent;
   protected readonly CalendarFormComponent = CalendarFormComponent;
   protected readonly PortfolioFormComponent = PortfolioFormComponent;
   protected readonly InformationFormComponent = InformationFormComponent;
   protected readonly PresentationFormComponent = PresentationFormComponent;
+  protected readonly SelectServiceAndProfessionalFormComponent = SelectServiceAndProfessionalFormComponent;
 }

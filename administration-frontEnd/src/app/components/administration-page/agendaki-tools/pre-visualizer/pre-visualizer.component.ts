@@ -34,36 +34,37 @@ export interface ComponentWithId {
   styleUrls: ['./pre-visualizer.component.css']
 })
 export class PreVisualizerComponent {
-  components: ComponentWithId[] = [
-  ];
-  protected primaryColor:string | null = "#ffff";
-
-  protected secundaryColor:string | null = "#000";
+  components: ComponentWithId[] = [];
+  protected primaryColor: string | null = "#ffff";
+  protected secundaryColor: string | null = "#000";
 
   drop(event: CdkDragDrop<ComponentWithId[]>) {
     moveItemInArray(this.components, event.previousIndex, event.currentIndex);
   }
+
   constructor(private commService: ComponentCommunicationService) {}
 
   ngOnInit() {
     this.commService.addComponentAction$.subscribe(action => {
-      this.components.push(action)
+      this.components.push(action);
     });
 
-    this.commService.colorPrimaryAction$.subscribe(action =>{
+    this.commService.colorPrimaryAction$.subscribe(action => {
       this.primaryColor = action;
-    })
+    });
 
-    this.commService.colorSecundaryAction$.subscribe(action =>{
-      console.log("color");
-      
+    this.commService.colorSecundaryAction$.subscribe(action => {
       this.secundaryColor = action;
-    })
+    });
   }
 
   onDragStarted(event: CdkDragStart) {
     const placeholderElement = event.source.getPlaceholderElement();
     const sourceElement = event.source.element.nativeElement;
     placeholderElement.style.height = `${sourceElement.clientHeight}px`;
+  }
+
+  saveComponents() {
+    return this.components;
   }
 }

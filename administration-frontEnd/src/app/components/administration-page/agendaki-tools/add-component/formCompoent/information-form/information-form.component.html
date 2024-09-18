@@ -11,11 +11,6 @@
           <input matInput type="text" [(ngModel)]="inputValue" formControlName="informationList" required>
         </mat-form-field>
         <button type="button" (click)="addInformation()">Adicionar</button>
-        <!-- <label>
-          <span>Conteudo:</span>
-          <input type="text" [(ngModel)]="inputValue" formControlName="informationList"/>
-            <button type="button" (click)="addInformation()">Adicionar</button>
-        </label> -->
         <li *ngFor="let information of informationList">
             {{ information }}
           </li>
