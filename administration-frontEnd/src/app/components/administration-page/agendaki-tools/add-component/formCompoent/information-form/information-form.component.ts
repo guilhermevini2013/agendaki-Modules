@@ -28,7 +28,7 @@ export class InformationFormComponent {
   inputValue: string = '';
   formEditInformation: FormGroup = new FormGroup({
     title: new FormControl('',Validators.required),
-    informationList: new FormControl(this.informationList,Validators.required)
+    content: new FormControl(this.informationList,Validators.required)
   });
 
   constructor(private communicationComponent: ComponentCommunicationService, private dialogRef: MatDialogRef<InformationFormComponent>) {}

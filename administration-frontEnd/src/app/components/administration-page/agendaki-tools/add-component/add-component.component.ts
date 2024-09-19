@@ -14,6 +14,7 @@ import {
 } from "./formCompoent/select-service-and-professional-form/select-service-and-professional-form.component";
 import {PreVisualizerComponent} from "../pre-visualizer/pre-visualizer.component";
 import {AgendakiToolsComponent} from "../agendaki-tools.component";
+import {TemplateService} from "../../../../services/template/template.service";
 
 @Component({
   selector: 'app-add-component',
@@ -31,7 +32,7 @@ export class AddComponentComponent{
   colorSecundary:string | null=null;
   colorTerciary:string | null=null;
 
-  constructor(private commService: ComponentCommunicationService, private parent: AgendakiToolsComponent) {}
+  constructor(private commService: ComponentCommunicationService, private parent: AgendakiToolsComponent, private templateService:TemplateService) {}
   readonly dialog = inject(MatDialog);
   openDialog(form:Type<any>) {
     this.dialog.open(form);
@@ -43,7 +44,8 @@ export class AddComponentComponent{
   }
 
   saveComponents() {
-    console.log(this.parent.saveComponents());
+    this.parent.saveComponents();
+
   }
 
   protected readonly FormInputComponent = FormInputComponent;

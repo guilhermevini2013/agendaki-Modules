@@ -9,9 +9,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
         @JsonSubTypes.Type(value = HelpDTO.class, name = "help"),
         @JsonSubTypes.Type(value = ImageDTO.class, name = "image"),
         @JsonSubTypes.Type(value = CalendarDTO.class, name = "calendar"),
-        @JsonSubTypes.Type(value = ProfessionalSectionDTO.class, name = "professional"),
-        @JsonSubTypes.Type(value = ServiceSectionDTO.class, name = "service"),
-        @JsonSubTypes.Type(value = TimeDTO.class, name = "time")
+        @JsonSubTypes.Type(value = ProfessionalAndServiceSectionDTO.class, name = "professionalAndService"),
 })
 public abstract class SectionToSaveDTO {
     private Long id;

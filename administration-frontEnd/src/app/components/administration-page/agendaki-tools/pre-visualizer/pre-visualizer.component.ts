@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';
 import {ɵEmptyOutletComponent} from "@angular/router";
 import {DynamicComponentContainer} from "../dynamic-component-container/dynamic-component-container.component";
 import { ComponentCommunicationService } from '../../../../services/component-communication.service';
-import { PresentationComponent } from '../sections/presentation/presentation.component';
+import { TemplateDTO} from "../../../../models/template/template-create-dto";
 export interface ComponentWithId {
   component: Type<any>;
   data: any;
@@ -65,6 +65,18 @@ export class PreVisualizerComponent {
   }
 
   saveComponents() {
+    const templateToInsert: TemplateDTO = {
+      primaryColor: this.primaryColor!,
+      secondaryColor: this.secundaryColor!,
+      sections: this.components.map((component, index) => {
+        const { data } = component;
+        return {
+          ...data,
+          position: index,
+        };
+      })
+    };
+    console.log(templateToInsert);
     return this.components;
   }
 }

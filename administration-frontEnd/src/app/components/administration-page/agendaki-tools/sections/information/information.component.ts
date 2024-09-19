@@ -9,7 +9,7 @@ import { Component } from '@angular/core';
   styleUrl: './information.component.css'
 })
 export class InformationComponent {
-  protected informationList:string[]=[]
+  protected content:string[]=[]
   protected title:string = "";
 
 }

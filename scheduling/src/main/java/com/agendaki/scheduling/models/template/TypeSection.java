@@ -5,7 +5,5 @@ public enum TypeSection {
     INPUT,
     HELP,
     CALENDAR,
-    SERVICE,
-    PROFESSIONAL,
-    TIME
+    PROFESSIONAL_AND_SERVICE,
 }

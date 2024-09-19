@@ -28,9 +28,10 @@ export class PerfilFormComponent {
   selectedImage: string | ArrayBuffer | null = null;
 
   formEditPerfil: FormGroup = new FormGroup({
-    urlPhotoPerfil: new FormControl(this.selectedImage!,Validators.required),
+    imageToBase64: new FormControl(this.selectedImage!,Validators.required),
     bio: new FormControl('',Validators.required),
-    horizontalAlignment: new FormControl('',Validators.required)
+    horizontalAlignment: new FormControl('',Validators.required),
+    isPortfolio: new FormControl(false,Validators.required)
   });
 
   constructor(private communicationComponent: ComponentCommunicationService,private dialogRef: MatDialogRef<PerfilFormComponent>) {}

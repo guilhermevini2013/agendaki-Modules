@@ -8,7 +8,7 @@ import {Component, Input} from '@angular/core';
   styleUrl: './perfil.component.css'
 })
 export class PerfilComponent {
-  @Input() urlPhotoPerfil: string | ArrayBuffer | null = null;
+  @Input() imageToBase64: string | ArrayBuffer | null = null;
   @Input() bio: string = "";
 
 }
