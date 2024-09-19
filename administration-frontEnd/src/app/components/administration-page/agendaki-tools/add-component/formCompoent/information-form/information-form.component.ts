@@ -28,7 +28,9 @@ export class InformationFormComponent {
   inputValue: string = '';
   formEditInformation: FormGroup = new FormGroup({
     title: new FormControl('',Validators.required),
-    content: new FormControl(this.informationList,Validators.required)
+    content: new FormControl(this.informationList),
+    typeSection: new FormControl("CALENDAR"),
+    type:new FormControl("calendar")
   });
 
   constructor(private communicationComponent: ComponentCommunicationService, private dialogRef: MatDialogRef<InformationFormComponent>) {}
@@ -41,15 +43,13 @@ export class InformationFormComponent {
   }
 
   submitForm(): void {
-    if(this.formEditInformation.valid){
       this.formEditInformation.patchValue({
-        informationList: this.informationList
+        content: this.informationList
       });
       this.communicationComponent.triggerAddComponentAction({
         component: InformationComponent,
         data: this.formEditInformation.value
       });
       this.dialogRef.close();
-    }
   }
 }

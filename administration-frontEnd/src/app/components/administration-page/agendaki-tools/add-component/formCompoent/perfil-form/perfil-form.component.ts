@@ -30,8 +30,10 @@ export class PerfilFormComponent {
   formEditPerfil: FormGroup = new FormGroup({
     imageToBase64: new FormControl(this.selectedImage!,Validators.required),
     bio: new FormControl('',Validators.required),
-    horizontalAlignment: new FormControl('',Validators.required),
-    isPortfolio: new FormControl(false,Validators.required)
+    horizontalAlignment: new FormControl(''),
+    isPortfolio: new FormControl(false),
+    typeSection: new FormControl("IMAGE"),
+    type:new FormControl("image")
   });
 
   constructor(private communicationComponent: ComponentCommunicationService,private dialogRef: MatDialogRef<PerfilFormComponent>) {}
@@ -44,7 +46,7 @@ export class PerfilFormComponent {
       reader.onload = (e: ProgressEvent<FileReader>) => {
         this.selectedImage = reader.result;
         this.formEditPerfil.patchValue({
-          urlPhotoPerfil: this.selectedImage
+          imageToBase64: this.selectedImage
         });
       };
       reader.readAsDataURL(file);
@@ -54,6 +56,7 @@ export class PerfilFormComponent {
   submitForm(): void {
     if(this.selectedImage != null){
       if(this.formEditPerfil.valid){
+        
         this.communicationComponent.triggerAddComponentAction({
           component: PerfilComponent,
           data: this.formEditPerfil.value

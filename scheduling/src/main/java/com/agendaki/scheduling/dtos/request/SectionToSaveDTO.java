@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 public abstract class SectionToSaveDTO {
     private Long id;
     private TypeSection typeSection;
-    private Short position;
+    private Short position; 
     private String horizontalAlignment;
 
     public SectionToSaveDTO(Long id, TypeSection typeSection, Short position, String horizontalAlignment) {

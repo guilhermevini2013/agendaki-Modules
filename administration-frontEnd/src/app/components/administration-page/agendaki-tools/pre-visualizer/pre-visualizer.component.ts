@@ -72,7 +72,7 @@ export class PreVisualizerComponent {
         const { data } = component;
         return {
           ...data,
-          position: index,
+          position: index, 
         };
       })
     };

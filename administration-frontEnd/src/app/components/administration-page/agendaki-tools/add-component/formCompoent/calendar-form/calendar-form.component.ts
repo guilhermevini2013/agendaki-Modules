@@ -25,7 +25,9 @@ import { MatInput } from '@angular/material/input';
 export class CalendarFormComponent {
 
   protected formEditCalendar:FormGroup = new FormGroup<any>({
-    horizontalAlignment: new FormControl('',Validators.required)
+    horizontalAlignment: new FormControl('',Validators.required),
+    typeSection: new FormControl("CALENDAR"),
+    type:new FormControl("calendar")
   });
 
   constructor(private communicationComponent:ComponentCommunicationService, private dialogRef: MatDialogRef<CalendarFormComponent>) {
