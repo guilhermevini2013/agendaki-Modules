@@ -8,7 +8,7 @@
         </mat-form-field>
         <mat-form-field appearance="outline" class="inputMat" >
           <mat-label>Conteúdo</mat-label>
-          <input matInput type="text" [(ngModel)]="inputValue" formControlName="informationList" required>
+          <input matInput type="text" [(ngModel)]="inputValue" formControlName="content" required>
         </mat-form-field>
         <button type="button" (click)="addInformation()">Adicionar</button>
         <li *ngFor="let information of informationList">

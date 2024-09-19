@@ -1,7 +1,7 @@
 package com.agendaki.scheduling.models.template;
 
 public enum TypeSection {
-    IMAGE,
+    IMAGE, 
     INPUT,
     HELP,
     CALENDAR,

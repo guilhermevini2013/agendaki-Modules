@@ -26,7 +26,9 @@ import {
 })
 export class SelectServiceAndProfessionalFormComponent {
   protected formEditSelectServiceAndProfessional:FormGroup = new FormGroup<any>({
-    horizontalAlignment: new FormControl('',Validators.required)
+    horizontalAlignment: new FormControl('',Validators.required),
+    typeSection: new FormControl("PROFESSIONAL_AND_SERVICE"),
+    type:new FormControl("professionalAndService")
   });
 
   constructor(private communicationComponent:ComponentCommunicationService, private dialogRef: MatDialogRef<SelectServiceAndProfessionalFormComponent>) {

@@ -33,8 +33,9 @@ export class FormInputComponent {
     label: new FormControl('',Validators.required),
     placeHolder: new FormControl('',Validators.required),
     width: new FormControl('',Validators.required),
-    horizontalAlignment: new FormControl('',Validators.required)
-    
+    horizontalAlignment: new FormControl('',Validators.required),
+    typeSection: new FormControl("INPUT"),
+    type:new FormControl("input")
   });
 
   constructor(private communicationComponent:ComponentCommunicationService, private dialogRef: MatDialogRef<FormInputComponent>) {

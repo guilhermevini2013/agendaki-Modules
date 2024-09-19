@@ -30,7 +30,10 @@ export class PortfolioFormComponent {
 
   formEditPortfolio: FormGroup = new FormGroup({
     urlsPhotos: new FormControl<string[]>([],Validators.required),
-    title: new FormControl('',Validators.required)
+    title: new FormControl('',Validators.required),
+    isPortfolio: new FormControl(true),
+    typeSection: new FormControl("IMAGE"),
+    type:new FormControl("image")
   });
 
   constructor(private communicationComponent: ComponentCommunicationService,private dialogRef: MatDialogRef<PortfolioFormComponent>) {}
