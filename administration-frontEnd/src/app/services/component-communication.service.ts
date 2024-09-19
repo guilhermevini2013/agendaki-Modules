@@ -28,4 +28,11 @@ export class ComponentCommunicationService {
   triggerColorSecundary(color:string):void{
     this.colorSecundary.next(color);
   }
+
+  private colorTerciary = new Subject<string>();
+  colorTerciaryAction$ = this.colorTerciary.asObservable();
+
+  triggerColorTerciary(color:string):void{
+    this.colorTerciary.next(color);
+  }
 }

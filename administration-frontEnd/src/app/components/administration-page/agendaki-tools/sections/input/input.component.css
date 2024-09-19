@@ -26,4 +26,11 @@
     padding-left: 10px;
     padding-right: 10px;
     height: 40px;
+    border: none;
+    border-radius: 7px;
+    background-color: whitesmoke;
+}
+
+.container__input label input:focus{
+    outline: none;
 }

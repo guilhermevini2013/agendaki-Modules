@@ -41,6 +41,7 @@ export class AddComponentComponent{
   saveColors():void{
       this.commService.triggerColorPrimary(this.colorPrimary!);
       this.commService.triggerColorSecundary(this.colorSecundary!);
+      this.commService.triggerColorTerciary(this.colorTerciary!);
   }
 
   saveComponents() {

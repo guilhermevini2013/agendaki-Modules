@@ -37,6 +37,7 @@ export class PreVisualizerComponent {
   components: ComponentWithId[] = [];
   protected primaryColor: string | null = "#ffff";
   protected secundaryColor: string | null = "#000";
+  protected terciaryColor: string | null = "#000";
 
   drop(event: CdkDragDrop<ComponentWithId[]>) {
     moveItemInArray(this.components, event.previousIndex, event.currentIndex);
@@ -56,6 +57,10 @@ export class PreVisualizerComponent {
     this.commService.colorSecundaryAction$.subscribe(action => {
       this.secundaryColor = action;
     });
+
+    this.commService.colorTerciaryAction$.subscribe(action => {
+      this.terciaryColor = action;
+    });
   }
 
   onDragStarted(event: CdkDragStart) {
@@ -68,6 +73,7 @@ export class PreVisualizerComponent {
     const templateToInsert: TemplateDTO = {
       primaryColor: this.primaryColor!,
       secondaryColor: this.secundaryColor!,
+      terciaryColor: this.terciaryColor!,
       sections: this.components.map((component, index) => {
         const { data } = component;
         return {

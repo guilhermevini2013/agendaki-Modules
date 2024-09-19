@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {NgStyle} from "@angular/common";
+import { ComponentCommunicationService } from '../../../../../services/component-communication.service';
 
 @Component({
   selector: 'app-input',
@@ -15,4 +16,14 @@ export class InputComponent {
   public placeHolder:string="";
   public width:string="";
   public horizontalAlignment:string="";
+
+  protected terciaryColor: string | null = "#000";
+
+  constructor(private commService: ComponentCommunicationService) {}
+
+  ngOnInit() {
+    this.commService.colorTerciaryAction$.subscribe(action => {
+      this.terciaryColor = action;
+    });
+  }
 }

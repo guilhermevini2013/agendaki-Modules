@@ -1,6 +1,7 @@
 export interface TemplateDTO {
   primaryColor: string;
   secondaryColor: string;
+  terciaryColor: string;
   sections: any[];
 }
 
