@@ -69,20 +69,18 @@ export class PreVisualizerComponent {
     placeholderElement.style.height = `${sourceElement.clientHeight}px`;
   }
 
-  saveComponents() {
+  getJsonForTemplate() {
     const templateToInsert: TemplateDTO = {
       primaryColor: this.primaryColor!,
       secondaryColor: this.secundaryColor!,
-      terciaryColor: this.terciaryColor!,
       sections: this.components.map((component, index) => {
         const { data } = component;
         return {
           ...data,
-          position: index, 
+          position: index,
         };
       })
     };
-    console.log(templateToInsert);
-    return this.components;
+    return templateToInsert;
   }
 }

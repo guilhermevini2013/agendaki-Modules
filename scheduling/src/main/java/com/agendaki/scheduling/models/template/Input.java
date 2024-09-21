@@ -12,7 +12,7 @@ import java.util.List;
 @DiscriminatorValue("INPUT")
 public class Input extends Section{
     private String label;
-    private Integer width;
+    private String width;
     private String placeholder;
     private Boolean isIdentifier;
     @OneToMany(mappedBy = "input", cascade = CascadeType.ALL)
@@ -53,7 +53,7 @@ public class Input extends Section{
         return label;
     }
 
-    public Integer getWidth() {
+    public String getWidth() {
         return width;
     }
 

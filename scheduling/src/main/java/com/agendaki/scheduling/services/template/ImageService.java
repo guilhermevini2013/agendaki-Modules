@@ -11,8 +11,8 @@ public class ImageService {
     private static final String RESOURCE_DIRECTORY = "scheduling/src/main/resources/static/images/";
 
     public Boolean saveImageIntoArchive(String imageToBase64, String uuid){
-        byte[] imageBytes = Base64.getDecoder().decode(imageToBase64);
-        File file = Paths.get(RESOURCE_DIRECTORY, uuid+".png").toFile();
+        byte[] imageBytes = Base64.getDecoder().decode(removePreFix(imageToBase64));
+        File file = Paths.get(RESOURCE_DIRECTORY, uuid + getExtension(imageToBase64)).toFile();
         file.getParentFile().mkdirs();
         try (OutputStream os = new FileOutputStream(file)) {
             os.write(imageBytes);
@@ -20,5 +20,13 @@ public class ImageService {
             throw new RuntimeException(e);
         }
         return true;
+    }
+
+    private String removePreFix(String imageToBase64) {
+        return imageToBase64.split(",")[1];
+    }
+
+    private String getExtension(String imageToBase64) {
+        return "."+imageToBase64.split(",")[0].split("/")[1].split(";")[0];
     }
 }

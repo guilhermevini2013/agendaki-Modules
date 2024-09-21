@@ -10,9 +10,10 @@ export class TemplateService {
   private baseHttp:string = "http://localhost:8081";
   constructor(private http:HttpClient) { }
 
-  // insertTemplate(template:TemplateDTO):Observable<HttpResponse<void>>{
-  //   return this.http.post(this.baseHttp+"/scheduling/api/template",template,{
-  //     withCredentials: true
-  //   });
-  // }
+  insertTemplate(template:TemplateDTO):Observable<HttpResponse<void>>{
+    return this.http.post<void>(this.baseHttp+"/scheduling/api/template",template,{
+      withCredentials: true,
+      observe: 'response'
+    });
+  }
 }

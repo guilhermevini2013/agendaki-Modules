@@ -5,11 +5,11 @@ import com.agendaki.scheduling.models.template.TypeSection;
 
 public class InputDTO extends SectionToSaveDTO {
     private String label;
-    private Integer width;
+    private String width;
     private boolean isIdentifier;
     private String placeholder;
 
-    public InputDTO(Long id,TypeSection typeSection, Short position, String horizontalAlignment,boolean isIdentifier, String label, Integer width, String placeholder) {
+    public InputDTO(Long id,TypeSection typeSection, Short position, String horizontalAlignment,boolean isIdentifier, String label, String width, String placeholder) {
         super(id,typeSection, position, horizontalAlignment);
         this.label = label;
         this.width = width;
@@ -31,7 +31,7 @@ public class InputDTO extends SectionToSaveDTO {
         return label;
     }
 
-    public Integer getWidth() {
+    public String getWidth() {
         return width;
     }
 

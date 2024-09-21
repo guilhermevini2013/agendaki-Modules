@@ -12,7 +12,7 @@ import { AddComponentComponent } from './add-component/add-component.component';
 export class AgendakiToolsComponent {
   @ViewChild(PreVisualizerComponent) preVisualizerComponent!: PreVisualizerComponent;
 
-  saveComponents() {
-    return this.preVisualizerComponent.saveComponents();
+  getJsonForTemplateByPreVisualizer() {
+    return this.preVisualizerComponent.getJsonForTemplate();
   }
 }

@@ -45,8 +45,8 @@ export class AddComponentComponent{
   }
 
   saveComponents() {
-    this.parent.saveComponents();
-
+    const jsonForTemplateByPreVisualizer = this.parent.getJsonForTemplateByPreVisualizer();
+    this.templateService.insertTemplate(jsonForTemplateByPreVisualizer).subscribe();
   }
 
   protected readonly FormInputComponent = FormInputComponent;
