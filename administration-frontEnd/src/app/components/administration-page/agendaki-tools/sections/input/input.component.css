@@ -1,4 +1,4 @@
-.container__input{
+.container__input {
   width: 100%;
   display: flex;
 }
@@ -10,27 +10,27 @@
   justify-content: center;
 }
 
-.container__input label{
-    display: flex;
-    flex-direction: column;
+.container__input label {
+  display: flex;
+  flex-direction: column;
   width: 50%;
 }
 
-.container__input label span{
-    font-size: 20px;
+.container__input label span {
+  font-size: 20px;
   width: max-content;
 }
 
-.container__input label input{
-    font-size: 17px;
-    padding-left: 10px;
-    padding-right: 10px;
-    height: 40px;
-    border: none;
-    border-radius: 7px;
-    background-color: whitesmoke;
+.container__input label input {
+  font-size: 17px;
+  padding-left: 10px;
+  padding-right: 10px;
+  height: 40px;
+  border: none;
+  border-radius: 7px;
+  background-color: whitesmoke;
 }
 
-.container__input label input:focus{
-    outline: none;
+.container__input label input:focus {
+  outline: none;
 }

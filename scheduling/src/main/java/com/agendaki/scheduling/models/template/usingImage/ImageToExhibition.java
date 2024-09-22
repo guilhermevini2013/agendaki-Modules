@@ -27,7 +27,7 @@ public abstract class ImageToExhibition extends Section {
             this.id = profileDTO.getId();
         }
         this.text = profileDTO.getText();
-        this.image.add(new Image(profileDTO.getImageToBase64(),this));
+        this.image.add(new Image(profileDTO.getImageToBase64(), this));
     }
 
     public ImageToExhibition(PresentationDTO presentationDTO, Template template) {
@@ -36,7 +36,7 @@ public abstract class ImageToExhibition extends Section {
             this.id = presentationDTO.getId();
         }
         this.text = presentationDTO.getText();
-        this.image.add(new Image(presentationDTO.getImageToBase64(),this));
+        this.image.add(new Image(presentationDTO.getImageToBase64(), this));
     }
 
     public ImageToExhibition(PortfolioDTO portfolioDTO, Template template) {
@@ -45,7 +45,7 @@ public abstract class ImageToExhibition extends Section {
             this.id = portfolioDTO.getId();
         }
         this.text = portfolioDTO.getText();
-        this.image = portfolioDTO.getImagesToBase64().stream().map(imageInBase64DTO -> new Image(imageInBase64DTO,this)).toList();
+        this.image = portfolioDTO.getImagesToBase64().stream().map(imageInBase64DTO -> new Image(imageInBase64DTO, this)).toList();
     }
 
     public ImageToExhibition() {

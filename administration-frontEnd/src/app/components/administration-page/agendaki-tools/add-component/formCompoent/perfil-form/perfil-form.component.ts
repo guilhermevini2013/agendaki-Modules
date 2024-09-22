@@ -1,12 +1,12 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef} from "@angular/material/dialog";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {NgIf} from "@angular/common";
 import {ComponentCommunicationService} from "../../../../../../services/component-communication.service";
 import {PerfilComponent} from "../../../sections/perfil/perfil.component";
-import { MatInput } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatSelectModule } from '@angular/material/select';
+import {MatInput} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatSelectModule} from '@angular/material/select';
 
 @Component({
   selector: 'app-perfil-form',
@@ -22,19 +22,20 @@ import { MatSelectModule } from '@angular/material/select';
     NgIf
   ],
   templateUrl: './perfil-form.component.html',
-  styleUrls: ['./perfil-form.component.css','../styleFormComponent.css']
+  styleUrls: ['./perfil-form.component.css', '../styleFormComponent.css']
 })
 export class PerfilFormComponent {
   selectedImage: string | ArrayBuffer | null = null;
 
   formEditPerfil: FormGroup = new FormGroup({
-    imageToBase64: new FormControl(this.selectedImage!,Validators.required),
-    text: new FormControl('',Validators.required),
+    imageToBase64: new FormControl(this.selectedImage!, Validators.required),
+    text: new FormControl('', Validators.required),
     horizontalAlignment: new FormControl(''),
-    type:new FormControl("profile")
+    type: new FormControl("profile")
   });
 
-  constructor(private communicationComponent: ComponentCommunicationService,private dialogRef: MatDialogRef<PerfilFormComponent>) {}
+  constructor(private communicationComponent: ComponentCommunicationService, private dialogRef: MatDialogRef<PerfilFormComponent>) {
+  }
 
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
@@ -52,8 +53,8 @@ export class PerfilFormComponent {
   }
 
   submitForm(): void {
-    if(this.selectedImage != null){
-      if(this.formEditPerfil.valid){
+    if (this.selectedImage != null) {
+      if (this.formEditPerfil.valid) {
         this.communicationComponent.triggerAddComponentAction({
           component: PerfilComponent,
           data: this.formEditPerfil.value

@@ -7,7 +7,9 @@ import {PopUpComponent} from "../components/pop-up/pop-up.component";
 })
 export class PopUpService {
   private _snackBar = inject(MatSnackBar);
-  constructor() { }
+
+  constructor() {
+  }
 
   openPopUp(message: string, icon: string): void {
     this._snackBar.openFromComponent(PopUpComponent, {

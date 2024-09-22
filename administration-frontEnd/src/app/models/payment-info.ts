@@ -14,7 +14,8 @@ export interface PaymentInfo {
   expireTime: string;
   signatureSpecification: SignatureSpecification;
 }
-interface  SignatureSpecification {
+
+interface SignatureSpecification {
   date: string;
   price: number;
   description: string;

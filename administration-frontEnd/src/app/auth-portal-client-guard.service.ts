@@ -1,26 +1,22 @@
-import {
-  CanActivate,
-  Router,
-} from '@angular/router';
-import {inject, Injectable} from "@angular/core";
+import {CanActivate, Router,} from '@angular/router';
+import {Injectable} from "@angular/core";
 import {Observable} from "rxjs";
 import {CookieService} from "ngx-cookie-service";
-import {PopUpComponent} from "./components/pop-up/pop-up.component";
-import {MatSnackBar} from "@angular/material/snack-bar";
 import {PopUpService} from "./services/pop-up.service";
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthPortalClientGuard implements CanActivate{
-  constructor(private router: Router,private cookieService:CookieService,private popUpService:PopUpService) {}
+export class AuthPortalClientGuard implements CanActivate {
+  constructor(private router: Router, private cookieService: CookieService, private popUpService: PopUpService) {
+  }
 
   canActivate(): Observable<boolean> | Promise<boolean> | boolean {
     if (this.cookieService.check("jwtPortalClient")) {
       return true;
     } else {
       this.router.navigate(['/']);
-      this.popUpService.openPopUp("Seu login expirou, faça novamente.","error")
+      this.popUpService.openPopUp("Seu login expirou, faça novamente.", "error")
       return false;
     }
   }

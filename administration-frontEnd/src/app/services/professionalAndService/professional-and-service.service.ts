@@ -12,37 +12,38 @@ import {ProfessionalReadDto} from "../../models/professionalAndService/professio
 })
 export class ProfessionalAndServiceService {
 
-  private baseHttp:string = "http://localhost:8081";
+  private baseHttp: string = "http://localhost:8081";
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
-  insertService(serviceDTO:ServiceCreateDTO):Observable<HttpResponse<void>>{
-    return this.http.post<void>(this.baseHttp+"/scheduling/api/service",serviceDTO,{
-      withCredentials:true,
-      headers:{
-        'Content-Type':'application/json'
+  insertService(serviceDTO: ServiceCreateDTO): Observable<HttpResponse<void>> {
+    return this.http.post<void>(this.baseHttp + "/scheduling/api/service", serviceDTO, {
+      withCredentials: true,
+      headers: {
+        'Content-Type': 'application/json'
       },
-      observe:'response'
+      observe: 'response'
     });
   }
 
-  insertProfessional(professionalDTO:ProfessionalCreateDto):Observable<HttpResponse<void>>{
-    return this.http.post<void>(this.baseHttp+"/scheduling/api/professional",professionalDTO,{
-      withCredentials:true,
-      headers:{
-        'Content-Type':'application/json'
+  insertProfessional(professionalDTO: ProfessionalCreateDto): Observable<HttpResponse<void>> {
+    return this.http.post<void>(this.baseHttp + "/scheduling/api/professional", professionalDTO, {
+      withCredentials: true,
+      headers: {
+        'Content-Type': 'application/json'
       },
-      observe:'response'
+      observe: 'response'
     });
   }
 
-  getServices():Observable<HttpResponse<ServiceReadDto[]>>{
-    return this.http.get<ServiceReadDto[]>(this.baseHttp+"/scheduling/api/service",{
-      withCredentials:true,
-      headers:{
-        'Content-Type':'application/json'
+  getServices(): Observable<HttpResponse<ServiceReadDto[]>> {
+    return this.http.get<ServiceReadDto[]>(this.baseHttp + "/scheduling/api/service", {
+      withCredentials: true,
+      headers: {
+        'Content-Type': 'application/json'
       },
-      observe:'response'
+      observe: 'response'
     });
   }
 
@@ -56,14 +57,14 @@ export class ProfessionalAndServiceService {
     });
   }
 
-  disassociateProfessionalAndService(idProfessional:number,idService:number):Observable<void>{
+  disassociateProfessionalAndService(idProfessional: number, idService: number): Observable<void> {
     return this.http.put<void>(this.baseHttp + "/scheduling/api/professional/disassociate", Array.of(idService), {
-      withCredentials:true,
+      withCredentials: true,
       params: {
         id: idProfessional
       },
-      headers:{
-        'Content-Type':'application/json'
+      headers: {
+        'Content-Type': 'application/json'
       }
     })
   }

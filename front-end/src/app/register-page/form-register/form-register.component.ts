@@ -15,12 +15,9 @@ import {NgxMaskDirective, NgxMaskPipe} from 'ngx-mask';
   styleUrl: './form-register.component.css'
 })
 export class FormRegisterComponent {
-  private _snackBar = inject(MatSnackBar);
   horizontalPosition: MatSnackBarHorizontalPosition = 'end';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
-
   protected isLoading: boolean = false;
-
   protected registerForm: FormGroup = new FormGroup<any>({
       name: new FormControl("", [Validators.minLength(3), Validators.maxLength(70)]),
       tradeName: new FormControl("", [Validators.minLength(3), Validators.maxLength(50)]),
@@ -29,10 +26,10 @@ export class FormRegisterComponent {
       tellPhone: new FormControl("", Validators.minLength(11))
     }
   );
+  private _snackBar = inject(MatSnackBar);
+  private preUserService: PreUserServiceService;
 
-  private preUserService:PreUserServiceService;
-
-  constructor(preUserService:PreUserServiceService) {
+  constructor(preUserService: PreUserServiceService) {
     this.preUserService = preUserService;
   }
 
@@ -40,19 +37,19 @@ export class FormRegisterComponent {
     return this.registerForm.get('name');
   }
 
-  get tradeName(){
+  get tradeName() {
     return this.registerForm.get('tradeName')
   }
 
-  get tellPhone(){
+  get tellPhone() {
     return this.registerForm.get('tellPhone')
   }
 
-  get email(){
+  get email() {
     return this.registerForm.get('email')
   }
 
-  get password(){
+  get password() {
     return this.registerForm.get('password')
   }
 

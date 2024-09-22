@@ -1,35 +1,35 @@
 <article>
   <h2 mat-dialog-title>Edite o campo de texto</h2>
   <mat-dialog-content class="mat-form">
-    <form [formGroup]="formEditInput" (ngSubmit)="submitForm()">
-      <mat-form-field appearance="outline" class="inputMat" >
+    <form (ngSubmit)="submitForm()" [formGroup]="formEditInput">
+      <mat-form-field appearance="outline" class="inputMat">
         <mat-label>Nome do campo</mat-label>
-        <input matInput type="text" formControlName="label" required>
+        <input formControlName="label" matInput required type="text">
       </mat-form-field>
 
-      <mat-form-field appearance="outline" class="inputMat" >
+      <mat-form-field appearance="outline" class="inputMat">
         <mat-label>Texto de Ajuda</mat-label>
-        <input matInput type="text" formControlName="placeHolder" required>
+        <input formControlName="placeHolder" matInput required type="text">
       </mat-form-field>
 
       <label>
         <span>Largura:</span>
-        <mat-slider min="0" max="100" step="1" showTickMarks discrete>
-          <input matSliderThumb formControlName="width"/>
+        <mat-slider discrete max="100" min="0" showTickMarks step="1">
+          <input formControlName="width" matSliderThumb/>
         </mat-slider>
       </label>
       <label>
         <span>Alinhamento Horizontal:</span>
         <mat-form-field appearance="outline">
           <mat-label>Centro</mat-label>
-          <mat-select formControlName="horizontalAlignment" [(value)]="alignSelected">
+          <mat-select [(value)]="alignSelected" formControlName="horizontalAlignment">
             <mat-option value="center">Centro</mat-option>
             <mat-option value="start">Começo</mat-option>
             <mat-option value="end">Final</mat-option>
           </mat-select>
         </mat-form-field>
       </label>
-      <button type="submit" mat-button>Salvar</button>
+      <button mat-button type="submit">Salvar</button>
     </form>
   </mat-dialog-content>
 </article>

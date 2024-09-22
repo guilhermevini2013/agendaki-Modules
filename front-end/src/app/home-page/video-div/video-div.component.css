@@ -1,36 +1,36 @@
 article {
-    gap: 50px;
-    display: flex;
-    padding-top: 80px;
-    flex-direction: column;
+  gap: 50px;
+  display: flex;
+  padding-top: 80px;
+  flex-direction: column;
 }
 
-.section-title{
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    gap: 30px;
-    text-align: center;
+.section-title {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  text-align: center;
 }
 
-.section-title div h1{
+.section-title div h1 {
   font-size: 2.3rem;
 }
 
 .section-video-text {
-    width:65%;
+  width: 65%;
 }
 
-.section-video-text div span{
+.section-video-text div span {
   font-size: 1.25rem;
 }
 
 .video-section {
-    width: 65%;
+  width: 65%;
 
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 .section-faqs {
@@ -48,7 +48,7 @@ article {
   max-width: 700px;
 
   background-color: transparent;
-  box-shadow: 3px 7px 4px  rgba(0, 0, 0, 0.25);;
+  box-shadow: 3px 7px 4px rgba(0, 0, 0, 0.25);;
   border-radius: 5px;
 
   text-align: center;

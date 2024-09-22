@@ -18,11 +18,13 @@ public class DateJobHoliday extends DateJob {
         this.date = holidayDTO.dateOfHoliday();
     }
 
-    public DateJobHoliday() {}
+    public DateJobHoliday() {
+    }
 
     public Boolean getOpen() {
         return isOpen;
     }
+
     public LocalDate getDate() {
         return date;
     }

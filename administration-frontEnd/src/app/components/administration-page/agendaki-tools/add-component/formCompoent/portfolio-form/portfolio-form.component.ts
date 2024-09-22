@@ -1,12 +1,12 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {MatDialogClose, MatDialogContent, MatDialogRef} from "@angular/material/dialog";
 import {ComponentCommunicationService} from "../../../../../../services/component-communication.service";
 import {NgForOf} from "@angular/common";
 import {PortfolioComponent} from "../../../sections/portfolio/portfolio.component";
-import { MatSelectModule } from '@angular/material/select';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInput } from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInput} from '@angular/material/input';
 
 @Component({
   selector: 'app-portfolio-form',
@@ -22,18 +22,19 @@ import { MatInput } from '@angular/material/input';
     MatInput,
   ],
   templateUrl: './portfolio-form.component.html',
-  styleUrls: ['./portfolio-form.component.css','../styleFormComponent.css']
+  styleUrls: ['./portfolio-form.component.css', '../styleFormComponent.css']
 })
 export class PortfolioFormComponent {
   selectedFiles: { name: string, base64: string }[] = [];
 
   formEditPortfolio: FormGroup = new FormGroup({
-    imagesToBase64: new FormControl<string[]>([],Validators.required),
-    text: new FormControl('',Validators.required),
-    type:new FormControl("portfolio")
+    imagesToBase64: new FormControl<string[]>([], Validators.required),
+    text: new FormControl('', Validators.required),
+    type: new FormControl("portfolio")
   });
 
-  constructor(private communicationComponent: ComponentCommunicationService,private dialogRef: MatDialogRef<PortfolioFormComponent>) {}
+  constructor(private communicationComponent: ComponentCommunicationService, private dialogRef: MatDialogRef<PortfolioFormComponent>) {
+  }
 
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
@@ -66,7 +67,7 @@ export class PortfolioFormComponent {
   }
 
   submitForm(): void {
-    if(this.selectedFiles.length > 0){
+    if (this.selectedFiles.length > 0) {
       if (this.formEditPortfolio.valid) {
         this.communicationComponent.triggerAddComponentAction({
           component: PortfolioComponent,

@@ -48,14 +48,12 @@ import {PopUpService} from "../../../../services/pop-up.service";
   styleUrls: ['./week-card.component.css']
 })
 export class WeekCardComponent implements OnInit {
-  private _formBuilder = inject(FormBuilder);
   public weekName: string = "";
   @Input()
   public weekEnum: DayOfWeek = DayOfWeek.NONE;
-
   @Input()
   public dayOfWeekInf: DateJobReadDTO | null = null;
-
+  private _formBuilder = inject(FormBuilder);
   firstFormGroup = this._formBuilder.group({
     doWork: ['', Validators.required],
   });

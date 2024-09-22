@@ -1,30 +1,31 @@
 <div class="container-form">
-    <form [formGroup]="loginForm" (ngSubmit)="submitFormLogin($event)">
-      <label for="email">
-        E-mail
-        <input type="text" id="email" formControlName="email" required formControlName="email">
-        <div *ngIf="email?.invalid && email?.dirty"
-             class="alert-danger">
-          <div *ngIf="email?.hasError('required')">
-            <span>*Email deve ser preenchido.</span>
-          </div>
-          <div *ngIf="email?.hasError('email')">
-            <span>*Email incorreto</span>
-          </div>
+  <form (ngSubmit)="submitFormLogin($event)" [formGroup]="loginForm">
+    <label for="email">
+      E-mail
+      <input formControlName="email" formControlName="email" id="email" required type="text">
+      <div *ngIf="email?.invalid && email?.dirty"
+           class="alert-danger">
+        <div *ngIf="email?.hasError('required')">
+          <span>*Email deve ser preenchido.</span>
         </div>
-      </label>
-      <label for="password">
-        Senha
-        <input type="password" id="password" formControlName="password" required formControlName="password">
-      </label>
-      <div>
-        <button type="submit" name="action" value="administration" class="button-login administration">Administração</button>
-        <button type="submit" name="action" value="portal-client" class="button-login portal-client">Portal cliente
-        </button>
+        <div *ngIf="email?.hasError('email')">
+          <span>*Email incorreto</span>
+        </div>
       </div>
-    </form>
-    <div class="container-form__help">
-      <span>Ainda não tem conta? <a href="http://localhost:4200/register" style="color: var(--secundary-color)">Cadastra-se</a></span>
+    </label>
+    <label for="password">
+      Senha
+      <input formControlName="password" formControlName="password" id="password" required type="password">
+    </label>
+    <div>
+      <button class="button-login administration" name="action" type="submit" value="administration">Administração
+      </button>
+      <button class="button-login portal-client" name="action" type="submit" value="portal-client">Portal cliente
+      </button>
     </div>
+  </form>
+  <div class="container-form__help">
+    <span>Ainda não tem conta? <a href="http://localhost:4200/register" style="color: var(--secundary-color)">Cadastra-se</a></span>
   </div>
+</div>
 

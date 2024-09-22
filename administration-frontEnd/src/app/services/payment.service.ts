@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpResponse} from "@angular/common/http";
-import {Observable, catchError, throwError} from "rxjs";
+import {catchError, Observable, throwError} from "rxjs";
 import {PaymentOrdersDTO} from "../models/payment-orders-dto";
 import {PaymentPixCreateDTO} from "../models/payment-pix-create-dto";
 import {PaymentInfo} from "../models/payment-info";
@@ -12,32 +12,34 @@ import {PaymentBankDetailsDTO} from "../models/payment-bank-details-dto";
 })
 export class PaymentService {
   private _baseUrlAPI: string = "http://localhost:8081/"
-  constructor(private http:HttpClient) { }
 
-  public getAllOrders(): Observable<PaymentOrdersDTO[]>{
-    return this.http.get<PaymentOrdersDTO[]>(this._baseUrlAPI + "financially/api/payment/orders",{
+  constructor(private http: HttpClient) {
+  }
+
+  public getAllOrders(): Observable<PaymentOrdersDTO[]> {
+    return this.http.get<PaymentOrdersDTO[]>(this._baseUrlAPI + "financially/api/payment/orders", {
       withCredentials: true,
     });
   }
 
-  public createPaymentPix(createPayment:PaymentPixCreateDTO): Observable<HttpResponse<PaymentInfo>> {
+  public createPaymentPix(createPayment: PaymentPixCreateDTO): Observable<HttpResponse<PaymentInfo>> {
     return this.http.post<PaymentInfo>(this._baseUrlAPI + "financially/api/payment", createPayment,
       {
         observe: "response",
         withCredentials: true
       }).pipe(
-        catchError(error => {
-         let errorMessage: string = '';
-         if (error.status === 503) {
-            errorMessage = 'Erro no servidor. Tente novamente mais tarde.';
-          }
-          return throwError({ status: error.status, message: errorMessage });
-        })
-      )
+      catchError(error => {
+        let errorMessage: string = '';
+        if (error.status === 503) {
+          errorMessage = 'Erro no servidor. Tente novamente mais tarde.';
+        }
+        return throwError({status: error.status, message: errorMessage});
+      })
+    )
   }
 
-  public createPaymentBank(createPayment:PaymentBankCreateDTO): Observable<HttpResponse<PaymentBankDetailsDTO>>{
-    return this.http.post<PaymentBankDetailsDTO>(this._baseUrlAPI + "financially/api/payment",createPayment,{
+  public createPaymentBank(createPayment: PaymentBankCreateDTO): Observable<HttpResponse<PaymentBankDetailsDTO>> {
+    return this.http.post<PaymentBankDetailsDTO>(this._baseUrlAPI + "financially/api/payment", createPayment, {
       observe: "response",
       withCredentials: true
     })

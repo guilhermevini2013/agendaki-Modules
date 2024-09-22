@@ -1,4 +1,4 @@
-footer{
+footer {
   background-color: var(--principal-color);
   height: 100%;
   display: flex;
@@ -9,7 +9,7 @@ footer{
   align-items: center;
 }
 
-footer hr{
+footer hr {
   width: 100%;
   border: 0;
   border-top: 2px solid var(--tertiary-color);

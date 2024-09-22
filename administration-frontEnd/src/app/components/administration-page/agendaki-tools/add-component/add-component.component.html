@@ -1,71 +1,85 @@
 <section>
-    <div class="list">
-        <span class="list__title">Lista de componentes</span>
-        <div class="list_options">
-            <ul>
-                <li><button (click)="openDialog(FormInputComponent)">
-                  <span>Campo de texto</span>
-                </button></li>
-                <li><button (click)="openDialog(PerfilFormComponent)">
-                  <span>Perfil</span>
-                </button></li>
-              <li><button (click)="openDialog(SelectServiceAndProfessionalFormComponent)">
-                <span>Selecionar profissionais e servicos</span>
-              </button></li>
-                <li><button (click)="openDialog(CalendarFormComponent)">
-                  <span>Calendario</span>
-                </button></li>
-              <li><button (click)="openDialog(PortfolioFormComponent)">
-                <span>Portfolio</span>
-              </button></li>
-                <li><button (click)="openDialog(InformationFormComponent)">
-                  <span>Informação</span>
-                </button></li>
-                <li><button (click)="openDialog(PresentationFormComponent)">
-                  <span>Apresentação</span>
-                </button></li>
-            </ul>
-        </div>
+  <div class="list">
+    <span class="list__title">Lista de componentes</span>
+    <div class="list_options">
+      <ul>
+        <li>
+          <button (click)="openDialog(FormInputComponent)">
+            <span>Campo de texto</span>
+          </button>
+        </li>
+        <li>
+          <button (click)="openDialog(PerfilFormComponent)">
+            <span>Perfil</span>
+          </button>
+        </li>
+        <li>
+          <button (click)="openDialog(SelectServiceAndProfessionalFormComponent)">
+            <span>Selecionar profissionais e servicos</span>
+          </button>
+        </li>
+        <li>
+          <button (click)="openDialog(CalendarFormComponent)">
+            <span>Calendario</span>
+          </button>
+        </li>
+        <li>
+          <button (click)="openDialog(PortfolioFormComponent)">
+            <span>Portfolio</span>
+          </button>
+        </li>
+        <li>
+          <button (click)="openDialog(InformationFormComponent)">
+            <span>Informação</span>
+          </button>
+        </li>
+        <li>
+          <button (click)="openDialog(PresentationFormComponent)">
+            <span>Apresentação</span>
+          </button>
+        </li>
+      </ul>
     </div>
+  </div>
 
-    <div class="colors">
-      <label>
-        <span>Cor primária:</span>
-        <div class="colorInput">
-          <input type="color" [(ngModel)]="colorPrimary">
-        </div>
-      </label>
-
-
-      <label>
-        <span>Cor secundária:</span>
-        <div class="colorInput">
-          <input type="color" [(ngModel)]="colorSecundary">
-        </div>
-      </label>
-      <label>
-        <span>Cor terciaria:</span>
-        <div class="colorInput">
-          <input type="color" [(ngModel)]="colorTerciary">
-        </div>
-      </label>
-      <div class="button__colors">
-        <button (click)="saveColors()">Salvar cores</button>
+  <div class="colors">
+    <label>
+      <span>Cor primária:</span>
+      <div class="colorInput">
+        <input [(ngModel)]="colorPrimary" type="color">
       </div>
-    </div>
+    </label>
 
-    <div class="warn">
+
+    <label>
+      <span>Cor secundária:</span>
+      <div class="colorInput">
+        <input [(ngModel)]="colorSecundary" type="color">
+      </div>
+    </label>
+    <label>
+      <span>Cor terciaria:</span>
+      <div class="colorInput">
+        <input [(ngModel)]="colorTerciary" type="color">
+      </div>
+    </label>
+    <div class="button__colors">
+      <button (click)="saveColors()">Salvar cores</button>
+    </div>
+  </div>
+
+  <div class="warn">
         <span>
             Avisos:
             <span class="sucess">Tudo certo!</span>
         </span>
+  </div>
+  <div class="optionToSave">
+    <div>
+      <button (click)="saveComponents()">Salvar</button>
     </div>
-    <div class="optionToSave">
-        <div>
-            <button (click)="saveComponents()">Salvar</button>
-        </div>
-        <div>
-            <span>Desfazer alteraçôes</span>
-        </div>
+    <div>
+      <span>Desfazer alteraçôes</span>
     </div>
+  </div>
 </section>

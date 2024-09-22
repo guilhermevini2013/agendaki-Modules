@@ -1,11 +1,11 @@
 section {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: max-content; /* Ajusta a altura com base no conteúdo */
-    box-sizing: border-box; /* Garante que o padding não afete a largura total do elemento */
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: max-content; /* Ajusta a altura com base no conteúdo */
+  box-sizing: border-box; /* Garante que o padding não afete a largura total do elemento */
+}
 
 .presentation {
   width: 80%;
@@ -32,7 +32,7 @@ section {
   width: 360px; /* Largura fixa */
   text-align: justify;
   padding-top: 5px;
-  word-break: break-all;/* Garante que o texto não exceda a largura do contêiner */
+  word-break: break-all; /* Garante que o texto não exceda a largura do contêiner */
 }
 
 .representation__bio__title {

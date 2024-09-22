@@ -1,36 +1,37 @@
 <div class="content">
   <div class="Cards">
     <div class="formOptionsCard">
-      <h1>{{weekName}}</h1>
+      <h1>{{ weekName }}</h1>
       <div class="card_side"></div>
       <span class="formOptionsCardText"></span>
 
       <form [formGroup]="firstFormGroup" class="firstFormGroup">
         <mat-radio-group aria-label="Select an option" formControlName="doWork">
-          <mat-radio-button value="1" [checked]="dayOfWeekInf?.isOpen">Trabalho</mat-radio-button>
-          <mat-radio-button value="2" [checked]="!dayOfWeekInf?.isOpen" (change)="alterDayOfWeek(false)">Não Trabalho</mat-radio-button>
+          <mat-radio-button [checked]="dayOfWeekInf?.isOpen" value="1">Trabalho</mat-radio-button>
+          <mat-radio-button (change)="alterDayOfWeek(false)" [checked]="!dayOfWeekInf?.isOpen" value="2">Não Trabalho
+          </mat-radio-button>
         </mat-radio-group>
       </form>
       <ng-template [ngIf]="checkIfWork() == '1'">
-        <form [formGroup]="secondFormGroup" class="secondFormGroup" (ngSubmit)="alterDayOfWeek(true)">
+        <form (ngSubmit)="alterDayOfWeek(true)" [formGroup]="secondFormGroup" class="secondFormGroup">
           <mat-form-field appearance="outline">
             <mat-label>Inicio Expediente</mat-label>
-            <input matInput placeholder="00:00" mask="00:00" formControlName="startWork" minlength="4" required>
+            <input formControlName="startWork" mask="00:00" matInput minlength="4" placeholder="00:00" required>
           </mat-form-field>
 
           <mat-form-field appearance="outline">
             <mat-label>Fim Expediente</mat-label>
-            <input matInput placeholder="00:00" mask="00:00" formControlName="endWork" minlength="4" required>
+            <input formControlName="endWork" mask="00:00" matInput minlength="4" placeholder="00:00" required>
           </mat-form-field>
 
           <mat-form-field appearance="outline">
             <mat-label>Inicio Almoço</mat-label>
-            <input matInput placeholder="00:00" mask="00:00" formControlName="startOffHour" minlength="4" required>
+            <input formControlName="startOffHour" mask="00:00" matInput minlength="4" placeholder="00:00" required>
           </mat-form-field>
 
           <mat-form-field appearance="outline">
             <mat-label>Fim Almoço</mat-label>
-            <input matInput placeholder="00:00" mask="00:00" formControlName="endOffHour" minlength="4" required>
+            <input formControlName="endOffHour" mask="00:00" matInput minlength="4" placeholder="00:00" required>
           </mat-form-field>
           <div>
             <button mat-button type="submit">Salvar</button>

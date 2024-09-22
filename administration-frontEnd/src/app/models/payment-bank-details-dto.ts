@@ -4,7 +4,7 @@ export interface PaymentBankDetailsDTO {
   paymentId: string;
   price: number;
   cpf: string;
-  typeSignature: 'ANNUAL' | 'QUARTERLY' |'MONTHLY';
+  typeSignature: 'ANNUAL' | 'QUARTERLY' | 'MONTHLY';
   typePayment: TypePayment;
   dateOpen: string;
   description: string;

@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
-import {catchError, map, Observable, of, throwError} from "rxjs";
+import {catchError, map, Observable, throwError} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +28,7 @@ export class PreUserServiceService {
         } else if (error.status === 500) {
           errorMessage = 'Erro no servidor. Tente novamente mais tarde.';
         }
-        return throwError({ status: error.status, message: errorMessage });
+        return throwError({status: error.status, message: errorMessage});
       })
     );
   }

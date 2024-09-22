@@ -1,64 +1,65 @@
-<div class="example-container" >
-    <mat-toolbar color="primary" class="example-toolbar">
-      <div class="tool-button">
-        <button mat-icon-button (click)="snav.toggle()"><mat-icon style="transform: scale(1.5);">menu</mat-icon></button>
+<div class="example-container">
+  <mat-toolbar class="example-toolbar" color="primary">
+    <div class="tool-button">
+      <button (click)="snav.toggle()" mat-icon-button>
+        <mat-icon style="transform: scale(1.5);">menu</mat-icon>
+      </button>
+    </div>
+    <div class="toolbar-content">
+      <div class="toolbar-content_image">
+        <img alt="" src="image/logoPortalClient.png">
       </div>
-      <div class="toolbar-content">
-        <div class="toolbar-content_image">
-            <img src="image/logoPortalClient.png" alt="">
-        </div>
-      </div>
-    </mat-toolbar>
-    <mat-sidenav-container class="example-sidenav-container">
-      <mat-sidenav #snav>
-        <mat-nav-list>
-            <div class="content-sidenav">
-                <div>
-                    <div>
-                        <span class="title-content">Pedidos</span>
-                        <div class="line"></div>
-                    </div>
-                    <div class="content-sidenav__inf">
-                        <div>
-                            <mat-icon>edit</mat-icon>
-                            <span><a routerLink="create-order" routerLinkActire="active">Criar</a></span>
-                        </div>
-                        <div>
-                            <mat-icon>visibility</mat-icon>
-                            <span><a routerLink="client-orders" routerLinkActire="active">Ver</a></span>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div>
-                        <span class="title-content">Suporte</span>
-                        <div class="line"></div>
-                    </div>
-                    <div class="content-sidenav__inf">
-                        <div>
-                            <mat-icon>confirmation_number</mat-icon>
-                            <span><a href="">Ticket</a></span>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div>
-                        <span class="title-content">Outros</span>
-                        <div class="line"></div>
-                    </div>
-                    <div class="content-sidenav__inf">
-                        <div>
-                            <mat-icon>logout</mat-icon>
-                            <span><a href="">Sair do painel</a></span>
-                        </div>
-                    </div>
-                </div>
+    </div>
+  </mat-toolbar>
+  <mat-sidenav-container class="example-sidenav-container">
+    <mat-sidenav #snav>
+      <mat-nav-list>
+        <div class="content-sidenav">
+          <div>
+            <div>
+              <span class="title-content">Pedidos</span>
+              <div class="line"></div>
             </div>
-        </mat-nav-list>
-      </mat-sidenav>
-      <mat-sidenav-content>
-        <router-outlet></router-outlet>
-      </mat-sidenav-content>
-    </mat-sidenav-container>
-  </div>
-  
+            <div class="content-sidenav__inf">
+              <div>
+                <mat-icon>edit</mat-icon>
+                <span><a routerLink="create-order" routerLinkActire="active">Criar</a></span>
+              </div>
+              <div>
+                <mat-icon>visibility</mat-icon>
+                <span><a routerLink="client-orders" routerLinkActire="active">Ver</a></span>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div>
+              <span class="title-content">Suporte</span>
+              <div class="line"></div>
+            </div>
+            <div class="content-sidenav__inf">
+              <div>
+                <mat-icon>confirmation_number</mat-icon>
+                <span><a href="">Ticket</a></span>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div>
+              <span class="title-content">Outros</span>
+              <div class="line"></div>
+            </div>
+            <div class="content-sidenav__inf">
+              <div>
+                <mat-icon>logout</mat-icon>
+                <span><a href="">Sair do painel</a></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

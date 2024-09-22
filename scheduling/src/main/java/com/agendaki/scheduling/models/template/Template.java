@@ -15,7 +15,7 @@ public class Template {
     private Long id;
     private String primaryColor;
     private String secondaryColor;
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "template", orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "template", orphanRemoval = true)
     private List<Section> sections = new ArrayList<>();
     @OneToOne(fetch = FetchType.LAZY)
     private Instance instance;
@@ -27,7 +27,8 @@ public class Template {
         this.sections = createSections(templateDTO);
     }
 
-    public Template() {}
+    public Template() {
+    }
 
     public void update(TemplateDTO templateDTO) {
         this.primaryColor = templateDTO.primaryColor();

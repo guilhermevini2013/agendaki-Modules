@@ -1,7 +1,6 @@
 package com.agendaki.scheduling.models.scheduling;
 
 import com.agendaki.scheduling.dtos.request.InsertDateOfSchedulingDTO;
-import com.agendaki.scheduling.dtos.response.ReadDateOfSchedulingDTO;
 import com.agendaki.scheduling.models.user.Instance;
 import com.agendaki.scheduling.repositories.UserRepository;
 import jakarta.persistence.DiscriminatorValue;
@@ -32,6 +31,7 @@ public class DateJobCommon extends DateJob {
     public DateJobCommon() {
 
     }
+
     public void update(InsertDateOfSchedulingDTO insertDateOfSchedulingDTO) {
         super.breakInitial = insertDateOfSchedulingDTO.breakInitial();
         super.breakFinal = insertDateOfSchedulingDTO.breakFinal();

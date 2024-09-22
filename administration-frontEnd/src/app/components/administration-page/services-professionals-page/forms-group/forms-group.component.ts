@@ -48,65 +48,28 @@ import {ProfessionalReadDto} from "../../../../models/professionalAndService/pro
   styleUrl: './forms-group.component.css'
 })
 
-export class FormsGroupComponent implements OnInit{
-  private _formBuilder = inject(FormBuilder);
+export class FormsGroupComponent implements OnInit {
+  defaultTime: number = 30;
   protected professionals: ProfessionalReadDto[] = [];
-  protected services:ServiceReadDto[] = [];
-  constructor(private professionalAndService:ProfessionalAndServiceService) {
-  }
+  protected services: ServiceReadDto[] = [];
+  private _formBuilder = inject(FormBuilder);
   workerFormGroup = this._formBuilder.group({
     name: ['', Validators.required],
-    idService: [[],Validators.required]
+    idService: [[], Validators.required]
   });
-  defaultTime:number = 30;
-
   serviceFormGroup = this._formBuilder.group({
     name: ['', Validators.required],
     price: ['', Validators.required],
     time: [this.defaultTime, Validators.required],
   });
-
   deleteWorkerFormGroup = this._formBuilder.group({
     id: [0, Validators.required],
   });
-
   deleteServiceFormGroup = this._formBuilder.group({
     id: [0, Validators.required],
   });
 
-  protected createWorker():void{
-    if (this.workerFormGroup.valid){
-      const workerDto:ProfessionalCreateDto = {
-        name: this.workerFormGroup.value.name!,
-        servicesToJobIDs: this.workerFormGroup.value.idService! as number[]
-      }
-      this.professionalAndService.insertProfessional(workerDto).pipe().subscribe(next => {
-        if (next.status == 201) {
-          this.workerFormGroup.reset();
-        }
-      });
-      window.location.reload();
-    }
-  }
-
-  protected createService():void{
-    if (this.serviceFormGroup.valid){
-      const serviceDto:ServiceCreateDTO = {
-        name: this.serviceFormGroup.value.name!,
-        price: Number(this.serviceFormGroup.value.price!),
-        duration: Number(this.serviceFormGroup.value.time!),
-      }
-      this.professionalAndService.insertService(serviceDto).subscribe(next => {
-        if (next.status == 201) {
-          this.serviceFormGroup.reset()
-          this.serviceFormGroup.patchValue({
-            time: this.defaultTime
-          });
-        }
-      });
-      this.serviceFormGroup.reset();
-      window.location.reload();
-    }
+  constructor(private professionalAndService: ProfessionalAndServiceService) {
   }
 
   ngOnInit(): void {
@@ -122,15 +85,50 @@ export class FormsGroupComponent implements OnInit{
   }
 
   deleteService() {
-    if (this.deleteServiceFormGroup.valid){
+    if (this.deleteServiceFormGroup.valid) {
       this.professionalAndService.deleteService(this.deleteServiceFormGroup.value.id!).subscribe();
       window.location.reload();
     }
   }
 
-  deleteProfessional(){
-    if (this.deleteWorkerFormGroup.valid){
+  deleteProfessional() {
+    if (this.deleteWorkerFormGroup.valid) {
       this.professionalAndService.deleteProfessional(this.deleteWorkerFormGroup.value.id!).subscribe();
+      window.location.reload();
+    }
+  }
+
+  protected createWorker(): void {
+    if (this.workerFormGroup.valid) {
+      const workerDto: ProfessionalCreateDto = {
+        name: this.workerFormGroup.value.name!,
+        servicesToJobIDs: this.workerFormGroup.value.idService! as number[]
+      }
+      this.professionalAndService.insertProfessional(workerDto).pipe().subscribe(next => {
+        if (next.status == 201) {
+          this.workerFormGroup.reset();
+        }
+      });
+      window.location.reload();
+    }
+  }
+
+  protected createService(): void {
+    if (this.serviceFormGroup.valid) {
+      const serviceDto: ServiceCreateDTO = {
+        name: this.serviceFormGroup.value.name!,
+        price: Number(this.serviceFormGroup.value.price!),
+        duration: Number(this.serviceFormGroup.value.time!),
+      }
+      this.professionalAndService.insertService(serviceDto).subscribe(next => {
+        if (next.status == 201) {
+          this.serviceFormGroup.reset()
+          this.serviceFormGroup.patchValue({
+            time: this.defaultTime
+          });
+        }
+      });
+      this.serviceFormGroup.reset();
       window.location.reload();
     }
   }

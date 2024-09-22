@@ -45,10 +45,10 @@ public class schedulingServiceImpl implements SchedulingService {
         Instance instance = SecurityUtil.getProjectionOfUserEntityAuthenticated().getInstance();
         List<Scheduling> allByInstance = schedulingRepository.findAllByInstance(instance);
         List<AllSchedulingReadDTO> list = allByInstance.stream().map(scheduling -> new AllSchedulingReadDTO(scheduling)).toList();
-        return new SchedulingInformationColumDTO(recoverColumns(instance),list);
+        return new SchedulingInformationColumDTO(recoverColumns(instance), list);
     }
 
-    private List<String> recoverColumns(Instance instance){
+    private List<String> recoverColumns(Instance instance) {
         return inputRepository.findAllLabelsByInstance(instance);
     }
 }

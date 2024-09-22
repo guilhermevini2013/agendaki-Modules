@@ -7,6 +7,7 @@ import com.agendaki.scheduling.models.template.Section;
 import com.agendaki.scheduling.models.template.Template;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type")
 @JsonSubTypes({
         @JsonSubTypes.Type(value = InputDTO.class, name = "input"),
@@ -19,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 })
 public abstract class SectionToSaveDTO {
     private Long id;
-    private Short position; 
+    private Short position;
     private String horizontalAlignment;
 
     public SectionToSaveDTO(Long id, Short position, String horizontalAlignment) {

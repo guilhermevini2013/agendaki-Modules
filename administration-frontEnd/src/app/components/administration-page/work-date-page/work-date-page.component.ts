@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import { WeekCardComponent } from './week-card/week-card.component';
+import {WeekCardComponent} from './week-card/week-card.component';
 import {DateJobService} from "../../../services/dateJob/date-job.service";
 import {DateJobReadDTO} from "../../../models/dateJob/date-job-read-DTO";
 import {NgForOf} from "@angular/common";
@@ -11,8 +11,9 @@ import {NgForOf} from "@angular/common";
   templateUrl: './work-date-page.component.html',
   styleUrl: './work-date-page.component.css'
 })
-export class WorkDatePageComponent implements OnInit{
+export class WorkDatePageComponent implements OnInit {
   protected daysOfWeek: DateJobReadDTO[] = []
+
   constructor(private dateJobService: DateJobService) {
   }
 

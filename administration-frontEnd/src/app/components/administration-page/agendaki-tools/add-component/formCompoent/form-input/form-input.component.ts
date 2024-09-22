@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef} from "@angular/material/dialog";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {ComponentCommunicationService} from "../../../../../../services/component-communication.service";
@@ -6,7 +6,7 @@ import {InputComponent} from "../../../sections/input/input.component";
 import {MatSliderModule} from '@angular/material/slider';
 import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import { MatInput } from '@angular/material/input';
+import {MatInput} from '@angular/material/input';
 
 @Component({
   selector: 'app-form-input',
@@ -27,29 +27,29 @@ import { MatInput } from '@angular/material/input';
   styleUrls: ['./form-input.component.css', '../styleFormComponent.css']
 })
 export class FormInputComponent {
-  alignSelected:string = "center";
+  alignSelected: string = "center";
 
-  formEditInput:FormGroup = new FormGroup<any>({
-    label: new FormControl('',Validators.required),
-    placeHolder: new FormControl('',Validators.required),
-    width: new FormControl('',Validators.required),
-    horizontalAlignment: new FormControl('',Validators.required),
-    type:new FormControl("input")
+  formEditInput: FormGroup = new FormGroup<any>({
+    label: new FormControl('', Validators.required),
+    placeHolder: new FormControl('', Validators.required),
+    width: new FormControl('', Validators.required),
+    horizontalAlignment: new FormControl('', Validators.required),
+    type: new FormControl("input")
   });
 
-  constructor(private communicationComponent:ComponentCommunicationService, private dialogRef: MatDialogRef<FormInputComponent>) {
+  constructor(private communicationComponent: ComponentCommunicationService, private dialogRef: MatDialogRef<FormInputComponent>) {
   }
 
-  submitForm():void{
+  submitForm(): void {
     if (this.formEditInput.value.width == "") {
       this.formEditInput.value.width = 50
     }
 
-    this.formEditInput.value.width +="%";
+    this.formEditInput.value.width += "%";
 
-    if(this.formEditInput.valid){
+    if (this.formEditInput.valid) {
       this.communicationComponent.triggerAddComponentAction({
-        component:InputComponent,
+        component: InputComponent,
         data: this.formEditInput.value
       })
       this.dialogRef.close();

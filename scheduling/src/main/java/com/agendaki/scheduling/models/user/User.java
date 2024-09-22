@@ -21,7 +21,7 @@ public class User implements UserDetails {
     private String password;
     private String tradeName;
     private String tellPhone;
-    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Signature signature;
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "user")
     private Instance instance;
@@ -43,7 +43,7 @@ public class User implements UserDetails {
         this.tradeName = (String) attributes.get("tradeName");
         this.email = (String) attributes.get("email");
         List<Integer> dates = (List<Integer>) attributes.get("expiryDate");
-        this.signature = new Signature(TypeSignature.valueOf((String) attributes.get("typeSignature")), LocalDate.of(dates.get(0),dates.get(1),dates.get(2)));
+        this.signature = new Signature(TypeSignature.valueOf((String) attributes.get("typeSignature")), LocalDate.of(dates.get(0), dates.get(1), dates.get(2)));
         this.instance = new Instance(this);
     }
 

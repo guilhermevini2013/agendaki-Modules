@@ -12,7 +12,7 @@ import java.util.Optional;
 @Repository
 public interface ProfessionalRepository extends JpaRepository<Professional, Long> {
 
-    void deleteByIdAndInstance(Long id,Instance instance);
+    void deleteByIdAndInstance(Long id, Instance instance);
 
     Optional<Professional> findByIdAndInstance(Long id, Instance instance);
 

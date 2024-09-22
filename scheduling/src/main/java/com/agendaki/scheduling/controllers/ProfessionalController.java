@@ -53,14 +53,14 @@ public class ProfessionalController {
         } else {
             professionalsByService = professionalService.getProfessionals();
         }
-        if (professionalsByService.isEmpty()){
+        if (professionalsByService.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.ok(professionalsByService);
     }
 
     @GetMapping(value = "/all")
-    public List<ProfessionalAndServiceReadDTO> getProfessionalsAndServices(){
+    public List<ProfessionalAndServiceReadDTO> getProfessionalsAndServices() {
         return this.professionalService.getAllProfessionalAndServices();
     }
 

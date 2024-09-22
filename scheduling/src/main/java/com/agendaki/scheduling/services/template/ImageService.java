@@ -10,7 +10,7 @@ import java.util.Base64;
 public class ImageService {
     private static final String RESOURCE_DIRECTORY = "scheduling/src/main/resources/static/images/";
 
-    public Boolean saveImageIntoArchive(String imageToBase64, String uuid){
+    public Boolean saveImageIntoArchive(String imageToBase64, String uuid) {
         byte[] imageBytes = Base64.getDecoder().decode(removePreFix(imageToBase64));
         File file = Paths.get(RESOURCE_DIRECTORY, uuid + getExtension(imageToBase64)).toFile();
         file.getParentFile().mkdirs();
@@ -27,6 +27,6 @@ public class ImageService {
     }
 
     private String getExtension(String imageToBase64) {
-        return "."+imageToBase64.split(",")[0].split("/")[1].split(";")[0];
+        return "." + imageToBase64.split(",")[0].split("/")[1].split(";")[0];
     }
 }

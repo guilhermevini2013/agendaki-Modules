@@ -4,8 +4,9 @@ import com.agendaki.scheduling.dtos.request.template.SectionToSaveDTO;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+
 @Component
-public class CheckQuantityInputs implements ICheckTemplateToSave{
+public class CheckQuantityInputs implements ICheckTemplateToSave {
     @Override
     public void checkSectionsToSave(List<SectionToSaveDTO> sections) {
 //        Short quantityInput = 0;

@@ -1,7 +1,7 @@
 <article>
   <h2 mat-dialog-title>Edite o calendario</h2>
   <mat-dialog-content class="mat-form">
-    <form [formGroup]="formEditCalendar" (ngSubmit)="submitForm()">
+    <form (ngSubmit)="submitForm()" [formGroup]="formEditCalendar">
       <label>
         <span>Alinhamento Horizontal:</span>
         <mat-form-field appearance="outline">
@@ -13,7 +13,7 @@
           </mat-select>
         </mat-form-field>
       </label>
-      <button type="submit" mat-button>Salvar</button>
+      <button mat-button type="submit">Salvar</button>
     </form>
   </mat-dialog-content>
 </article>

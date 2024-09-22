@@ -6,67 +6,67 @@ import {
 import {
   PortalClientPrincipalComponent
 } from "./components/portal-client-page/portal-client-principal/portal-client-principal.component";
-import {AuthPortalClientGuard} from "./auth-portal-client-guard.service";
-import {AuthAdministrationGuard} from "./auth-administration-guard.service";
 import {ClientOrdersComponent} from './components/portal-client-page/client-orders/client-orders.component';
 import {CreateOrderComponent} from './components/portal-client-page/create-order/create-order.component';
 import {ManagePageComponent} from './components/administration-page/manage-page/manage-page.component';
 import {BlockedPageComponent} from './components/administration-page/blocked-page/blocked-page.component';
 import {WorkDatePageComponent} from './components/administration-page/work-date-page/work-date-page.component';
 import {HolidayDatePageComponent} from './components/administration-page/holiday-date-page/holiday-date-page.component';
-import { AgendakiToolsComponent } from './components/administration-page/agendaki-tools/agendaki-tools.component';
-import { ServicesProfessionalsPageComponent } from './components/administration-page/services-professionals-page/services-professionals-page.component';
+import {AgendakiToolsComponent} from './components/administration-page/agendaki-tools/agendaki-tools.component';
+import {
+  ServicesProfessionalsPageComponent
+} from './components/administration-page/services-professionals-page/services-professionals-page.component';
 
 export const routes: Routes = [
   {
     path: "",
-    component:LoginPageComponent
+    component: LoginPageComponent
   },
 
   {
-    path:"administration",
-    component:AdministrationPrincipalComponent,
+    path: "administration",
+    component: AdministrationPrincipalComponent,
     //canActivate: [AuthAdministrationGuard],
-      children:[
+    children: [
       {
-        path:"manage-page",
-        component:ManagePageComponent
+        path: "manage-page",
+        component: ManagePageComponent
       },
       {
-        path:"blocked-page",
-        component:BlockedPageComponent
+        path: "blocked-page",
+        component: BlockedPageComponent
       },
       {
-        path:"work-date-page",
-        component:WorkDatePageComponent
+        path: "work-date-page",
+        component: WorkDatePageComponent
       },
       {
-        path:"services-professionals-page",
-        component:ServicesProfessionalsPageComponent
+        path: "services-professionals-page",
+        component: ServicesProfessionalsPageComponent
       },
       {
-        path:"holiday-date-page",
-        component:HolidayDatePageComponent
+        path: "holiday-date-page",
+        component: HolidayDatePageComponent
       },
       {
-        path:"agendakiTools",
-        component:AgendakiToolsComponent
+        path: "agendakiTools",
+        component: AgendakiToolsComponent
       }
     ]
   },
 
   {
-    path:"portalClient",
-    component:PortalClientPrincipalComponent,
+    path: "portalClient",
+    component: PortalClientPrincipalComponent,
     //canActivate: [AuthPortalClientGuard],
-    children:[
+    children: [
       {
-        path:"create-order",
-        component:CreateOrderComponent
+        path: "create-order",
+        component: CreateOrderComponent
       },
       {
-        path:"client-orders",
-        component:ClientOrdersComponent
+        path: "client-orders",
+        component: ClientOrdersComponent
       },
     ]
   },

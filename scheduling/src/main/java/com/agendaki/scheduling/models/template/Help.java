@@ -9,18 +9,13 @@ import java.util.List;
 
 @Entity
 @DiscriminatorValue("HELP")
-public class Help extends Section{
+public class Help extends Section {
     private String title;
     private String content;
     private String fontSizeTitle;
     private String fontSizeContent;
 
     public Help() {
-    }
-
-    @Override
-    public SectionToSaveDTO getDtoForClass() {
-        return new HelpDTO(this);
     }
 
     public Help(SectionToSaveDTO sectionToSaveDTO, Template template) {
@@ -35,6 +30,11 @@ public class Help extends Section{
             this.fontSizeTitle = helpDTO.getFontSizeTitle();
             this.fontSizeContent = helpDTO.getFontSizeContent();
         }
+    }
+
+    @Override
+    public SectionToSaveDTO getDtoForClass() {
+        return new HelpDTO(this);
     }
 
     private String formatListToContent(List<String> contentList) {

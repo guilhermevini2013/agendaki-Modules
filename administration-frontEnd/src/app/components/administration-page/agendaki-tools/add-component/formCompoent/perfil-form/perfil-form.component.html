@@ -1,18 +1,18 @@
 <article>
   <h2 mat-dialog-title>Edite o perfil</h2>
   <mat-dialog-content class="mat-form">
-    <form [formGroup]="formEditPerfil" (ngSubmit)="submitForm()">
+    <form (ngSubmit)="submitForm()" [formGroup]="formEditPerfil">
       <label>
         <span>Selecione a foto de perfil:</span>
-        <input type="file" accept="image/png, image/gif, image/jpeg" (change)="onFileSelected($event)"/>
+        <input (change)="onFileSelected($event)" accept="image/png, image/gif, image/jpeg" type="file"/>
       </label>
 
-      <mat-form-field appearance="outline" class="inputMat" >
+      <mat-form-field appearance="outline" class="inputMat">
         <mat-label>Bio</mat-label>
-        <input matInput type="text" formControlName="text" required>
+        <input formControlName="text" matInput required type="text">
       </mat-form-field>
 
-      <button type="submit" mat-button >Salvar</button>
+      <button mat-button type="submit">Salvar</button>
     </form>
   </mat-dialog-content>
 </article>

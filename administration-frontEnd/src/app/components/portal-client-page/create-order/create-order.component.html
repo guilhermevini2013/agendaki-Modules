@@ -1,186 +1,188 @@
 <div class="content">
-      <mat-stepper [linear]="true" #stepper>
+  <mat-stepper #stepper [linear]="true">
 
-        <mat-step [stepControl]="firstFormGroup" label="Escolha seu plano!">
+    <mat-step [stepControl]="firstFormGroup" label="Escolha seu plano!">
 
-          <form [formGroup]="firstFormGroup" class="firstFormGroup">
-            <mat-button-toggle-group appearance="legacy" class="formOptions" aria-label="Select an option" formControlName="typeSignature">
-              <mat-button-toggle value="1">
-                <div class="formOptionsCard">
-                  <mat-icon>bar_chart</mat-icon>
-                  <h1>Mensal</h1>
-                  <span class="formOptionsCardText">o nosso plano mensal charabim charabal na cabeça do birinbal</span>
-                  <p>por apenas:</p>
-                  <div class="formOptionsCardPrice">
-                    <span class="formOptionsCardMoneyType">R$</span>
-                    <span class="formOptionsCardValue">50,00</span>
-                    <i><p>/mês</p></i>
-                  </div>
-                </div>
-              </mat-button-toggle>
-
-              <mat-button-toggle value="2">
-                <div class="formOptionsCard">
-                  <mat-icon>analytics</mat-icon>
-                  <h1>Tri-Mensal</h1>
-                  <span class="formOptionsCardText">o nosso plano mensal charabim charabal na cabeça do birinbal</span>
-                  <p>por apenas:</p>
-                  <div class="formOptionsCardPrice">
-                    <span class="formOptionsCardMoneyType">R$</span>
-                    <span class="formOptionsCardValue">120,00</span>
-                    <i><p>/Tri-mestre</p></i>
-                  </div>
-                </div>
-              </mat-button-toggle>
-
-              <mat-button-toggle value="3">
-                <div class="formOptionsCard">
-                  <mat-icon>account_tree</mat-icon>
-                  <h1>Anual</h1>
-                  <span class="formOptionsCardText">o nosso plano mensal charabim charabal na cabeça do birinbal</span>
-                  <p>por apenas:</p>
-                  <div class="formOptionsCardPrice">
-                    <span class="formOptionsCardMoneyType">R$</span>
-                    <span class="formOptionsCardValue">360,00</span>
-                    <i><p>/ano</p></i>
-                  </div>
-                </div>
-              </mat-button-toggle>
-            </mat-button-toggle-group>
-
-            <div>
-              <button mat-button matStepperNext>Próximo</button>
+      <form [formGroup]="firstFormGroup" class="firstFormGroup">
+        <mat-button-toggle-group appearance="legacy" aria-label="Select an option" class="formOptions"
+                                 formControlName="typeSignature">
+          <mat-button-toggle value="1">
+            <div class="formOptionsCard">
+              <mat-icon>bar_chart</mat-icon>
+              <h1>Mensal</h1>
+              <span class="formOptionsCardText">o nosso plano mensal charabim charabal na cabeça do birinbal</span>
+              <p>por apenas:</p>
+              <div class="formOptionsCardPrice">
+                <span class="formOptionsCardMoneyType">R$</span>
+                <span class="formOptionsCardValue">50,00</span>
+                <i><p>/mês</p></i>
+              </div>
             </div>
-          </form>
-        </mat-step>
+          </mat-button-toggle>
 
-        <mat-step [stepControl]="secondFormGroup" label="Forma de pagamento!">
-          <form [formGroup]="secondFormGroup" class="secondFormGroup">
-            <mat-button-toggle-group appearance="legacy" class="formOptions PaymentOptions" aria-label="Select an option" formControlName="typePayment">
-              <mat-button-toggle value="1">
-                <div class="formOptionsCard Payment">
-                  <mat-icon>attach_money</mat-icon>
-                  <h1>Pix</h1>
-                </div>
-              </mat-button-toggle>
-              <mat-button-toggle value="2">
-                <div class="formOptionsCard Payment">
-                  <mat-icon>account_balance</mat-icon>
-                  <h1>Boleto</h1>
-                </div>
-              </mat-button-toggle>
-
-            </mat-button-toggle-group>
-
-            <div>
-              <button mat-button matStepperNext>Próximo</button>
+          <mat-button-toggle value="2">
+            <div class="formOptionsCard">
+              <mat-icon>analytics</mat-icon>
+              <h1>Tri-Mensal</h1>
+              <span class="formOptionsCardText">o nosso plano mensal charabim charabal na cabeça do birinbal</span>
+              <p>por apenas:</p>
+              <div class="formOptionsCardPrice">
+                <span class="formOptionsCardMoneyType">R$</span>
+                <span class="formOptionsCardValue">120,00</span>
+                <i><p>/Tri-mestre</p></i>
+              </div>
             </div>
-          </form>
-        </mat-step>
-        <mat-step [stepControl]="formTo!" label="Seus dados!">
-          <ng-template [ngIf]="checkTypePayment() == '1'">
-            <form [formGroup]="formTo!">
-              <div class="form-payment">
-                <div>
-                  <h1>Complete suas informações</h1>
-                </div>
+          </mat-button-toggle>
+
+          <mat-button-toggle value="3">
+            <div class="formOptionsCard">
+              <mat-icon>account_tree</mat-icon>
+              <h1>Anual</h1>
+              <span class="formOptionsCardText">o nosso plano mensal charabim charabal na cabeça do birinbal</span>
+              <p>por apenas:</p>
+              <div class="formOptionsCardPrice">
+                <span class="formOptionsCardMoneyType">R$</span>
+                <span class="formOptionsCardValue">360,00</span>
+                <i><p>/ano</p></i>
+              </div>
+            </div>
+          </mat-button-toggle>
+        </mat-button-toggle-group>
+
+        <div>
+          <button mat-button matStepperNext>Próximo</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step [stepControl]="secondFormGroup" label="Forma de pagamento!">
+      <form [formGroup]="secondFormGroup" class="secondFormGroup">
+        <mat-button-toggle-group appearance="legacy" aria-label="Select an option" class="formOptions PaymentOptions"
+                                 formControlName="typePayment">
+          <mat-button-toggle value="1">
+            <div class="formOptionsCard Payment">
+              <mat-icon>attach_money</mat-icon>
+              <h1>Pix</h1>
+            </div>
+          </mat-button-toggle>
+          <mat-button-toggle value="2">
+            <div class="formOptionsCard Payment">
+              <mat-icon>account_balance</mat-icon>
+              <h1>Boleto</h1>
+            </div>
+          </mat-button-toggle>
+
+        </mat-button-toggle-group>
+
+        <div>
+          <button mat-button matStepperNext>Próximo</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="formTo!" label="Seus dados!">
+      <ng-template [ngIf]="checkTypePayment() == '1'">
+        <form [formGroup]="formTo!">
+          <div class="form-payment">
+            <div>
+              <h1>Complete suas informações</h1>
+            </div>
+            <mat-form-field appearance="outline">
+              <mat-label>CPF</mat-label>
+              <input formControlName="cpf" mask="999.999.999-99" matInput maxlength="15"
+                     placeholder="000.000.000-00" required>
+            </mat-form-field>
+          </div>
+          <div>
+            <button mat-button matStepperPrevious>Voltar</button>
+            <button (click)="createPayment()" mat-button matStepperNext>Próximo</button>
+          </div>
+        </form>
+      </ng-template>
+      <ng-template [ngIf]="checkTypePayment() == '2'">
+        <form [formGroup]="formTo!">
+          <div class="form-payment">
+            <div>
+              <h1>Complete suas informações</h1>
+            </div>
+            <div class="form-payment-inf">
               <mat-form-field appearance="outline">
                 <mat-label>CPF</mat-label>
-                <input matInput placeholder="000.000.000-00" formControlName="cpf" maxlength="15"
-                 mask="999.999.999-99" required>
+                <input formControlName="cpf" mask="999.999.999-99" matInput maxlength="15"
+                       placeholder="000.000.000-00" required>
               </mat-form-field>
-              </div>
-            <div>
-              <button mat-button matStepperPrevious>Voltar</button>
-              <button mat-button matStepperNext (click)="createPayment()">Próximo</button>
-            </div>
-          </form>
-          </ng-template>
-            <ng-template [ngIf]="checkTypePayment() == '2'" >
-              <form [formGroup]="formTo!">
-              <div class="form-payment">
-                <div>
-                  <h1>Complete suas informações</h1>
-                </div>
-                <div class="form-payment-inf">
-                  <mat-form-field appearance="outline">
-                    <mat-label>CPF</mat-label>
-                    <input matInput placeholder="000.000.000-00" formControlName="cpf" maxlength="15"
-                     mask="999.999.999-99" required>
-                  </mat-form-field>
-                  <div>
-                    <mat-form-field appearance="outline">
-                      <mat-label>Rua </mat-label>
-                      <input matInput formControlName="street"  required>
-                    </mat-form-field>
-                    <mat-form-field appearance="outline">
-                      <mat-label>Numero </mat-label>
-                      <input matInput formControlName="number"  required>
-                    </mat-form-field>
-                  </div>
-                  <div>
-                    <mat-form-field appearance="outline">
-                      <mat-label>Cidade</mat-label>
-                      <input matInput formControlName="city" required>
-                    </mat-form-field>
-                    <mat-form-field appearance="outline">
-                      <mat-label>CEP                      </mat-label>
-                      <input matInput mask="99999-999" formControlName="cep" maxlength="15" required>
-                    </mat-form-field>
-                  </div>
-                </div>
+              <div>
+                <mat-form-field appearance="outline">
+                  <mat-label>Rua</mat-label>
+                  <input formControlName="street" matInput required>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                  <mat-label>Numero</mat-label>
+                  <input formControlName="number" matInput required>
+                </mat-form-field>
               </div>
               <div>
-                <button mat-button matStepperPrevious>Voltar</button>
-                <button mat-button matStepperNext (click)="createPayment()">Próximo</button>
+                <mat-form-field appearance="outline">
+                  <mat-label>Cidade</mat-label>
+                  <input formControlName="city" matInput required>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                  <mat-label>CEP</mat-label>
+                  <input formControlName="cep" mask="99999-999" matInput maxlength="15" required>
+                </mat-form-field>
               </div>
-            </form>
-            </ng-template>
-        </mat-step>
-        <mat-step>
-          <ng-template matStepLabel>Informações do pagamento</ng-template>
-          <ng-template [ngIf]="viewPaymentInf">
-            <ng-template [ngIf]="checkTypePayment() == '1'">
-              <div class="section-payment">
-                <div>
-                </div>
-                <div class="section-payment__inf">
-                  <div class="section-payment__inf__qrcode">
-                    <img [src]="pixGenerated.imagePix" alt="">
-                    <span>Leia o QR-code e efetue o pagamento!</span>
-                  </div>
-                  <div class="section-payment__inf__key">
-                    <span>Ou se preferir efetue o pagamento pela chave PIX.</span>
-                    <span style="color: #2536A6">{{pixGenerated.urlPix}}</span>
-                  </div>
-                  <div class="section-payment__inf__expire">
-                    <span>Sua chave e Qr-code PIX expira em: {{pixGenerated.dateExpire}}</span>
-                    <span>AgendaKi agradece o seu pagamento :).</span>
-                  </div>
-                </div>
+            </div>
+          </div>
+          <div>
+            <button mat-button matStepperPrevious>Voltar</button>
+            <button (click)="createPayment()" mat-button matStepperNext>Próximo</button>
+          </div>
+        </form>
+      </ng-template>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Informações do pagamento</ng-template>
+      <ng-template [ngIf]="viewPaymentInf">
+        <ng-template [ngIf]="checkTypePayment() == '1'">
+          <div class="section-payment">
+            <div>
+            </div>
+            <div class="section-payment__inf">
+              <div class="section-payment__inf__qrcode">
+                <img [src]="pixGenerated.imagePix" alt="">
+                <span>Leia o QR-code e efetue o pagamento!</span>
               </div>
-            </ng-template>
-            <ng-template [ngIf]="checkTypePayment() == '2'">
-              <div class="section-payment">
-                <div>
-                </div>
-                <div class="section-payment__inf">
-                  <div class="section-payment__inf__qrcode">
-                    <a [href]="bankGenerated.linkPDF" target="_blank">Click aqui para se direcionar</a>
-                    <span>Se direcione para o boleto.</span>
-                  </div>
-                  <div class="section-payment__inf__key">
-                    <span>Ou se preferir efetue o pagamento pelo codigo de barra</span>
-                    <span style="color: #2536A6">{{bankGenerated.barcode}}</span>
-                  </div>
-                  <div class="section-payment__inf__expire">
-                    <span>AgendaKi agradece o seu pagamento :).</span>
-                  </div>
-                </div>
+              <div class="section-payment__inf__key">
+                <span>Ou se preferir efetue o pagamento pela chave PIX.</span>
+                <span style="color: #2536A6">{{ pixGenerated.urlPix }}</span>
               </div>
-            </ng-template>
-          </ng-template>
-        </mat-step>
-      </mat-stepper>
+              <div class="section-payment__inf__expire">
+                <span>Sua chave e Qr-code PIX expira em: {{ pixGenerated.dateExpire }}</span>
+                <span>AgendaKi agradece o seu pagamento :).</span>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+        <ng-template [ngIf]="checkTypePayment() == '2'">
+          <div class="section-payment">
+            <div>
+            </div>
+            <div class="section-payment__inf">
+              <div class="section-payment__inf__qrcode">
+                <a [href]="bankGenerated.linkPDF" target="_blank">Click aqui para se direcionar</a>
+                <span>Se direcione para o boleto.</span>
+              </div>
+              <div class="section-payment__inf__key">
+                <span>Ou se preferir efetue o pagamento pelo codigo de barra</span>
+                <span style="color: #2536A6">{{ bankGenerated.barcode }}</span>
+              </div>
+              <div class="section-payment__inf__expire">
+                <span>AgendaKi agradece o seu pagamento :).</span>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </ng-template>
+    </mat-step>
+  </mat-stepper>
 </div>
 

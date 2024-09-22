@@ -20,6 +20,6 @@ public interface DateJobService {
 
     void deleteDateJobById(Long id);
 
-    ReadHolidayDTO updateHolidayById(InsertHolidayDTO insertHolidayDTO,Long id);
+    ReadHolidayDTO updateHolidayById(InsertHolidayDTO insertHolidayDTO, Long id);
 
 }

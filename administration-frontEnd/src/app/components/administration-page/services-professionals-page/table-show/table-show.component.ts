@@ -1,10 +1,10 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
-import { MatSort, MatSortModule } from '@angular/material/sort';
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { HolidayFormComponent } from '../../holiday-date-page/holiday-form/holiday-form.component';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
+import {MatSort, MatSortModule} from '@angular/material/sort';
+import {MatTableDataSource, MatTableModule} from '@angular/material/table';
+import {HolidayFormComponent} from '../../holiday-date-page/holiday-form/holiday-form.component';
 import {
   ProfessionalAndServiceService
 } from "../../../../services/professionalAndService/professional-and-service.service";
@@ -26,8 +26,8 @@ import {
   templateUrl: './table-show.component.html',
   styleUrl: './table-show.component.css'
 })
-export class TableShowComponent implements OnInit{
-  displayedColumns: string[] = ['nameProfessional', 'nameService',"action"];
+export class TableShowComponent implements OnInit {
+  displayedColumns: string[] = ['nameProfessional', 'nameService', "action"];
   dataSource: MatTableDataSource<ProfessionalAndServiceReadDTO>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;

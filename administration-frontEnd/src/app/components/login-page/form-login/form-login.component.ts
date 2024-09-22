@@ -18,59 +18,20 @@ import {TypePage} from "./TypePage";
   styleUrl: './form-login.component.css'
 })
 export class FormLoginComponent {
-  private _snackBar = inject(MatSnackBar);
   horizontalPosition: MatSnackBarHorizontalPosition = 'end';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
-  constructor(private preUserService:UserService, private router:Router) {
-  }
-
-  protected loginForm:FormGroup = new FormGroup<any>(
+  protected loginForm: FormGroup = new FormGroup<any>(
     {
-      email: new FormControl('',[Validators.email,Validators.required]),
+      email: new FormControl('', [Validators.email, Validators.required]),
       password: new FormControl('')
     }
   )
-  protected submitFormLogin(event:Event):void{
-    event.preventDefault();
-    const form = event.target as HTMLFormElement;
-    const button = form.querySelector('button:focus') as HTMLButtonElement;
-    const action = button?.value;
-    if (this.loginForm.valid) {
-      if (action === 'administration') {
-        this.authUser(TypePage.ADMINISTRATION)
-      } else if (action === 'portal-client') {
-        this.authUser(TypePage.PORTAL_CLIENT);
-      }
-    }
+  private _snackBar = inject(MatSnackBar);
+
+  constructor(private preUserService: UserService, private router: Router) {
   }
 
-  protected authUser(typePageToAuth:TypePage):void{
-    this.preUserService.authUser({email:this.loginForm.value.email, password:this.loginForm.value.password},typePageToAuth).subscribe(
-      response =>{
-        switch (response.status) {
-          case 422:
-            this.openPopUp("Email ou senha incorreto.","error")
-            break;
-          case 200:
-            if (typePageToAuth == TypePage.ADMINISTRATION){
-              this.router.navigate(["/administration"])
-            }else if (typePageToAuth == TypePage.PORTAL_CLIENT){
-              this.router.navigate(["/portalClient"])
-            }
-            break;
-        }
-      },
-      error => {
-        switch (error.status) {
-          case 422:
-            this.openPopUp("Email ou senha incorreto.","error")
-            break;
-        }
-      },
-    );
-  }
-
-  get email(){
+  get email() {
     return this.loginForm.get("email");
   }
 
@@ -84,5 +45,48 @@ export class FormLoginComponent {
         icon: icon
       }
     });
+  }
+
+  protected submitFormLogin(event: Event): void {
+    event.preventDefault();
+    const form = event.target as HTMLFormElement;
+    const button = form.querySelector('button:focus') as HTMLButtonElement;
+    const action = button?.value;
+    if (this.loginForm.valid) {
+      if (action === 'administration') {
+        this.authUser(TypePage.ADMINISTRATION)
+      } else if (action === 'portal-client') {
+        this.authUser(TypePage.PORTAL_CLIENT);
+      }
+    }
+  }
+
+  protected authUser(typePageToAuth: TypePage): void {
+    this.preUserService.authUser({
+      email: this.loginForm.value.email,
+      password: this.loginForm.value.password
+    }, typePageToAuth).subscribe(
+      response => {
+        switch (response.status) {
+          case 422:
+            this.openPopUp("Email ou senha incorreto.", "error")
+            break;
+          case 200:
+            if (typePageToAuth == TypePage.ADMINISTRATION) {
+              this.router.navigate(["/administration"])
+            } else if (typePageToAuth == TypePage.PORTAL_CLIENT) {
+              this.router.navigate(["/portalClient"])
+            }
+            break;
+        }
+      },
+      error => {
+        switch (error.status) {
+          case 422:
+            this.openPopUp("Email ou senha incorreto.", "error")
+            break;
+        }
+      },
+    );
   }
 }

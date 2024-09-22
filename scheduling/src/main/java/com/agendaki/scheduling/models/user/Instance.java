@@ -20,7 +20,7 @@ public class Instance {
     private List<DateJob> dateJobs;
     @OneToOne(fetch = FetchType.LAZY)
     private User user;
-    @OneToOne(fetch = FetchType.LAZY,mappedBy = "instance")
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "instance")
     private Template template;
     @OneToMany
     private Set<Service> services = new HashSet<>();

@@ -1,12 +1,12 @@
-import { Component, AfterViewInit, ViewChild, OnInit } from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import {MatSort, MatSortModule} from '@angular/material/sort';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { ManageService } from '../../../services/manage/manage.service';
-import { NgForOf } from '@angular/common';
-import { Scheduling } from '../../../models/manage/AllSchedulingReadDTO';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {ManageService} from '../../../services/manage/manage.service';
+import {NgForOf} from '@angular/common';
+import {Scheduling} from '../../../models/manage/AllSchedulingReadDTO';
 
 @Component({
   selector: 'app-manage-page',

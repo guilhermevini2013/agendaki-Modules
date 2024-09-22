@@ -18,10 +18,10 @@ public class PresentationDTO extends SectionToSaveDTO {
     }
 
     public PresentationDTO(Presentation presentation) {
-       super(presentation.getId(), presentation.getPosition(), presentation.getHorizontalAlignment());
-         this.imageToBase64 = presentation.getImage().get(0).getUuidImage();
-         this.text = presentation.getText();
-         this.paragraph = presentation.getParagraph();
+        super(presentation.getId(), presentation.getPosition(), presentation.getHorizontalAlignment());
+        this.imageToBase64 = presentation.getImage().get(0).getUuidImage();
+        this.text = presentation.getText();
+        this.paragraph = presentation.getParagraph();
     }
 
     @Override

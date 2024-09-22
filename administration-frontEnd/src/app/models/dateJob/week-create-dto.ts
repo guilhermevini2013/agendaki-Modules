@@ -1,4 +1,4 @@
-import { DayOfWeek } from "./dayOfWeek";
+import {DayOfWeek} from "./dayOfWeek";
 
 export interface WeekCreateDTO {
   dayOfWeek: DayOfWeek;
@@ -6,5 +6,5 @@ export interface WeekCreateDTO {
   scheduleFinal: string;
   breakInitial: string;
   breakFinal: string;
-  isOpen:boolean;
+  isOpen: boolean;
 }

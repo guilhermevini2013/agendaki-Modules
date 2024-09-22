@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import { MatIcon } from '@angular/material/icon';
+import {MatIcon} from '@angular/material/icon';
 import {PaymentService} from "../../../services/payment.service";
 import {PaymentOrdersDTO} from "../../../models/payment-orders-dto";
 import {NgForOf, NgIf} from "@angular/common";
@@ -11,17 +11,17 @@ import {NgForOf, NgIf} from "@angular/common";
   templateUrl: './client-orders.component.html',
   styleUrl: './client-orders.component.css'
 })
-export class ClientOrdersComponent implements OnInit{
+export class ClientOrdersComponent implements OnInit {
 
-  protected ordersList:PaymentOrdersDTO[]=[]
+  protected ordersList: PaymentOrdersDTO[] = []
 
-  constructor(private paymentService:PaymentService) {
+  constructor(private paymentService: PaymentService) {
   }
 
   ngOnInit(): void {
     this.paymentService.getAllOrders().subscribe(
       value => {
-        this.ordersList= value
+        this.ordersList = value
       }
     )
   }

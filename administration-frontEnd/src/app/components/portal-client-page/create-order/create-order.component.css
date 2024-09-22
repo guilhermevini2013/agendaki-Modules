@@ -1,164 +1,165 @@
 .firstFormGroup {
-    display: flex;
-    flex-direction: column;
-    align-items:  center;
-    gap: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
 }
 
 .mat-button-toggle-group:not([class*=mat-elevation-z]) {
-    box-shadow: none;
-    padding-bottom: 10px;
-    white-space: nowrap;
+  box-shadow: none;
+  padding-bottom: 10px;
+  white-space: nowrap;
 }
 
 mat-button-toggle-group {
-    background: none;
-    box-shadow: none;
-    border: none;
+  background: none;
+  box-shadow: none;
+  border: none;
 }
 
 mat-button-toggle {
-    background: none;
-    box-shadow: none;
-    border: none;
+  background: none;
+  box-shadow: none;
+  border: none;
 }
 
 .formOptions {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    gap: 50px;
-    width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  gap: 50px;
+  width: 100%;
 }
 
 .formOptions mat-radio-group {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .formOptionsExpand {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .formOptionsExpand mat-expansion-panel {
-   width: 200px;
+  width: 200px;
 }
 
 .formOptionsCard {
-    width: 300px;
-    height: 500px;
-    border-radius: 20px;
-    box-shadow: 0px 5px 0px var(--light-green);
-    background-color: #f7f7fc;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    text-align: center;
-    flex-wrap: wrap;
-    gap: 20px;
-    transition: .75s;
+  width: 300px;
+  height: 500px;
+  border-radius: 20px;
+  box-shadow: 0px 5px 0px var(--light-green);
+  background-color: #f7f7fc;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  transition: .75s;
 }
 
-.formOptionsCard:hover{
-    box-shadow: 0px 0px 8px var(--light-green);
-    transform: translateY(.5vh);
+.formOptionsCard:hover {
+  box-shadow: 0px 0px 8px var(--light-green);
+  transform: translateY(.5vh);
 }
 
 
 .formOptionsCard h1 {
-    margin-top: 15px;
-    font-size: 2em;
+  margin-top: 15px;
+  font-size: 2em;
 }
 
 .formOptionsCard mat-icon {
-    margin-top: 50px;
-    scale: 4;
+  margin-top: 50px;
+  scale: 4;
 }
 
 .formOptionsCard span {
-    width: 90%;
+  width: 90%;
 }
 
 .formOptionsCardText {
-    text-wrap: wrap;
+  text-wrap: wrap;
 }
 
 .formOptionsCard p {
-    font-size: 1em;
-    font-weight: bolder;
+  font-size: 1em;
+  font-weight: bolder;
 }
 
 .formOptionsCardPrice {
-    color: var(--light-green);
-    font-weight: 500;
+  color: var(--light-green);
+  font-weight: 500;
 }
 
 .formOptionsCardPrice p {
-    margin-top: 20%;
-    font-size: 1.35em;
+  margin-top: 20%;
+  font-size: 1.35em;
 }
 
 .formOptionsCardValue {
-    font-size: 2.5em;
+  font-size: 2.5em;
 }
 
 .formOptionsCardMoneyType {
-    font-size: 1.65em;
+  font-size: 1.65em;
 }
 
 .PaymentOptions {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 15px;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 15px;
+  width: 100%;
 }
 
 .Payment {
-    height: max-content;
-    border-radius: 10px;
-    box-shadow: 0px 5px 0px var(--light-green);
-    background-color: #f7f7fc;
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-    justify-content: center;
-    text-align: center;
-    flex-wrap: wrap;
-    gap: 20px;
-    transition: .75s;
+  height: max-content;
+  border-radius: 10px;
+  box-shadow: 0px 5px 0px var(--light-green);
+  background-color: #f7f7fc;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+  text-align: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  transition: .75s;
 }
 
 .Payment mat-icon {
-    margin: 0px;
-    scale: 2;
+  margin: 0px;
+  scale: 2;
 }
 
-.form-payment{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
+.form-payment {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
 }
 
-.form-payment-inf{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 5px;
-    width: 600px;
-}
-.form-payment-inf div{
-    display: flex;
-    gap: 10px;
+.form-payment-inf {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 600px;
 }
 
-.section-payment{
+.form-payment-inf div {
+  display: flex;
+  gap: 10px;
+}
+
+.section-payment {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -167,7 +168,7 @@ mat-button-toggle {
   padding-bottom: 30px;
 }
 
-.section-payment__inf{
+.section-payment__inf {
   display: flex;
   flex-direction: column;
   gap: 40px;
@@ -176,7 +177,7 @@ mat-button-toggle {
   width: 500px;
 }
 
-.section-payment__inf__qrcode{
+.section-payment__inf__qrcode {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -186,7 +187,7 @@ mat-button-toggle {
   padding-top: 10px;
 }
 
-.section-payment__inf__key{
+.section-payment__inf__key {
   width: 100%;
   word-break: break-all;
   display: flex;
@@ -196,37 +197,41 @@ mat-button-toggle {
   gap: 10px;
 }
 
-.section-payment__inf__expire{
+.section-payment__inf__expire {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 10px;
 }
-.section-payment__inf__qrcode img{
+
+.section-payment__inf__qrcode img {
   width: 230px;
 }
-@media (max-width: 1100px){
-    .formOptions {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-        gap: 50px;
-    }
+
+@media (max-width: 1100px) {
+  .formOptions {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 50px;
+  }
+}
+
+@media (max-width: 620px) {
+
+}
+
+@media (max-width: 450px) {
+  mat-button-toggle {
+    width: 100%;
   }
 
-  @media (max-width: 620px){
-
+  .form-payment-inf div {
+    display: contents;
   }
 
-  @media (max-width: 450px){
-    mat-button-toggle{
-        width: 100%;
-    }
-    .form-payment-inf div {
-        display: contents;
-    }
-    .mat-mdc-form-field{
-        width: 45%;
-    }
+  .mat-mdc-form-field {
+    width: 45%;
   }
+}

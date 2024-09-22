@@ -13,7 +13,7 @@ import java.util.List;
 
 @Entity
 @DiscriminatorValue("INPUT")
-public class Input extends Section{
+public class Input extends Section {
     private String label;
     private String width;
     private String placeholder;
@@ -22,8 +22,8 @@ public class Input extends Section{
     private List<ResponseForm> responseForms = new ArrayList<>();
 
     public Input(SectionToSaveDTO sectionToSaveDTO, Template template) {
-        super(sectionToSaveDTO.getPosition(), sectionToSaveDTO.getHorizontalAlignment(),template);
-        if (sectionToSaveDTO instanceof InputDTO){
+        super(sectionToSaveDTO.getPosition(), sectionToSaveDTO.getHorizontalAlignment(), template);
+        if (sectionToSaveDTO instanceof InputDTO) {
             InputDTO inputDTO = (InputDTO) sectionToSaveDTO;
             if (sectionToSaveDTO.getId() != null) {
                 super.id = sectionToSaveDTO.getId();
@@ -39,13 +39,13 @@ public class Input extends Section{
         super.id = idInput;
     }
 
+    public Input() {
+
+    }
+
     @Override
     public SectionToSaveDTO getDtoForClass() {
         return new InputDTO(this);
-    }
-
-    public Input() {
-
     }
 
     public List<ResponseForm> getResponseForms() {

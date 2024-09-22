@@ -1,4 +1,4 @@
-.container-form{
+.container-form {
   display: flex;
   box-shadow: 5px 5px 10px var(--secundary-color);
   border-radius: 20px;
@@ -9,18 +9,19 @@
   border: 2px solid #2536A6;
 }
 
-.container-form form{
+.container-form form {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
-.container-form form label{
+.container-form form label {
   display: flex;
   flex-direction: column;
   color: #ffffff;
 }
-.container-form form label input{
+
+.container-form form label input {
   width: 100%;
   border-radius: 6px;
   height: 33px;
@@ -31,7 +32,7 @@
   outline: none;
 }
 
-.container-form form button{
+.container-form form button {
   width: 100%;
   height: 40px;
   border: none;
@@ -43,22 +44,23 @@
   cursor: pointer;
 }
 
-.container-form__help{
+.container-form__help {
   width: 100%;
   display: flex;
   justify-content: center;
 }
-.container-form__help span{
+
+.container-form__help span {
   font-size: 14px;
   color: #ffff;
 }
 
-.alert-danger{
+.alert-danger {
   width: 100%;
   float: right;
 }
 
-.alert-danger div span{
+.alert-danger div span {
   float: right;
   color: #b20000;
   font-size: 13px;
@@ -66,17 +68,17 @@
 }
 
 
-@media (max-width: 1100px){
+@media (max-width: 1100px) {
   .container-form {
     box-shadow: 0px 5px 25px var(--secundary-color);
     margin-bottom: 50px;
   }
 }
 
-@media (max-width: 620px){
+@media (max-width: 620px) {
 
 }
 
-@media (max-width: 360px){
-  
+@media (max-width: 360px) {
+
 }

@@ -1,125 +1,138 @@
-section{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 40px;
-    height: 100%;
-}
-.payment-view{
-    width: 55%;
-    height: max-content;
-    display: flex;
-    gap: 20px;
-    flex-direction: column;
+section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 40px;
+  height: 100%;
 }
 
-.payment-view__title{
-    width: 100%;
-    background-color: #f7f7fc;
-    padding: 15px;
-    border-radius: 8px;
+.payment-view {
+  width: 55%;
+  height: max-content;
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
 }
 
-.payment-view__title h1{
-    font-size: 1.8rem;
+.payment-view__title {
+  width: 100%;
+  background-color: #f7f7fc;
+  padding: 15px;
+  border-radius: 8px;
 }
 
-.payment-view__card{
-    display: flex;
-    flex-direction: row;
-    background-color: #f7f7fc;
-    width: 100%;
-    height: max-content;
-    justify-content: center;
-    align-items: center;
-    box-shadow: -4px 0px 0px var(--tertiary-color);
-    transition: 0.75s;
+.payment-view__title h1 {
+  font-size: 1.8rem;
+}
+
+.payment-view__card {
+  display: flex;
+  flex-direction: row;
+  background-color: #f7f7fc;
+  width: 100%;
+  height: max-content;
+  justify-content: center;
+  align-items: center;
+  box-shadow: -4px 0px 0px var(--tertiary-color);
+  transition: 0.75s;
   gap: 5px;
 }
-.payment-view__card:hover{
-    box-shadow: -4px 4px 0px var(--tertiary-color);
-}
-.icon{
-margin-left: 20px
-}
-.icon mat-icon{
-    scale: 1.5;
-    color: var(--tertiary-color);
-}
-.line{
-    width: 5px;
-    background-color: var(--tertiary-color);
+
+.payment-view__card:hover {
+  box-shadow: -4px 4px 0px var(--tertiary-color);
 }
 
-.payment-view__card__inf{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    width: 100%;
-    align-items: center;
+.icon {
+  margin-left: 20px
 }
-.payment-view__card__inf__er{
+
+.icon mat-icon {
+  scale: 1.5;
+  color: var(--tertiary-color);
+}
+
+.line {
+  width: 5px;
+  background-color: var(--tertiary-color);
+}
+
+.payment-view__card__inf {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100%;
+  align-items: center;
+}
+
+.payment-view__card__inf__er {
   width: 80%;
 }
-.payment-view__card__inf__title{
-    width: 100%;
+
+.payment-view__card__inf__title {
+  width: 100%;
 }
+
 .payment-view__card__inf__title h1 {
-    font-size: 1.3rem;
+  font-size: 1.3rem;
 }
-.payment-view__card__inf__plan{
-    display: flex;
-    width: 70%;
+
+.payment-view__card__inf__plan {
+  display: flex;
+  width: 70%;
+  gap: 20px;
+}
+
+.payment-view__card__inf__actions div {
+  display: flex;
+  gap: 30px;
+  width: max-content;
+
+}
+
+.payment-view__card__inf__actions div button {
+  border: none;
+  width: 100%;
+  background-color: rgb(214, 46, 46);
+  color: #f7f7fc;
+  cursor: pointer;
+  padding: 6px 15px;
+  border-radius: 10px;
+}
+
+.status {
+  padding: 6px 15px;
+  border-radius: 30px;
+}
+
+.paid {
+  background-color: rgb(25, 163, 32);
+  color: #f7f7fc;
+}
+
+@media (max-width: 1100px) {
+  .payment-view__card__inf__actions div {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .payment-view__card__inf {
+    flex-direction: column;
     gap: 20px;
-}
-.payment-view__card__inf__actions div{
-    display: flex;
-    gap: 30px;
-    width: max-content;
-
-}
-.payment-view__card__inf__actions div button{
-    border: none;
-    width: 100%;
-    background-color: rgb(214, 46, 46);
-    color: #f7f7fc;
-    cursor: pointer;
-    padding: 6px 15px;
-    border-radius: 10px;
+    padding-bottom: 5px;
+  }
 }
 
-.status{
-    padding: 6px 15px;
-    border-radius: 30px;
-}
-
-.paid{
-    background-color: rgb(25, 163, 32);
-    color: #f7f7fc;
-}
-
-@media (max-width: 1100px){
-    .payment-view__card__inf__actions div{
-      flex-direction: column;
-      gap: 10px;
-    }
-    .payment-view__card__inf{
-        flex-direction: column;
-        gap: 20px;
-        padding-bottom: 5px;
-    }
+@media (max-width: 620px) {
+  .payment-view__card {
+    flex-direction: column;
+    padding-top: 10px;
   }
 
-  @media (max-width: 620px){
-    .payment-view__card{
-        flex-direction: column;
-        padding-top: 10px;
-    }
-    .payment-view{
-        width: 90%;
-    }
+  .payment-view {
+    width: 90%;
   }
+}
 
-  @media (max-width: 360px){
+@media (max-width: 360px) {
 
-  }
+}

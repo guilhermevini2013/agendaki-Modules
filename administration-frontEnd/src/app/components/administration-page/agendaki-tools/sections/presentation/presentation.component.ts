@@ -8,7 +8,7 @@ import {Component, Input} from '@angular/core';
   styleUrl: './presentation.component.css'
 })
 export class PresentationComponent {
-  text:string="";
-  paragraph:string="";
+  text: string = "";
+  paragraph: string = "";
   @Input() imageToBase64: string | ArrayBuffer | null = null;
 }

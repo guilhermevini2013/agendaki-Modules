@@ -1,10 +1,10 @@
-import { Component, AfterViewInit, ViewChild } from '@angular/core';
+import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import {MatSort, MatSortModule} from '@angular/material/sort';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import {HolidayFormComponent } from './holiday-form/holiday-form.component';
+import {HolidayFormComponent} from './holiday-form/holiday-form.component';
 
 
 export interface UserData {
@@ -27,8 +27,8 @@ const NAMES: string[] = [
   imports: [
     MatFormFieldModule,
     MatInputModule,
-    MatTableModule, 
-    MatSortModule, 
+    MatTableModule,
+    MatSortModule,
     MatPaginatorModule,
     HolidayFormComponent
   ],

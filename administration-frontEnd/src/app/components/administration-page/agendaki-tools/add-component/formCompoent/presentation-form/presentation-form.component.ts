@@ -28,13 +28,14 @@ export class PresentationFormComponent {
   selectedImage: string | ArrayBuffer | null = null;
 
   formEditPerfil: FormGroup = new FormGroup({
-    imageToBase64: new FormControl(this.selectedImage!,Validators.required),
-    text: new FormControl('',Validators.required),
-    paragraph: new FormControl('',Validators.required),
-    type:new FormControl("presentation")
+    imageToBase64: new FormControl(this.selectedImage!, Validators.required),
+    text: new FormControl('', Validators.required),
+    paragraph: new FormControl('', Validators.required),
+    type: new FormControl("presentation")
   });
 
-  constructor(private communicationComponent: ComponentCommunicationService, private dialogRef: MatDialogRef<PresentationFormComponent>) {}
+  constructor(private communicationComponent: ComponentCommunicationService, private dialogRef: MatDialogRef<PresentationFormComponent>) {
+  }
 
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
@@ -53,7 +54,7 @@ export class PresentationFormComponent {
 
   submitForm(): void {
     if (this.selectedImage != null) {
-      if(this.formEditPerfil.valid){
+      if (this.formEditPerfil.valid) {
         this.communicationComponent.triggerAddComponentAction({
           component: PresentationComponent,
           data: this.formEditPerfil.value

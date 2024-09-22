@@ -1,8 +1,8 @@
 <div class="container-form">
-  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  <form (ngSubmit)="onSubmit()" [formGroup]="registerForm">
     <label for="fullName">
       Nome completo
-      <input type="text" id="fullName" formControlName="name" required>
+      <input formControlName="name" id="fullName" required type="text">
       <div *ngIf="name?.invalid && name?.dirty"
            class="alert-danger">
         <div *ngIf="name?.hasError('required')">
@@ -15,7 +15,7 @@
     </label>
     <label for="nameEnterprise">
       <span>Nome do seu <span style="color: var(--secundary-color);">negócio</span></span>
-      <input type="text" id="nameEnterprise" formControlName="tradeName" required>
+      <input formControlName="tradeName" id="nameEnterprise" required type="text">
       <div *ngIf="tradeName?.invalid && tradeName?.dirty"
            class="alert-danger">
         <div *ngIf="tradeName?.hasError('required')">
@@ -28,8 +28,8 @@
     </label>
     <label for="tellEnterprise">
       <span>Telefone do seu <span style="color: var(--secundary-color);">negócio</span></span>
-      <input type="text" id="tellEnterprise" formControlName="tellPhone" maxlength="15"
-      placeholder="(00) 90000-0000" mask="(99) 99999-9999" required>
+      <input formControlName="tellPhone" id="tellEnterprise" mask="(99) 99999-9999" maxlength="15"
+             placeholder="(00) 90000-0000" required type="text">
       <div *ngIf="tellPhone?.invalid && tellPhone?.dirty"
            class="alert-danger">
         <div *ngIf="tellPhone?.hasError('minlength')">
@@ -42,7 +42,7 @@
     </label>
     <label for="email">
       E-mail
-      <input type="text" id="email" formControlName="email" required>
+      <input formControlName="email" id="email" required type="text">
       <div *ngIf="email?.invalid && email?.dirty"
            class="alert-danger">
         <div *ngIf="email?.hasError('email')">
@@ -55,7 +55,7 @@
     </label>
     <label for="password">
       Senha
-      <input type="password" id="password" formControlName="password" required>
+      <input formControlName="password" id="password" required type="password">
       <div *ngIf="password?.invalid && password?.dirty"
            class="alert-danger">
         <div *ngIf="password?.hasError('minlength') || password?.hasError('maxlength')">

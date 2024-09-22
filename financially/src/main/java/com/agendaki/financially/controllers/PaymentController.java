@@ -41,7 +41,7 @@ public class PaymentController {
     @GetMapping(value = "/orders")
     public ResponseEntity<List<PaymentViewOrderDTO>> getAllPaymentOrders() {
         List<PaymentViewOrderDTO> allOrders = paymentService.getAllOrders();
-        if (allOrders.isEmpty()){
+        if (allOrders.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.ok(allOrders);

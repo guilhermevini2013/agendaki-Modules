@@ -1,12 +1,12 @@
-import { Component } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { CommonModule } from '@angular/common'; // Importar CommonModule para NgIf e NgFor
-import { MatDialogModule, MatDialogRef } from '@angular/material/dialog'; // Importar MatDialogModule para MatDialogClose, MatDialogActions, MatDialogContent
-import { ComponentCommunicationService } from '../../../../../../services/component-communication.service';
-import { InformationComponent } from '../../../sections/information/information.component';
-import { MatInput } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatSelectModule } from '@angular/material/select';
+import {Component} from '@angular/core';
+import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
+import {CommonModule} from '@angular/common'; // Importar CommonModule para NgIf e NgFor
+import {MatDialogModule, MatDialogRef} from '@angular/material/dialog'; // Importar MatDialogModule para MatDialogClose, MatDialogActions, MatDialogContent
+import {ComponentCommunicationService} from '../../../../../../services/component-communication.service';
+import {InformationComponent} from '../../../sections/information/information.component';
+import {MatInput} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatSelectModule} from '@angular/material/select';
 
 @Component({
   selector: 'app-information-form',
@@ -24,15 +24,16 @@ import { MatSelectModule } from '@angular/material/select';
   styleUrls: ['./information-form.component.css', '../styleFormComponent.css']
 })
 export class InformationFormComponent {
-  protected informationList: string[] = [];
   inputValue: string = '';
+  protected informationList: string[] = [];
   formEditInformation: FormGroup = new FormGroup({
-    title: new FormControl('',Validators.required),
+    title: new FormControl('', Validators.required),
     content: new FormControl(this.informationList),
-    type:new FormControl("help")
+    type: new FormControl("help")
   });
 
-  constructor(private communicationComponent: ComponentCommunicationService, private dialogRef: MatDialogRef<InformationFormComponent>) {}
+  constructor(private communicationComponent: ComponentCommunicationService, private dialogRef: MatDialogRef<InformationFormComponent>) {
+  }
 
   addInformation(): void {
     if (this.inputValue.trim()) {
@@ -42,13 +43,13 @@ export class InformationFormComponent {
   }
 
   submitForm(): void {
-      this.formEditInformation.patchValue({
-        content: this.informationList
-      });
-      this.communicationComponent.triggerAddComponentAction({
-        component: InformationComponent,
-        data: this.formEditInformation.value
-      });
-      this.dialogRef.close();
+    this.formEditInformation.patchValue({
+      content: this.informationList
+    });
+    this.communicationComponent.triggerAddComponentAction({
+      component: InformationComponent,
+      data: this.formEditInformation.value
+    });
+    this.dialogRef.close();
   }
 }

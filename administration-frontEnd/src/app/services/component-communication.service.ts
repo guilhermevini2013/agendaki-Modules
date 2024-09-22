@@ -1,6 +1,5 @@
-import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
-import { SectionProperty } from '../models/sectionProperty';
+import {Injectable} from '@angular/core';
+import {Subject} from 'rxjs';
 import {
   ComponentWithId
 } from "../components/administration-page/agendaki-tools/pre-visualizer/pre-visualizer.component";
@@ -11,28 +10,26 @@ import {
 export class ComponentCommunicationService {
   private componentSubjectToAdd = new Subject<ComponentWithId>();
   addComponentAction$ = this.componentSubjectToAdd.asObservable();
+  private colorPrimary = new Subject<string>();
+  colorPrimaryAction$ = this.colorPrimary.asObservable();
+  private colorSecundary = new Subject<string>();
+  colorSecundaryAction$ = this.colorSecundary.asObservable();
+  private colorTerciary = new Subject<string>();
+  colorTerciaryAction$ = this.colorTerciary.asObservable();
+
   triggerAddComponentAction(action: ComponentWithId) {
     this.componentSubjectToAdd.next(action);
   }
 
-  private colorPrimary = new Subject<string>();
-  colorPrimaryAction$ = this.colorPrimary.asObservable();
-
-  triggerColorPrimary(color:string):void{
+  triggerColorPrimary(color: string): void {
     this.colorPrimary.next(color);
   }
 
-  private colorSecundary = new Subject<string>();
-  colorSecundaryAction$ = this.colorSecundary.asObservable();
-
-  triggerColorSecundary(color:string):void{
+  triggerColorSecundary(color: string): void {
     this.colorSecundary.next(color);
   }
 
-  private colorTerciary = new Subject<string>();
-  colorTerciaryAction$ = this.colorTerciary.asObservable();
-
-  triggerColorTerciary(color:string):void{
+  triggerColorTerciary(color: string): void {
     this.colorTerciary.next(color);
   }
 }

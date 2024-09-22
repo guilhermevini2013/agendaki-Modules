@@ -1,4 +1,4 @@
-export enum TypePage{
+export enum TypePage {
   PORTAL_CLIENT,
   ADMINISTRATION
 }

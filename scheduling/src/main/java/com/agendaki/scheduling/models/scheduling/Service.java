@@ -5,14 +5,13 @@ import com.agendaki.scheduling.models.user.Instance;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
-import java.time.Duration;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 public class Service {
     @Id
-    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private BigDecimal price;

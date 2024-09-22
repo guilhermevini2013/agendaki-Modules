@@ -8,5 +8,6 @@ public interface TemplateService {
     void updateTemplate(TemplateDTO templateDTO);
 
     TemplateDTO getTemplate();
+
     TemplateDTO getTemplate(String uuid);
 }

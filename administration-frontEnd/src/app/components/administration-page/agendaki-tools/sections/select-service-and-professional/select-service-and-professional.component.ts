@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {NgStyle} from "@angular/common";
 
 @Component({
@@ -11,5 +11,5 @@ import {NgStyle} from "@angular/common";
   styleUrl: './select-service-and-professional.component.css'
 })
 export class SelectServiceAndProfessionalComponent {
-  public horizontalAlignment:string = "";
+  public horizontalAlignment: string = "";
 }

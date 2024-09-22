@@ -1,5 +1,5 @@
-import { Component, Input, inject } from '@angular/core';
-import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
+import {Component, inject, Input} from '@angular/core';
+import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatStepperModule} from '@angular/material/stepper';
@@ -13,7 +13,7 @@ import {MatListModule} from '@angular/material/list';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {NgxMaskDirective, NgxMaskPipe} from 'ngx-mask';
 import {NgxSpinnerModule} from "ngx-spinner";
-import { HolidayCreateDTO } from '../../../../models/holiday-create-dto';
+import {HolidayCreateDTO} from '../../../../models/holiday-create-dto';
 
 @Component({
   selector: 'app-holiday-form',
@@ -44,10 +44,9 @@ import { HolidayCreateDTO } from '../../../../models/holiday-create-dto';
   styleUrl: './holiday-form.component.css'
 })
 export class HolidayFormComponent {
-  private _formBuilder = inject(FormBuilder);
   @Input()
-  public weekName:string = "";
-
+  public weekName: string = "";
+  private _formBuilder = inject(FormBuilder);
   firstFormGroup = this._formBuilder.group({
     doWork: ['', Validators.required],
   });
@@ -70,16 +69,16 @@ export class HolidayFormComponent {
     }
   }
 
-  protected createHoliday():void{
-      const holidayDto:HolidayCreateDTO = {
-        scheduleInitial: this.secondFormGroup.value.startWork!,
-        scheduleFinal: this.secondFormGroup.value.endWork!,
-        breakInitial: this.secondFormGroup.value.startOffHour!,
-        breakFinal: this.secondFormGroup.value.endOffHour!,
-        dateOfHoliday: new Date(this.secondFormGroup.value.dateHoliday!),
-        isOpen:true
-      }
-      console.log(holidayDto);
-      
+  protected createHoliday(): void {
+    const holidayDto: HolidayCreateDTO = {
+      scheduleInitial: this.secondFormGroup.value.startWork!,
+      scheduleFinal: this.secondFormGroup.value.endWork!,
+      breakInitial: this.secondFormGroup.value.startOffHour!,
+      breakFinal: this.secondFormGroup.value.endOffHour!,
+      dateOfHoliday: new Date(this.secondFormGroup.value.dateHoliday!),
+      isOpen: true
+    }
+    console.log(holidayDto);
+
   }
 }

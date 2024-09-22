@@ -1,13 +1,13 @@
 // dynamic-component-container.component.ts
 import {
   Component,
-  Input,
   ComponentFactoryResolver,
-  ViewChild,
-  ViewContainerRef,
-  OnInit,
   ComponentRef,
-  Type
+  Input,
+  OnInit,
+  Type,
+  ViewChild,
+  ViewContainerRef
 } from '@angular/core';
 
 @Component({
@@ -21,9 +21,10 @@ export class DynamicComponentContainer implements OnInit {
   @Input() component: Type<any> | null = null;
   @Input() data: any;
 
-  @ViewChild('container', { read: ViewContainerRef, static: true }) container!: ViewContainerRef;
+  @ViewChild('container', {read: ViewContainerRef, static: true}) container!: ViewContainerRef;
 
-  constructor(private componentFactoryResolver: ComponentFactoryResolver) {}
+  constructor(private componentFactoryResolver: ComponentFactoryResolver) {
+  }
 
   ngOnInit() {
     if (this.component) {

@@ -1,4 +1,4 @@
 export interface ProfessionalReadDto {
-    id: number;
-    name: string;
+  id: number;
+  name: string;
 }

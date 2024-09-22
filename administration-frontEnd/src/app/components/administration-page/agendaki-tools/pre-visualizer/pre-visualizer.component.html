@@ -1,23 +1,23 @@
 <section>
   <div class="visualizer">
     <div
-      cdkDropList
       (cdkDropListDropped)="drop($event)"
+      cdkDropList
       class="example-container"
     >
       <div
-        class="example-box"
-        *ngFor="let component of components; let i = index"
-        cdkDrag
-        [ngStyle]="{'background-color': primaryColor!}"
         (cdkDragStarted)="onDragStarted($event)"
+        *ngFor="let component of components; let i = index"
+        [ngStyle]="{'background-color': primaryColor!}"
+        cdkDrag
+        class="example-box"
       >
-        <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
+        <div *cdkDragPlaceholder class="example-custom-placeholder"></div>
         <app-dynamic-component-container
           [component]="component.component"
           [data]="component.data"
           [ngStyle]="{'color': secundaryColor!}"
-          >
+        >
         </app-dynamic-component-container>
       </div>
     </div>

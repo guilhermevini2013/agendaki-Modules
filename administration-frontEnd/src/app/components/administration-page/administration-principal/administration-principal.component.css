@@ -1,128 +1,138 @@
 .example-container {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    gap: 0;
-    right: 0;
-    background-color: aqua;
-  }
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  gap: 0;
+  right: 0;
+  background-color: aqua;
+}
 
-  .example-sidenav-container {
-    flex: 1;
-  }
+.example-sidenav-container {
+  flex: 1;
+}
 
-  .example-is-mobile .example-sidenav-container {
-    flex: 1 0 auto;
-  }
+.example-is-mobile .example-sidenav-container {
+  flex: 1 0 auto;
+}
 
-  mat-toolbar{
-    background-color: #12122C;
-    height: max-content;
-    display: flex;
-    align-items: center;
-    gap: 40px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-  }
-  .toolbar-content{
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .toolbar-content_image{
-    width: 170px;
-    float: right;
-  }
-  .toolbar-content_image img {
-    width: 100%;
-  }
-  .tool-button button{
-    border: none;
-    cursor: pointer;
-    background-color: var(--secundary-color);
-    width: 55px;
-    height: 55px;
-    color: #12122C;
-    border-radius: 100%;
+mat-toolbar {
+  background-color: #12122C;
+  height: max-content;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    align-content: center;
-  }
+.toolbar-content {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-  .tool-button button:hover mat-icon {
-    color: white;
-  }
+.toolbar-content_image {
+  width: 170px;
+  float: right;
+}
 
-  .tool-button mat-icon {
-    transition: .2s;
-  }
+.toolbar-content_image img {
+  width: 100%;
+}
 
-  mat-nav-list{
-    background-color: #12122C;
-    height: 100%;
-  }
+.tool-button button {
+  border: none;
+  cursor: pointer;
+  background-color: var(--secundary-color);
+  width: 55px;
+  height: 55px;
+  color: #12122C;
+  border-radius: 100%;
 
-  .content-sidenav span{
-    color: #ffff;
-  }
-  .content-sidenav mat-icon{
-    color: #ffff;
-  }
-  .content-sidenav{
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-  }
-  .line{
-    width: 100%;
-    height: 2px;
-    background-color: var(--tertiary-color);
-  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+}
 
-  .title-content{
-    padding-left: 20px;
-    width: 100%;
-  }
-  .content-sidenav__inf{
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    padding-top: 10px;
-  }
+.tool-button button:hover mat-icon {
+  color: white;
+}
 
-  .content-sidenav__inf div{
-    display: flex;
-    flex-direction: row;
-    justify-content: start;
-    gap: 20px;
-    align-items: center;
-    width: 100%;
-    padding-left: 15px;
-  }
-.content-sidenav__inf div span{
+.tool-button mat-icon {
+  transition: .2s;
+}
+
+mat-nav-list {
+  background-color: #12122C;
+  height: 100%;
+}
+
+.content-sidenav span {
+  color: #ffff;
+}
+
+.content-sidenav mat-icon {
+  color: #ffff;
+}
+
+.content-sidenav {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.line {
+  width: 100%;
+  height: 2px;
+  background-color: var(--tertiary-color);
+}
+
+.title-content {
+  padding-left: 20px;
+  width: 100%;
+}
+
+.content-sidenav__inf {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding-top: 10px;
+}
+
+.content-sidenav__inf div {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  gap: 20px;
+  align-items: center;
+  width: 100%;
+  padding-left: 15px;
+}
+
+.content-sidenav__inf div span {
   width: 80%;
   word-break: break-all;
 }
 
-  .content-sidenav__inf div span a{
-    text-decoration: none;
-    color: #ffff;
-    transition: .5s;
-  }
-  .content-sidenav__inf div mat-icon{
-    transition: .25s;
-  }
+.content-sidenav__inf div span a {
+  text-decoration: none;
+  color: #ffff;
+  transition: .5s;
+}
 
-  .content-sidenav__inf div:hover mat-icon{
-    color: var(--secundary-color);
-  }
+.content-sidenav__inf div mat-icon {
+  transition: .25s;
+}
 
-  .content-sidenav__inf div:hover span a{
-    color: var(--secundary-color);
-  }
+.content-sidenav__inf div:hover mat-icon {
+  color: var(--secundary-color);
+}
+
+.content-sidenav__inf div:hover span a {
+  color: var(--secundary-color);
+}

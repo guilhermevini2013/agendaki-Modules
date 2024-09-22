@@ -14,9 +14,9 @@ public interface ProfessionalService {
 
     void deleteProfessionalFromInstance(Long idProfessional);
 
-    void disassociateProfessionalOfService(Set<Long> idsToDisassociate,Long idProfessional);
+    void disassociateProfessionalOfService(Set<Long> idsToDisassociate, Long idProfessional);
 
-    void associateProfessionalToService(Set<Long> idsToAssociate,Long idProfessional);
+    void associateProfessionalToService(Set<Long> idsToAssociate, Long idProfessional);
 
     List<ProfessionalReadByServiceDTO> getProfessionalsByService(Long idService);
 

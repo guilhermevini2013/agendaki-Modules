@@ -1,23 +1,26 @@
-import { Component, Type } from '@angular/core';
+import {Component, Type} from '@angular/core';
 import {
-  CdkDropList,
   CdkDrag,
-  CdkDragPlaceholder,
-  moveItemInArray,
   CdkDragDrop,
   CdkDragHandle,
-  CdkDragStart
+  CdkDragPlaceholder,
+  CdkDragStart,
+  CdkDropList,
+  moveItemInArray
 } from '@angular/cdk/drag-drop';
-import { CommonModule } from '@angular/common';
+import {CommonModule} from '@angular/common';
 import {ɵEmptyOutletComponent} from "@angular/router";
 import {DynamicComponentContainer} from "../dynamic-component-container/dynamic-component-container.component";
-import { ComponentCommunicationService } from '../../../../services/component-communication.service';
-import { TemplateDTO} from "../../../../models/template/template-create-dto";
+import {ComponentCommunicationService} from '../../../../services/component-communication.service';
+import {TemplateDTO} from "../../../../models/template/template-create-dto";
+import {TemplateService} from "../../../../services/template/template.service";
+
 export interface ComponentWithId {
   component: Type<any>;
   data: any;
 
 }
+
 @Component({
   selector: 'app-pre-visualizer',
   standalone: true,
@@ -35,15 +38,16 @@ export interface ComponentWithId {
 })
 export class PreVisualizerComponent {
   components: ComponentWithId[] = [];
-  protected primaryColor: string | null = "#ffff";
+  protected primaryColor: string | null = "#fff";
   protected secundaryColor: string | null = "#000";
-  protected terciaryColor: string | null = "#000";
+  protected terciaryColor: string | null = "#fff";
+
+  constructor(private commService: ComponentCommunicationService, private templateService: TemplateService) {
+  }
 
   drop(event: CdkDragDrop<ComponentWithId[]>) {
     moveItemInArray(this.components, event.previousIndex, event.currentIndex);
   }
-
-  constructor(private commService: ComponentCommunicationService) {}
 
   ngOnInit() {
     this.commService.addComponentAction$.subscribe(action => {
@@ -61,6 +65,13 @@ export class PreVisualizerComponent {
     this.commService.colorTerciaryAction$.subscribe(action => {
       this.terciaryColor = action;
     });
+
+    this.templateService.getTemplate().subscribe((response) => {
+      const template = response.body;
+      this.primaryColor = template?.primaryColor!;
+      this.secundaryColor = template?.secondaryColor!;
+      console.log(template);
+    });
   }
 
   onDragStarted(event: CdkDragStart) {
@@ -74,7 +85,7 @@ export class PreVisualizerComponent {
       primaryColor: this.primaryColor!,
       secondaryColor: this.secundaryColor!,
       sections: this.components.map((component, index) => {
-        const { data } = component;
+        const {data} = component;
         return {
           ...data,
           position: index,

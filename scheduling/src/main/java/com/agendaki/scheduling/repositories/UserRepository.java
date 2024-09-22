@@ -18,6 +18,8 @@ public interface UserRepository extends JpaRepository<User, String> {
     Optional<UserAuthProjection> findByEmail(String email);
 
     interface UserAuthProjection {
+        Collection<? extends GrantedAuthority> role = List.of(new SimpleGrantedAuthority(TypeRole.ROLE_USER.getAuthority()));
+
         String getEmail();
 
         String getPassword();
@@ -25,7 +27,5 @@ public interface UserRepository extends JpaRepository<User, String> {
         String getId();
 
         Instance getInstance();
-
-        Collection<? extends GrantedAuthority> role = List.of(new SimpleGrantedAuthority(TypeRole.ROLE_USER.getAuthority()));
     }
 }

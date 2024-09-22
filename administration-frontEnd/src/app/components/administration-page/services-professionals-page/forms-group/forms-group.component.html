@@ -1,80 +1,80 @@
 <mat-tab-group animationDuration="0ms">
-    <mat-tab label="Funcionário">
-        <div class="FormGroups">
-            <form [formGroup]="workerFormGroup" (ngSubmit)="createWorker()" class="secondFormGroup">
-                <mat-form-field appearance="outline" >
-                    <mat-label>Nome</mat-label>
-                    <input matInput placeholder="Jucilano.." formControlName="name" required>
-                </mat-form-field>
-              <mat-form-field>
-                <mat-select placeholder="Escolha" formControlName="idService" multiple>
-                  <mat-option *ngFor="let service of services" [value]="service.id">{{service.name}}</mat-option>
-                </mat-select>
-              </mat-form-field>
-                <div>
-                  <button mat-button type="submit">Adicionar</button>
-                </div>
-            </form>
+  <mat-tab label="Funcionário">
+    <div class="FormGroups">
+      <form (ngSubmit)="createWorker()" [formGroup]="workerFormGroup" class="secondFormGroup">
+        <mat-form-field appearance="outline">
+          <mat-label>Nome</mat-label>
+          <input formControlName="name" matInput placeholder="Jucilano.." required>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-select formControlName="idService" multiple placeholder="Escolha">
+            <mat-option *ngFor="let service of services" [value]="service.id">{{ service.name }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div>
+          <button mat-button type="submit">Adicionar</button>
         </div>
+      </form>
+    </div>
 
-    </mat-tab>
-    <mat-tab label="Serviço">
-        <div class="FormGroups">
-            <form [formGroup]="serviceFormGroup" (ngSubmit)="createService()" class="secondFormGroup">
-                <mat-form-field appearance="outline" >
-                    <mat-label>Nome</mat-label>
-                    <input matInput placeholder="Barba.." formControlName="name" required>
-                </mat-form-field>
+  </mat-tab>
+  <mat-tab label="Serviço">
+    <div class="FormGroups">
+      <form (ngSubmit)="createService()" [formGroup]="serviceFormGroup" class="secondFormGroup">
+        <mat-form-field appearance="outline">
+          <mat-label>Nome</mat-label>
+          <input formControlName="name" matInput placeholder="Barba.." required>
+        </mat-form-field>
 
-                <mat-form-field appearance="outline" >
-                    <mat-label>Preço</mat-label>
-                    <input matInput placeholder="20.." mask="00.00" formControlName="price" required>
-                </mat-form-field>
-                <div class="slider">
-                    <span>Escolhe o tempo do serviço</span>
-                    <mat-slider min="5" max="120" step="5"  showTickMarks discrete>
-                        <input matSliderThumb formControlName="time"/>
-                    </mat-slider>
-                </div>
-                <div>
-                  <button mat-button type="submit">Adicionar</button>
-                </div>
-            </form>
+        <mat-form-field appearance="outline">
+          <mat-label>Preço</mat-label>
+          <input formControlName="price" mask="00.00" matInput placeholder="20.." required>
+        </mat-form-field>
+        <div class="slider">
+          <span>Escolhe o tempo do serviço</span>
+          <mat-slider discrete max="120" min="5" showTickMarks step="5">
+            <input formControlName="time" matSliderThumb/>
+          </mat-slider>
         </div>
-    </mat-tab>
-
-    <mat-tab label="Deletar">
-        <div class="FormGroups">
-            <form [formGroup]="deleteWorkerFormGroup" (ngSubmit)="deleteProfessional()" class="secondFormGroup">
-                <label>
-                    <span>Delete um Funcionário</span>
-                     <mat-form-field>
-                        <mat-select placeholder="Escolha" formControlName="id">
-                            <mat-option *ngFor="let worker of professionals" [value]="worker.id">{{worker.name}}</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </label>
-
-                <div>
-                  <button mat-button type="submit">Deletar</button>
-                </div>
-            </form>
-
-            <form [formGroup]="deleteServiceFormGroup" (ngSubmit)="deleteService()" class="secondFormGroup">
-                <label>
-                    <span>Delete um Serviço</span>
-                     <mat-form-field>
-                        <mat-select placeholder="Escolha" formControlName="id">
-                            <mat-option *ngFor="let service of services" [value]="service.id">{{service.name}}</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </label>
-
-                <div>
-                  <button mat-button type="submit">Deletar</button>
-                </div>
-            </form>
-
+        <div>
+          <button mat-button type="submit">Adicionar</button>
         </div>
-    </mat-tab>
+      </form>
+    </div>
+  </mat-tab>
+
+  <mat-tab label="Deletar">
+    <div class="FormGroups">
+      <form (ngSubmit)="deleteProfessional()" [formGroup]="deleteWorkerFormGroup" class="secondFormGroup">
+        <label>
+          <span>Delete um Funcionário</span>
+          <mat-form-field>
+            <mat-select formControlName="id" placeholder="Escolha">
+              <mat-option *ngFor="let worker of professionals" [value]="worker.id">{{ worker.name }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </label>
+
+        <div>
+          <button mat-button type="submit">Deletar</button>
+        </div>
+      </form>
+
+      <form (ngSubmit)="deleteService()" [formGroup]="deleteServiceFormGroup" class="secondFormGroup">
+        <label>
+          <span>Delete um Serviço</span>
+          <mat-form-field>
+            <mat-select formControlName="id" placeholder="Escolha">
+              <mat-option *ngFor="let service of services" [value]="service.id">{{ service.name }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </label>
+
+        <div>
+          <button mat-button type="submit">Deletar</button>
+        </div>
+      </form>
+
+    </div>
+  </mat-tab>
 </mat-tab-group>

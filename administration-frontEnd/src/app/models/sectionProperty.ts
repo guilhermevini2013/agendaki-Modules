@@ -1,4 +1,4 @@
-export interface SectionProperty{
-    typeSection:string;
-    data:any;
+export interface SectionProperty {
+  typeSection: string;
+  data: any;
 }

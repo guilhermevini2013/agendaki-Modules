@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { MatIcon } from '@angular/material/icon';
+import {Component} from '@angular/core';
+import {MatIcon} from '@angular/material/icon';
 
 @Component({
   selector: 'app-footer-div',
@@ -9,5 +9,5 @@ import { MatIcon } from '@angular/material/icon';
   styleUrl: './footer-div.component.css'
 })
 export class FooterDivComponent {
-  email:string = "ababada@gmail.com";
+  email: string = "ababada@gmail.com";
 }

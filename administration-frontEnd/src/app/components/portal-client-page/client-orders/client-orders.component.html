@@ -11,17 +11,17 @@
       <div class="payment-view__card__inf">
         <div class="payment-view__card__inf__er">
           <div class="payment-view__card__inf__title">
-            <h1>{{order.titlePlan}}</h1>
+            <h1>{{ order.titlePlan }}</h1>
           </div>
           <div class="payment-view__card__inf__plan">
-            <span>{{order.descriptionPlan}}</span>
+            <span>{{ order.descriptionPlan }}</span>
             <div class="line"></div>
-            <span>R${{order.valuePlan}}</span>
+            <span>R${{ order.valuePlan }}</span>
           </div>
         </div>
         <div class="payment-view__card__inf__actions">
           <div>
-            <span class="status paid">{{order.paymentStatus}}</span>
+            <span class="status paid">{{ order.paymentStatus }}</span>
             <button *ngIf="order.paymentStatus == 'AGUARDANDO'">Cancelar pedido</button>
           </div>
         </div>

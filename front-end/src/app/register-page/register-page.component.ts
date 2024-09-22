@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { MatIcon } from '@angular/material/icon';
+import {Component} from '@angular/core';
+import {MatIcon} from '@angular/material/icon';
 import {FormRegisterComponent} from "./form-register/form-register.component";
 import {FooterRegisterComponent} from "./footer-register/footer-register.component";
 

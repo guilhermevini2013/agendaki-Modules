@@ -1,16 +1,16 @@
 :host {
-    display: flex;
+  display: flex;
 }
 
 .message-SnackBar {
-    color: #ffff;
-    background-color: var(--principal-color);
-    box-shadow: 5px 5px 10px var(--secundary-color);
-    display: flex;
-    justify-content: space-evenly;
+  color: #ffff;
+  background-color: var(--principal-color);
+  box-shadow: 5px 5px 10px var(--secundary-color);
+  display: flex;
+  justify-content: space-evenly;
   align-items: center;
 }
 
 .mdc-snackbar__surface mat-mdc-snackbar-surface ng-tns-c808971067-2 {
-    background-color: var(--principal-color);
+  background-color: var(--principal-color);
 }

@@ -1,8 +1,8 @@
 <div class="container__input">
-    <div [ngStyle]="{'justify-content': horizontalAlignment}">
-      <label>
-        <span>{{label}}</span>
-        <input type="text" [placeholder]="placeHolder" [ngStyle]="{'width': width, 'background-color': terciaryColor}">
-      </label>
-    </div>
+  <div [ngStyle]="{'justify-content': horizontalAlignment}">
+    <label>
+      <span>{{ label }}</span>
+      <input [ngStyle]="{'width': width, 'background-color': terciaryColor}" [placeholder]="placeHolder" type="text">
+    </label>
+  </div>
 </div>

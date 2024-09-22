@@ -18,8 +18,8 @@ import {TypeSignature} from "../../../models/TypeSignature";
 import {PaymentPixCreateDTO} from "../../../models/payment-pix-create-dto";
 import {NgxSpinnerModule} from "ngx-spinner";
 import {PaymentBankCreateDTO} from "../../../models/payment-bank-create-dto";
-import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
-import { PopUpComponent } from '../../pop-up/pop-up.component';
+import {MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition} from '@angular/material/snack-bar';
+import {PopUpComponent} from '../../pop-up/pop-up.component';
 
 @Component({
   selector: 'app-create-order',
@@ -48,18 +48,15 @@ import { PopUpComponent } from '../../pop-up/pop-up.component';
   templateUrl: './create-order.component.html',
   styleUrls: ['./create-order.component.css'] // Corrected styleUrl to styleUrls
 })
-export class CreateOrderComponent{
-  private _snackBar = inject(MatSnackBar);
+export class CreateOrderComponent {
   horizontalPosition: MatSnackBarHorizontalPosition = 'end';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
-
-  private _formBuilder = inject(FormBuilder);
-  protected pixGenerated:{imagePix:string,urlPix:string,dateExpire:string} = {
-    imagePix:"",
-    urlPix:"",
-    dateExpire:""
+  formTo: FormGroup | undefined;
+  protected pixGenerated: { imagePix: string, urlPix: string, dateExpire: string } = {
+    imagePix: "",
+    urlPix: "",
+    dateExpire: ""
   }
-
   protected bankGenerated: {
     linkPDF: string,
     barcode: string
@@ -67,19 +64,15 @@ export class CreateOrderComponent{
     linkPDF: "",
     barcode: ""
   }
-
-  protected viewPaymentInf:boolean = false;
-
+  protected viewPaymentInf: boolean = false;
+  private _snackBar = inject(MatSnackBar);
+  private _formBuilder = inject(FormBuilder);
   firstFormGroup = this._formBuilder.group({
     typeSignature: ['', Validators.required],
   });
-
   secondFormGroup = this._formBuilder.group({
     typePayment: ['', Validators.required],
   });
-
-  formTo: FormGroup | undefined;
-
   formGroupBank = this._formBuilder.group({
     cpf: ['', Validators.required],
     street: ['', Validators.required],
@@ -92,7 +85,46 @@ export class CreateOrderComponent{
     cpf: ['', Validators.required],
   });
 
-  constructor(private paymentService: PaymentService) { }
+  constructor(private paymentService: PaymentService) {
+  }
+
+  openPopUp(message: string, icon: string): void {
+    this._snackBar.openFromComponent(PopUpComponent, {
+      duration: 8000,
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+      data: {
+        message: message,
+        icon: icon
+      }
+    });
+  }
+
+  protected createPayment(): void {
+    if (this.formGroupPix.valid || this.formGroupBank.valid && this.secondFormGroup.valid && this.formTo?.valid) {
+      const typeSignature = this.getTypeSignature(this.firstFormGroup.value.typeSignature!);
+      if (this.getTypePayment(this.secondFormGroup.value.typePayment!) == TypePayment.PIX) {
+        this.createPaymentPix(typeSignature);
+      } else {
+        this.createPaymentBank(typeSignature)
+      }
+    }
+  }
+
+  protected checkTypePayment(): string {
+    const value = this.secondFormGroup.value?.typePayment;
+    if (typeof value === 'string') {
+      if (value === '1') {
+        this.formTo = this.formGroupPix;
+      } else {
+        this.formTo = this.formGroupBank;
+      }
+      return value;
+    } else {
+      console.log(typeof value);
+      return '0';
+    }
+  }
 
   private getTypeSignature(value: string): TypeSignature {
     switch (value) {
@@ -115,17 +147,6 @@ export class CreateOrderComponent{
         return TypePayment.BANK_SLIP;
       default:
         throw new Error('Invalid TypePayment value');
-    }
-  }
-
-  protected createPayment(): void {
-    if (this.formGroupPix.valid || this.formGroupBank.valid && this.secondFormGroup.valid && this.formTo?.valid) {
-      const typeSignature = this.getTypeSignature(this.firstFormGroup.value.typeSignature!);
-      if (this.getTypePayment(this.secondFormGroup.value.typePayment!) == TypePayment.PIX) {
-        this.createPaymentPix(typeSignature);
-      } else {
-        this.createPaymentBank(typeSignature)
-      }
     }
   }
 
@@ -157,7 +178,7 @@ export class CreateOrderComponent{
       error => {
         switch (error.status) {
           case 503:
-            this.openPopUp("Erro no servidor, tente mais tarde!","error")
+            this.openPopUp("Erro no servidor, tente mais tarde!", "error")
             break;
         }
         //console.error(error);
@@ -165,52 +186,25 @@ export class CreateOrderComponent{
     )
   }
 
-  openPopUp(message: string, icon: string): void {
-    this._snackBar.openFromComponent(PopUpComponent, {
-      duration: 8000,
-      horizontalPosition: this.horizontalPosition,
-      verticalPosition: this.verticalPosition,
-      data: {
-        message: message,
-        icon: icon
-      }
-    });
-  }
-
   private createPaymentPix(typeSignature: TypeSignature): void {
-      const paymentDto: PaymentPixCreateDTO = {
-        cpf: this.formGroupPix.value.cpf!.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4'),
-        typePayment: TypePayment.PIX,
-        typeSignature: typeSignature
-      };
+    const paymentDto: PaymentPixCreateDTO = {
+      cpf: this.formGroupPix.value.cpf!.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4'),
+      typePayment: TypePayment.PIX,
+      typeSignature: typeSignature
+    };
     this.paymentService.createPaymentPix(paymentDto).subscribe(
-        response => {
-          this.pixGenerated = {
-            imagePix:response.body?.urlImagePix!,
-            urlPix:response.body?.urlPix!,
-            dateExpire:response.body?.expireTime!
-          }
-          this.viewPaymentInf = true;
-        },
-        error => {
-          console.error(error);
+      response => {
+        this.pixGenerated = {
+          imagePix: response.body?.urlImagePix!,
+          urlPix: response.body?.urlPix!,
+          dateExpire: response.body?.expireTime!
         }
-      );
-    }
-
-  protected checkTypePayment(): string {
-    const value = this.secondFormGroup.value?.typePayment;
-    if (typeof value === 'string') {
-      if (value === '1') {
-        this.formTo = this.formGroupPix;
-      } else {
-        this.formTo = this.formGroupBank;
+        this.viewPaymentInf = true;
+      },
+      error => {
+        console.error(error);
       }
-      return value;
-    } else {
-      console.log(typeof value);
-      return '0';
-    }
+    );
   }
 }
 

@@ -44,8 +44,8 @@ public class SecurityConfig {
                 .sessionManagement(httpSecuritySessionManagementConfigurer -> httpSecuritySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(request -> request
                         .requestMatchers(privateRoutes).hasRole("USER")
-                        .requestMatchers(HttpMethod.GET,"/api/template").hasRole("USER")
-                        .requestMatchers(HttpMethod.GET,"/api/template/free").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/template").hasRole("USER")
+                        .requestMatchers(HttpMethod.GET, "/api/template/free").permitAll()
                         .requestMatchers(publicRoutes).permitAll()
                         .anyRequest().permitAll())
                 .headers(header -> header.frameOptions(frame -> frame.disable()))

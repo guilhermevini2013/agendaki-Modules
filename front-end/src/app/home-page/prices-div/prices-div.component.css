@@ -1,15 +1,15 @@
-section{
-    display: flex;
-    flex-direction: column;
-    background-color: var(--principal-color);
-    justify-content: center;
-    align-items: center;
-    padding-top: 30px;
-    padding-bottom: 30px;
-    gap: 60px;
+section {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--principal-color);
+  justify-content: center;
+  align-items: center;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  gap: 60px;
 }
 
-.section-title{
+.section-title {
   width: 40%;
   display: flex;
   justify-content: center;
@@ -18,7 +18,7 @@ section{
   transform-origin: center center;
 }
 
-.section-title div{
+.section-title div {
   height: max-content;
   display: flex;
   justify-content: center;
@@ -27,34 +27,35 @@ section{
   transform-origin: center center;
 }
 
-.section-title div h1{
+.section-title div h1 {
   color: var(--principal-color);
   font-size: 2.3rem;
 }
 
-.container-section{
-    width: 100%;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
+.container-section {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
 }
 
-.container-section__content{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 25px;
-    width: max-content;
-    width: 100%;
+.container-section__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 25px;
+  width: max-content;
+  width: 100%;
 
-    text-align: center;
-}
-.container-section__content span{
-    font-size: 2.0rem;
-    color: #fff;
+  text-align: center;
 }
 
-.container-example-template{
+.container-section__content span {
+  font-size: 2.0rem;
+  color: #fff;
+}
+
+.container-example-template {
   display: flex;
   flex-wrap: wrap;
   width: 100%;
@@ -63,7 +64,7 @@ section{
   max-height: 466px;
 }
 
-.container-example-template__card{
+.container-example-template__card {
   width: 257px;
   min-width: 257px;
   display: flex;
@@ -77,19 +78,19 @@ section{
   transition: .5s;
 }
 
-.container-example-template__card:hover{
+.container-example-template__card:hover {
   width: 267px;
   min-width: 267px;
   height: 171px;
   margin-bottom: 10px;
 }
 
-.container-example-template__card h1{
+.container-example-template__card h1 {
   font-size: 2rem;
   color: #fff;
 }
 
-.container-example-template__card span{
+.container-example-template__card span {
   font-size: 1.5rem;
   color: #fff;
 }
@@ -98,17 +99,18 @@ section{
   .container-section__content {
     width: 60%;
   }
-  .section-title{
+
+  .section-title {
     margin-top: 60px;
     width: 90%;
   }
 
-  .section-title div h1{
+  .section-title div h1 {
     text-indent: -9999px;
-     line-height: 0; /* Collapse the original line */
+    line-height: 0; /* Collapse the original line */
   }
 
-  .section-title div h1::after{
+  .section-title div h1::after {
     content: "Crie sua conta!";
     text-indent: 0;
     display: block;

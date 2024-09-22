@@ -29,11 +29,11 @@ public class TemplateServiceImpl implements TemplateService {
         checkTemplateToSaves.forEach(check -> check.checkSectionsToSave(templateDTO.sections()));
         Instance instanceToAuth = SecurityUtil.getProjectionOfUserEntityAuthenticated().getInstance();
         Optional<Template> templateByInstance = templateRepository.findByInstance(instanceToAuth);
-        if (templateByInstance.isPresent()){
+        if (templateByInstance.isPresent()) {
             Template templateFind = templateByInstance.get();
             templateFind.update(templateDTO);
             templateRepository.save(templateFind);
-        }else {
+        } else {
             Template template = new Template(templateDTO, instanceToAuth);
             templateRepository.save(template);
         }

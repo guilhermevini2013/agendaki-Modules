@@ -1,6 +1,5 @@
 package com.agendaki.scheduling.models.scheduling;
 
-import com.agendaki.scheduling.dtos.request.InsertDateOfSchedulingDTO;
 import com.agendaki.scheduling.models.user.Instance;
 import jakarta.persistence.*;
 
@@ -10,9 +9,6 @@ import java.time.LocalTime;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "TYPE_DATE_JOB")
 public abstract class DateJob {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     @ManyToOne(fetch = FetchType.LAZY)
     protected Instance instance;
     protected LocalTime startTime;
@@ -20,6 +16,9 @@ public abstract class DateJob {
     protected LocalTime breakInitial;
     protected LocalTime breakFinal;
     protected Boolean isOpen;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     public DateJob(Instance instance, LocalTime startTime, LocalTime endTime, LocalTime breakInitial, LocalTime breakFinal, Boolean isOpen) {
         this.instance = instance;

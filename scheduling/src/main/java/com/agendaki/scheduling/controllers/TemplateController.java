@@ -22,14 +22,13 @@ public class TemplateController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public TemplateDTO getTemplate(@RequestParam(name = "key",required = false) String uuidInstance) {
+    public TemplateDTO getTemplate() {
         return templateService.getTemplate();
     }
 
-    @GetMapping(value = "/free")
+    @GetMapping(value = "/{uuidInstance}")
     @ResponseStatus(HttpStatus.OK)
-    public TemplateDTO getTemplateNoAuth(@RequestParam(name = "key") String uuidInstance) {
+    public TemplateDTO getTemplateNoAuth(@PathVariable String uuidInstance) {
         return templateService.getTemplate(uuidInstance);
     }
-
 }

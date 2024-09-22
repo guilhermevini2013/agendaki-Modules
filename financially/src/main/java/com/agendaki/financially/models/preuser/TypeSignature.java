@@ -8,6 +8,7 @@ public enum TypeSignature {
     QUARTERLY("Tri-mensal"),
     ANNUAL("Anual");
     private final String value;
+
     TypeSignature(String value) {
         this.value = value;
     }

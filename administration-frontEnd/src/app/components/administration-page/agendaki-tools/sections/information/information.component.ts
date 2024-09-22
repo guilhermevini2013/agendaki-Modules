@@ -1,5 +1,5 @@
-import { NgFor } from '@angular/common';
-import { Component } from '@angular/core';
+import {NgFor} from '@angular/common';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-information',
@@ -9,7 +9,7 @@ import { Component } from '@angular/core';
   styleUrl: './information.component.css'
 })
 export class InformationComponent {
-  protected content:string[]=[]
-  protected title:string = "";
+  protected content: string[] = []
+  protected title: string = "";
 
 }
