@@ -1,9 +1,12 @@
 package com.agendaki.scheduling.models.template;
 
-import com.agendaki.scheduling.dtos.request.InputDTO;
-import com.agendaki.scheduling.dtos.request.SectionToSaveDTO;
+import com.agendaki.scheduling.dtos.request.template.InputDTO;
+import com.agendaki.scheduling.dtos.request.template.SectionToSaveDTO;
 import com.agendaki.scheduling.models.scheduling.ResponseForm;
-import jakarta.persistence.*;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 
 import java.util.ArrayList;
 import java.util.List;

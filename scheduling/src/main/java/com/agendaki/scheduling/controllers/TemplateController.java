@@ -1,6 +1,6 @@
 package com.agendaki.scheduling.controllers;
 
-import com.agendaki.scheduling.dtos.request.TemplateDTO;
+import com.agendaki.scheduling.dtos.request.template.TemplateDTO;
 import com.agendaki.scheduling.services.template.TemplateService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

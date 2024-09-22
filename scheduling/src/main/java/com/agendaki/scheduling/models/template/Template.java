@@ -1,6 +1,6 @@
 package com.agendaki.scheduling.models.template;
 
-import com.agendaki.scheduling.dtos.request.TemplateDTO;
+import com.agendaki.scheduling.dtos.request.template.TemplateDTO;
 import com.agendaki.scheduling.models.user.Instance;
 import jakarta.persistence.*;
 
@@ -38,30 +38,8 @@ public class Template {
         this.sections.addAll(createSections(templateDTO));
     }
 
-        //Melhorar isso com abstracao
     private List<Section> createSections(TemplateDTO templateDTO) {
-         return templateDTO.sections().stream().map(sectionToSaveDTO -> {
-            switch (sectionToSaveDTO.getTypeSection()) {
-                case HELP -> {
-                    return new Help(sectionToSaveDTO,this);
-                }
-                case CALENDAR -> {
-                    return new Calendar(sectionToSaveDTO,this);
-                }
-                case PROFESSIONAL_AND_SERVICE -> {
-                    return new ProfessionalAndServiceSection(sectionToSaveDTO, this);
-                }
-                case INPUT -> {
-                    return new Input(sectionToSaveDTO,this);
-                }
-                case IMAGE -> {
-                    return new Image(sectionToSaveDTO,this);
-                }
-                default -> {
-                    throw new RuntimeException("Invalid section type: " + sectionToSaveDTO.getTypeSection());
-                }
-            }
-        }).toList();
+        return templateDTO.sections().stream().map(sectionToSaveDTO -> sectionToSaveDTO.getClassForDTO(this)).toList();
     }
 
     public Long getId() {

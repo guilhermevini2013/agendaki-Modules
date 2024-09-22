@@ -1,7 +1,7 @@
 package com.agendaki.scheduling.models.template;
 
-import com.agendaki.scheduling.dtos.request.HelpDTO;
-import com.agendaki.scheduling.dtos.request.SectionToSaveDTO;
+import com.agendaki.scheduling.dtos.request.template.HelpDTO;
+import com.agendaki.scheduling.dtos.request.template.SectionToSaveDTO;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 

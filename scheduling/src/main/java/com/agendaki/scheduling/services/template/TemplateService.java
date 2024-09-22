@@ -1,7 +1,7 @@
 package com.agendaki.scheduling.services.template;
 
 
-import com.agendaki.scheduling.dtos.request.TemplateDTO;
+import com.agendaki.scheduling.dtos.request.template.TemplateDTO;
 
 public interface TemplateService {
 

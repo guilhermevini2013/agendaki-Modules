@@ -1,6 +1,6 @@
 package com.agendaki.scheduling.services.template;
 
-import com.agendaki.scheduling.dtos.request.TemplateDTO;
+import com.agendaki.scheduling.dtos.request.template.TemplateDTO;
 import com.agendaki.scheduling.exceptions.ResourceNotFoundException;
 import com.agendaki.scheduling.models.template.Template;
 import com.agendaki.scheduling.models.user.Instance;

@@ -1,4 +1,4 @@
-package com.agendaki.scheduling.dtos.request;
+package com.agendaki.scheduling.dtos.request.template;
 
 import com.agendaki.scheduling.models.template.Template;
 
