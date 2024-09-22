@@ -6,12 +6,12 @@
         <span>Selecione a foto de perfil:</span>
         <input type="file" accept="image/png, image/gif, image/jpeg" (change)="onFileSelected($event)"/>
       </label>
-    
+
       <mat-form-field appearance="outline" class="inputMat" >
         <mat-label>Bio</mat-label>
-        <input matInput type="text" formControlName="bio" required>
+        <input matInput type="text" formControlName="text" required>
       </mat-form-field>
-    
+
       <button type="submit" mat-button >Salvar</button>
     </form>
   </mat-dialog-content>

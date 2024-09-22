@@ -9,6 +9,6 @@ import {Component, Input} from '@angular/core';
 })
 export class PerfilComponent {
   @Input() imageToBase64: string | ArrayBuffer | null = null;
-  @Input() bio: string = "";
+  @Input() text: string = "";
 
 }

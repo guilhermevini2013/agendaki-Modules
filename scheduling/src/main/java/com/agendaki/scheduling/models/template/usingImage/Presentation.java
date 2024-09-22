@@ -19,4 +19,13 @@ public class Presentation extends ImageToExhibition {
     public Presentation() {
 
     }
+
+    @Override
+    public SectionToSaveDTO getDtoForClass() {
+        return new PresentationDTO(this);
+    }
+
+    public String getParagraph() {
+        return paragraph;
+    }
 }

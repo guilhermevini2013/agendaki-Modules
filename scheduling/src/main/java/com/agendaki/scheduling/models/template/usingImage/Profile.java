@@ -17,4 +17,9 @@ public class Profile extends ImageToExhibition {
     public Profile() {
 
     }
+
+    @Override
+    public SectionToSaveDTO getDtoForClass() {
+        return new ProfileDTO(this);
+    }
 }

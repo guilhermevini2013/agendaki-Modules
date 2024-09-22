@@ -29,8 +29,7 @@ export class InformationFormComponent {
   formEditInformation: FormGroup = new FormGroup({
     title: new FormControl('',Validators.required),
     content: new FormControl(this.informationList),
-    typeSection: new FormControl("CALENDAR"),
-    type:new FormControl("calendar")
+    type:new FormControl("help")
   });
 
   constructor(private communicationComponent: ComponentCommunicationService, private dialogRef: MatDialogRef<InformationFormComponent>) {}

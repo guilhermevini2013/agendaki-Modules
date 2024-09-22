@@ -11,6 +11,6 @@ import {NgForOf} from "@angular/common";
   styleUrl: './portfolio.component.css'
 })
 export class PortfolioComponent{
-  @Input() urlsPhotos: string[] | null = null; // expects an array of base64 strings
-  @Input() title: string = '';
+  @Input() imagesToBase64: string[] | null = null; // expects an array of base64 strings
+  @Input() text: string = '';
 }

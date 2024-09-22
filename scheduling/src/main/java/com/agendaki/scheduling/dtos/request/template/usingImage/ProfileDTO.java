@@ -15,6 +15,12 @@ public class ProfileDTO extends SectionToSaveDTO {
         this.text = text;
     }
 
+    public ProfileDTO(Profile profile) {
+        super(profile.getId(), profile.getPosition(), profile.getHorizontalAlignment());
+        this.imageToBase64 = profile.getImage().get(0).getUuidImage();
+        this.text = profile.getText();
+    }
+
     @Override
     public Section getClassForDTO(Template template) {
         return new Profile(this, template);

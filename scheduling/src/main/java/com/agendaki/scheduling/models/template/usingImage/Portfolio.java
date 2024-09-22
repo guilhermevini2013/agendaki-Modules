@@ -17,4 +17,9 @@ public class Portfolio extends ImageToExhibition {
     public Portfolio() {
 
     }
+
+    @Override
+    public SectionToSaveDTO getDtoForClass() {
+        return new PortfolioDTO(this);
+    }
 }

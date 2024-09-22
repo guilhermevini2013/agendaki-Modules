@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 
 @Component({
   selector: 'app-presentation',
@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
   styleUrl: './presentation.component.css'
 })
 export class PresentationComponent {
-  title:string="";
   text:string="";
-  urlPhoto: string | ArrayBuffer | null = null;
+  paragraph:string="";
+  @Input() imageToBase64: string | ArrayBuffer | null = null;
 }

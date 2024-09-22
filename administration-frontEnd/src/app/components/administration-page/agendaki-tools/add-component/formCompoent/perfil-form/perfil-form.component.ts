@@ -29,11 +29,9 @@ export class PerfilFormComponent {
 
   formEditPerfil: FormGroup = new FormGroup({
     imageToBase64: new FormControl(this.selectedImage!,Validators.required),
-    bio: new FormControl('',Validators.required),
+    text: new FormControl('',Validators.required),
     horizontalAlignment: new FormControl(''),
-    isPortfolio: new FormControl(false),
-    typeSection: new FormControl("IMAGE"),
-    type:new FormControl("image")
+    type:new FormControl("profile")
   });
 
   constructor(private communicationComponent: ComponentCommunicationService,private dialogRef: MatDialogRef<PerfilFormComponent>) {}
@@ -56,7 +54,6 @@ export class PerfilFormComponent {
   submitForm(): void {
     if(this.selectedImage != null){
       if(this.formEditPerfil.valid){
-        
         this.communicationComponent.triggerAddComponentAction({
           component: PerfilComponent,
           data: this.formEditPerfil.value

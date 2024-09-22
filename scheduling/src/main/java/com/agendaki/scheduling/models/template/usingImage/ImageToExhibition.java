@@ -45,7 +45,7 @@ public abstract class ImageToExhibition extends Section {
             this.id = portfolioDTO.getId();
         }
         this.text = portfolioDTO.getText();
-        this.image = portfolioDTO.getImageToBase64().stream().map(imageInBase64DTO -> new Image(imageInBase64DTO,this)).toList();
+        this.image = portfolioDTO.getImagesToBase64().stream().map(imageInBase64DTO -> new Image(imageInBase64DTO,this)).toList();
     }
 
     public ImageToExhibition() {
@@ -53,9 +53,7 @@ public abstract class ImageToExhibition extends Section {
     }
 
     @Override
-    public SectionToSaveDTO getDtoForClass() {
-        return null;
-    }
+    public abstract SectionToSaveDTO getDtoForClass();
 
     public List<Image> getImage() {
         return image;

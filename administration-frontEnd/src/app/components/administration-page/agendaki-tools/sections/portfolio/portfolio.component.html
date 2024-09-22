@@ -1,11 +1,11 @@
 <section>
   <div class="portfolio">
     <div class="portfolio__title">
-      <span>{{title}}</span>
+      <span>{{text}}</span>
     </div>
     <div class="portfolio__image-container">
       <div class="portfolio__image">
-        <div *ngFor="let image of urlsPhotos">
+        <div *ngFor="let image of imagesToBase64">
           <img [src]="image">
         </div>
       </div>

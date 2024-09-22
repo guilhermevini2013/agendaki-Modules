@@ -26,7 +26,6 @@ export class CalendarFormComponent {
 
   protected formEditCalendar:FormGroup = new FormGroup<any>({
     horizontalAlignment: new FormControl('',Validators.required),
-    typeSection: new FormControl("CALENDAR"),
     type:new FormControl("calendar")
   });
 

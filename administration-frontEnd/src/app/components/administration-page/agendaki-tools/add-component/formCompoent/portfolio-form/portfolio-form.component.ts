@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {MatDialogClose, MatDialogContent, MatDialogRef} from "@angular/material/dialog";
 import {ComponentCommunicationService} from "../../../../../../services/component-communication.service";
-import {PerfilComponent} from "../../../sections/perfil/perfil.component";
 import {NgForOf} from "@angular/common";
 import {PortfolioComponent} from "../../../sections/portfolio/portfolio.component";
 import { MatSelectModule } from '@angular/material/select';
@@ -29,11 +28,9 @@ export class PortfolioFormComponent {
   selectedFiles: { name: string, base64: string }[] = [];
 
   formEditPortfolio: FormGroup = new FormGroup({
-    urlsPhotos: new FormControl<string[]>([],Validators.required),
-    title: new FormControl('',Validators.required),
-    isPortfolio: new FormControl(true),
-    typeSection: new FormControl("IMAGE"),
-    type:new FormControl("image")
+    imagesToBase64: new FormControl<string[]>([],Validators.required),
+    text: new FormControl('',Validators.required),
+    type:new FormControl("portfolio")
   });
 
   constructor(private communicationComponent: ComponentCommunicationService,private dialogRef: MatDialogRef<PortfolioFormComponent>) {}
@@ -57,7 +54,7 @@ export class PortfolioFormComponent {
             if (newFiles.length === files.length) {
               this.selectedFiles = [...this.selectedFiles, ...newFiles];
               this.formEditPortfolio.patchValue({
-                urlsPhotos: this.selectedFiles.map(file => file.base64)
+                imagesToBase64: this.selectedFiles.map(file => file.base64)
               });
             }
           }

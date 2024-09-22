@@ -28,9 +28,10 @@ export class PresentationFormComponent {
   selectedImage: string | ArrayBuffer | null = null;
 
   formEditPerfil: FormGroup = new FormGroup({
-    urlPhoto: new FormControl(this.selectedImage!,Validators.required),
-    title: new FormControl('',Validators.required),
-    text: new FormControl('',Validators.required)
+    imageToBase64: new FormControl(this.selectedImage!,Validators.required),
+    text: new FormControl('',Validators.required),
+    paragraph: new FormControl('',Validators.required),
+    type:new FormControl("presentation")
   });
 
   constructor(private communicationComponent: ComponentCommunicationService, private dialogRef: MatDialogRef<PresentationFormComponent>) {}
@@ -43,7 +44,7 @@ export class PresentationFormComponent {
       reader.onload = (e: ProgressEvent<FileReader>) => {
         this.selectedImage = reader.result;
         this.formEditPerfil.patchValue({
-          urlPhoto: this.selectedImage
+          imageToBase64: this.selectedImage
         });
       };
       reader.readAsDataURL(file);

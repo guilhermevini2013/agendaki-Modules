@@ -34,7 +34,6 @@ export class FormInputComponent {
     placeHolder: new FormControl('',Validators.required),
     width: new FormControl('',Validators.required),
     horizontalAlignment: new FormControl('',Validators.required),
-    typeSection: new FormControl("INPUT"),
     type:new FormControl("input")
   });
 
@@ -44,7 +43,7 @@ export class FormInputComponent {
   submitForm():void{
     if (this.formEditInput.value.width == "") {
       this.formEditInput.value.width = 50
-    } 
+    }
 
     this.formEditInput.value.width +="%";
 

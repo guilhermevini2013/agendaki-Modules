@@ -27,9 +27,7 @@ public class Template {
         this.sections = createSections(templateDTO);
     }
 
-    public Template() {
-
-    }
+    public Template() {}
 
     public void update(TemplateDTO templateDTO) {
         this.primaryColor = templateDTO.primaryColor();
