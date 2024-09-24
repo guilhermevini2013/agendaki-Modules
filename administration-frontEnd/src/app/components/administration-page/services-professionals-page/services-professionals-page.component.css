@@ -1,6 +1,7 @@
 .Content {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
 
   justify-content: center;
   width: 100%;
@@ -8,4 +9,12 @@
   gap: 200px;
 
   padding-top: 30px;
+}
+
+.TabsGroup {
+  width: 700px;
+}
+
+@media (max-width: 900px) {
+  
 }

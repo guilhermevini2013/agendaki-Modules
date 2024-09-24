@@ -8,7 +8,7 @@
       <app-pre-visualizer></app-pre-visualizer>
     </div>
   </div>
-  <div class="tools">
+  <div class="tools" *ngIf="screenSize >= 1330">
     <div class="title_tools">
       <h1>Adicione componentes</h1>
       <span>Personalize do seu jeito.</span>
@@ -17,4 +17,10 @@
       <app-add-component class="tools__component_options"></app-add-component>
     </div>
   </div>
+  <div class="andoidTools" *ngIf="screenSize <= 1330">
+    <button class="androidToolsButton">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
 </article>
+
