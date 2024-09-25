@@ -17,10 +17,16 @@
       <app-add-component class="tools__component_options"></app-add-component>
     </div>
   </div>
-  <div class="andoidTools" *ngIf="screenSize <= 1330">
-    <button class="androidToolsButton">
+
+  <div class="androidTools" *ngIf="screenSize <= 1330">
+    <button class="androidToolsButton" (click)="openDialog(AddComponentFormComponent)">
       <mat-icon>add</mat-icon>
     </button>
-  </div>
+
+    <button class="androidToolsButton" (click)="openDialog(AddComponentFormComponent)">
+      <mat-icon>edit</mat-icon>
+    </button>
+  </div> 
+
 </article>
 
