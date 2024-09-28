@@ -17,14 +17,7 @@ export class InputComponent {
   public width: string = "";
   public horizontalAlignment: string = "";
 
-  protected terciaryColor: string | null = "#000";
-
-  constructor(private commService: ComponentCommunicationService) {
-  }
-
   ngOnInit() {
-    this.commService.colorTerciaryAction$.subscribe(action => {
-      this.terciaryColor = action;
-    });
+
   }
 }

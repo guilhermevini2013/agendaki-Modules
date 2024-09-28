@@ -14,6 +14,15 @@ import {DynamicComponentContainer} from "../dynamic-component-container/dynamic-
 import {ComponentCommunicationService} from '../../../../services/component-communication.service';
 import {TemplateDTO} from "../../../../models/template/template-create-dto";
 import {TemplateService} from "../../../../services/template/template.service";
+import {InputComponent} from "../sections/input/input.component";
+import {InformationComponent} from "../sections/information/information.component";
+import {CalendarComponent} from "../sections/calendar/calendar.component";
+import {
+  SelectServiceAndProfessionalComponent
+} from "../sections/select-service-and-professional/select-service-and-professional.component";
+import {PortfolioComponent} from "../sections/portfolio/portfolio.component";
+import {PresentationComponent} from "../sections/presentation/presentation.component";
+import {PerfilComponent} from "../sections/perfil/perfil.component";
 
 export interface ComponentWithId {
   component: Type<any>;
@@ -67,10 +76,36 @@ export class PreVisualizerComponent {
     });
 
     this.templateService.getTemplate().subscribe((response) => {
-      const template = response.body;
+      const template = response.body!;
       this.primaryColor = template?.primaryColor!;
       this.secundaryColor = template?.secondaryColor!;
-      console.log(template);
+      console.log(template?.sections!)
+      const sortedSections = template?.sections!.sort((a, b) => a.position - b.position);
+      sortedSections.forEach((section) => {
+        switch (section.type) {
+          case 'input':
+            this.components.push({component: InputComponent, data: section});
+            break;
+          case 'help':
+            this.components.push({component: InformationComponent, data: section});
+            break;
+          case 'calendar':
+            this.components.push({component: CalendarComponent, data: section});
+            break;
+          case 'professionalAndService':
+            this.components.push({component: SelectServiceAndProfessionalComponent, data: section});
+            break;
+          case 'portfolio':
+            this.components.push({component: PortfolioComponent, data: section});
+            break;
+          case 'presentation':
+            this.components.push({component: PresentationComponent, data: section});
+            break;
+          case 'profile':
+            this.components.push({component: PerfilComponent, data: section});
+            break;
+        }
+      });
     });
   }
 

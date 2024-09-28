@@ -10,16 +10,17 @@ import java.util.Base64;
 public class ImageService {
     private static final String RESOURCE_DIRECTORY = "scheduling/src/main/resources/static/images/";
 
-    public Boolean saveImageIntoArchive(String imageToBase64, String uuid) {
+    public String saveImageIntoArchive(String imageToBase64, String uuid) {
         byte[] imageBytes = Base64.getDecoder().decode(removePreFix(imageToBase64));
-        File file = Paths.get(RESOURCE_DIRECTORY, uuid + getExtension(imageToBase64)).toFile();
+        String extension = getExtension(imageToBase64);
+        File file = Paths.get(RESOURCE_DIRECTORY, uuid + extension).toFile();
         file.getParentFile().mkdirs();
         try (OutputStream os = new FileOutputStream(file)) {
             os.write(imageBytes);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return true;
+        return uuid + extension;
     }
 
     private String removePreFix(String imageToBase64) {

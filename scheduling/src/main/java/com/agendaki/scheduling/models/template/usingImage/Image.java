@@ -16,10 +16,10 @@ public class Image {
     private ImageToExhibition imageToExhibition;
 
     public Image(String imageInBase64, ImageToExhibition imageToExhibition) {
-        final ImageService imageService = new ImageService();
-        String uuidCreated = UUID.randomUUID().toString().replace("-", "");
-        imageService.saveImageIntoArchive(imageInBase64, uuidCreated);
-        this.uuidImage = uuidCreated;
+//        final ImageService imageService = new ImageService();
+//        String uuidCreated = UUID.randomUUID().toString().replace("-", "");
+//        String uuidWithExtension = imageService.saveImageIntoArchive(imageInBase64, uuidCreated);
+        this.uuidImage = imageInBase64;
         this.imageToExhibition = imageToExhibition;
     }
 
