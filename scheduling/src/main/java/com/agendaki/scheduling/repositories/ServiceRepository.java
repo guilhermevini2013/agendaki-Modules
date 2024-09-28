@@ -9,11 +9,15 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface ServiceRepository extends JpaRepository<Service, Long> {
 
     List<Service> findByInstance(Instance instance);
+
+    @Query("select s from Service s join s.professionals p where p.id = :professionalId and s.id = :serviceId")
+    Optional<Service> findByIdProfessional(Long professionalId, Long serviceId);
 
     @Modifying
     @Query(value = "BEGIN TRANSACTION; " +

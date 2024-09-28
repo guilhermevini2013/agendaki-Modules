@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/administration-frontEnd.iml" filepath="$PROJECT_DIR$/administration-frontEnd.iml" />
       <module fileurl="file://$PROJECT_DIR$/agendaki-Modules.iml" filepath="$PROJECT_DIR$/agendaki-Modules.iml" />
       <module fileurl="file://$PROJECT_DIR$/front-end.iml" filepath="$PROJECT_DIR$/front-end.iml" />
+      <module fileurl="file://$PROJECT_DIR$/scheduling/scheduling.iml" filepath="$PROJECT_DIR$/scheduling/scheduling.iml" />
     </modules>
   </component>
 </project>

@@ -33,4 +33,7 @@ public interface DateJobRepository extends JpaRepository<DateJob, Long> {
 
     @Query("select dh from DateJobHoliday dh where dh.id= :id and dh.instance= :instance")
     Optional<DateJobHoliday> getDateHolidayByidAndInstance(Long id, Instance instance);
+
+    @Query("select dc from DateJobCommon dc where dc.instance.keyInstance= :keyInstance and dc.dayOfWeek= :dayOfWeek")
+    Optional<DateJob> findDateJobCommonByKeyInstance(String keyInstance, DayOfWeek dayOfWeek);
 }
