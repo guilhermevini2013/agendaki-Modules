@@ -1,5 +1,5 @@
-import {Component} from '@angular/core';
-import {MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef} from "@angular/material/dialog";
+import {Component, inject, model} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef} from "@angular/material/dialog";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {ComponentCommunicationService} from "../../../../../../services/component-communication.service";
 import {InputComponent} from "../../../sections/input/input.component";
@@ -26,7 +26,11 @@ import {MatInput} from '@angular/material/input';
   templateUrl: './form-input.component.html',
   styleUrls: ['./form-input.component.css', '../styleFormComponent.css']
 })
+
 export class FormInputComponent {
+  readonly dialogReff2 = inject(MatDialogRef<FormInputComponent>);
+  readonly data = inject<DialogData>(MAT_DIALOG_DATA);
+ 
   alignSelected: string = "center";
 
   formEditInput: FormGroup = new FormGroup<any>({
@@ -48,11 +52,28 @@ export class FormInputComponent {
     this.formEditInput.value.width += "%";
 
     if (this.formEditInput.valid) {
-      this.communicationComponent.triggerAddComponentAction({
-        component: InputComponent,
-        data: this.formEditInput.value
-      })
+      if (this.data) {
+        this.data.components.splice(this.data.index);
+
+        this.communicationComponent.triggerAddComponentAction({
+          component: InputComponent,
+          data: this.formEditInput.value
+        })
+        
+      } else {
+        this.communicationComponent.triggerAddComponentAction({
+          component: InputComponent,
+          data: this.formEditInput.value
+        })
+      }
+     
       this.dialogRef.close();
     }
   }
+}
+  
+export interface DialogData {
+  name: any;
+  components: any;
+  index: any;
 }

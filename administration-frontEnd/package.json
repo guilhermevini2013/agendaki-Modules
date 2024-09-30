@@ -23,6 +23,7 @@
     "@capacitor/android": "^6.1.2",
     "@capacitor/angular": "^2.0.3",
     "@capacitor/core": "latest",
+    "@capacitor/ios": "^6.1.2",
     "material-icons": "^1.13.12",
     "ngx-cookie-service": "^18.0.0",
     "ngx-mask": "^18.0.0",
@@ -43,6 +44,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "source-map-explorer": "^2.5.3",
     "typescript": "~5.5.2"
   }
 }

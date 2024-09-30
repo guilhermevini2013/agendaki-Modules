@@ -11,6 +11,7 @@
         [ngStyle]="{'background-color': primaryColor!}"
         cdkDrag
         class="example-box"
+        (click)="onClick(i)"
       >
         <div *cdkDragPlaceholder class="example-custom-placeholder"></div>
         <app-dynamic-component-container

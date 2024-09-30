@@ -1,4 +1,4 @@
-import {Component, Type} from '@angular/core';
+import {Component, Type, inject} from '@angular/core';
 import {
   CdkDrag,
   CdkDragDrop,
@@ -23,6 +23,14 @@ import {
 import {PortfolioComponent} from "../sections/portfolio/portfolio.component";
 import {PresentationComponent} from "../sections/presentation/presentation.component";
 import {PerfilComponent} from "../sections/perfil/perfil.component";
+import { MatDialog } from '@angular/material/dialog';
+import { FormInputComponent } from '../add-component/formCompoent/form-input/form-input.component';
+import { PerfilFormComponent } from '../add-component/formCompoent/perfil-form/perfil-form.component';
+import { SelectServiceAndProfessionalFormComponent } from '../add-component/formCompoent/select-service-and-professional-form/select-service-and-professional-form.component';
+import { CalendarFormComponent } from '../add-component/formCompoent/calendar-form/calendar-form.component';
+import { PortfolioFormComponent } from '../add-component/formCompoent/portfolio-form/portfolio-form.component';
+import { InformationFormComponent } from '../add-component/formCompoent/information-form/information-form.component';
+import { PresentationFormComponent } from '../add-component/formCompoent/presentation-form/presentation-form.component';
 
 export interface ComponentWithId {
   component: Type<any>;
@@ -46,6 +54,41 @@ export interface ComponentWithId {
   styleUrls: ['./pre-visualizer.component.css']
 })
 export class PreVisualizerComponent {
+
+  readonly dialog = inject(MatDialog);
+
+  onClick(value: number) {
+    const componentRecovered = this.components[value].component;
+   // this.components.splice(value);
+
+    switch(componentRecovered.name) {
+      case '_InputComponent':
+          this.dialog.open(FormInputComponent, {
+            data: {name: componentRecovered, components: this.components, index: value},
+          });
+
+          break;
+      case '_PerfilComponent':
+          this.dialog.open(PerfilFormComponent)
+          break;
+      case '_SelectServiceAndProfessionalComponent':
+          this.dialog.open(SelectServiceAndProfessionalFormComponent)
+          break;
+      case '_CalendarComponent':
+          this.dialog.open(CalendarFormComponent)
+          break;
+      case '_PortfolioComponent':
+          this.dialog.open(PortfolioFormComponent)
+          break;
+      case '_InformationComponent':
+          this.dialog.open(InformationFormComponent)
+          break;
+      case '_PresentationComponent':
+          this.dialog.open(PresentationFormComponent)
+          break;
+    }
+  }
+
   components: ComponentWithId[] = [];
   protected primaryColor: string | null = "#fff";
   protected secundaryColor: string | null = "#000";
