@@ -1,4 +1,4 @@
-import {Component, Type, inject} from '@angular/core';
+import {ChangeDetectorRef, Component, EventEmitter, Input, Type, inject, input, viewChild} from '@angular/core';
 import {
   CdkDrag,
   CdkDragDrop,
@@ -31,6 +31,7 @@ import { CalendarFormComponent } from '../add-component/formCompoent/calendar-fo
 import { PortfolioFormComponent } from '../add-component/formCompoent/portfolio-form/portfolio-form.component';
 import { InformationFormComponent } from '../add-component/formCompoent/information-form/information-form.component';
 import { PresentationFormComponent } from '../add-component/formCompoent/presentation-form/presentation-form.component';
+import { firstValueFrom } from 'rxjs';
 
 export interface ComponentWithId {
   component: Type<any>;
@@ -58,15 +59,34 @@ export class PreVisualizerComponent {
   readonly dialog = inject(MatDialog);
 
   onClick(value: number) {
-    const componentRecovered = this.components[value].component;
-   // this.components.splice(value);
+    // Recupera o componente que foi clicado
+   const componentRecovered = { ...this.components[value] }; // Faz uma cópia do objeto
+    // AQUI VOCE VAI BOTAR PARA ALTERAR ESSA PORRA
+    // componentRecovered.data.label = "aaaaaa";
 
-    switch(componentRecovered.name) {
+    switch(componentRecovered.component.name) {
       case '_InputComponent':
-          this.dialog.open(FormInputComponent, {
-            data: {name: componentRecovered, components: this.components, index: value},
+          const dialogRef = this.dialog.open(FormInputComponent, {
+            data: {component: componentRecovered, components: this.components, index: value},
           });
 
+          dialogRef.afterClosed().subscribe(result => {
+            if (result) {
+              // Aqui você pode lidar com o resultado retornado do diálogo
+              componentRecovered.data.label = result.label;
+              componentRecovered.data.placeHolder = result.placeHolder;
+              componentRecovered.data.width = result.width;
+              componentRecovered.data.horizontalAlignment = result.horizontalAlignment;
+      
+               // Cria uma nova array com o componente atualizado
+              this.components = this.components.map((component, index) => 
+                  index === value ? componentRecovered : component
+              );
+      
+              // Se necessário, força a detecção de mudanças
+              this.cdr.detectChanges(); 
+            }
+          });
           break;
       case '_PerfilComponent':
           this.dialog.open(PerfilFormComponent)
@@ -86,15 +106,15 @@ export class PreVisualizerComponent {
       case '_PresentationComponent':
           this.dialog.open(PresentationFormComponent)
           break;
-    }
-  }
+    }    
+}
 
   components: ComponentWithId[] = [];
   protected primaryColor: string | null = "#fff";
   protected secundaryColor: string | null = "#000";
   protected terciaryColor: string | null = "#fff";
 
-  constructor(private commService: ComponentCommunicationService, private templateService: TemplateService) {
+  constructor(private commService: ComponentCommunicationService, private templateService: TemplateService,private cdr: ChangeDetectorRef) {
   }
 
   drop(event: CdkDragDrop<ComponentWithId[]>) {

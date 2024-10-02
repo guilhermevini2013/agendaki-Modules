@@ -53,27 +53,21 @@ export class FormInputComponent {
 
     if (this.formEditInput.valid) {
       if (this.data) {
-        this.data.components.splice(this.data.index);
-
-        this.communicationComponent.triggerAddComponentAction({
-          component: InputComponent,
-          data: this.formEditInput.value
-        })
-        
+        this.dialogRef.close(this.formEditInput.value);
       } else {
         this.communicationComponent.triggerAddComponentAction({
           component: InputComponent,
           data: this.formEditInput.value
         })
+
+        this.dialogRef.close();
       }
-     
-      this.dialogRef.close();
     }
   }
 }
   
 export interface DialogData {
-  name: any;
+  component: any;
   components: any;
   index: any;
 }
