@@ -58,6 +58,42 @@ export class PreVisualizerComponent {
 
   readonly dialog = inject(MatDialog);
 
+  handleDialog(classType: any, componentRecovered: any, value: number, changes: any) {
+
+    console.log(changes)
+    
+    const dialogRef = this.dialog.open(classType, {
+      data: {component: componentRecovered, components: this.components, index: value},
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        // Aqui você pode lidar com o resultado retornado do diálogo
+        console.log("retornou resultado")
+        for (let index = 0; index < changes.length; index++) {
+          const element = changes[index];
+          
+          componentRecovered.data[element] = result[element]
+
+          console.log(element)
+        }
+
+        // componentRecovered.data.label = result.label;
+        // componentRecovered.data.placeHolder = result.placeHolder;
+        // componentRecovered.data.width = result.width;
+        // componentRecovered.data.horizontalAlignment = result.horizontalAlignment;
+
+         // Cria uma nova array com o componente atualizado
+        this.components = this.components.map((component, index) => 
+            index === value ? componentRecovered : component
+        );
+
+        // Se necessário, força a detecção de mudanças
+        this.cdr.detectChanges(); 
+      }
+    });
+  }
+
   onClick(value: number) {
     // Recupera o componente que foi clicado
    const componentRecovered = { ...this.components[value] }; // Faz uma cópia do objeto
@@ -66,45 +102,25 @@ export class PreVisualizerComponent {
 
     switch(componentRecovered.component.name) {
       case '_InputComponent':
-          const dialogRef = this.dialog.open(FormInputComponent, {
-            data: {component: componentRecovered, components: this.components, index: value},
-          });
-
-          dialogRef.afterClosed().subscribe(result => {
-            if (result) {
-              // Aqui você pode lidar com o resultado retornado do diálogo
-              componentRecovered.data.label = result.label;
-              componentRecovered.data.placeHolder = result.placeHolder;
-              componentRecovered.data.width = result.width;
-              componentRecovered.data.horizontalAlignment = result.horizontalAlignment;
-      
-               // Cria uma nova array com o componente atualizado
-              this.components = this.components.map((component, index) => 
-                  index === value ? componentRecovered : component
-              );
-      
-              // Se necessário, força a detecção de mudanças
-              this.cdr.detectChanges(); 
-            }
-          });
+          this.handleDialog(FormInputComponent,componentRecovered,value,['label','placeHolder', 'width', 'horizontalAlignment'])
           break;
       case '_PerfilComponent':
-          this.dialog.open(PerfilFormComponent)
+          this.handleDialog(PerfilFormComponent,componentRecovered,value,['imageToBase64','text'])
           break;
       case '_SelectServiceAndProfessionalComponent':
-          this.dialog.open(SelectServiceAndProfessionalFormComponent)
+          this.handleDialog(SelectServiceAndProfessionalFormComponent,componentRecovered,value,['horizontalAlignment'])
           break;
       case '_CalendarComponent':
-          this.dialog.open(CalendarFormComponent)
+          this.handleDialog(CalendarFormComponent,componentRecovered,value,['horizontalAlignment'])
           break;
       case '_PortfolioComponent':
-          this.dialog.open(PortfolioFormComponent)
+          this.handleDialog(PortfolioFormComponent,componentRecovered,value,['imagesToBase64', 'text'])
           break;
       case '_InformationComponent':
-          this.dialog.open(InformationFormComponent)
+          this.handleDialog(InformationFormComponent,componentRecovered,value,['content', 'title'])
           break;
       case '_PresentationComponent':
-          this.dialog.open(PresentationFormComponent)
+          this.handleDialog(PresentationFormComponent,componentRecovered,value,['imageToBase64', 'text', 'paragraph'])
           break;
     }    
 }

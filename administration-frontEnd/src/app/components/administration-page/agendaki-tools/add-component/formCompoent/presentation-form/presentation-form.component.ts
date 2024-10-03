@@ -1,5 +1,5 @@
-import {Component} from '@angular/core';
-import {MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef} from "@angular/material/dialog";
+import {Component, inject} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef} from "@angular/material/dialog";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {NgIf} from "@angular/common";
 import {MatInput} from '@angular/material/input';
@@ -7,6 +7,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import {ComponentCommunicationService} from '../../../../../../services/component-communication.service';
 import {PresentationComponent} from '../../../sections/presentation/presentation.component';
+import { DialogData } from '../form-input/form-input.component';
 
 @Component({
   selector: 'app-presentation-form',
@@ -25,6 +26,7 @@ import {PresentationComponent} from '../../../sections/presentation/presentation
   styleUrls: ['./presentation-form.component.css', '../styleFormComponent.css']
 })
 export class PresentationFormComponent {
+  readonly data = inject<DialogData>(MAT_DIALOG_DATA);
   selectedImage: string | ArrayBuffer | null = null;
 
   formEditPerfil: FormGroup = new FormGroup({
@@ -55,11 +57,16 @@ export class PresentationFormComponent {
   submitForm(): void {
     if (this.selectedImage != null) {
       if (this.formEditPerfil.valid) {
-        this.communicationComponent.triggerAddComponentAction({
-          component: PresentationComponent,
-          data: this.formEditPerfil.value
-        });
-        this.dialogRef.close()
+        if (this.data) {
+          this.dialogRef.close(this.formEditPerfil.value);
+        } else {
+          this.communicationComponent.triggerAddComponentAction({
+            component: PresentationComponent,
+            data: this.formEditPerfil.value
+          })
+  
+          this.dialogRef.close();
+        }
       }
     }
   }

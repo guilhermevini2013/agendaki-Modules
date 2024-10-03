@@ -32,7 +32,7 @@ export class FormInputComponent {
   readonly data = inject<DialogData>(MAT_DIALOG_DATA);
  
   alignSelected: string = "center";
-
+  
   formEditInput: FormGroup = new FormGroup<any>({
     label: new FormControl('', Validators.required),
     placeHolder: new FormControl('', Validators.required),

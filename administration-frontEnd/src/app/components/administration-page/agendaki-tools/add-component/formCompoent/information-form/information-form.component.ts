@@ -1,12 +1,13 @@
-import {Component} from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {CommonModule} from '@angular/common'; // Importar CommonModule para NgIf e NgFor
-import {MatDialogModule, MatDialogRef} from '@angular/material/dialog'; // Importar MatDialogModule para MatDialogClose, MatDialogActions, MatDialogContent
+import {MAT_DIALOG_DATA, MatDialogModule, MatDialogRef} from '@angular/material/dialog'; // Importar MatDialogModule para MatDialogClose, MatDialogActions, MatDialogContent
 import {ComponentCommunicationService} from '../../../../../../services/component-communication.service';
 import {InformationComponent} from '../../../sections/information/information.component';
 import {MatInput} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
+import { DialogData } from '../form-input/form-input.component';
 
 @Component({
   selector: 'app-information-form',
@@ -24,6 +25,8 @@ import {MatSelectModule} from '@angular/material/select';
   styleUrls: ['./information-form.component.css', '../styleFormComponent.css']
 })
 export class InformationFormComponent {
+  readonly data = inject<DialogData>(MAT_DIALOG_DATA);
+
   inputValue: string = '';
   protected informationList: string[] = [];
   formEditInformation: FormGroup = new FormGroup({
@@ -46,10 +49,16 @@ export class InformationFormComponent {
     this.formEditInformation.patchValue({
       content: this.informationList
     });
-    this.communicationComponent.triggerAddComponentAction({
-      component: InformationComponent,
-      data: this.formEditInformation.value
-    });
-    this.dialogRef.close();
+
+    if (this.data) {
+      this.dialogRef.close(this.formEditInformation.value);
+    } else {
+      this.communicationComponent.triggerAddComponentAction({
+        component: InformationComponent,
+        data: this.formEditInformation.value
+      })
+
+      this.dialogRef.close();
+    }
   }
 }
