@@ -1,5 +1,5 @@
-import {Component} from '@angular/core';
-import {MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef} from "@angular/material/dialog";
+import {Component, inject} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef} from "@angular/material/dialog";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {NgIf} from "@angular/common";
 import {ComponentCommunicationService} from "../../../../../../services/component-communication.service";
@@ -7,6 +7,7 @@ import {PerfilComponent} from "../../../sections/perfil/perfil.component";
 import {MatInput} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
+import { DialogData } from '../form-input/form-input.component';
 
 @Component({
   selector: 'app-perfil-form',
@@ -26,6 +27,8 @@ import {MatSelectModule} from '@angular/material/select';
 })
 export class PerfilFormComponent {
   selectedImage: string | ArrayBuffer | null = null;
+  readonly data = inject<DialogData>(MAT_DIALOG_DATA);
+ 
 
   formEditPerfil: FormGroup = new FormGroup({
     imageToBase64: new FormControl(this.selectedImage!, Validators.required),
@@ -54,11 +57,14 @@ export class PerfilFormComponent {
 
   submitForm(): void {
     if (this.selectedImage != null) {
-      if (this.formEditPerfil.valid) {
+      if (this.data) {
+        this.dialogRef.close(this.formEditPerfil.value);
+      } else {
         this.communicationComponent.triggerAddComponentAction({
           component: PerfilComponent,
           data: this.formEditPerfil.value
-        });
+        })
+
         this.dialogRef.close();
       }
     }

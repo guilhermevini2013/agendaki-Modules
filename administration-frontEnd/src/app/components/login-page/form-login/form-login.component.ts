@@ -54,9 +54,9 @@ export class FormLoginComponent {
     const action = button?.value;
     if (this.loginForm.valid) {
       if (action === 'administration') {
-        this.authUser(TypePage.ADMINISTRATION)
+        this.router.navigate(["/administration"])
       } else if (action === 'portal-client') {
-        this.authUser(TypePage.PORTAL_CLIENT);
+        this.router.navigate(["/portalClient"])
       }
     }
   }

@@ -1,5 +1,5 @@
-import {Component} from '@angular/core';
-import {MatDialogContent, MatDialogRef} from "@angular/material/dialog";
+import {Component, inject} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialogContent, MatDialogRef} from "@angular/material/dialog";
 import {MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatOption} from "@angular/material/core";
 import {MatSelect} from "@angular/material/select";
@@ -8,6 +8,7 @@ import {ComponentCommunicationService} from "../../../../../../services/componen
 import {
   SelectServiceAndProfessionalComponent
 } from "../../../sections/select-service-and-professional/select-service-and-professional.component";
+import { DialogData } from '../form-input/form-input.component';
 
 @Component({
   selector: 'app-select-service-and-professional-form',
@@ -24,6 +25,8 @@ import {
   styleUrls: ['./select-service-and-professional-form.component.css', '../styleFormComponent.css']
 })
 export class SelectServiceAndProfessionalFormComponent {
+  readonly data = inject<DialogData>(MAT_DIALOG_DATA);
+
   protected formEditSelectServiceAndProfessional: FormGroup = new FormGroup<any>({
     horizontalAlignment: new FormControl('', Validators.required),
     type: new FormControl("professionalAndService")
@@ -34,11 +37,16 @@ export class SelectServiceAndProfessionalFormComponent {
 
   submitForm(): void {
     if (this.formEditSelectServiceAndProfessional.valid) {
-      this.communicationComponent.triggerAddComponentAction({
-        component: SelectServiceAndProfessionalComponent,
-        data: this.formEditSelectServiceAndProfessional.value
-      })
-      this.dialogRef.close();
+      if (this.data) {
+        this.dialogRef.close(this.formEditSelectServiceAndProfessional.value);
+      } else {
+        this.communicationComponent.triggerAddComponentAction({
+          component: SelectServiceAndProfessionalComponent,
+          data: this.formEditSelectServiceAndProfessional.value
+        })
+
+        this.dialogRef.close();
+      }
     }
   }
 }
