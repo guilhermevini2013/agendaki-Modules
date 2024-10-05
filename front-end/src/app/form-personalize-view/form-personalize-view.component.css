@@ -1,0 +1,31 @@
+.form{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  padding-top: 40px;
+  padding-bottom: 60px;
+}
+
+.form-view{
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+}
+button {
+  width: 50%;
+  padding: 10px 20px;
+  background-color: #4CAF50; /* Cor de fundo verde */
+  color: white; /* Cor do texto branco */
+  border: none; /* Remover borda */
+  border-radius: 5px; /* Bordas arredondadas */
+  font-size: 16px; /* Tamanho da fonte */
+  cursor: pointer; /* Cursor de ponteiro ao passar o mouse */
+  transition: background-color 0.3s ease; /* Transição suave para a cor de fundo */
+}
+
+button:hover {
+  background-color: #45a049; /* Cor de fundo ao passar o mouse */
+}

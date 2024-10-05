@@ -36,7 +36,6 @@ import { firstValueFrom } from 'rxjs';
 export interface ComponentWithId {
   component: Type<any>;
   data: any;
-
 }
 
 @Component({
@@ -59,46 +58,27 @@ export class PreVisualizerComponent {
   readonly dialog = inject(MatDialog);
 
   handleDialog(classType: any, componentRecovered: any, value: number, changes: any) {
-
     console.log(changes)
-    
     const dialogRef = this.dialog.open(classType, {
       data: {component: componentRecovered, components: this.components, index: value},
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        // Aqui você pode lidar com o resultado retornado do diálogo
-        console.log("retornou resultado")
         for (let index = 0; index < changes.length; index++) {
           const element = changes[index];
-          
           componentRecovered.data[element] = result[element]
-
-          console.log(element)
         }
-
-        // componentRecovered.data.label = result.label;
-        // componentRecovered.data.placeHolder = result.placeHolder;
-        // componentRecovered.data.width = result.width;
-        // componentRecovered.data.horizontalAlignment = result.horizontalAlignment;
-
-         // Cria uma nova array com o componente atualizado
-        this.components = this.components.map((component, index) => 
+        this.components = this.components.map((component, index) =>
             index === value ? componentRecovered : component
         );
-
-        // Se necessário, força a detecção de mudanças
-        this.cdr.detectChanges(); 
+        this.cdr.detectChanges();
       }
     });
   }
 
   onClick(value: number) {
-    // Recupera o componente que foi clicado
    const componentRecovered = { ...this.components[value] }; // Faz uma cópia do objeto
-    // AQUI VOCE VAI BOTAR PARA ALTERAR ESSA PORRA
-    // componentRecovered.data.label = "aaaaaa";
 
     switch(componentRecovered.component.name) {
       case '_InputComponent':
@@ -122,7 +102,7 @@ export class PreVisualizerComponent {
       case '_PresentationComponent':
           this.handleDialog(PresentationFormComponent,componentRecovered,value,['imageToBase64', 'text', 'paragraph'])
           break;
-    }    
+    }
 }
 
   components: ComponentWithId[] = [];
@@ -158,7 +138,6 @@ export class PreVisualizerComponent {
       const template = response.body!;
       this.primaryColor = template?.primaryColor!;
       this.secundaryColor = template?.secondaryColor!;
-      console.log(template?.sections!)
       const sortedSections = template?.sections!.sort((a, b) => a.position - b.position);
       sortedSections.forEach((section) => {
         switch (section.type) {

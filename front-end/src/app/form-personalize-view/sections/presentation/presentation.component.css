@@ -1,0 +1,47 @@
+section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: max-content; /* Ajusta a altura com base no conteúdo */
+  box-sizing: border-box; /* Garante que o padding não afete a largura total do elemento */
+}
+
+.presentation {
+  width: 100%;
+  height: auto; /* Ajusta a altura com base no conteúdo */
+  display: flex;
+  flex-direction: row;
+  gap: 13px;
+  justify-content: center;
+}
+
+.presentation__img {
+  width: 300px; /* Largura fixa */
+  height: 400px; /* Altura fixa */
+  overflow: hidden; /* Garante que a imagem não exceda o contêiner */
+  border-radius: 10px; /* Bordas arredondadas para a imagem */
+}
+
+.presentation__img img {
+  width: 100%; /* A imagem ocupa 100% da largura do contêiner */
+  height: 100%; /* A imagem ocupa 100% da altura do contêiner */
+  object-fit: cover; /* A imagem se ajusta ao contêiner mantendo a proporção */
+}
+
+.representation__bio {
+  width: 360px; /* Largura fixa */
+  text-align: justify;
+  padding-top: 5px;
+  word-break: break-all; /* Garante que o texto não exceda a largura do contêiner */
+}
+
+.representation__bio__title {
+  font-size: 21px;
+  margin: 0 0 10px 0; /* Adiciona margem inferior para separar o título do texto */
+}
+
+.representation__bio__text {
+  font-size: 15px;
+  line-height: 1.5; /* Melhora a legibilidade do texto */
+}

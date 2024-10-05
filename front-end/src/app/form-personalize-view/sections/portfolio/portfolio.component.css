@@ -1,0 +1,83 @@
+section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: max-content; /* Ajusta a altura com base no conteúdo */
+  box-sizing: border-box; /* Garante que o padding não afete a largura total do elemento */
+}
+
+.portfolio {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centraliza horizontalmente o conteúdo */
+  width: 100%; /* Garante que o portfólio ocupe toda a largura disponível */
+  max-width: 780px; /* Limita a largura máxima do portfólio para manter o layout consistente */
+  padding: 20px; /* Adiciona espaçamento interno */
+  box-sizing: border-box; /* Garante que o padding não afete a largura total do elemento */
+}
+
+.portfolio__title {
+  font-size: 28px; /* Tamanho da fonte do título */
+  margin-bottom: 20px; /* Espaço abaixo do título */
+  text-align: center; /* Centraliza o texto */
+}
+
+.portfolio__image-container {
+  overflow-x: auto; /* Permite rolar horizontalmente */
+  overflow-y: hidden; /* Oculta a rolagem vertical */
+  white-space: nowrap; /* Mantém os itens em uma linha horizontal */
+  width: 100%; /* Garante que o container ocupe toda a largura disponível */
+  padding: 10px 0; /* Espaçamento vertical ao redor da área de rolagem */
+}
+
+/* width */
+.portfolio__image-container::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+.portfolio__image-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+/* Handle */
+.portfolio__image-container::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+.portfolio__image-container::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.portfolio__image {
+  display: inline-flex; /* Exibe as imagens em linha horizontal */
+  gap: 25px; /* Espaçamento entre as imagens */
+}
+
+.portfolio__image div {
+  width: 250px; /* Largura fixa do contêiner da imagem */
+  height: 220px; /* Altura fixa do contêiner da imagem */
+  overflow: hidden; /* Oculta partes da imagem que saem dos limites do contêiner */
+}
+
+.portfolio__image div::after {
+  transform: rotateZ(180deg);
+}
+
+
+.portfolio__image img {
+  width: 100%; /* Ajusta a largura da imagem ao contêiner */
+  height: 100%; /* Ajusta a altura da imagem ao contêiner */
+  object-fit: cover; /* Garante que a imagem cubra completamente o contêiner sem distorção */
+  border-radius: 8px; /* Cantos arredondados das imagens */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adiciona uma sombra suave */
+  transition: transform 0.3s ease; /* Transição suave para efeitos de hover */
+}
+
+.portfolio__image img:hover {
+  transform: scale(1.05); /* Levemente amplia a imagem ao passar o mouse */
+}
