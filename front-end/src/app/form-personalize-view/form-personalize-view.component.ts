@@ -83,7 +83,7 @@ export class FormPersonalizeViewComponent implements OnInit {
     this.dynamicComponents.forEach((dynamicComponent) => {
       const instance = dynamicComponent.instance;
       if (instance instanceof IMessageSender) {
-        console.log(`Message: ${instance.sendValue()}`);
+        console.log(`Message: ${instance.sendValue().id}`);
       }
     });
   }

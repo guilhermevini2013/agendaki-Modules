@@ -1,4 +1,4 @@
-import {Component, model} from '@angular/core';
+import {Component, Input, model} from '@angular/core';
 import {MatCardModule} from '@angular/material/card';
 import {MAT_DATE_LOCALE, provideNativeDateAdapter} from '@angular/material/core';
 import {MatDatepickerModule} from '@angular/material/datepicker';
@@ -15,12 +15,13 @@ import {FormsModule} from "@angular/forms";
   styleUrl: './calendar.component.css'
 })
 export class CalendarComponent extends IMessageSender{
+  @Input() public id:number = 0;
   selected = model<Date | null>(new Date());
   public horizontalAlignment: string = "";
   selectedDate: Date = new Date();
 
   sendValue(): any {
-    return this.selectedDate.toLocaleDateString();
+    return {value: this.selectedDate, id: this.id};
   }
 
 }

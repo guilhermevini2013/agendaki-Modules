@@ -14,13 +14,14 @@ import { FormsModule } from "@angular/forms";
   styleUrls: ['./input.component.css']
 })
 export class InputComponent extends IMessageSender {
+  @Input() public id:number = 0;
   @Input() public label: string = "";
   @Input() public placeHolder: string = "";
   @Input() public width: string = "";
   @Input() public horizontalAlignment: string = "";
   public inputValue: string = "";
 
-  sendValue(): string {
-    return this.inputValue;
+  sendValue(): any {
+    return {value: this.inputValue, id: this.id};
   }
 }

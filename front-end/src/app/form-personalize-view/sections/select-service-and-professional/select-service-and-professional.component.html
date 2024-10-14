@@ -2,7 +2,7 @@
   <div>
     <span>Selecione um tipo de serviço</span>
     <select name="">
-      <option>...</option>
+      <option *ngFor="let service of services" [value]="service.id">{{service.name}}</option>
     </select>
   </div>
   <div>

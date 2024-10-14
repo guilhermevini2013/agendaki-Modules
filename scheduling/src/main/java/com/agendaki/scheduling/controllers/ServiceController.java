@@ -5,6 +5,7 @@ import com.agendaki.scheduling.dtos.response.ReadServiceByInstanceDTO;
 import com.agendaki.scheduling.services.service.ServiceSchedulingService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,6 +35,11 @@ public class ServiceController {
     @ResponseStatus(HttpStatus.OK)
     public List<ReadServiceByInstanceDTO> getServicesByInstance() {
         return serviceSchedulingService.getServicesByInstance();
+    }
+
+    @GetMapping(value = "/public/{uuidInstance}")
+    public ResponseEntity<List<ReadServiceByInstanceDTO>> getServicesByUuidInstance(@PathVariable String uuidInstance) {
+        return ResponseEntity.ok(serviceSchedulingService.getServicesByUuidInstance(uuidInstance));
     }
 
 }

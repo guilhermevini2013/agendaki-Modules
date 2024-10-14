@@ -1,3 +1,3 @@
 export abstract class IMessageSender{
-  public abstract sendValue(): any;
+  public abstract sendValue(): { value:string, id:number };
 }

@@ -19,6 +19,9 @@ public interface ServiceRepository extends JpaRepository<Service, Long> {
     @Query("select s from Service s join s.professionals p where p.id = :professionalId and s.id = :serviceId")
     Optional<Service> findByIdProfessional(Long professionalId, Long serviceId);
 
+    @Query("select s from Service s where s.instance.keyInstance = :idInstance")
+    List<Service> findByInstanceKeyInstance(String idInstance);
+
     @Modifying
     @Query(value = "BEGIN TRANSACTION; " +
             "DELETE FROM professional_services WHERE services_id = :serviceId; " +

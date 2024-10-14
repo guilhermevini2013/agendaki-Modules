@@ -20,7 +20,6 @@ public class SecurityConfig {
             "/api/professional",
             "/api/professional/**",
             "/api/service",
-            "/api/service/**",
             "/api/scheduling/private",
             "/api/scheduling/private/**",
     };
@@ -30,6 +29,8 @@ public class SecurityConfig {
             "/api/scheduling",
             "/api/scheduling/public",
             "/api/scheduling/public/**",
+            "/api/service/public",
+            "/api/service/public/**",
     };
 
     public SecurityConfig(RecoverTokenFilter recoverTokenFilter) {

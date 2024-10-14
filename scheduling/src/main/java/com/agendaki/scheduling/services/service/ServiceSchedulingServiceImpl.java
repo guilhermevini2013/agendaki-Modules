@@ -39,5 +39,9 @@ public class ServiceSchedulingServiceImpl implements ServiceSchedulingService {
         return servicesByInstance.stream().map(service -> new ReadServiceByInstanceDTO(service)).toList();
     }
 
+    @Override
+    public List<ReadServiceByInstanceDTO> getServicesByUuidInstance(String uuidInstance) {
+        return serviceRepository.findByInstanceKeyInstance(uuidInstance).stream().map(service -> new ReadServiceByInstanceDTO(service)).toList();
+    }
 
 }

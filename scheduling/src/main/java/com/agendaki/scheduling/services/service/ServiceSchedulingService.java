@@ -12,4 +12,6 @@ public interface ServiceSchedulingService {
     void deleteService(Long id);
 
     List<ReadServiceByInstanceDTO> getServicesByInstance();
+
+    List<ReadServiceByInstanceDTO> getServicesByUuidInstance(String uuidInstance);
 }
