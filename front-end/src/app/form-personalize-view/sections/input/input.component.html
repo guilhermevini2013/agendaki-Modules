@@ -2,7 +2,7 @@
   <div [ngStyle]="{'justify-content': horizontalAlignment}">
     <label>
       <span>{{ label }}</span>
-      <input [ngStyle]="{'width': width}" [placeholder]="placeHolder" type="text">
+      <input [(ngModel)]="inputValue" [ngStyle]="{'width': width}" [placeholder]="placeHolder" type="text">
     </label>
   </div>
 </div>

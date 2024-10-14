@@ -1,4 +1,3 @@
-// dynamic-component-container.component.ts
 import {
   Component,
   ComponentFactoryResolver,
@@ -22,9 +21,9 @@ export class DynamicComponentContainer implements OnInit {
   @Input() data: any;
 
   @ViewChild('container', {read: ViewContainerRef, static: true}) container!: ViewContainerRef;
+  public instance: any;
 
-  constructor(private componentFactoryResolver: ComponentFactoryResolver) {
-  }
+  constructor(private componentFactoryResolver: ComponentFactoryResolver) {}
 
   ngOnInit() {
     if (this.component) {
@@ -36,10 +35,10 @@ export class DynamicComponentContainer implements OnInit {
     this.container.clear();
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory(this.component!);
     const componentRef: ComponentRef<any> = this.container.createComponent(componentFactory);
+    this.instance = componentRef.instance;
 
     if (this.data) {
-      Object.assign(componentRef.instance, this.data);
+      Object.assign(this.instance, this.data);
     }
   }
 }
-
