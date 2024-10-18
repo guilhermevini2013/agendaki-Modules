@@ -18,7 +18,9 @@ public class SecurityConfig {
 
     private final String[] privateRoutes = {
             "/api/professional",
-            "/api/professional/**",
+            "/api/professional/disassociate",
+            "/api/professional/associate",
+            "/api/professional/all",
             "/api/service",
             "/api/scheduling/private",
             "/api/scheduling/private/**",
@@ -31,6 +33,8 @@ public class SecurityConfig {
             "/api/scheduling/public/**",
             "/api/service/public",
             "/api/service/public/**",
+            "/api/professional/public",
+            "/api/professional/public/**"
     };
 
     public SecurityConfig(RecoverTokenFilter recoverTokenFilter) {

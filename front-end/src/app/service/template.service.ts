@@ -32,4 +32,13 @@ export class TemplateService {
       }
     );
   }
+
+  getAllProfessionalsByParamAndService(param: string,idService:number): Observable<HttpResponse<ServiceDTO[]>> {
+    return this.http.get<ServiceDTO[]>(this.baseUrl+`/scheduling/api/professional/public/${param}?service=${idService}`,
+      {
+        observe: 'response',
+        withCredentials: false
+      }
+    );
+  }
 }

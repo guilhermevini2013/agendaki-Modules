@@ -23,4 +23,8 @@ public interface ProfessionalRepository extends JpaRepository<Professional, Long
     List<Professional> findByServiceAndInstance(Instance instance);
 
     List<Professional> findAllByInstance(Instance instance);
+
+    @Query("select p from Professional p join p.services s where p.instance.keyInstance = :uuidInstance and s.id = :idService")
+    List<Professional> findByInstanceAndService(String uuidInstance, Long idService);
+
 }

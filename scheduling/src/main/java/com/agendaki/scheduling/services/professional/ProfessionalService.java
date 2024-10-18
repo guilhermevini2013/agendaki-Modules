@@ -23,4 +23,6 @@ public interface ProfessionalService {
     List<ProfessionalReadByServiceDTO> getProfessionals();
 
     List<ProfessionalAndServiceReadDTO> getAllProfessionalAndServices();
+
+    List<ProfessionalReadByServiceDTO> getAllProfessionalByInstanceAndService(String uuidInstance, Long idService);
 }

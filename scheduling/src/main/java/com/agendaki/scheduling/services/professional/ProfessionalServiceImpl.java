@@ -99,6 +99,12 @@ public class ProfessionalServiceImpl implements ProfessionalService {
         return professionalAndServiceReadDTOList;
     }
 
+    @Override
+    public List<ProfessionalReadByServiceDTO> getAllProfessionalByInstanceAndService(String uuidInstance, Long idService) {
+        List<Professional> byInstanceAndService = professionalRepository.findByInstanceAndService(uuidInstance, idService);
+        return byInstanceAndService.stream().map(professional -> new ProfessionalReadByServiceDTO(professional)).toList();
+    }
+
     private void populatedProfessionalAndServiceReadDTOList(List<ProfessionalAndServiceReadDTO> listToPopulated) {
         Instance instanceAuth = SecurityUtil.getProjectionOfUserEntityAuthenticated().getInstance();
         List<Professional> byServiceAndInstance = professionalRepository.findByServiceAndInstance(instanceAuth);

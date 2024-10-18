@@ -1,14 +1,14 @@
 <section [ngStyle]="{'align-items':horizontalAlignment}">
   <div>
     <span>Selecione um tipo de serviço</span>
-    <select name="">
+    <select [formControl]="serviceControl">
       <option *ngFor="let service of services" [value]="service.id">{{service.name}}</option>
     </select>
   </div>
   <div>
     <span>Selecione um profissional</span>
-    <select name="">
-      <option>...</option>
+    <select [formControl]="professionalControl">
+      <option *ngFor="let professional of professionals" [value]="professional.id">{{professional.name}}</option>
     </select>
   </div>
   <div>

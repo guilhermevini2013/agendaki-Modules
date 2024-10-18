@@ -64,4 +64,9 @@ public class ProfessionalController {
         return this.professionalService.getAllProfessionalAndServices();
     }
 
+    @GetMapping(value = "/public/{uuidInstance}")
+    public List<ProfessionalReadByServiceDTO> getProfessionalsAndServicesByInstance(@PathVariable String uuidInstance, @RequestParam(name = "service") Long idService) {
+        return this.professionalService.getAllProfessionalByInstanceAndService(uuidInstance, idService);
+    }
+
 }
