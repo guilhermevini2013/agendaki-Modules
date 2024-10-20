@@ -16,6 +16,6 @@ public interface SchedulingRepository extends JpaRepository<Scheduling, Long> {
 
     List<Scheduling> findAllByInstance(Instance instance);
 
-    @Query("select new com.agendaki.scheduling.repositories.projections.SchedulingTime(s.startHour, s.service.durationInMinutes) from Scheduling s where s.instance.keyInstance = :keyInstance and s.date = :date")
-    List<SchedulingTime> findAllTimeByInstanceAndDate(@Param("keyInstance") String keyInstance, @Param("date") LocalDate date);
+    @Query("select new com.agendaki.scheduling.repositories.projections.SchedulingTime(s.startHour, s.service.durationInMinutes) from Scheduling s where s.instance.keyInstance = :keyInstance and s.date = :date and s.professional.id = :idProfessional")
+    List<SchedulingTime> findAllTimeByInstanceAndDate(@Param("keyInstance") String keyInstance, @Param("date") LocalDate date,@Param("idProfessional") Long idProfessional);
 }

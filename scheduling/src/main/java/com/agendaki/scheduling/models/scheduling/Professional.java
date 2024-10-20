@@ -16,7 +16,7 @@ public class Professional {
     private String name;
     @ManyToMany
     private Set<Service> services;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     private Instance instance;
 
     protected Professional() {

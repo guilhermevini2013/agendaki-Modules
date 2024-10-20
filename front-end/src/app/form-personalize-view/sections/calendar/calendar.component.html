@@ -1,6 +1,6 @@
 <section [ngStyle]="{'align-items': horizontalAlignment}">
   <span>Escolha a data:</span>
   <mat-card class="demo-inline-calendar-card">
-    <mat-calendar [(selected)]="selectedDate"></mat-calendar>
+    <mat-calendar [(selected)]="selectedDate" (selectedChange)="onDateChange($event)"></mat-calendar>
   </mat-card>
 </section>

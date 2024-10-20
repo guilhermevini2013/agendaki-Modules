@@ -56,7 +56,7 @@ public class schedulingServiceImpl implements SchedulingService {
     public List<LocalTime> getTimeFreeByUuidInstance(String uuidInstance, LocalDate date, Long idProfessional, Long idService) {
         com.agendaki.scheduling.models.scheduling.Service service = serviceRepository.findByIdProfessional(idProfessional, idService).orElseThrow(() -> new ResourceNotFoundException("Service not found"));
         DateJob dateJobCommonByKeyInstance = dateJobRepository.findDateJobCommonByKeyInstance(uuidInstance, date.getDayOfWeek()).orElseThrow(() -> new ResourceNotFoundException("DateJob not found"));
-        List<SchedulingTime> allTimeFilled = schedulingRepository.findAllTimeByInstanceAndDate(uuidInstance, date);
+        List<SchedulingTime> allTimeFilled = schedulingRepository.findAllTimeByInstanceAndDate(uuidInstance, date, idProfessional);
         return TimeSchedulingFactory.getTimeFree(service, dateJobCommonByKeyInstance, allTimeFilled);
     }
 

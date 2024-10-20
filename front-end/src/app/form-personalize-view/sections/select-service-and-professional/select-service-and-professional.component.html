@@ -14,7 +14,7 @@
   <div>
     <span>Selecione um horário</span>
     <select name="">
-      <option>...</option>
+      <option *ngFor="let time of timesFree">{{time}}</option>
     </select>
   </div>
 </section>
