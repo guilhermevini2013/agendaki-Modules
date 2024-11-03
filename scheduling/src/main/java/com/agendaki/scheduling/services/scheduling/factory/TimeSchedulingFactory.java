@@ -21,23 +21,22 @@ public class TimeSchedulingFactory {
 
     private static void recoverTimeFree(List<LocalTime> timeOptions, List<SchedulingTime> schedulingTimes) {
         for (SchedulingTime schedulingTime : schedulingTimes) {
-            if (timeOptions.contains(schedulingTime.startHour())) {
-                timeOptions.removeIf(option -> option.isAfter(schedulingTime.startHour()) && option.isBefore(schedulingTime.startHour().plusMinutes(schedulingTime.durationInMinutes())) || option == schedulingTime.startHour());
+            LocalTime start = schedulingTime.startHour();
+            LocalTime end = start.plusMinutes(schedulingTime.durationInMinutes());
+            for (int i = 0; i < timeOptions.size()-1; i++) {
+                if (timeOptions.get(i).isAfter(start.minusMinutes(1)) && timeOptions.get(i).isBefore(end.plusMinutes(1))) {
+                    timeOptions.remove(i);
+                }
             }
         }
     }
 
     private static List<LocalTime> generatedTimeOptionsByDurationService(Short durationInMinutes, LocalTime startHour, LocalTime endHour) {
-        Boolean isTimeBeforeEndHour = true;
         List<LocalTime> timeOptions = new ArrayList<>();
-        do {
-            if (startHour.plusMinutes(durationInMinutes).isBefore(endHour.plusMinutes(60))) {
-                timeOptions.add(startHour);
-                startHour = startHour.plusMinutes(durationInMinutes);
-            } else {
-                isTimeBeforeEndHour = false;
-            }
-        } while (isTimeBeforeEndHour);
+        while (startHour.plusMinutes(durationInMinutes).isBefore(endHour.plusMinutes(1))) {
+            timeOptions.add(startHour);
+            startHour = startHour.plusMinutes(durationInMinutes);
+        }
         return timeOptions;
     }
 

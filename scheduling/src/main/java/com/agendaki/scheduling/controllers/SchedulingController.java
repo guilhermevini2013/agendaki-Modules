@@ -39,4 +39,10 @@ public class SchedulingController {
     public ResponseEntity<SchedulingInformationColumDTO> getAllScheduling() {
         return ResponseEntity.ok(schedulingService.getAllScheduling());
     }
+
+    @DeleteMapping(value = "/private")
+    public ResponseEntity<Void> deleteScheduling(@RequestParam(name = "id") Long id) {
+        schedulingService.deleteSchedulingById(id);
+        return ResponseEntity.noContent().build();
+    }
 }

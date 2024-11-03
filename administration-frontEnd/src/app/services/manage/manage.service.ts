@@ -21,4 +21,14 @@ export class ManageService {
       observe: 'response'
     });
   }
+
+  deleteScheduling(id: number): Observable<HttpResponse<any>> {
+    return this.http.delete(this.baseHttp + "/scheduling/api/scheduling/private?id=" + id, {
+      withCredentials: true,
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      observe: 'response'
+    });
+  }
 }

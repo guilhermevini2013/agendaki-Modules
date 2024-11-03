@@ -60,7 +60,17 @@ public class schedulingServiceImpl implements SchedulingService {
         return TimeSchedulingFactory.getTimeFree(service, dateJobCommonByKeyInstance, allTimeFilled);
     }
 
+    @Override
+    public void deleteSchedulingById(Long id) {
+        schedulingRepository.deleteById(id);
+    }
+
     private List<String> recoverColumns(Instance instance) {
-        return inputRepository.findAllLabelsByInstance(instance);
+        List<String> allLabelsByInstance = inputRepository.findAllLabelsByInstance(instance);
+        allLabelsByInstance.add("Data");
+        allLabelsByInstance.add("Horário");
+        allLabelsByInstance.add("Profissional");
+        allLabelsByInstance.add("Serviço");
+        return allLabelsByInstance;
     }
 }

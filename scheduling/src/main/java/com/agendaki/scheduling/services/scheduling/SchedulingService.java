@@ -14,4 +14,6 @@ public interface SchedulingService {
     SchedulingInformationColumDTO getAllScheduling();
 
     List<LocalTime> getTimeFreeByUuidInstance(String uuidInstance, LocalDate date, Long idProfessional, Long idService);
+
+    void deleteSchedulingById(Long id);
 }

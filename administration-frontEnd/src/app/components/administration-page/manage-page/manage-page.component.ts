@@ -58,4 +58,12 @@ export class ManagePageComponent implements AfterViewInit, OnInit {
     const response = row.responseScheduling.find(res => res.nameColum === column);
     return response ? response.value : '';
   }
+
+  blockScheduling(idScheduling: number): void {
+  }
+
+  removeScheduling(idScheduling: number): void {
+    this.manageService.deleteScheduling(idScheduling).subscribe(() => {});
+    window.location.reload();
+  }
 }
