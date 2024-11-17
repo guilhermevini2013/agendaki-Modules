@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { NgForOf, NgStyle } from "@angular/common";
-import { TemplateService } from "../../../service/template.service";
-import { ActivatedRoute } from "@angular/router";
-import { FormControl, ReactiveFormsModule } from "@angular/forms";
-import { DateService } from '../../../service/date.service';
+import {Component, OnInit} from '@angular/core';
+import {NgForOf, NgStyle} from "@angular/common";
+import {TemplateService} from "../../../service/template.service";
+import {ActivatedRoute} from "@angular/router";
+import {FormControl, ReactiveFormsModule} from "@angular/forms";
+import {DateService} from '../../../service/date.service';
 import {IMessageSender} from "../IMessageSender";
+import {FormPersonalizeViewComponent} from "../../form-personalize-view.component";
 
 @Component({
   selector: 'app-select-service-and-professional',
@@ -17,12 +18,13 @@ import {IMessageSender} from "../IMessageSender";
   templateUrl: './select-service-and-professional.component.html',
   styleUrls: ['./select-service-and-professional.component.css']
 })
-export class SelectServiceAndProfessionalComponent extends IMessageSender implements OnInit  {
+export class SelectServiceAndProfessionalComponent extends IMessageSender implements OnInit {
   public horizontalAlignment: string = "";
   public services: ServiceDTO[] = [];
   public professionals: ProfessionalDTO[] = [];
   public serviceControl = new FormControl('');
   public professionalControl = new FormControl('');
+  public timeControl = new FormControl('');
   public timesFree: string[] = [];
 
   constructor(
@@ -30,7 +32,8 @@ export class SelectServiceAndProfessionalComponent extends IMessageSender implem
     private route: ActivatedRoute,
     private dateService: DateService
   ) {
-    super();}
+    super();
+  }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -87,8 +90,22 @@ export class SelectServiceAndProfessionalComponent extends IMessageSender implem
     });
   }
 
-  sendValue(): { value: string; id: number } {
-    return {id: 0, value: ""};
+  sendValue(): { value: any; id: number; type: string } {
+    FormPersonalizeViewComponent.jsonToSend = {
+      ...FormPersonalizeViewComponent.jsonToSend,
+      idService: this.serviceControl.value,
+      idProfessional: this.professionalControl.value,
+      startHour: this.timeControl.value
+    };
+    return {
+      id: 0,
+      type: "Obj",
+      value: {
+        idService: this.serviceControl.value,
+        idProfessional: this.professionalControl.value,
+        startHour: this.timeControl.value
+      }
+    };
   }
 }
 

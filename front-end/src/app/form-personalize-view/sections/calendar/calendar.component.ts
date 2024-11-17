@@ -6,6 +6,7 @@ import {NgStyle} from "@angular/common";
 import {IMessageSender} from "../IMessageSender";
 import {FormsModule} from "@angular/forms";
 import {DateService} from "../../../service/date.service";
+import {FormPersonalizeViewComponent} from "../../form-personalize-view.component";
 
 @Component({
   selector: 'app-calendar',
@@ -25,7 +26,11 @@ export class CalendarComponent extends IMessageSender{
     super();}
 
   sendValue(): any {
-    return {value: this.selectedDate, id: this.id};
+    FormPersonalizeViewComponent.jsonToSend = {
+      ...FormPersonalizeViewComponent.jsonToSend,
+      date: this.selectedDate.toLocaleDateString()
+    };
+    return {value: this.selectedDate, id: this.id ,type: "NoObj"};
   }
 
   onDateChange(date: Date | null): void {

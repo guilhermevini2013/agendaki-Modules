@@ -51,4 +51,13 @@ export class TemplateService {
       }
     );
   }
+
+  createScheduling(param: string, jsonToSend: any): Observable<HttpResponse<any>> {
+    return this.http.post<any>(this.baseUrl+`/scheduling/api/scheduling/public`, jsonToSend,
+      {
+        observe: 'response',
+        withCredentials: false
+      }
+    );
+  }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Type, ViewChildren, QueryList } from '@angular/core';
+import {Component, OnInit, Type, ViewChildren, QueryList, AfterViewInit} from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 import { TemplateService } from "../service/template.service";
 import { InputComponent } from "./sections/input/input.component";
@@ -28,15 +28,24 @@ export interface ComponentWithId {
   templateUrl: './form-personalize-view.component.html',
   styleUrls: ['./form-personalize-view.component.css']
 })
-export class FormPersonalizeViewComponent implements OnInit {
+export class FormPersonalizeViewComponent implements OnInit, AfterViewInit  {
 
   public components: ComponentWithId[] = [];
   public primaryColor: string = '';
   public secondaryColor: string = '';
+  public static jsonToSend: any = {};
 
-  @ViewChildren(DynamicComponentContainer) dynamicComponents!: QueryList<DynamicComponentContainer>;
+  static dynamicComponents: QueryList<DynamicComponentContainer>;
+  static templateService: TemplateService;
+  static route: ActivatedRoute;
 
-  constructor(private route: ActivatedRoute, private templateService: TemplateService) {}
+  @ViewChildren(DynamicComponentContainer) dynamicComponentsQuery!: QueryList<DynamicComponentContainer>;
+  FormPersonalizeViewComponent: any = FormPersonalizeViewComponent;
+
+  constructor(private route: ActivatedRoute, private templateService: TemplateService) {
+    FormPersonalizeViewComponent.templateService = templateService;
+    FormPersonalizeViewComponent.route = route;
+  }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -79,13 +88,29 @@ export class FormPersonalizeViewComponent implements OnInit {
     });
   }
 
-  sendForm(): void {
-    this.dynamicComponents.forEach((dynamicComponent) => {
+  ngAfterViewInit() {
+    FormPersonalizeViewComponent.dynamicComponents = this.dynamicComponentsQuery;
+  }
+
+  static sendForm(): void {
+    // @ts-ignore
+    this.dynamicComponents.forEach((dynamicComponent: { instance: any; }) => {
       const instance = dynamicComponent.instance;
       if (instance instanceof IMessageSender) {
-        console.log(`Message: ${instance.sendValue().id}`);
+        instance.sendValue();
       }
     });
+    this.route.paramMap.subscribe(params => {
+      this.jsonToSend = {
+        ...this.jsonToSend,
+        idInstance: params.get('uuidTemplate')
+      };
+      console.log(this.jsonToSend);
+      this.templateService.createScheduling(params.get('uuidTemplate')!, this.jsonToSend).subscribe(response => {
+      });
+    });
+
+    this.jsonToSend = {};
   }
 }
 

@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { NgStyle } from "@angular/common";
 import { IMessageSender } from "../IMessageSender";
 import { FormsModule } from "@angular/forms";
+import {FormPersonalizeViewComponent} from "../../form-personalize-view.component";
 
 @Component({
   selector: 'app-input',
@@ -22,6 +23,16 @@ export class InputComponent extends IMessageSender {
   public inputValue: string = "";
 
   sendValue(): any {
-    return {value: this.inputValue, id: this.id};
+    // Garantir que responsesForms esteja definido e seja um array
+    FormPersonalizeViewComponent.jsonToSend = {
+      ...FormPersonalizeViewComponent.jsonToSend,
+      responsesForms: [
+        ...(FormPersonalizeViewComponent.jsonToSend.responsesForms && FormPersonalizeViewComponent.jsonToSend.responsesForms.length > 0
+          ? FormPersonalizeViewComponent.jsonToSend.responsesForms
+          : []), // Se responsesForms estiver vazio ou não existir, inicializa com um array vazio
+        { id: this.id, response: this.inputValue }
+      ]
+    };
+    return { value: this.inputValue, id: this.id, type: "NoObj" };
   }
 }

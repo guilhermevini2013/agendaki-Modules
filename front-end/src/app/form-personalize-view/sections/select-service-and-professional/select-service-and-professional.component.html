@@ -13,8 +13,8 @@
   </div>
   <div>
     <span>Selecione um horário</span>
-    <select name="">
-      <option *ngFor="let time of timesFree">{{time}}</option>
+    <select [formControl]="timeControl">
+      <option *ngFor="let time of timesFree" [value]="time">{{time}}</option>
     </select>
   </div>
 </section>
