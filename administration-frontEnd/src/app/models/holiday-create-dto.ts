@@ -4,5 +4,5 @@ export interface HolidayCreateDTO {
   breakInitial: string;
   breakFinal: string;
   isOpen: boolean;
-  dateOfHoliday: Date;
+  dateOfHoliday: string;
 }

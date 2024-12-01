@@ -14,6 +14,7 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {NgxMaskDirective, NgxMaskPipe} from 'ngx-mask';
 import {NgxSpinnerModule} from "ngx-spinner";
 import {HolidayCreateDTO} from '../../../../models/holiday-create-dto';
+import {DateJobService} from "../../../../services/dateJob/date-job.service";
 
 @Component({
   selector: 'app-holiday-form',
@@ -47,6 +48,10 @@ export class HolidayFormComponent {
   @Input()
   public weekName: string = "";
   private _formBuilder = inject(FormBuilder);
+
+  constructor(private dateJobService: DateJobService) {
+  }
+
   firstFormGroup = this._formBuilder.group({
     doWork: ['', Validators.required],
   });
@@ -57,6 +62,10 @@ export class HolidayFormComponent {
     endWork: ['', Validators.required],
     startOffHour: ['', Validators.required],
     endOffHour: ['', Validators.required],
+  });
+
+  createHolidayNotJobFormGroup = this._formBuilder.group({
+    dateHoliday: ['', Validators.required],
   });
 
   protected checkIfWork(): string {
@@ -71,14 +80,39 @@ export class HolidayFormComponent {
 
   protected createHoliday(): void {
     const holidayDto: HolidayCreateDTO = {
-      scheduleInitial: this.secondFormGroup.value.startWork!,
-      scheduleFinal: this.secondFormGroup.value.endWork!,
-      breakInitial: this.secondFormGroup.value.startOffHour!,
-      breakFinal: this.secondFormGroup.value.endOffHour!,
-      dateOfHoliday: new Date(this.secondFormGroup.value.dateHoliday!),
+      scheduleInitial: convertToTime(this.secondFormGroup.value.startWork!),
+      scheduleFinal: convertToTime(this.secondFormGroup.value.endWork!),
+      breakInitial: convertToTime(this.secondFormGroup.value.startOffHour!),
+      breakFinal: convertToTime(this.secondFormGroup.value.endOffHour!),
+      dateOfHoliday: convertToDate(this.secondFormGroup.value.dateHoliday!),
       isOpen: true
     }
-    console.log(holidayDto);
-
+    this.dateJobService.insertDateHoliday(holidayDto).subscribe();
+    window.location.reload();
   }
+  protected createHolidayNotJob(): void {
+    console.log(this.createHolidayNotJobFormGroup.value.dateHoliday!)
+    const holidayDto: HolidayCreateDTO = {
+      scheduleInitial: "00:00",
+      scheduleFinal: "00:00",
+      breakInitial: "00:00",
+      breakFinal: "00:00",
+      dateOfHoliday: convertToDate(this.createHolidayNotJobFormGroup.value.dateHoliday!),
+      isOpen: false
+    }
+    this.dateJobService.insertDateHoliday(holidayDto).subscribe();
+  }
+
+}
+function convertToDate(dateString: string): string {
+  const day = dateString.substring(0, 2);
+  const month = dateString.substring(2, 4);
+  const year = dateString.substring(4, 8);
+  return `${year}-${month}-${day}`;
+}
+
+function convertToTime(time: string): string {
+  const hours = time.substring(0, 2);
+  const minutes = time.substring(2, 4);
+  return `${hours}:${minutes}`;
 }

@@ -9,3 +9,13 @@ export interface DateJobReadDTO {
   breakFinal: string;
   isOpen: boolean;
 }
+
+export interface DateJobHolidayReadDTO {
+  id: number;
+  dateOfHoliday: string;
+  scheduleInitial: string;
+  scheduleFinal: string;
+  breakInitial: string;
+  breakFinal: string;
+  isOpen: boolean;
+}
