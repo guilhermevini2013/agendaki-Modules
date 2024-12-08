@@ -27,4 +27,5 @@ export class PortalClientPrincipalComponent {
 
   }
 
+    protected readonly alert = alert;
 }

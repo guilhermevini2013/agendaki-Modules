@@ -26,7 +26,7 @@ export class SelectServiceAndProfessionalComponent extends IMessageSender implem
   public professionalControl = new FormControl('');
   public timeControl = new FormControl('');
   public timesFree: string[] = [];
-
+  public dateSalected: Date = new Date();
   constructor(
     private templateService: TemplateService,
     private route: ActivatedRoute,
@@ -52,14 +52,15 @@ export class SelectServiceAndProfessionalComponent extends IMessageSender implem
     this.serviceControl.valueChanges.subscribe(serviceId => {
       const uuidTemplate = this.route.snapshot.paramMap.get('uuidTemplate')!;
       this.loadProfessionals(uuidTemplate, Number(serviceId));
-      this.updateTimesFree();
+      this.updateTimesFree(this.dateSalected);
     });
 
     this.professionalControl.valueChanges.subscribe(() => {
-      this.updateTimesFree();
+      this.updateTimesFree(this.dateSalected);
     });
 
     this.dateService.selectedDate$.subscribe(date => {
+      this.dateSalected = date;
       this.updateTimesFree(date);
     });
   }

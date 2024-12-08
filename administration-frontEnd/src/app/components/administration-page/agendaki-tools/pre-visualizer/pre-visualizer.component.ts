@@ -31,7 +31,6 @@ import { CalendarFormComponent } from '../add-component/formCompoent/calendar-fo
 import { PortfolioFormComponent } from '../add-component/formCompoent/portfolio-form/portfolio-form.component';
 import { InformationFormComponent } from '../add-component/formCompoent/information-form/information-form.component';
 import { PresentationFormComponent } from '../add-component/formCompoent/presentation-form/presentation-form.component';
-import { firstValueFrom } from 'rxjs';
 
 export interface ComponentWithId {
   component: Type<any>;
@@ -58,7 +57,6 @@ export class PreVisualizerComponent {
   readonly dialog = inject(MatDialog);
 
   handleDialog(classType: any, componentRecovered: any, value: number, changes: any) {
-    console.log(changes)
     const dialogRef = this.dialog.open(classType, {
       data: {component: componentRecovered, components: this.components, index: value},
     });
