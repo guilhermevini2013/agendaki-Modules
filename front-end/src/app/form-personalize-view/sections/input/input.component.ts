@@ -23,6 +23,9 @@ export class InputComponent extends IMessageSender {
   public inputValue: string = "";
 
   sendValue(): any {
+    if (this.inputValue === "") {
+      throw new Error(`O campo \`${this.label}\` não pode ser vazio`);
+    }
     // Garantir que responsesForms esteja definido e seja um array
     FormPersonalizeViewComponent.jsonToSend = {
       ...FormPersonalizeViewComponent.jsonToSend,

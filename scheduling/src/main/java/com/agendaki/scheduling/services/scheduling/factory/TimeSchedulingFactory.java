@@ -39,7 +39,7 @@ public class TimeSchedulingFactory {
             LocalTime currentTime = iterator.next();
             for (SchedulingTime schedulingTime : schedulingTimes) {
                 LocalTime start = schedulingTime.startHour();
-                LocalTime end = start.plusMinutes(schedulingTime.durationInMinutes());
+                LocalTime end = start.plusMinutes(schedulingTime.durationInMinutes()-1);
 
                 // Se o horário está dentro do intervalo ocupado, remove da lista de opções
                 if (!currentTime.isBefore(start) && !currentTime.isAfter(end)) {

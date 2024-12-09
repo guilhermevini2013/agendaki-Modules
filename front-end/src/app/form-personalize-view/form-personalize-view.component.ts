@@ -1,4 +1,4 @@
-import {Component, OnInit, Type, ViewChildren, QueryList, AfterViewInit} from '@angular/core';
+import {Component, OnInit, Type, ViewChildren, QueryList, AfterViewInit, inject} from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 import { TemplateService } from "../service/template.service";
 import { InputComponent } from "./sections/input/input.component";
@@ -11,6 +11,8 @@ import { PerfilComponent } from "./sections/perfil/perfil.component";
 import { NgForOf, NgStyle } from "@angular/common";
 import { DynamicComponentContainer } from "./dynamic-component-container/dynamic-component-container.component";
 import { IMessageSender } from "./sections/IMessageSender";
+import {MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition} from "@angular/material/snack-bar";
+import {PopUpComponent} from "../register-page/pop-up/pop-up.component";
 
 export interface ComponentWithId {
   component: Type<any>;
@@ -28,7 +30,7 @@ export interface ComponentWithId {
   templateUrl: './form-personalize-view.component.html',
   styleUrls: ['./form-personalize-view.component.css']
 })
-export class FormPersonalizeViewComponent implements OnInit, AfterViewInit  {
+export class FormPersonalizeViewComponent implements OnInit, AfterViewInit {
 
   public components: ComponentWithId[] = [];
   public primaryColor: string = '';
@@ -38,13 +40,16 @@ export class FormPersonalizeViewComponent implements OnInit, AfterViewInit  {
   static dynamicComponents: QueryList<DynamicComponentContainer>;
   static templateService: TemplateService;
   static route: ActivatedRoute;
-
+  static horizontalPosition: MatSnackBarHorizontalPosition = 'end';
+  static verticalPosition: MatSnackBarVerticalPosition = 'top';
   @ViewChildren(DynamicComponentContainer) dynamicComponentsQuery!: QueryList<DynamicComponentContainer>;
   FormPersonalizeViewComponent: any = FormPersonalizeViewComponent;
+  private static _snackBar: MatSnackBar;
 
-  constructor(private route: ActivatedRoute, private templateService: TemplateService) {
+  constructor(private route: ActivatedRoute, private templateService: TemplateService, private _snackBar: MatSnackBar) {
     FormPersonalizeViewComponent.templateService = templateService;
     FormPersonalizeViewComponent.route = route;
+    FormPersonalizeViewComponent._snackBar = _snackBar;
   }
 
   ngOnInit(): void {
@@ -58,25 +63,25 @@ export class FormPersonalizeViewComponent implements OnInit, AfterViewInit  {
             sortedSections.forEach((section) => {
               switch (section.type) {
                 case 'input':
-                  this.components.push({component: InputComponent, data: section});
+                  this.components.push({ component: InputComponent, data: section });
                   break;
                 case 'help':
-                  this.components.push({component: InformationComponent, data: section});
+                  this.components.push({ component: InformationComponent, data: section });
                   break;
                 case 'calendar':
-                  this.components.push({component: CalendarComponent, data: section});
+                  this.components.push({ component: CalendarComponent, data: section });
                   break;
                 case 'professionalAndService':
-                  this.components.push({component: SelectServiceAndProfessionalComponent, data: section});
+                  this.components.push({ component: SelectServiceAndProfessionalComponent, data: section });
                   break;
                 case 'portfolio':
-                  this.components.push({component: PortfolioComponent, data: section});
+                  this.components.push({ component: PortfolioComponent, data: section });
                   break;
                 case 'presentation':
-                  this.components.push({component: PresentationComponent, data: section});
+                  this.components.push({ component: PresentationComponent, data: section });
                   break;
                 case 'profile':
-                  this.components.push({component: PerfilComponent, data: section});
+                  this.components.push({ component: PerfilComponent, data: section });
                   break;
               }
             });
@@ -93,24 +98,40 @@ export class FormPersonalizeViewComponent implements OnInit, AfterViewInit  {
   }
 
   static sendForm(): void {
-    // @ts-ignore
-    this.dynamicComponents.forEach((dynamicComponent: { instance: any; }) => {
-      const instance = dynamicComponent.instance;
-      if (instance instanceof IMessageSender) {
-        instance.sendValue();
+    try {
+      this.dynamicComponents.forEach((dynamicComponent: { instance: any; }) => {
+        const instance = dynamicComponent.instance;
+        if (instance instanceof IMessageSender) {
+          instance.sendValue();
+        }
+      });
+      this.route.paramMap.subscribe(params => {
+        this.jsonToSend = {
+          ...this.jsonToSend,
+          idInstance: params.get('uuidTemplate')
+        };
+        this.templateService.createScheduling(params.get('uuidTemplate')!, this.jsonToSend).subscribe(response => {
+        });
+      });
+
+      this.jsonToSend = {};
+      this.openPopUp("Agendamento realizado com sucesso!", "success");
+    } catch (error) {
+      // @ts-ignore
+      this.openPopUp(error.message, "error");
+    }
+  }
+
+  static openPopUp(message: string, icon: string): void {
+    this._snackBar.openFromComponent(PopUpComponent, {
+      duration: 8000,
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+      data: {
+        message: message,
+        icon: icon
       }
     });
-    this.route.paramMap.subscribe(params => {
-      this.jsonToSend = {
-        ...this.jsonToSend,
-        idInstance: params.get('uuidTemplate')
-      };
-      console.log(this.jsonToSend);
-      this.templateService.createScheduling(params.get('uuidTemplate')!, this.jsonToSend).subscribe(response => {
-      });
-    });
-
-    this.jsonToSend = {};
   }
 }
 
