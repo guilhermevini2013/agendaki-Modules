@@ -5,6 +5,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatListModule} from '@angular/material/list';
 import {NgFor, NgIf} from '@angular/common';
+import {FormLoginComponent} from "../../login-page/form-login/form-login.component";
 
 @Component({
   selector: 'app-administration-principal',
@@ -21,4 +22,5 @@ export class AdministrationPrincipalComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  protected readonly FormLoginComponent = FormLoginComponent;
 }

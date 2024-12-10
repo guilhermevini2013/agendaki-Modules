@@ -12,6 +12,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -32,11 +33,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public UserTokenDTO loadUser(UserLoadDTO userLoadDTO) {
         try {
             UsernamePasswordAuthenticationToken usernamePasswordAuth = new UsernamePasswordAuthenticationToken(userLoadDTO.email(), userLoadDTO.password());
             Authentication authenticate = authenticationManager.authenticate(usernamePasswordAuth);
-            return new UserTokenDTO(jwtService.generateToken(((User) authenticate.getPrincipal()).getEmail()));
+            String instanceKey = this.userRepository.findByEmail(userLoadDTO.email()).get().getInstance().getKeyInstance();
+            return new UserTokenDTO(jwtService.generateToken(((User) authenticate.getPrincipal()).getEmail()), instanceKey);
         } catch (AuthenticationException ex) {
             throw new UsernameNotFoundException("Credentials not found");
         }

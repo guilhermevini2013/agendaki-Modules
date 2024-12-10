@@ -1,3 +1,4 @@
 export interface PreUserTokenDTO {
-  token: string;
+  token: string,
+  instanceKey: string,
 }

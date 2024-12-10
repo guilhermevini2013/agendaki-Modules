@@ -20,6 +20,7 @@ import {TypePage} from "./TypePage";
 export class FormLoginComponent {
   horizontalPosition: MatSnackBarHorizontalPosition = 'end';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
+  public static instanceKey: string = "";
   protected loginForm: FormGroup = new FormGroup<any>(
     {
       email: new FormControl('', [Validators.email, Validators.required]),
@@ -73,6 +74,7 @@ export class FormLoginComponent {
             break;
           case 200:
             if (typePageToAuth == TypePage.ADMINISTRATION) {
+              FormLoginComponent.instanceKey = response.body!.instanceKey;
               this.router.navigate(["/administration"])
             } else if (typePageToAuth == TypePage.PORTAL_CLIENT) {
               this.router.navigate(["/portalClient"])

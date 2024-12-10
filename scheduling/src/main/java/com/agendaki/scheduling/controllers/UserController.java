@@ -22,13 +22,13 @@ public class UserController {
     }
 
     @PostMapping(value = "/auth")
-    public ResponseEntity<Void> authUser(@RequestBody @Valid UserLoadDTO userLoadDTO, HttpServletResponse response) {
+    public ResponseEntity<UserTokenDTO> authUser(@RequestBody @Valid UserLoadDTO userLoadDTO, HttpServletResponse response) {
         UserTokenDTO userTokenDTO = userService.loadUser(userLoadDTO);
         Cookie cookie = new Cookie("jwtAdministration", userTokenDTO.token());
         cookie.setPath("/");
         cookie.setMaxAge(259200);
         cookie.setHttpOnly(false);
         response.addCookie(cookie);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(userTokenDTO);
     }
 }
